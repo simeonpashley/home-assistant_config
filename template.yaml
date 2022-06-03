@@ -1,0 +1,65 @@
+#
+# entity for Energy management dashboard
+#
+
+sensor:
+  - name: "Solar Production"
+    unique_id: solar_production
+    state_class: measurement
+    device_class: energy
+    unit_of_measurement: "W"
+    state: "{{(states('sensor.smappee_solar_c') | float)}}"
+
+  - name: "Solar House Consumption"
+    unique_id: solar_house_consumption
+    state_class: measurement
+    device_class: energy
+    unit_of_measurement: "W"
+    state: "{{(states('sensor.smappee_usage_abs') | float)}}"
+
+  - name: "Solar Imported Power W"
+    unique_id: solar_imported_power_w
+    state_class: measurement
+    device_class: energy
+    unit_of_measurement: "W"
+    state: >
+      {% if ((states('sensor.smappee_injected') | float) <= 0) %} 
+        {{(-(states('sensor.smappee_injected') | float))}}
+      {% else %}
+        0
+      {% endif %}
+
+  - name: "Solar Exported Power W"
+    unique_id: solar_exported_power_w
+    state_class: measurement
+    device_class: energy
+    unit_of_measurement: "W"
+    state: >
+      {% if ((states('sensor.smappee_injected') | float) > 0) %} 
+        {{(states('sensor.smappee_injected') | float)}}
+      {% else %}
+        0
+      {% endif %}
+
+binary_sensor:
+  - name: "Excess Solar"
+    icon: "mdi:solar-power"
+    state: "{{ ( states('sensor.lp20_solar_exported_power')|float(0) ) >= 300 }}"
+    delay_off:
+      minutes: 10
+    delay_on:
+      minutes: 10
+  - name: "330e Chargeable"
+    state: >
+      {% if (states('device_tracker.330e_xdrive') == "home") 
+        and not (states('binary_sensor.330e_xdrive_connection_status'))
+        and (states('sensor.330e_xdrive_charging_level_hv')|float(0) < 95)
+      %}
+        1
+      {% else %}
+        0
+      {% endif %}
+    delay_off:
+      minutes: 10
+    delay_on:
+      minutes: 10

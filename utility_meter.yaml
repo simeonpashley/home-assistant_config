@@ -1,0 +1,85 @@
+solar_imported_power_hourly:
+    source: sensor.solar_imported_power_kwh
+    name: Solar Imported Power Hourly
+    cycle: hourly
+solar_imported_power_daily:
+    source: sensor.solar_imported_power_kwh
+    name: Solar Imported Power Daily
+    cycle: daily 
+solar_imported_power_weekly:
+    source: sensor.solar_imported_power_kwh
+    name: Solar Imported Power Weekly
+    cycle: weekly 
+solar_imported_power_monthly:
+    source: sensor.solar_imported_power_kwh
+    name: Solar Imported Power Monthly
+    cycle: monthly 
+solar_imported_power_yearly:
+    source: sensor.solar_imported_power_kwh
+    name: Solar Imported Power Yearly
+    cycle: yearly
+
+solar_exported_power_hourly:
+    source: sensor.solar_exported_power_kwh
+    name: Solar Exported Power Hourly
+    cycle: hourly 
+solar_exported_power_daily:
+    source: sensor.solar_exported_power_kwh
+    name: Solar Exported Power Daily
+    cycle: daily 
+solar_exported_power_weekly:
+    source: sensor.solar_exported_power_kwh
+    name: Solar Exported Power Weekly
+    cycle: weekly 
+solar_exported_power_monthly:
+    source: sensor.solar_exported_power_kwh
+    name: Solar Exported Power Monthly
+    cycle: monthly 
+solar_exported_power_yearly:
+    source: sensor.solar_exported_power_kwh
+    name: Solar Exported Power Yearly
+    cycle: yearly 
+
+solar_production_hourly:
+    source: sensor.solar_production_kwh
+    name: Solar Production Hourly
+    cycle: hourly 
+solar_production_daily:
+    source: sensor.solar_production_kwh
+    name: Solar Production Daily
+    cycle: daily 
+solar_production_weekly:
+    source: sensor.solar_production_kwh
+    name: Solar Production Weekly
+    cycle: weekly 
+solar_production_monthly:
+    source: sensor.solar_production_kwh
+    name: Solar Production Monthly
+    cycle: monthly 
+solar_production_yearly:
+    source: sensor.solar_production_kwh
+    name: Solar Production Yearly
+    cycle: yearly 
+
+
+solar_house_consumption_hourly:
+    source: sensor.solar_house_consumption_kwh
+    name: Solar House Consumption Hourly
+    cycle: hourly
+solar_house_consumption_daily:
+    source: sensor.solar_house_consumption_kwh
+    name: Solar House Consumption Daily
+    cycle: daily 
+solar_house_consumption_weekly:
+    source: sensor.solar_house_consumption_kwh
+    name: Solar House Consumption Weekly
+    cycle: weekly 
+solar_house_consumption_monthly:
+    source: sensor.solar_house_consumption_kwh
+    name: Solar House Consumption Monthly
+    cycle: monthly 
+solar_house_consumption_yearly:
+    source: sensor.solar_house_consumption_kwh
+    name: Solar House Consumption Yearly
+    cycle: yearly     
+   

@@ -1,0 +1,12 @@
+#
+# MQTT >=2022.6
+#
+sensor:
+  - name: "Smappee usage c"
+    state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+    unit_of_measurement: "W"
+    value_template: "{{value_json.channelPowers[1].power}}"
+  - name: "Smappee Solar c"
+    state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+    unit_of_measurement: "W"
+    value_template: "{{value_json.channelPowers[0].power}}"

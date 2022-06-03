@@ -1,0 +1,82 @@
+#
+# entity for Energy management dashboard
+#
+- platform: systemmonitor
+  resources:
+    - type: memory_free
+    - type: memory_use
+    - type: swap_use
+    - type: swap_free
+    - type: load_1m
+    - type: processor_use
+    - type: processor_temperature
+
+- platform: mqtt
+  state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+  name: "Smappee usage c"
+  unit_of_measurement: "W"
+  value_template: "{{value_json.channelPowers[1].power}}"
+
+  
+- platform: mqtt
+  state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+  name: "Smappee Solar c"
+  unit_of_measurement: "W"
+  value_template: "{{value_json.channelPowers[0].power}}"
+
+- platform: template
+  sensors:
+    smappee_injected:
+      value_template: "{{ ((states('sensor.smappee_solar_c') | float) - (states('sensor.smappee_usage_abs') | float)) | int }}"
+      unit_of_measurement: "W"
+
+- platform: template
+  sensors:
+    smappee_usage_abs:
+      unit_of_measurement: "W"
+      value_template: >
+        {% if ((states('sensor.smappee_usage_c') | float) <= 0) %} 
+            {{ ((states('sensor.smappee_solar_c') | float) - -(states('sensor.smappee_usage_c') | float)) | int}}
+        {% else %}
+            {{ ((states('sensor.smappee_usage_c') | float)) | int }}
+        {% endif %}
+
+- platform: integration
+  source: sensor.solar_imported_power_w
+  method: left
+  unit_prefix: k
+  name: solar_imported_power_kwh
+
+- platform: integration
+  source: sensor.solar_exported_power_w
+  method: left
+  unit_prefix: k
+  name: solar_exported_power_kwh
+
+- platform: integration
+  source: sensor.solar_production
+  method: left
+  unit_prefix: k
+  name: solar_production_kwh
+
+- platform: integration
+  source: sensor.solar_house_consumption
+  method: left
+  unit_prefix: k
+  name: solar_house_consumption_kwh
+
+- platform: filter
+  name: LP20 Solar Power
+  entity_id: sensor.smappee_solar_c
+  filters:
+    - filter: lowpass
+      time_constant: 20
+      precision: 0
+
+- platform: filter
+  name: LP20 Solar Exported Power
+  entity_id: sensor.solar_exported_power_w
+  filters:
+    - filter: lowpass
+      time_constant: 20
+      precision: 0
