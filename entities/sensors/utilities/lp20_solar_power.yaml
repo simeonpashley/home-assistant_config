@@ -1,0 +1,7 @@
+platform: filter
+name: LP20 Solar Power
+entity_id: sensor.smappee_solar_c
+filters:
+  - filter: lowpass
+    time_constant: 20
+    precision: 0

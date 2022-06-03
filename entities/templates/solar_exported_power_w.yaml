@@ -1,0 +1,16 @@
+#
+# entity for Energy management dashboard
+#
+
+- sensor:
+    - name: "Solar Exported Power W"
+      unique_id: solar_exported_power_w
+      state_class: measurement
+      device_class: energy
+      unit_of_measurement: "W"
+      state: >
+        {% if ((states('sensor.smappee_injected') | float) > 0) %} 
+          {{(states('sensor.smappee_injected') | float)}}
+        {% else %}
+          0
+        {% endif %}

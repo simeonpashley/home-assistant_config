@@ -1,0 +1,8 @@
+- binary_sensor:
+    - name: "Excess Solar"
+      icon: "mdi:solar-power"
+      state: "{{ ( states('sensor.lp20_solar_exported_power')|float(0) ) >= 300 }}"
+      delay_off:
+        minutes: 10
+      delay_on:
+        minutes: 10

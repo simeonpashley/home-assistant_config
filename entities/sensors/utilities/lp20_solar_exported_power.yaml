@@ -1,0 +1,7 @@
+platform: filter
+name: LP20 Solar Exported Power
+entity_id: sensor.solar_exported_power_w
+filters:
+  - filter: lowpass
+    time_constant: 20
+    precision: 0
