@@ -3,6 +3,8 @@
 !.gitignore
 !*.md
 
+.ip_authenticated.yaml
+
 home-assistant.log*
 home-assistant_v2.db*
 
