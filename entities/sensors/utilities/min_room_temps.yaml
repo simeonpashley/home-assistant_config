@@ -1,0 +1,9 @@
+#####
+# Minimum room temperature
+#####
+
+platform: min_max
+entity_ids:
+  - sensor.living_room_temperature
+name: min_temp_rooms
+type: min

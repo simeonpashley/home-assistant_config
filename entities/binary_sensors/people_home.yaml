@@ -1,0 +1,13 @@
+#####
+# Set People Home to "Home" if anyone is home
+# Currently using tado - some delay
+#####
+
+platform: template
+sensors:
+  people_home:
+    value_template: >-
+      {{ is_state('person.simeon', 'home')
+         or is_state('person.claire', 'home')
+         or is_state('person.eleanor', 'home')
+         or is_state('person.isabelle', 'home') }}

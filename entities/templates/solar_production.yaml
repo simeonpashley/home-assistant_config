@@ -3,5 +3,5 @@
       unique_id: solar_production
       state_class: measurement
       device_class: energy
-      unit_of_measurement: "W"
+      unit_of_measurement: "Wh"
       state: "{{(states('sensor.smappee_solar_c') | float)}}"

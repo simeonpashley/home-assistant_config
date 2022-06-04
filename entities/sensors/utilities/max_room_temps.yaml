@@ -1,0 +1,8 @@
+#####
+# Check maximum temperature in rooms
+#####
+
+platform: min_max
+entity_ids:
+  - sensor.living_room_temperature
+name: max_temp_rooms

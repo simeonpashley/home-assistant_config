@@ -1,0 +1,11 @@
+#####
+# Counter that tracks total number of sensors
+#
+#####
+
+platform: template
+sensors:
+  count_sensor:
+    friendly_name: 'Number of Sensors'
+    value_template: >-
+      {{ states.sensor | list | count }}

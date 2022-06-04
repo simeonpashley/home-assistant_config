@@ -1,0 +1,68 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_ztest",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "title": "Home",
+                    "cards": [
+                        {
+                            "show_header_toggle": false,
+                            "title": "HP Officejet 8600",
+                            "type": "entities",
+                            "entities": [
+                                "sensor.hp_officejet_pro_8600",
+                                "sensor.hp_officejet_pro_8600_yellow_ink",
+                                "sensor.hp_officejet_pro_8600_magenta_ink",
+                                "sensor.hp_officejet_pro_8600_cyan_ink",
+                                "sensor.hp_officejet_pro_8600_black_ink"
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "columns": 2,
+                            "cards": [
+                                {
+                                    "type": "entity",
+                                    "entity": "sensor.heating_living_room_last_24hr",
+                                    "name": "Living room (24hr)"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "columns": 2,
+                            "cards": [
+                                {
+                                    "type": "entity",
+                                    "entity": "sensor.heating_living_room_last_30d",
+                                    "name": "Living room (30d)"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "custom:auto-entities",
+                            "card": {
+                                "type": "entities"
+                            },
+                            "filter": {
+                                "include": [
+                                    {
+                                        "domain": "light",
+                                        "state": "on"
+                                    }
+                                ],
+                                "exclude": []
+                            },
+                            "sort": {
+                                "method": "none"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

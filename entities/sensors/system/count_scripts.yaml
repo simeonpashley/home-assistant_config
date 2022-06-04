@@ -1,0 +1,11 @@
+#####
+# Counter that tracks total number of scripts
+#
+#####
+
+platform: template
+sensors:
+  count_script:
+    friendly_name: 'Number of Scripts'
+    value_template: >
+      {{ states.script | list | count }}

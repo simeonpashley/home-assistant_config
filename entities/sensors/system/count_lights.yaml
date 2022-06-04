@@ -1,0 +1,11 @@
+#####
+# Counter that tracks total number of lights
+#
+#####
+
+platform: template
+sensors:
+  count_lights:
+    friendly_name: 'Number of Lights'
+    value_template: >
+      {{ states.light | list | count }}

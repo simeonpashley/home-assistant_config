@@ -1,0 +1,19 @@
+#####
+# Telegram Command - /simeon to get GPS location
+#####
+
+alias: Telegram - GPS Notify Simeon
+id: b2b15b19-cbeb-4be9-9160-327a65647c9b
+
+trigger:
+  event_data:
+    command: /simeon
+  event_type: telegram_command
+  platform: event
+
+action:
+  - data:
+      message: Simeon GPS Position
+    service: notify.ebroz_bot
+  - service: script.simeon_gps_notify_telegram
+initial_state: true

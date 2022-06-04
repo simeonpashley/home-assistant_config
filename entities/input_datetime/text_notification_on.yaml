@@ -1,0 +1,10 @@
+#####
+# Time when Text notifications are turned On
+# Used to mute messages
+#####
+
+text_notification_on:
+  name: Text Notifications On
+  has_date: false
+  has_time: true
+  icon: mdi:message-text-outline

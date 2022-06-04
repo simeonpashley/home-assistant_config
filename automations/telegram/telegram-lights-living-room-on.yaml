@@ -1,0 +1,21 @@
+#####
+# Telegram Command - /living_on turn living room lights on
+#####
+
+alias: Telegram - Living Light On
+id: 83f1ed86-b290-4d66-9ab4-a5a08d7f1610
+
+trigger:
+  platform: event
+  event_type: telegram_callback
+  event_data:
+    data: /living_on
+
+action:
+- service: telegram_bot.answer_callback_query
+  data:
+    callback_query_id: '{{ trigger.event.data.id }}'
+    message: Living Room Lights ON
+- service: light.turn_on
+  target:
+    entity_id: light.living_room_lights

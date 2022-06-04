@@ -1,0 +1,10 @@
+#####
+# Time when evening report will be played
+# TBU
+#####
+
+evening_report:
+  name: Evening Report
+  has_date: false
+  has_time: true
+  icon: mdi:weather-sunset

@@ -1,0 +1,31 @@
+#####
+# GitHub workflow runs on every Github commit
+# If it fails, notify!
+#####
+
+alias: GitHub workflow failed
+id: ab612ffe-5607-463a-ad84-2ba70cc49c79
+description: "Triggered when GiHub workflow fails"
+
+trigger:
+  - entity_id: sensor.simeonpashley_home_assistant_config_last_build_state
+    platform: state
+    to: errored
+
+condition: []
+
+action:
+  - service: script.notify_engine
+    data:
+      who: "discord"
+      title: "*GitHub workflow failed!*"
+      value1: 'At {{ states("sensor.simeonpashley_home_assistant_config_last_build_finished_at") }} after {{states("sensor.simeonpashley_home_assistant_config_last_build_duration")}} seconds, while building {{ states("sensor.simeonpashley_home_assistant_config_last_build_id") }} '
+      target_id: !secret discord_github_id
+      group: system
+      tag_id: "warning"
+      importance_id: default
+      color: "yellow"
+      sticky: "false"
+      timeout: 300
+
+mode: single

@@ -1,0 +1,21 @@
+#####
+# Telegram Command - /harestart to restar HA
+#####
+
+alias: Telegram Home Assistant restart
+id: d6ce8e15-cba1-4a9c-a9f3-1696b9f6633d
+
+trigger:
+  event_data:
+    command: /harestart
+  event_type: telegram_command
+  platform: event
+
+action:
+- data:
+    message: HA - Restart - Triggered
+  service: notify.ebroz_bot
+- alias: ''
+  data: {}
+  service: homeassistant.restart
+- service: script.googlescriptharestart

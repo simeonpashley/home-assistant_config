@@ -1,0 +1,11 @@
+#####
+# Track workdays for UK
+# This checks if tomorrow is workday - used to check for school night warning
+#
+# https://www.home-assistant.io/integrations/workday/
+#####
+
+platform: workday
+name: workday_tomorrow
+days_offset: 1
+country: GB

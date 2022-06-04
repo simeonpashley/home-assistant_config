@@ -1,0 +1,83 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_outside",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "title": "Outdoor",
+                    "icon": "mdi:weather-sunset",
+                    "cards": [
+                        {
+                            "type": "iframe",
+                            "url": "https://embed.windy.com/embed2.html?lat=53.412&lon=-1.276&detailLat=53.337&detailLon=-1.270&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=12&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=default&radarRange=-1",
+                            "aspect_ratio": "100%"
+                        },
+                        {
+                            "type": "custom:weather-card",
+                            "entity": "weather.29stratford_2",
+                            "number_of_forecasts": "5",
+                            "name": "AW"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.meteoalarm"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_event"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_onset"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_severity"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_description"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_instruction"
+                                },
+                                {
+                                    "entity": "sensor.meteoalarm_expires"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather warning",
+                            "type": "entities"
+                        },
+                        {
+                            "type": "custom:meteoalarm-card",
+                            "entity": "binary_sensor.meteoalarm"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.protection_window",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "sensor.current_uv_index",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "sensor.current_uv_level",
+                                    "secondary_info": "last-changed"
+                                },
+                                {
+                                    "entity": "sensor.max_uv_index",
+                                    "secondary_info": "last-updated"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "UV levels",
+                            "type": "entities"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

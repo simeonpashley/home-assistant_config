@@ -1,0 +1,81 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_climate",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "horizontal-stack",
+                            "cards": [
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.living_room_temperature",
+                                    "min": 0,
+                                    "max": 100,
+                                    "severity": {
+                                        "green": 22,
+                                        "yellow": 25,
+                                        "red": 28
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "entity": "climate.living_room",
+                            "step_size": 0.1,
+                            "type": "custom:simple-thermostat"
+                        },
+                        {
+                            "entities": [
+                                "sensor.living_room_humidity"
+                            ],
+                            "show": {
+                                "fill": false,
+                                "labels": true
+                            },
+                            "type": "custom:mini-graph-card"
+                        },
+                        {
+                            "entities": [
+                                "sensor.living_room_temperature"
+                            ],
+                            "show": {
+                                "fill": false,
+                                "labels": true
+                            },
+                            "type": "custom:mini-graph-card"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.living_room_heating"
+                                }
+                            ],
+                            "type": "entities",
+                            "title": "Heating status",
+                            "show_header_toggle": false
+                        },
+                        {
+                            "entities": [
+                                "sensor.min_temp_rooms",
+                                "sensor.max_temp_rooms"
+                            ],
+                            "name": "Minimum/Maximum",
+                            "show": {
+                                "fill": false,
+                                "labels": true
+                            },
+                            "type": "custom:mini-graph-card"
+                        }
+                    ],
+                    "icon": "mdi:home-thermometer-outline",
+                    "title": "Climate"
+                }
+            ]
+        }
+    }
+}

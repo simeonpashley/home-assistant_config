@@ -1,0 +1,21 @@
+views:
+  - title: Home
+    cards:
+      - hours_to_show: 12
+        graph: line
+        type: sensor
+        entity: sensor.memory_use
+        detail: 2
+      - type: entities
+        entities:
+          - entity: sensor.memory_use
+          - entity: sensor.memory_free
+          - entity: sensor.load_1m
+          - entity: sensor.swap_free
+          - entity: sensor.swap_use
+          - entity: sensor.processor_temperature
+      - hours_to_show: 12
+        graph: line
+        type: sensor
+        entity: sensor.load_1m
+        detail: 2

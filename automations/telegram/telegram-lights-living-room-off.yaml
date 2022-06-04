@@ -1,0 +1,21 @@
+#####
+# Telegram Command - /living_off turn living room lights off
+#####
+
+alias: Telegram - Living Room Light OFF
+id: 172b22ca-495e-4297-b233-646ab76c5e60
+
+trigger:
+  platform: event
+  event_type: telegram_callback
+  event_data:
+    data: /living_off
+
+action:
+- service: telegram_bot.answer_callback_query
+  data:
+    callback_query_id: '{{ trigger.event.data.id }}'
+    message: Living Room Lights OFF
+- service: light.turn_off
+  target:
+    entity_id: light.living_room_lights

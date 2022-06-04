@@ -1,0 +1,110 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace",
+    "data": {
+        "config": {
+            "icon": "mdi:home",
+            "views": [
+                {
+                    "title": "Home",
+                    "icon": "mdi:home",
+                    "panel": false,
+                    "path": "default_view",
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.speedtest_download",
+                                    "secondary_info": "last-updated",
+                                    "index": 0
+                                },
+                                {
+                                    "entity": "sensor.speedtest_upload",
+                                    "secondary_info": "last-updated",
+                                    "index": 0
+                                }
+                            ],
+                            "type": "custom:mini-graph-card"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "climate.living_room"
+                                }
+                            ]
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.moon"
+                                },
+                                {
+                                    "entity": "sensor.season"
+                                },
+                                {
+                                    "entity": "binary_sensor.workday_today",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "binary_sensor.workday_tomorrow",
+                                    "secondary_info": "last-updated"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.bio_waste"
+                                },
+                                {
+                                    "entity": "sensor.mixed_waste"
+                                },
+                                {
+                                    "entity": "sensor.paper_waste"
+                                },
+                                {
+                                    "entity": "sensor.plastic_waste"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Waste ",
+                            "type": "entities"
+                        },
+                        {
+                            "type": "glance",
+                            "entities": [
+                                {
+                                    "entity": "person.simeon",
+                                    "name": "Simeon",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.claire",
+                                    "name": "Claire",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.eleanor",
+                                    "name": "Eleanor",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.isabelle",
+                                    "name": "Isabelle",
+                                    "secondary_info": "last-updated"
+                                }
+                            ],
+                            "title": "The Family",
+                            "show_name": true,
+                            "show_icon": true,
+                            "show_state": true
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

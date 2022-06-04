@@ -1,0 +1,15 @@
+#####
+# Time & Date component
+# https://www.home-assistant.io/integrations/time_date/
+#####
+
+platform: time_date
+display_options:
+  - time
+  - date
+  - time_utc
+
+# These are NOT used, so disabled
+#  - date_time
+#  - time_date
+#  - beat

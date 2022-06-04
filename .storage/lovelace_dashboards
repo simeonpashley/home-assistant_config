@@ -1,0 +1,103 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace_dashboards",
+    "data": {
+        "items": [
+            {
+                "show_in_sidebar": true,
+                "title": "Solar",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-solar",
+                "id": "lovelace_solar"
+            },
+            {
+                "show_in_sidebar": true,
+                "title": "System Monitor",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "system-monitor",
+                "id": "system_monitor"
+            },
+            {
+                "show_in_sidebar": true,
+                "title": "legacy",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-legacy",
+                "id": "lovelace_legacy"
+            },
+            {
+                "show_in_sidebar": true,
+                "title": "Outside",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-outside",
+                "id": "lovelace_outside"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:lightbulb-group-outline",
+                "title": "Lights",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-lights",
+                "id": "lovelace_lights"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:youtube-tv",
+                "title": "Media",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-media",
+                "id": "lovelace_media"
+            },
+            {
+                "show_in_sidebar": true,
+                "title": "Climate",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-climate",
+                "id": "lovelace_climate"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:flash",
+                "title": "Electricity",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-electricity",
+                "id": "lovelace_electricity"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:battery-charging-40",
+                "title": "Battery",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-battery",
+                "id": "lovelace_battery"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:tune-vertical",
+                "title": "19-Configuration",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "19-configuration",
+                "id": "19_configuration"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:beta",
+                "title": "zTest",
+                "require_admin": false,
+                "mode": "storage",
+                "url_path": "lovelace-ztest",
+                "id": "lovelace_ztest"
+            }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+#####
+# Sends notifications that HA has shutdown
+#####
+
+alias: Home Assistant Shutdown - Notify
+id: 2a93d8c4-5ad7-4bf3-842c-2b0940efe4a2
+
+trigger:
+  event: shutdown
+  platform: homeassistant
+
+action:
+  - service: script.notify_engine
+    data:
+      who: "parents"
+      title: "*HA shutdown*"
+      value1: 'Home Assistant shutting down at {{ states("sensor.time") }}'
+      group: ha
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "false"
+      timeout: 150
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.display_me
+    data:
+      volume_level: 0.3
+  - delay: 00:00:01
+  - service: script.googlescriptharestart

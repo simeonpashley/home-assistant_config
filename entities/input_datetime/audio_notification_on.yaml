@@ -1,0 +1,10 @@
+#####
+# Time when Audio notifications are turned On
+# Used to un-mute TTS
+#####
+
+audio_notification_on:
+  name: Audio Notifications On
+  has_date: false
+  has_time: true
+  icon: mdi:text-to-speech

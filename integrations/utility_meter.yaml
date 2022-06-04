@@ -84,3 +84,33 @@ utility_meter:
     source: sensor.solar_house_consumption_kwh
     name: Solar House Consumption Yearly
     cycle: yearly
+  daily_energy:
+    source: sensor.solar_house_consumption_kwh
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  monthly_energy:
+    source: sensor.solar_house_consumption_kwh
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  quarterly_energy:
+    source: sensor.solar_house_consumption_kwh
+    cycle: quarterly
+    tariffs:
+      - peak
+      - offpeak
+  yearly_energy:
+    source: sensor.solar_house_consumption_kwh
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
+  sun_energy:
+    source: sensor.solar_house_consumption_kwh
+    cycle: daily
+    tariffs:
+      - day
+      - night

@@ -3,7 +3,7 @@
       unique_id: solar_imported_power_w
       state_class: measurement
       device_class: energy
-      unit_of_measurement: "W"
+      unit_of_measurement: "Wh"
       state: >
         {% if ((states('sensor.smappee_injected') | float) <= 0) %} 
           {{(-(states('sensor.smappee_injected') | float))}}

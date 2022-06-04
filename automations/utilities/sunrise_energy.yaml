@@ -1,0 +1,23 @@
+#####
+# At sunrise trigger day tarif.
+# This tarif really is used only to track difference in energy usage between day and night.
+#####
+
+alias: "Set energy to Sunrise/day"
+id: c20a3759-8477-498e-9aba-c9736459c1a5
+
+trigger:
+  platform: sun
+  event: sunrise
+
+action:
+  #- service: utility_meter.select_tariff    # Tariff change to night
+  #  data:
+  #    entity_id:
+  #    - utility_meter.sun_energy
+  #    tariff: day
+  - service: select.select_option
+    target:
+      entity_id: select.sun_energy
+    data:
+      option: day

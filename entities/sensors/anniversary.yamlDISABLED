@@ -1,0 +1,23 @@
+#####
+# Anniversary HACS integration
+# Trying it for Briefing
+#####
+
+platform: anniversary
+name: events
+multiple: true
+date_format: "%d-%m-%Y"
+anniversaries:
+  - event: "Simeon birthday"
+    date: "2-10"
+    icon: mdi:cake-variant
+  - event: "Claire birthday"
+    date: "24-11"
+    icon: mdi:cake-variant
+  - event: "Isabelle birthday"
+    date: "23-12"
+    icon: mdi:cake-variant
+  - event: "Eleanor birthday"
+    date: "26-12"
+  - event: "Wedding anniversary"
+    date: "27-8"

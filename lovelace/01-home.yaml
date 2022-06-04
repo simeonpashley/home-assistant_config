@@ -1,0 +1,94 @@
+views:
+  - title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: person.simeon
+            secondary_info: last-updated
+          - entity: person.isabelle
+            secondary_info: last-updated
+          - entity: person.eleanor
+            secondary_info: last-updated
+          - entity: person.claire
+            secondary_info: last-updated
+      - type: grid
+        square: false
+        columns: 1
+        cards:
+          - type: thermostat
+            entity: climate.living_room
+          - type: entities
+            entities:
+              - entity: sensor.living_room_humidity
+                secondary_info: last-updated
+              - entity: sensor.living_room_temperature
+                secondary_info: last-updated
+            header:
+              type: graph
+              entity: sensor.living_room_temperature
+              detail: 2
+      - type: entities
+        entities:
+          - entity: switch.smappee_1005002095_local_comfort_plug_front_small_lamp
+            name: Small lamp
+          - entity: switch.smappee_1005002095_local_comfort_plug_front_big_e
+            name: Big Lamp
+          - entity: switch.smappee_1005002095_local_comfort_plug_y_landing_off_only
+            name: Landing Light
+      - type: entities
+        entities:
+          - entity: sensor.330e_xdrive_charging_level_hv
+            name: Charge
+            secondary_info: last-updated
+          - entity: binary_sensor.330e_xdrive_charging_status
+            name: Status
+            secondary_info: last-updated
+          - entity: binary_sensor.330e_xdrive_connection_status
+            name: Charge connected
+            secondary_info: last-updated
+          - entity: sensor.330e_xdrive_fuel_percent
+            name: Fuel
+            secondary_info: last-updated
+          - entity: sensor.330e_xdrive_remaining_range_total
+            name: Range - Total
+            secondary_info: last-updated
+          - entity: sensor.330e_xdrive_remaining_range_fuel
+            name: Range - Fuel
+            secondary_info: last-updated
+          - entity: sensor.330e_xdrive_remaining_range_electric
+            name: Range - Electric
+            secondary_info: last-updated
+          - entity: sensor.330e_xdrive_mileage
+        title: 330e
+        state_color: true
+        show_header_toggle: true
+        header:
+          type: graph
+          entity: sensor.330e_xdrive_charging_level_hv
+          detail: 2
+          hours_to_show: 48
+      - type: grid
+        square: false
+        columns: 1
+        cards:
+          - show_state: true
+            show_name: true
+            camera_view: auto
+            type: picture-entity
+            entity: camera.drive
+          - show_state: true
+            show_name: true
+            camera_view: auto
+            type: picture-entity
+            entity: camera.front_door
+          - type: entities
+            entities:
+              - entity: sensor.front_door_last_activity
+              - entity: sensor.front_door_last_motion
+              - entity: sensor.drive_last_activity
+              - entity: sensor.drive_last_motion
+            title: Ring
+      - type: entities
+        entities:
+          - binary_sensor.330e_chargeable
+          - binary_sensor.excess_solar

@@ -1,0 +1,23 @@
+#####
+# At sunset trigger night tarif.
+# This tarif really is used only to track difference in energy usage between night and day.
+#####
+
+alias: 'Set energy to Sunset/night'
+id: 6466fff5-3eaa-4966-a693-5454b4507b73
+
+trigger:
+  platform: sun
+  event: sunset
+
+action:
+#- service: utility_meter.select_tariff    # Tariff change to night
+#  data:
+#    entity_id:
+#    - utility_meter.sun_energy
+#    tariff: night
+- service: select.select_option
+  target:
+    entity_id: select.sun_energy
+  data:
+    option: night

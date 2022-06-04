@@ -1,0 +1,40 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_battery",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "theme": "Backend-selected",
+                    "title": "12-Battery",
+                    "path": "battery",
+                    "icon": "mdi:battery-charging-medium",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "custom:battery-state-card",
+                            "title": "Phone battery levels",
+                            "entities": [
+                                {
+                                    "entity": "sensor.sp12_battery_level",
+                                    "name": "Simeon phone battery"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "custom:battery-state-card",
+                            "title": "Device battery levels",
+                            "entities": [
+                                {
+                                    "entity": "sensor.front_door_battery",
+                                    "name": "Ring Front Door"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

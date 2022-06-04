@@ -1,0 +1,7 @@
+#####
+# Downloaded - enable downloading and declare folder
+# https://www.home-assistant.io/integrations/downloader/
+#####
+
+downloader:
+  download_dir: downloads
