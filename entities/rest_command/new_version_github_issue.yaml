@@ -4,7 +4,7 @@
 #####
 
 new_version_github_issue:
-  url: "https://api.github.com/repos/simeonpashley/home-assistant_config/issues/14"
+  url: "https://api.github.com/repos/simeonpashley/home-assistant_config/issues/2"
   method: PATCH
   headers:
     Authorization: !secret github_token2

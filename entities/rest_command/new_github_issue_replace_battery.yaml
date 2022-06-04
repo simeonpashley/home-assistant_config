@@ -4,7 +4,7 @@
 #####
 
 new_github_issue_replace_battery:
-  url: "https://api.github.com/repos/simeonpashley/home-assistant_config/issues/76/comments"
+  url: "https://api.github.com/repos/simeonpashley/home-assistant_config/issues/1/comments"
   method: POST
   headers:
     Authorization: !secret github_token2
