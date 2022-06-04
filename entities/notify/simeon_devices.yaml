@@ -1,10 +1,5 @@
-#####
-# Notification group "Family"
-# All mobile devices + Telegram group
-#####
-
 platform: group
-name: family
+name: simeon_devices
 services:
   - service: mobile_app_sp12
   - service: !secret telegram_bot_name

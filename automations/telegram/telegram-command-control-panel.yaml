@@ -12,7 +12,7 @@ trigger:
     command: /cp
 
 action:
-  service: notify.ebroz_bot
+  service: notify.simeon_devices
   data:
     message: "{{ [ \"Home Assistant Status\", \"Control Panel\", \"Yes Sir!\", \"\
       Home Assistant Control Panel\", \"Control box\" ] | random }}       \n"

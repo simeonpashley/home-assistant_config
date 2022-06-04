@@ -12,7 +12,7 @@ trigger:
     data: /stop
 
 action:
-- service: notify.ebroz_bot
+- service: notify.simeon_devices
   data:
     message: '*Control Panel*'
     data:

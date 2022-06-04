@@ -1,7 +1,7 @@
 platform: template
 sensors:
   smappee_usage_abs:
-    unit_of_measurement: "Wh"
+    unit_of_measurement: "W"
     value_template: >
       {% if ((states('sensor.smappee_usage_c') | float(0)) <= 0) %} 
           {{ ((states('sensor.smappee_solar_c') | float(0)) - -(states('sensor.smappee_usage_c') | float(0))) | int}}

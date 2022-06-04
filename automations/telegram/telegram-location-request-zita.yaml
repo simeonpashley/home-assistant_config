@@ -14,6 +14,6 @@ trigger:
 action:
   - data:
       message: Isabelle GPS Position
-    service: notify.ebroz_bot
+    service: notify.pashley_bot
   - service: script.eleanor_gps_notify_telegram
 initial_state: true

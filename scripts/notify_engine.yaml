@@ -46,11 +46,7 @@ notify_engine:
           state: "on"
     - service: >
         {% if who == 'simeon' %}
-          notify.mobile_app_sp12
-        {% elif who == 'parents' %}
-          notify.parents
-        {% elif who == 'family' %}
-          notify.family
+          notify.simeon_devices
         {% else %}
           notify.pashley_bot
         {% endif %}

@@ -34,7 +34,7 @@ action:
   - service: rest_command.github_issue_state
     data:
       status: "close"
-      issue_number: 14
+      issue_number: 2
   - service: input_text.set_value
     data:
       entity_id: input_text.version_latest_notified

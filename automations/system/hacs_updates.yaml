@@ -33,7 +33,7 @@ action:
   - service: rest_command.github_issue_state
     data:
       status: "open"
-      issue_number: 16
+      issue_number: 2
   - service: rest_command.github_issue_comment
     data:
       repo: "There are {{ states('sensor.hacs') }} updates to HACS components at {{ states('sensor.time') }}:"
@@ -43,4 +43,4 @@ action:
         {{ repo.display_name }} {{ repo['installed_version'] }} -> {{repo['available_version'] }}
 
         {% endfor %}
-      issue_number: 16
+      issue_number: 2

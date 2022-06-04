@@ -3,12 +3,10 @@
 # This is one person zone
 #####
 
-parents:
-  zone: parents
+simeon:
+  zone: simeon
   ignored_zones:
-    - high_school
     - office
-    - school
     - home
   devices:
     - person.simeon

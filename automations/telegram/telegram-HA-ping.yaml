@@ -16,4 +16,4 @@ condition: []
 action:
   data:
     message: pong
-  service: notify.ebroz_bot
+  service: notify.simeon_devices

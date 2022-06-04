@@ -58,6 +58,47 @@
                             },
                             "name": "House Consumption",
                             "max": 10000
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.smappee_usage_today"
+                                },
+                                {
+                                    "entity": "sensor.smappee_reactive_power"
+                                },
+                                {
+                                    "entity": "sensor.smappee_usage_today_raw"
+                                },
+                                {
+                                    "entity": "sensor.smappee_power_moving_average"
+                                },
+                                {
+                                    "entity": "sensor.smappee_fase_1_power_moving_average"
+                                },
+                                {
+                                    "entity": "sensor.smappee_fase_2_power_moving_average"
+                                },
+                                {
+                                    "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
+                                },
+                                {
+                                    "entity": "sensor.smappee_always_on"
+                                },
+                                {
+                                    "entity": "sensor.smappee_0_export"
+                                },
+                                {
+                                    "entity": "sensor.smappee_0_import"
+                                },
+                                {
+                                    "entity": "sensor.smappee_1_export"
+                                },
+                                {
+                                    "entity": "sensor.smappee_1_import"
+                                }
+                            ]
                         }
                     ]
                 }

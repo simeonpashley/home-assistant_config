@@ -3,11 +3,110 @@
 #
 mqtt:
   sensor:
+    - name: Smappee power
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ value_json.totalPower }}"
+      device_class: power
+      state_class: measurement
+
+    - name: Smappee usage today (raw)
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.totalImportEnergy | multiply(0.0001)| round(4, default=0)) }}"
+      device_class: power
+      state_class: measurement
+
+    - name: Smappee usage today
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "Wh"
+      icon: "mdi:power-plug"
+      value_template: "{{ ((value_json.totalImportEnergy / 3600) | float | round(4, default=0)) }}"
+      device_class: energy
+      state_class: measurement
+
+    - name: Smappee export today (raw)
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.totalExportEnergy | multiply(0.0001) | round(4, default=0)) }}"
+      device_class: power
+      state_class: measurement
+
+    - name: Smappee export today
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "Wh"
+      icon: "mdi:power-plug"
+      value_template: "{{ ((value_json.totalExportEnergy / 3600) | float | round(4, default=0)) }}"
+      device_class: energy
+      state_class: measurement
+
+    - name: Smappee reactive power
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ value_json.totalReactivePower }}"
+
+    - name: Smappee voltage
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "V"
+      icon: "mdi:power-plug"
+      value_template: "{{ value_json.voltages[0].voltage }}"
+
     - name: "Smappee usage c"
       state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
-      unit_of_measurement: "Wh"
+      unit_of_measurement: "W"
       value_template: "{{value_json.channelPowers[1].power}}"
+      device_class: power
+      state_class: measurement
+      icon: "mdi:power-plug"
+
     - name: "Smappee Solar c"
       state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
-      unit_of_measurement: "Wh"
+      unit_of_measurement: "W"
       value_template: "{{value_json.channelPowers[0].power}}"
+      device_class: power
+      state_class: measurement
+      icon: "mdi:power-plug"
+
+    - name: Smappee 0 import
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.channelPowers[0].importEnergy | multiply(0.0001) | round(2, default=0)) }}"
+      device_class: power
+      state_class: measurement
+    - name: Smappee 0 export
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.channelPowers[0].exportEnergy | multiply(0.0001) | round(2, default=0)) }}"
+      device_class: power
+      state_class: measurement
+
+    - name: Smappee 1 import
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.channelPowers[1].importEnergy | multiply(0.0001) | round(2, default=0)) }}"
+      device_class: power
+      state_class: measurement
+    - name: Smappee 1 export
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.channelPowers[1].exportEnergy | multiply(0.0001) | round(2, default=0)) }}"
+      device_class: power
+      state_class: measurement
+
+    # aggregated
+
+    - name: Smappee always on
+      state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/aggregated"
+      unit_of_measurement: "W"
+      icon: "mdi:power-plug"
+      value_template: "{{ (value_json.intervalDatas[0].alwaysOn | multiply(0.001)) | round(2, default=0) }}"
+      device_class: power
+      state_class: measurement

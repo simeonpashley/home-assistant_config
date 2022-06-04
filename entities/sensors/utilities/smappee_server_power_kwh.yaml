@@ -1,0 +1,5 @@
+platform: integration
+source: sensor.smappee_server_power
+name: Server spent
+unit_prefix: k
+round: 2

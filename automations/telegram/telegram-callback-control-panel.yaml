@@ -2,7 +2,7 @@
 # Telegram callback - /cp to open Control Panel
 #####
 
-alias: Telegram Control Pannel Command
+alias: Telegram Control Panel Command
 id: 36db8046-1efd-48f3-a303-ddbefce0b59f
 
 trigger:
@@ -12,7 +12,7 @@ trigger:
   platform: event
 
 action:
-  service: notify.ebroz_bot
+  service: notify.simeon_devices
   data:
     message: "{{ [ \"Home Assistant Status\", \"Control Panel\", \"Yes Sir!\", \"\
       Home Assistant Control Panel\", \"Control box\" ] | random }}       \n"

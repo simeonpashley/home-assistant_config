@@ -2,4 +2,4 @@ platform: template
 sensors:
   smappee_injected:
     value_template: "{{ ((states('sensor.smappee_solar_c') | float(0)) - (states('sensor.smappee_usage_abs') | float(0))) | int }}"
-    unit_of_measurement: "Wh"
+    unit_of_measurement: "W"

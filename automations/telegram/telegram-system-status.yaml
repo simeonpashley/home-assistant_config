@@ -12,28 +12,27 @@ trigger:
   platform: event
 
 action:
-- service: telegram_bot.answer_callback_query
-  data:
-    callback_query_id: '{{ trigger.event.data.id }}'
-    message: System Status
-- service: notify.ebroz_bot
-  data:
-    message: >-
-      {{ "\U0001F4BB" }} *System*:
-
-      ------------------------------------------------
-
-      *CPU Usage*:   {{ states('sensor.ebroz920_cpu_utilization_total') }} %
-
-      *Memory usage*:   {{ states('sensor.ebroz920_memory_usage_real') }} %
-
-      *HDD Temp*:   {{ states('sensor.ebroz920_drive_1_temperature') }} °C
-
-      *Network DL*:   {{ states('sensor.ebroz920_network_down') }} kB/s
-
-      *Network UL*:   {{ states('sensor.ebroz920_network_up') }} kB/s
-
-
+  - service: telegram_bot.answer_callback_query
     data:
-      inline_keyboard:
-      - '{{ "\u21a9\ufe0f" }} Control Panel:/cp'
+      callback_query_id: "{{ trigger.event.data.id }}"
+      message: System Status
+  - service: notify.pashley_bot
+    data:
+      message: >-
+        {{ "\U0001F4BB" }} *System*:
+
+        ------------------------------------------------
+
+        *CPU Usage*:   {{ states('sensor.ebroz920_cpu_utilization_total') }} %
+
+        *Memory usage*:   {{ states('sensor.ebroz920_memory_usage_real') }} %
+
+        *HDD Temp*:   {{ states('sensor.ebroz920_drive_1_temperature') }} °C
+
+        *Network DL*:   {{ states('sensor.ebroz920_network_down') }} kB/s
+
+        *Network UL*:   {{ states('sensor.ebroz920_network_up') }} kB/s
+
+      data:
+        inline_keyboard:
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/cp'
