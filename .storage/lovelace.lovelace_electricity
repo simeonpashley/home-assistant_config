@@ -51,19 +51,6 @@
                             "type": "custom:mini-graph-card"
                         },
                         {
-                            "entities": [
-                                {
-                                    "entity": "sensor.shelly_em_channel_1_power"
-                                }
-                            ],
-                            "hours_to_show": 168,
-                            "points_per_hour": 0.25,
-                            "show": {
-                                "graph": "bar"
-                            },
-                            "type": "custom:mini-graph-card"
-                        },
-                        {
                             "cards": [
                                 {
                                     "entities": [
@@ -120,9 +107,6 @@
                                 },
                                 {
                                     "entity": "utility_meter.monthly_energy"
-                                },
-                                {
-                                    "entity": "sensor.shelly_em_channel_1_voltage"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -280,84 +264,6 @@
                             ],
                             "style": "ha-card {\n  border: solid 2px var(--primary-color);\n}\n",
                             "type": "custom:mini-graph-card"
-                        },
-                        {
-                            "color_thresholds": [
-                                {
-                                    "color": "#039BE5",
-                                    "value": 0
-                                },
-                                {
-                                    "color": "#0da035",
-                                    "value": 600
-                                },
-                                {
-                                    "color": "#e0b400",
-                                    "value": 1200
-                                },
-                                {
-                                    "color": "#e45e65",
-                                    "value": 2400
-                                }
-                            ],
-                            "color_thresholds_transition": "hard",
-                            "entities": [
-                                "sensor.shelly_em_channel_1_voltage"
-                            ],
-                            "group": false,
-                            "hour24": true,
-                            "hours_to_show": 24,
-                            "line_width": 4,
-                            "points_per_hour": 4,
-                            "show": {
-                                "extrema": true,
-                                "fill": "fade",
-                                "icon": true,
-                                "labels": false,
-                                "name": true,
-                                "state": true
-                            },
-                            "state_map": [
-                                {
-                                    "label": "Day",
-                                    "value": "off"
-                                },
-                                {
-                                    "label": "Night",
-                                    "value": "on"
-                                }
-                            ],
-                            "style": "ha-card {\n  border: solid 2px var(--primary-color);\n}\n",
-                            "type": "custom:mini-graph-card"
-                        },
-                        {
-                            "type": "custom:power-distribution-card",
-                            "title": "",
-                            "entities": [
-                                {
-                                    "decimals": 2,
-                                    "display_abs": true,
-                                    "name": "grid",
-                                    "unit_of_display": "W",
-                                    "icon": "mdi:transmission-tower",
-                                    "entity": "sensor.shelly_em_channel_1_power",
-                                    "preset": "grid"
-                                }
-                            ],
-                            "center": {
-                                "type": "none",
-                                "content": [
-                                    {
-                                        "preset": "autarky",
-                                        "name": "autarky"
-                                    },
-                                    {
-                                        "preset": "ratio",
-                                        "name": "ratio"
-                                    }
-                                ]
-                            },
-                            "animation": "slide"
                         },
                         {
                             "type": "energy-distribution",

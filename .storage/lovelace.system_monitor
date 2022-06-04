@@ -53,22 +53,12 @@
                             "title": "Github projects",
                             "entities": [
                                 {
-                                    "entity": "sensor.sp_ha_config",
+                                    "entity": "sensor.simeonpashley_home_assistant_config",
                                     "name": "Main HA config",
                                     "url": true,
                                     "secondary_info": "Clones: {clones}",
                                     "attributes": [
                                         "views",
-                                        "stargazers",
-                                        "forks",
-                                        "open_issues"
-                                    ]
-                                },
-                                {
-                                    "entity": "sensor.ha_core_repo",
-                                    "name": "HA Core ({latest_release_tag})",
-                                    "url": true,
-                                    "attributes": [
                                         "stargazers",
                                         "forks",
                                         "open_issues"

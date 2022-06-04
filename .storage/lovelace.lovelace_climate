@@ -52,7 +52,8 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.living_room_heating"
+                                    "entity": "binary_sensor.living_room_heating",
+                                    "secondary_info": "last-updated"
                                 }
                             ],
                             "type": "entities",

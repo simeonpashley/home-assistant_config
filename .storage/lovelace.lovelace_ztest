@@ -19,46 +19,6 @@
                                 "sensor.hp_officejet_pro_8600_cyan_ink",
                                 "sensor.hp_officejet_pro_8600_black_ink"
                             ]
-                        },
-                        {
-                            "type": "grid",
-                            "columns": 2,
-                            "cards": [
-                                {
-                                    "type": "entity",
-                                    "entity": "sensor.heating_living_room_last_24hr",
-                                    "name": "Living room (24hr)"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "grid",
-                            "columns": 2,
-                            "cards": [
-                                {
-                                    "type": "entity",
-                                    "entity": "sensor.heating_living_room_last_30d",
-                                    "name": "Living room (30d)"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:auto-entities",
-                            "card": {
-                                "type": "entities"
-                            },
-                            "filter": {
-                                "include": [
-                                    {
-                                        "domain": "light",
-                                        "state": "on"
-                                    }
-                                ],
-                                "exclude": []
-                            },
-                            "sort": {
-                                "method": "none"
-                            }
                         }
                     ]
                 }
