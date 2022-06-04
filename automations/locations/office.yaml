@@ -6,7 +6,7 @@
 alias: Leaving Office
 id: 3ac6f2e9-2a37-48cf-97fb-723e51b68107
 
-description: "Notify when I leave offive"
+description: "Notify when I leave office"
 
 trigger:
   - platform: numeric_state
