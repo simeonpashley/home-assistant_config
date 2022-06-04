@@ -1,10 +1,10 @@
 platform: template
 sensors:
   smappee_usage_abs:
-    unit_of_measurement: "W"
+    unit_of_measurement: "Wh"
     value_template: >
-      {% if ((states('sensor.smappee_usage_c') | float) <= 0) %} 
-          {{ ((states('sensor.smappee_solar_c') | float) - -(states('sensor.smappee_usage_c') | float)) | int}}
+      {% if ((states('sensor.smappee_usage_c') | float(0)) <= 0) %} 
+          {{ ((states('sensor.smappee_solar_c') | float(0)) - -(states('sensor.smappee_usage_c') | float(0))) | int}}
       {% else %}
-          {{ ((states('sensor.smappee_usage_c') | float)) | int }}
+          {{ ((states('sensor.smappee_usage_c') | float(0))) | int }}
       {% endif %}

@@ -5,7 +5,7 @@
       device_class: energy
       unit_of_measurement: "Wh"
       state: >
-        {% if ((states('sensor.smappee_injected') | float) <= 0) %} 
+        {% if ((states('sensor.smappee_injected') | float(0)) <= 0) %} 
           {{(-(states('sensor.smappee_injected') | float))}}
         {% else %}
           0

@@ -1,5 +1,0 @@
-platform: mqtt
-state_topic: "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime"
-name: "Smappee usage c"
-unit_of_measurement: "W"
-value_template: "{{value_json.channelPowers[1].power}}"

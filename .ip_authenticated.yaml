@@ -2,9 +2,9 @@
 172.30.32.2:
   city: null
   country: null
-  hostname: null
-  last_used_at: '2022-06-04T01:09:16.594990+00:00'
-  prev_used_at: null
+  hostname: supervisor
+  last_used_at: '2022-06-04T02:39:28.965399+00:00'
+  prev_used_at: '2022-06-04T02:09:27.662694+00:00'
   region: null
   user_id: 662e24c8babf46b8b10f884bcfc12645
   username: Supervisor
@@ -12,8 +12,8 @@
   city: null
   country: null
   hostname: nowtvhub.Home
-  last_used_at: '2022-06-04T01:20:18.097667+00:00'
-  prev_used_at: '2022-06-04T01:09:25.191146+00:00'
+  last_used_at: '2022-06-04T02:51:00.514779+00:00'
+  prev_used_at: '2022-06-04T02:33:03.648020+00:00'
   region: null
   user_id: cdb01f611ec2454191b010efd345ba75
   username: Simeon
