@@ -3,8 +3,8 @@
   city: null
   country: null
   hostname: supervisor
-  last_used_at: '2022-06-04T02:39:28.965399+00:00'
-  prev_used_at: '2022-06-04T02:09:27.662694+00:00'
+  last_used_at: '2022-06-04T03:09:32.833964+00:00'
+  prev_used_at: '2022-06-04T02:39:28.965399+00:00'
   region: null
   user_id: 662e24c8babf46b8b10f884bcfc12645
   username: Supervisor
@@ -24,6 +24,15 @@
   last_used_at: '2022-05-21T08:18:39.135811+00:00'
   prev_used_at: null
   region: null
+  user_id: cdb01f611ec2454191b010efd345ba75
+  username: Simeon
+45.133.172.235:
+  city: Manchester
+  country: United Kingdom
+  hostname: 45.133.172.235
+  last_used_at: '2022-06-04T03:21:14.694917+00:00'
+  prev_used_at: '2022-06-04T03:03:41.120378+00:00'
+  region: England
   user_id: cdb01f611ec2454191b010efd345ba75
   username: Simeon
 92.40.202.77:

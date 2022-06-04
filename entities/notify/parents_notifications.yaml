@@ -7,4 +7,4 @@ platform: group
 name: parents
 services:
   - service: mobile_app_sp12
-  - service: pashley_bot
+  - service: !secret telegram_bot_name
