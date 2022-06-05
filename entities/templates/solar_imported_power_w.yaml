@@ -1,7 +1,7 @@
 - sensor:
     - name: "Solar Imported Power W"
       unique_id: solar_imported_power_w
-      state_class: measurement
+      # state_class: measurement
       device_class: energy
       unit_of_measurement: "Wh"
       state: >

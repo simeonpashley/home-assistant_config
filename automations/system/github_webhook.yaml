@@ -21,9 +21,9 @@ condition:
         False
       {%- endif -%}
 action:
-  - service: notify.simeon_discord
+  - service: notify.notify_engine
     data:
-      target: !secret discord_github_id
+      target_id: !secret telegram_bot_chat_id
       message: >-
         {%- if trigger.json.pull_request -%}
           Pull request

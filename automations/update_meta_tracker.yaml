@@ -1,0 +1,46 @@
+id: update_meta_tracker
+alias: "Update Device Meta Tracker"
+initial_state: true
+mode: queued
+trigger:
+  # Delayed action for router-based and Owntracks trackers that are not 100% reliable
+  - platform: state
+    entity_id:
+      - device_tracker.sp12
+      - device_tracker.sp12_2
+    to: "not_home"
+    for: "00:07:00"
+  - platform: state
+    entity_id:
+      - device_tracker.alokphone_alokphone_2
+      - device_tracker.rashmiphone_rashmiphone_2
+      - bdevice_tracker.arnavphone_arnavphone
+    to: "home"
+    for: "00:00:30"
+  - platform: state
+    entity_id:
+      - device_tracker.alokiphone_3
+      - device_tracker.life360_alok_saboo
+      - device_tracker.275f08b3_dd14_459f_81b9_6c5b02c9b54e
+      - device_tracker.rashmiappiphone_2
+      - device_tracker.life360_sonu
+      - device_tracker.alok_geofency
+      - device_tracker.arnaviphone12pro
+      - device_tracker.life360_arnav_saboo
+      - device_tracker.bb1c8fd7_590d_4544_a362_07eba9dae90b
+  - platform: state
+    entity_id:
+      - device_tracker.alokiphone
+      - device_tracker.elantrase_2
+      - device_tracker.rashmiiphone
+    to: "home"
+action:
+  - service: script.updatetracker
+    data_template:
+      entityid: "{{trigger.entity_id}}"
+      fromstate: "{{trigger.from_state.state}}"
+      tostate: "{{trigger.to_state.state}}"
+  - service: logbook.log
+    data_template:
+      name: "Update Tracker: "
+      message: "{{trigger.entity_id}} changed from {{trigger.from_state.state}} to {{trigger.to_state.state}}."

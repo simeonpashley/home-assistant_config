@@ -17,10 +17,10 @@ condition: []
 action:
   - service: script.notify_engine
     data:
-      who: "discord"
+      who: "simeon"
       title: "*GitHub workflow failed!*"
       value1: 'At {{ states("sensor.simeonpashley_home_assistant_config_last_build_finished_at") }} after {{states("sensor.simeonpashley_home_assistant_config_last_build_duration")}} seconds, while building {{ states("sensor.simeonpashley_home_assistant_config_last_build_id") }} '
-      target_id: !secret discord_github_id
+      target_id: !secret telegram_bot_chat_id
       group: system
       tag_id: "warning"
       importance_id: default

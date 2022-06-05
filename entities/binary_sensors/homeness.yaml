@@ -1,0 +1,25 @@
+platform: "bayesian"
+prior: 0.75
+name: "Simeon Home"
+probability_threshold: 0.95
+observations:
+  - entity_id: "device_tracker.sp12_2"
+    prob_given_true: 0.8
+    prob_given_false: 0.2
+    platform: "state"
+    to_state: "home"
+  - entity_id: "device_tracker.sp12"
+    prob_given_true: 0.99
+    prob_given_false: 0.10
+    platform: "state"
+    to_state: "home"
+  - entity_id: "device_tracker.sp_m1_2"
+    prob_given_true: 0.99
+    prob_given_false: 0.4
+    platform: "state"
+    to_state: "home"
+  - entity_id: "device_tracker.wist"
+    prob_given_true: 0.99
+    prob_given_false: 0.1
+    platform: "state"
+    to_state: "home"
