@@ -10,23 +10,26 @@
                 "require_admin": false,
                 "mode": "storage",
                 "url_path": "lovelace-solar",
-                "id": "lovelace_solar"
+                "id": "lovelace_solar",
+                "icon": "mdi:solar-power"
             },
             {
                 "show_in_sidebar": true,
                 "title": "System Monitor",
-                "require_admin": false,
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "system-monitor",
-                "id": "system_monitor"
+                "id": "system_monitor",
+                "icon": "mdi:bug"
             },
             {
                 "show_in_sidebar": true,
                 "title": "legacy",
-                "require_admin": false,
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "lovelace-legacy",
-                "id": "lovelace_legacy"
+                "id": "lovelace_legacy",
+                "icon": "mdi:archive-outline"
             },
             {
                 "show_in_sidebar": true,
@@ -34,25 +37,8 @@
                 "require_admin": false,
                 "mode": "storage",
                 "url_path": "lovelace-outside",
-                "id": "lovelace_outside"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:lightbulb-group-outline",
-                "title": "Lights",
-                "require_admin": false,
-                "mode": "storage",
-                "url_path": "lovelace-lights",
-                "id": "lovelace_lights"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:youtube-tv",
-                "title": "Media",
-                "require_admin": false,
-                "mode": "storage",
-                "url_path": "lovelace-media",
-                "id": "lovelace_media"
+                "id": "lovelace_outside",
+                "icon": "mdi:weather-sunset"
             },
             {
                 "show_in_sidebar": true,
@@ -60,13 +46,14 @@
                 "require_admin": false,
                 "mode": "storage",
                 "url_path": "lovelace-climate",
-                "id": "lovelace_climate"
+                "id": "lovelace_climate",
+                "icon": "mdi:home-thermometer-outline"
             },
             {
                 "show_in_sidebar": true,
                 "icon": "mdi:flash",
                 "title": "Electricity",
-                "require_admin": false,
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "lovelace-electricity",
                 "id": "lovelace_electricity"
@@ -75,7 +62,7 @@
                 "show_in_sidebar": true,
                 "icon": "mdi:battery-charging-40",
                 "title": "Battery",
-                "require_admin": false,
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "lovelace-battery",
                 "id": "lovelace_battery"
@@ -93,10 +80,19 @@
                 "show_in_sidebar": true,
                 "icon": "mdi:beta",
                 "title": "zTest",
-                "require_admin": false,
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "lovelace-ztest",
                 "id": "lovelace_ztest"
+            },
+            {
+                "show_in_sidebar": true,
+                "title": "People",
+                "require_admin": true,
+                "mode": "storage",
+                "url_path": "lovelace-people",
+                "id": "lovelace_people",
+                "icon": "mdi:account-group-outline"
             }
         ]
     }

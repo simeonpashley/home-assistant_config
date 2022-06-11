@@ -13,94 +13,93 @@
                     "path": "default_view",
                     "cards": [
                         {
-                            "entities": [
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
-                                    "entity": "sensor.speedtest_download",
-                                    "secondary_info": "last-updated",
-                                    "index": 0
+                                    "type": "markdown",
+                                    "content": "{% if now().hour < 5 %}\n  # Good night\n{% elif now().hour < 12 %}\n  # Good morning\n{% elif now().hour < 18 %}\n  # Good afternoon\n{% else %}\n  # Have a nice evening\n{% endif %}\n",
+                                    "style": {
+                                        ".": "ha-card {\n  --ha-card-background: none !important;\n  box-shadow: none !important;\n  height: 20px;\n}\n",
+                                        "ha-markdown": {
+                                            "$": "h1 {\n  font-size: 20px;\n  font-weight: bold;\n  font-family: Helvetica;\n  letter-spacing: '-0.01em';\n}\n"
+                                        }
+                                    }
                                 },
                                 {
-                                    "entity": "sensor.speedtest_upload",
-                                    "secondary_info": "last-updated",
-                                    "index": 0
-                                }
-                            ],
-                            "type": "custom:mini-graph-card"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
+                                    "chart_type": "line",
+                                    "period": "5minute",
+                                    "days_to_show": 2,
+                                    "type": "statistics-graph",
+                                    "entities": [
+                                        "sensor.living_room_temperature"
+                                    ],
+                                    "stat_types": [
+                                        "mean"
+                                    ]
+                                },
                                 {
-                                    "entity": "climate.living_room"
+                                    "type": "custom:simple-thermostat",
+                                    "step_size": 0.5,
+                                    "entity": "climate.living_room",
+                                    "layout": {
+                                        "mode": {
+                                            "headings": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "entities",
+                                    "show_header_toggle": false,
+                                    "title": "Living room",
+                                    "entities": [
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_front_big_e",
+                                            "name": "Front Big",
+                                            "secondary_info": "last-updated",
+                                            "icon": "mdi:lightbulb"
+                                        },
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_y_landing_off_only",
+                                            "name": "Landing",
+                                            "secondary_info": "last-updated",
+                                            "icon": "mdi:lightbulb"
+                                        },
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_front_small_lamp",
+                                            "name": "Front Small",
+                                            "icon": "mdi:lightbulb"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
+                                    "show_header_toggle": false,
+                                    "title": "Plugs",
+                                    "entities": [
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_x_inside_lights"
+                                        },
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_z_outside_lights"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
+                                    "title": "Doorbell",
+                                    "show_header_toggle": false,
+                                    "entities": [
+                                        {
+                                            "entity": "switch.hallway_snooze",
+                                            "name": "Chime Snooze?"
+                                        },
+                                        {
+                                            "entity": "switch.hallway_play_ding_sound",
+                                            "name": "Manual Press"
+                                        }
+                                    ]
                                 }
                             ]
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.moon"
-                                },
-                                {
-                                    "entity": "sensor.season"
-                                },
-                                {
-                                    "entity": "binary_sensor.workday_today",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "binary_sensor.workday_tomorrow",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.bio_waste"
-                                },
-                                {
-                                    "entity": "sensor.mixed_waste"
-                                },
-                                {
-                                    "entity": "sensor.paper_waste"
-                                },
-                                {
-                                    "entity": "sensor.plastic_waste"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Waste ",
-                            "type": "entities"
-                        },
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "person.simeon",
-                                    "name": "Simeon",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.claire",
-                                    "name": "Claire",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.eleanor",
-                                    "name": "Eleanor",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.isabelle",
-                                    "name": "Isabelle",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "title": "The Family",
-                            "show_name": true,
-                            "show_icon": true,
-                            "show_state": true
                         }
                     ]
                 }

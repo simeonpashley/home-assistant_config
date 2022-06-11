@@ -12,7 +12,7 @@ hacs_update_available:
   title: "Updates available in {{ states('sensor.hacs') }} HACS repo{% if states('sensor.hacs') | int > 1 %}s{% endif %}"
   message: ""
   notifiers:
-    - 'mobile_app_sp12'
+    - simeon_devices
   data:
     tag: 'hacs-update-available'
     url: 'http://hassio.local/hacs/installed'

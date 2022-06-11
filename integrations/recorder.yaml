@@ -6,14 +6,12 @@
 
 recorder:
   # The number of days of history to keep in the recorder database
-  purge_keep_days: 10
+  purge_keep_days: 30
 
-# How often (in days) the purge task runs
-# UPDATE v0.109 - to be removed in future Home Assistant version - disabled!
-#  purge_interval: 1
+  # How often (in days) the purge task runs
+  # UPDATE v0.109 - to be removed in future Home Assistant version - disabled!
+  #  purge_interval: 1
 
   exclude:
     entities:
-      - sensor.next_launch_countdown
-      - sensor.blitzortung_lightning_azimuth
-      - sensor.blitzortung_lightning_distance
+      - sensor.icloud3_event_log

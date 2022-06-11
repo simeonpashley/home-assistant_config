@@ -1,0 +1,352 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.lovelace_people",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "cards": [
+                        {
+                            "type": "glance",
+                            "entities": [
+                                {
+                                    "entity": "person.simeon",
+                                    "name": "Simeon",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.claire",
+                                    "name": "Claire",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.eleanor",
+                                    "name": "Eleanor",
+                                    "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "person.isabelle",
+                                    "name": "Isabelle",
+                                    "secondary_info": "last-updated"
+                                }
+                            ],
+                            "title": "The Family",
+                            "show_name": true,
+                            "show_icon": true,
+                            "show_state": true
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "glance",
+                                    "title": "Location Info - Simeon",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "device_tracker.sp12",
+                                            "name": "Simeon"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_interval",
+                                            "name": "Interval",
+                                            "icon": "mdi:clock-start"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_travel_time",
+                                            "name": "TravTime",
+                                            "icon": "mdi:clock-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_zone_distance",
+                                            "name": "Home",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_next_update",
+                                            "name": "NextUpdt",
+                                            "icon": "mdi:update"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.sp12_calc_distance",
+                                            "name": "CalcDist",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_dir_of_travel",
+                                            "name": "Direction",
+                                            "icon": "mdi:compass-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_last_located",
+                                            "name": "Located",
+                                            "icon": "mdi:map-clock"
+                                        },
+                                        {
+                                            "entity": "sensor.sp12_last_update",
+                                            "name": "LastUpdt",
+                                            "icon": "mdi:history"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.sp12_info",
+                                                    "name": "Info",
+                                                    "icon": "mdi:information-outline"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "glance",
+                                    "title": "Location Info - Isabelle",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_zone_fname",
+                                            "name": "Isabelle"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_interval",
+                                            "name": "Interval",
+                                            "icon": "mdi:clock-start"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_travel_time",
+                                            "name": "TravTime",
+                                            "icon": "mdi:clock-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_zone_distance",
+                                            "name": "Home",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_next_update",
+                                            "name": "NextUpdt",
+                                            "icon": "mdi:update"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_calc_distance",
+                                            "name": "CalcDist",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_dir_of_travel",
+                                            "name": "Direction",
+                                            "icon": "mdi:compass-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_last_located",
+                                            "name": "Located",
+                                            "icon": "mdi:map-clock"
+                                        },
+                                        {
+                                            "entity": "sensor.isabelle_s_iphone_last_update",
+                                            "name": "LastUpdt",
+                                            "icon": "mdi:history"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.isabelle_s_iphone_info",
+                                                    "name": "Info",
+                                                    "icon": "mdi:information-outline"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "glance",
+                                    "title": "Location Info - Eleanor",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.iphone_5_zone_fname",
+                                            "name": "Eleanor"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_interval",
+                                            "name": "Interval",
+                                            "icon": "mdi:clock-start"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_travel_time",
+                                            "name": "TravTime",
+                                            "icon": "mdi:clock-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_zone_distance",
+                                            "name": "Home",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_next_update",
+                                            "name": "NextUpdt",
+                                            "icon": "mdi:update"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.iphone_5_calc_distance",
+                                            "name": "CalcDist",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_dir_of_travel",
+                                            "name": "Direction",
+                                            "icon": "mdi:compass-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_last_located",
+                                            "name": "Located",
+                                            "icon": "mdi:map-clock"
+                                        },
+                                        {
+                                            "entity": "sensor.iphone_5_last_update",
+                                            "name": "LastUpdt",
+                                            "icon": "mdi:history"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.iphone_5_info",
+                                                    "name": "Info",
+                                                    "icon": "mdi:information-outline"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "glance",
+                                    "title": "Location Info - Claire",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.claires_mobile_zone_fname",
+                                            "name": "Claire"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_interval",
+                                            "name": "Interval",
+                                            "icon": "mdi:clock-start"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_travel_time",
+                                            "name": "TravTime",
+                                            "icon": "mdi:clock-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_zone_distance",
+                                            "name": "Home",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_next_update",
+                                            "name": "NextUpdt",
+                                            "icon": "mdi:update"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "column_width": "20%",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.claires_mobile_calc_distance",
+                                            "name": "CalcDist",
+                                            "icon": "mdi:map-marker-distance"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_dir_of_travel",
+                                            "name": "Direction",
+                                            "icon": "mdi:compass-outline"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_last_located",
+                                            "name": "Located",
+                                            "icon": "mdi:map-clock"
+                                        },
+                                        {
+                                            "entity": "sensor.claires_mobile_last_update",
+                                            "name": "LastUpdt",
+                                            "icon": "mdi:history"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "entities",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.claires_mobile_info",
+                                                    "name": "Info",
+                                                    "icon": "mdi:information-outline"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

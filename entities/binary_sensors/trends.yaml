@@ -1,0 +1,4 @@
+platform: trend
+sensors:
+  330e_xdrive_fueled:
+    entity_id: sensor.330e_xdrive_remaining_fuel

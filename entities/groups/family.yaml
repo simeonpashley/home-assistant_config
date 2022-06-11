@@ -4,3 +4,33 @@
 
 family:
   - person.simeon
+
+someone_home:
+  name: Is someone at home?
+  entities:
+    - person.simeon
+    - person.claire
+    - person.eleanor
+    - person.isabelle
+
+somone_home_iphone:
+  name: Is Someone at home? (phones)
+  entities:
+    - device_tracker.sp12
+    - device_tracker.claires_mobile
+    - device_tracker.iphone5
+    - device_tracker.isabelle_s_iphone
+
+simeon_or_claire_home:
+  name: Is Simeon or Claire at home?
+  entities:
+    - person.simeon
+    - person.claire
+
+media_players:
+  name: Media Players
+  entities:
+    - media_player.kitchen_sonos
+    - media_player.master_bed_sonos
+    - media_player.bar_sonos
+    - media_player.lounge_sonos

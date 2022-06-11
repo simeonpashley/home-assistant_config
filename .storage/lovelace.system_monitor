@@ -4,6 +4,7 @@
     "key": "lovelace.system_monitor",
     "data": {
         "config": {
+            "title": "System Monitor",
             "icon": "mdi:bug",
             "views": [
                 {
@@ -221,11 +222,59 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "sensor.pi_hole_ads_blocked_today",
+                                    "name": "Ads Blocked Today"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_ads_percentage_blocked_today",
+                                    "name": "Ads Percentage Blocked Today"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_dns_queries_cached",
+                                    "name": "DNS Queries Cached"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_dns_queries_forwarded",
+                                    "name": "DNS Queries Forwarded"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_dns_queries_today",
+                                    "name": "DNS Queries Today"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_dns_unique_clients",
+                                    "name": "DNS Unique Clients"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_dns_unique_domains",
+                                    "name": "DNS Unique Domains"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_domains_blocked",
+                                    "name": "Domains Blocked"
+                                },
+                                {
+                                    "entity": "sensor.pi_hole_seen_clients",
+                                    "name": "Seen Clients"
+                                }
+                            ],
+                            "title": "Pi-Hole"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                "switch.pi_hole"
+                            ],
+                            "title": "Pi-Hole"
                         }
                     ]
                 }
-            ],
-            "title": ""
+            ]
         }
     }
 }

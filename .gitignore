@@ -20,3 +20,4 @@ ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 customize.yaml
+config_ic3.yaml

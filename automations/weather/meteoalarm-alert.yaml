@@ -32,16 +32,3 @@ action:
       importance_id: default
       color: "yellow"
       sticky: "true"
-
-  - service: media_player.volume_set
-    data:
-      entity_id:
-        - media_player.display_me
-        - media_player.clock_me
-      volume_level: 0.3
-  - service: tts.google_translate_say
-    data:
-      entity_id:
-        - media_player.display_me
-        - media_player.clock_me
-      message: 'Meteorological warning. {{state_attr("binary_sensor.meteoalarm", "event")}}. {{state_attr("binary_sensor.meteoalarm", "description")}}'

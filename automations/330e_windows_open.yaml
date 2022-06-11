@@ -1,0 +1,23 @@
+id: 330e_windows_left_open
+alias: 330e Windows Left Open
+trigger:
+  platform: state
+  entity_id:
+    - binary_sensor.330e_xdrive_windows
+    - binary_sensor.330e_xdrive_lids
+  to: "on"
+  for:
+    minutes: 45
+action:
+  - service: script.notify_engine
+    data:
+      who: "simeon"
+      title: "*Car window open*"
+      value1: "You have left the windows open on the 330e"
+      target_id: !secret telegram_bot_chat_id
+      group: duties
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "true"
+  #    timeout: ''

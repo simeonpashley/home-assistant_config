@@ -1,0 +1,5 @@
+- sensor:
+    - name: "330e remaining range total (miles)"
+      unique_id: 330e_xdrive_remaining_range_total_miles
+      unit_of_measurement: "mi"
+      state: "{{ ((states.sensor['330e_xdrive_remaining_range_total'].state | float) * 0.621371) | round }}"

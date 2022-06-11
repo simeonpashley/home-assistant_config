@@ -4,3 +4,29 @@ default_config:
 homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named integrations # package setup/config split
+
+pi_hole:
+  - host: http://pihole2.local
+    name: Pi-Hole2
+    ssl: false
+    verify_ssl: false
+    api_key: !secret pihole_api_key
+
+influxdb:
+  host: !secret influxdb_host
+  port: !secret influxdb_port
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  database: !secret influxdb_database
+  max_retries: 3
+  default_measurement: state
+
+device_tracker:
+  - platform: icloud3
+    # Using FMF without 2FA
+    #username: !secret fmf_username
+    #password: !secret fmf_password
+    config_ic3_file_name: config_ic3.yaml
+    #For Family Sharing with 2FA
+    username: !secret icloud_username
+    password: !secret icloud_password

@@ -73,6 +73,11 @@
                 "url": "/hacsfiles/github-flexi-card/github-flexi-card.js?hacstag=302895020200",
                 "type": "module",
                 "id": "75bad51ab97146a48a998fea3a29aafd"
+            },
+            {
+                "url": "/local/custom_cards/icloud3-event-log-card.js",
+                "type": "module",
+                "id": "2b0d30462ae5405e9e330082e57465d4"
             }
         ]
     }

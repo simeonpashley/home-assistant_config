@@ -1,0 +1,21 @@
+id: 330e_left_unlocked
+alias: 330e Left Unlocked
+trigger:
+  platform: state
+  entity_id: binary_sensor.330e_xdrive_door_lock_state
+  to: "on"
+  for:
+    minutes: 30
+action:
+  - service: script.notify_engine
+    data:
+      who: "simeon"
+      title: "*Car unlocked*"
+      value1: "You have left the 330e unlocked"
+      target_id: !secret telegram_bot_chat_id
+      group: duties
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "true"
+  #    timeout: ''

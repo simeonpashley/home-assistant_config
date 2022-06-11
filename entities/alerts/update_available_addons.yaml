@@ -12,7 +12,7 @@ addon_update_available:
   title: "Updates available for {{ states('sensor.supervisor_updates') }} HA addon{% if states('sensor.supervisor_updates') | int > 1 %}s{% endif %}"
   message: ""
   notifiers:
-  - 'mobile_app_sp12'
+  - simeon_devices
   data:
     tag: 'addon-update-available'
     url: 'http://hassio.local/hassio/dashboard'

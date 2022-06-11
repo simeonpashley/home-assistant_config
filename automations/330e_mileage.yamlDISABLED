@@ -1,0 +1,13 @@
+- id: 330e_mileage
+  alias: "330e Mileage"
+  trigger:
+    platform: time
+    at: "00:00:00"
+    # platform: state
+    # entity_id: sensor.330e_mileage
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: 330e_mileage
+        value1: "{{ as_timestamp(now()) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}"
+        value2: "{{ states('sensor.330e_xdrive_mileage_miles') }}"

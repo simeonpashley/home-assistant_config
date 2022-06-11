@@ -51,17 +51,6 @@
                         },
                         {
                             "entities": [
-                                {
-                                    "entity": "binary_sensor.living_room_heating",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "type": "entities",
-                            "title": "Heating status",
-                            "show_header_toggle": false
-                        },
-                        {
-                            "entities": [
                                 "sensor.min_temp_rooms",
                                 "sensor.max_temp_rooms"
                             ],

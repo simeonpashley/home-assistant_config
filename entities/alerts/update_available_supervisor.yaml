@@ -12,7 +12,7 @@ supervisor_update_available:
   title: 'Update for HA Supervisor available'
   message: "New version is {{ state_attr('sensor.supervisor_updates', 'newest_version') }}. Currently on {{ state_attr('sensor.supervisor_updates', 'current_version') }}"
   notifiers:
-    - 'mobile_app_sp12'
+    - simeon_devices
   data:
     tag: 'supervisor-update-available'
     url: 'http://hassio.local/hassio/dashboard'

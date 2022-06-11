@@ -30,17 +30,4 @@ action:
       importance_id: default
       color: "green"
 
-  - service: media_player.volume_set
-    data:
-      entity_id:
-        - media_player.display_me
-        - media_player.clock_me
-      volume_level: 0.5
-  - service: tts.google_translate_say
-    data:
-      entity_id:
-        - media_player.display_me
-        - media_player.clock_me
-      message: "Hey you! Looks like '{{ states.proximity.office.attributes.nearest }}' has left the office"
-
 mode: single
