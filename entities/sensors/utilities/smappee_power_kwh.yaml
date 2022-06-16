@@ -1,5 +1,0 @@
-platform: integration
-source: sensor.smappee_power
-name: Energy spent
-unit_prefix: k
-round: 2

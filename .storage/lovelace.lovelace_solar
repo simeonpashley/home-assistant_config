@@ -11,74 +11,92 @@
                     "title": "Home",
                     "cards": [
                         {
-                            "type": "gauge",
-                            "entity": "sensor.solar_production",
-                            "max": 3000,
-                            "severity": {
-                                "green": 3,
-                                "yellow": 2,
-                                "red": 1
-                            }
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.solar_production",
+                                    "max": 3000,
+                                    "severity": {
+                                        "green": 3,
+                                        "yellow": 2,
+                                        "red": 1
+                                    }
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "entities": [
+                                        "sensor.solar_production"
+                                    ]
+                                }
+                            ]
                         },
                         {
-                            "type": "gauge",
-                            "entity": "sensor.solar_imported_power_w",
-                            "severity": {
-                                "green": 1,
-                                "yellow": 2,
-                                "red": 3
-                            },
-                            "name": "Grid Import",
-                            "max": 10000
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.grid_imported_power_w",
+                                    "severity": {
+                                        "green": 1,
+                                        "yellow": 2,
+                                        "red": 3
+                                    },
+                                    "name": "Grid Import",
+                                    "max": 10000
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "entities": [
+                                        "sensor.grid_imported_power_w"
+                                    ]
+                                }
+                            ]
                         },
                         {
-                            "type": "gauge",
-                            "entity": "sensor.solar_exported_power_w",
-                            "max": 3000,
-                            "name": "Solar - not consumed"
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.solar_exported_power_w",
+                                    "max": 3000,
+                                    "name": "Solar - Export"
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "entities": [
+                                        "sensor.lp20_solar_exported_power"
+                                    ]
+                                }
+                            ]
                         },
                         {
-                            "type": "gauge",
-                            "entity": "sensor.smappee_usage_abs",
-                            "max": 10000,
-                            "name": "House Consumption (ABS)",
-                            "severity": {
-                                "green": 1,
-                                "yellow": 500,
-                                "red": 1000
-                            }
-                        },
-                        {
-                            "type": "gauge",
-                            "entity": "sensor.solar_house_consumption",
-                            "severity": {
-                                "green": 1,
-                                "yellow": 500,
-                                "red": 1000
-                            },
-                            "name": "House Consumption",
-                            "max": 10000
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.electric_load",
+                                    "severity": {
+                                        "green": 1,
+                                        "yellow": 500,
+                                        "red": 1000
+                                    },
+                                    "name": "House Load",
+                                    "max": 10000
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "entities": [
+                                        "sensor.electric_load"
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.smappee_usage_today"
-                                },
-                                {
                                     "entity": "sensor.smappee_reactive_power"
-                                },
-                                {
-                                    "entity": "sensor.smappee_usage_today_raw"
-                                },
-                                {
-                                    "entity": "sensor.smappee_power_moving_average"
-                                },
-                                {
-                                    "entity": "sensor.smappee_fase_1_power_moving_average"
-                                },
-                                {
-                                    "entity": "sensor.smappee_fase_2_power_moving_average"
                                 },
                                 {
                                     "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
@@ -87,16 +105,13 @@
                                     "entity": "sensor.smappee_always_on"
                                 },
                                 {
-                                    "entity": "sensor.smappee_0_export"
+                                    "entity": "sensor.lp20_solar_exported_power"
                                 },
                                 {
-                                    "entity": "sensor.smappee_0_import"
+                                    "entity": "sensor.solar_exported_power_w"
                                 },
                                 {
-                                    "entity": "sensor.smappee_1_export"
-                                },
-                                {
-                                    "entity": "sensor.smappee_1_import"
+                                    "entity": "sensor.solar_exported_power_kwh"
                                 }
                             ]
                         }

@@ -1,5 +1,0 @@
-platform: integration
-source: sensor.solar_house_consumption
-method: left
-unit_prefix: k
-name: solar_house_consumption_kwh

@@ -93,6 +93,15 @@
                 "url_path": "lovelace-people",
                 "id": "lovelace_people",
                 "icon": "mdi:account-group-outline"
+            },
+            {
+                "show_in_sidebar": true,
+                "icon": "mdi:floor-plan",
+                "title": "Floorplan",
+                "require_admin": true,
+                "mode": "storage",
+                "url_path": "lovelace-floorplan",
+                "id": "lovelace_floorplan"
             }
         ]
     }

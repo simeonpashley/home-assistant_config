@@ -1,0 +1,6 @@
+platform: mqtt_room
+name: "ble Isabelle iPhone"
+device_id: "apple:1006:10-12"
+state_topic: "espresense/devices/apple:1006:10-12"
+timeout: 5
+away_timeout: 120

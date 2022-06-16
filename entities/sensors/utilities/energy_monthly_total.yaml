@@ -8,3 +8,4 @@ sensors:
     friendly_name: 'Monthy Peak and Offpeak Total'
     value_template: "{{ ((states('sensor.monthly_energy_peak')|float + states('sensor.monthly_energy_offpeak')|float) )|round(3) }}"
     unit_of_measurement: "kWh"
+    device_class: energy

@@ -54,15 +54,14 @@
                             "title": "Github projects",
                             "entities": [
                                 {
-                                    "entity": "sensor.simeonpashley_home_assistant_config",
-                                    "name": "Main HA config",
+                                    "entity": "sensor.simeonpashley_home_assistant_config_latest_issue",
                                     "url": true,
-                                    "secondary_info": "Clones: {clones}",
                                     "attributes": [
-                                        "views",
-                                        "stargazers",
+                                        "stars",
+                                        "issues",
                                         "forks",
-                                        "open_issues"
+                                        "pull_requests",
+                                        "watchers"
                                     ]
                                 }
                             ]

@@ -5,13 +5,6 @@ homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named integrations # package setup/config split
 
-pi_hole:
-  - host: http://pihole2.local
-    name: Pi-Hole2
-    ssl: false
-    verify_ssl: false
-    api_key: !secret pihole_api_key
-
 influxdb:
   host: !secret influxdb_host
   port: !secret influxdb_port

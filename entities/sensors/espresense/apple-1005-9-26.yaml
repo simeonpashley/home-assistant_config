@@ -1,0 +1,6 @@
+platform: mqtt_room
+name: "ble apple:1005:9-26"
+device_id: "apple:1005:9-26"
+state_topic: "espresense/devices/apple:1005:9-26"
+timeout: 5
+away_timeout: 120

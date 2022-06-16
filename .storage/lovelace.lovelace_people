@@ -45,7 +45,7 @@
                                     "column_width": "20%",
                                     "entities": [
                                         {
-                                            "entity": "device_tracker.sp12",
+                                            "entity": "device_tracker.sp12_app",
                                             "name": "Simeon"
                                         },
                                         {
@@ -276,7 +276,7 @@
                                     "column_width": "20%",
                                     "entities": [
                                         {
-                                            "entity": "sensor.claires_mobile_zone_fname",
+                                            "entity": "device_tracker.claires_mobile_app",
                                             "name": "Claire"
                                         },
                                         {

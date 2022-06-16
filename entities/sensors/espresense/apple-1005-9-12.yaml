@@ -1,0 +1,6 @@
+platform: mqtt_room
+name: "ble Claire iPad"
+device_id: "apple:1005:9-12"
+state_topic: "espresense/devices/apple:1005:9-12"
+timeout: 5
+away_timeout: 120

@@ -1,7 +1,0 @@
-- sensor:
-    - name: "Solar House Consumption"
-      unique_id: solar_house_consumption
-      # state_class: measurement
-      device_class: energy
-      unit_of_measurement: "W"
-      state: "{{(states('sensor.smappee_usage_abs') | float(0))}}"

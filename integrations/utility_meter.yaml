@@ -4,25 +4,25 @@
 # https://www.home-assistant.io/integrations/utility_meter/
 #####
 utility_meter:
-  solar_imported_power_hourly:
-    source: sensor.solar_imported_power_kwh
-    name: Solar Imported Power Hourly
+  grid_imported_power_hourly:
+    source: sensor.grid_imported_power_kwh
+    name: Grid Imported Power Hourly
     cycle: hourly
-  solar_imported_power_daily:
-    source: sensor.solar_imported_power_kwh
-    name: Solar Imported Power Daily
+  grid_imported_power_daily:
+    source: sensor.grid_imported_power_kwh
+    name: Grid Imported Power Daily
     cycle: daily
-  solar_imported_power_weekly:
-    source: sensor.solar_imported_power_kwh
-    name: Solar Imported Power Weekly
+  grid_imported_power_weekly:
+    source: sensor.grid_imported_power_kwh
+    name: Grid Imported Power Weekly
     cycle: weekly
-  solar_imported_power_monthly:
-    source: sensor.solar_imported_power_kwh
-    name: Solar Imported Power Monthly
+  grid_imported_power_monthly:
+    source: sensor.grid_imported_power_kwh
+    name: Grid Imported Power Monthly
     cycle: monthly
-  solar_imported_power_yearly:
-    source: sensor.solar_imported_power_kwh
-    name: Solar Imported Power Yearly
+  grid_imported_power_yearly:
+    source: sensor.grid_imported_power_kwh
+    name: Grid Imported Power Yearly
     cycle: yearly
   solar_exported_power_hourly:
     source: sensor.solar_exported_power_kwh
@@ -64,52 +64,52 @@ utility_meter:
     source: sensor.solar_production_kwh
     name: Solar Production Yearly
     cycle: yearly
-  solar_house_consumption_hourly:
-    source: sensor.solar_house_consumption_kwh
-    name: Solar House Consumption Hourly
+  electric_load_hourly:
+    source: sensor.electric_load_kwh
+    name: Electric Load Hourly
     cycle: hourly
-  solar_house_consumption_daily:
-    source: sensor.solar_house_consumption_kwh
-    name: Solar House Consumption Daily
+  electric_load_daily:
+    source: sensor.electric_load_kwh
+    name: Electric Load Daily
     cycle: daily
-  solar_house_consumption_weekly:
-    source: sensor.solar_house_consumption_kwh
-    name: Solar House Consumption Weekly
+  electric_load_weekly:
+    source: sensor.electric_load_kwh
+    name: Electric Load Weekly
     cycle: weekly
-  solar_house_consumption_monthly:
-    source: sensor.solar_house_consumption_kwh
-    name: Solar House Consumption Monthly
+  electric_load_monthly:
+    source: sensor.electric_load_kwh
+    name: Electric Load Monthly
     cycle: monthly
-  solar_house_consumption_yearly:
-    source: sensor.solar_house_consumption_kwh
-    name: Solar House Consumption Yearly
+  electric_load_yearly:
+    source: sensor.electric_load_kwh
+    name: Electric Load Yearly
     cycle: yearly
   daily_energy:
-    source: sensor.solar_house_consumption_kwh
+    source: sensor.electric_load_kwh
     cycle: daily
     tariffs:
       - peak
       - offpeak
   monthly_energy:
-    source: sensor.solar_house_consumption_kwh
+    source: sensor.electric_load_kwh
     cycle: monthly
     tariffs:
       - peak
       - offpeak
   quarterly_energy:
-    source: sensor.solar_house_consumption_kwh
+    source: sensor.electric_load_kwh
     cycle: quarterly
     tariffs:
       - peak
       - offpeak
   yearly_energy:
-    source: sensor.solar_house_consumption_kwh
+    source: sensor.electric_load_kwh
     cycle: yearly
     tariffs:
       - peak
       - offpeak
   sun_energy:
-    source: sensor.solar_house_consumption_kwh
+    source: sensor.electric_load_kwh
     cycle: daily
     tariffs:
       - day

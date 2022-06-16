@@ -16,64 +16,9 @@
                         },
                         {
                             "type": "custom:weather-card",
-                            "entity": "weather.29stratford_2",
+                            "entity": "weather.29stratford",
                             "number_of_forecasts": "5",
                             "name": "AW"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.meteoalarm"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_event"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_onset"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_severity"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_description"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_instruction"
-                                },
-                                {
-                                    "entity": "sensor.meteoalarm_expires"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Weather warning",
-                            "type": "entities"
-                        },
-                        {
-                            "type": "custom:meteoalarm-card",
-                            "entity": "binary_sensor.meteoalarm"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.protection_window",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "sensor.current_uv_index",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "sensor.current_uv_level",
-                                    "secondary_info": "last-changed"
-                                },
-                                {
-                                    "entity": "sensor.max_uv_index",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "UV levels",
-                            "type": "entities"
                         }
                     ]
                 }

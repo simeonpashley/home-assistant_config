@@ -1,0 +1,15 @@
+platform: filter
+name: "Electric load (moving average)"
+entity_id: sensor.electric_load
+unique_id: electric_load
+filters:
+  - filter: outlier
+    window_size: 4
+    radius: 2.0
+  - filter: lowpass
+    time_constant: 10
+  - filter: time_simple_moving_average
+    window_size: 00:05
+    precision: 0
+  - filter: time_throttle
+    window_size: 00:01

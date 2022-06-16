@@ -1,0 +1,5 @@
+platform: integration
+source: sensor.electric_load
+name: Energy spent
+unit_prefix: k
+round: 2

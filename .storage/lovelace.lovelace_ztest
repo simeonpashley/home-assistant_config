@@ -121,8 +121,12 @@
                             ]
                         },
                         {
+                            "show_state": true,
+                            "show_name": true,
+                            "camera_view": "live",
                             "type": "picture-entity",
-                            "entity": "camera.drive"
+                            "entity": "camera.drive_snapshot",
+                            "camera_image": "camera.drive"
                         }
                     ]
                 }

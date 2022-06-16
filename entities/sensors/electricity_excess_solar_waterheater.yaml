@@ -1,0 +1,8 @@
+platform: template
+sensors:
+  # Excess Solar production for waterheater
+  electricity_excess_solar_waterheater:
+    friendly_name: "Excess Solar for Waterheater"
+    value_template: "{{ max(0, states('sensor.electricity_excess_solar') | int(0) - 2500 | int(0)) }}"
+    unit_of_measurement: "W" # Combine PV1 and PV2 power
+    device_class: power

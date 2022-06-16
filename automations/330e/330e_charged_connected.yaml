@@ -1,0 +1,28 @@
+id: 330e_charged_connected
+alias: "330e Charged and Connected"
+trigger:
+  platform: time_pattern
+  # Matches every hour at X minutes past whole
+  minutes: 5
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.330e_charged_connected
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.text_notifications
+      state: "on"
+action:
+  - service: script.notify_engine
+    data:
+      who: "simeon"
+      title: "*330e charged and connected*"
+      value1: "330e is charged, it can be disconnected"
+      target_id: !secret telegram_bot_chat_id
+      group: duties
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "true"
+  #    timeout: ''

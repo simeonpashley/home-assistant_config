@@ -9,7 +9,7 @@ addon_update_available:
   state: 'on'
   can_acknowledge: false
   repeat: 360
-  title: "Updates available for {{ states('sensor.supervisor_updates') }} HA addon{% if states('sensor.supervisor_updates') | int > 1 %}s{% endif %}"
+  title: "[Alert] Updates available for {{ states('sensor.supervisor_updates') }} HA addon{% if states('sensor.supervisor_updates') | int > 1 %}s{% endif %}"
   message: ""
   notifiers:
   - simeon_devices

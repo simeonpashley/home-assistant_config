@@ -10,7 +10,7 @@ supervisor_update_available:
   can_acknowledge: false
   repeat: 360
   title: 'Update for HA Supervisor available'
-  message: "New version is {{ state_attr('sensor.supervisor_updates', 'newest_version') }}. Currently on {{ state_attr('sensor.supervisor_updates', 'current_version') }}"
+  message: "[Alert] New version is {{ state_attr('sensor.supervisor_updates', 'newest_version') }}. Currently on {{ state_attr('sensor.supervisor_updates', 'current_version') }}"
   notifiers:
     - simeon_devices
   data:

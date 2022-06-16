@@ -1,5 +1,0 @@
-- sensor:
-  - name: "330e mileage (miles)"
-    unique_id: 330e_xdrive_mileage_miles
-    unit_of_measurement: "mi"
-    state: "{{ ((states.sensor['330e_xdrive_mileage'].state | float) * 0.621371) | round }}"

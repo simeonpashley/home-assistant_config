@@ -1,0 +1,7 @@
+- sensor:
+    - name: "Grid Power"
+      unique_id: grid_power
+      state_class: measurement
+      device_class: power
+      unit_of_measurement: "W"
+      state: "{{ (states('sensor.electric_load') | float(0)) - (states('sensor.solar_production') | float(0)) }}"

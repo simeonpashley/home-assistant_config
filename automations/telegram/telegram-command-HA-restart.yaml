@@ -12,10 +12,9 @@ trigger:
   platform: event
 
 action:
-- data:
-    message: HA - Restart - Triggered
-  service: notify.simeon_devices
-- alias: ''
-  data: {}
-  service: homeassistant.restart
-- service: script.googlescriptharestart
+  - data:
+      message: HA - Restart - Triggered
+    service: notify.simeon_devices
+  - alias: ""
+    data: {}
+    service: homeassistant.restart
