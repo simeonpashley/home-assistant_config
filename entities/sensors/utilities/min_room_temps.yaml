@@ -5,5 +5,6 @@
 platform: min_max
 entity_ids:
   - sensor.living_room_temperature
+  - sensor.esphome_af4cb4_temperature_2
 name: min_temp_rooms
 type: min

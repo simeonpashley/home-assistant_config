@@ -10,4 +10,4 @@ offpeak_energy_cost:
   max: 100
   initial: 0.36
   unit_of_measurement: "GBP/kWh"
-  icon: mdi:currency-eur-off
+  icon: mdi:currency-gbp

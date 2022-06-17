@@ -25,6 +25,83 @@
                             ]
                         },
                         {
+                            "type": "vertical-stack",
+                            "title": "Office",
+                            "cards": [
+                                {
+                                    "type": "horizontal-stack",
+                                    "cards": [
+                                        {
+                                            "type": "gauge",
+                                            "entity": "sensor.esphome_af4cb4_temperature_2",
+                                            "name": "Temp",
+                                            "max": 40,
+                                            "min": 10,
+                                            "needle": false,
+                                            "severity": {
+                                                "green": 0,
+                                                "yellow": 18,
+                                                "red": 30
+                                            }
+                                        },
+                                        {
+                                            "type": "gauge",
+                                            "entity": "sensor.esphome_af4cb4_humidity_2",
+                                            "name": "Humidity",
+                                            "max": 100,
+                                            "min": 0,
+                                            "needle": false,
+                                            "severity": {
+                                                "green": 0,
+                                                "yellow": 30,
+                                                "red": 60
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "smoothing": false,
+                                    "hours_to_show": 168,
+                                    "show": {
+                                        "fill": false,
+                                        "labels": true,
+                                        "labels_secondary": true
+                                    },
+                                    "entities": [
+                                        {
+                                            "name": "Temp",
+                                            "entity": "sensor.esphome_af4cb4_temperature_2"
+                                        },
+                                        {
+                                            "name": "Humidity",
+                                            "entity": "sensor.esphome_af4cb4_humidity_2",
+                                            "y_axis": "secondary",
+                                            "show_legend": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "input_boolean.af4cb4_prevent_deep_sleep",
+                                            "secondary_info": "none"
+                                        },
+                                        {
+                                            "entity": "sensor.esphome_af4cb4_wifi_signal_2",
+                                            "secondary_info": "last-updated"
+                                        },
+                                        {
+                                            "entity": "sensor.esphome_af4cb4_temperature_2",
+                                            "secondary_info": "last-updated"
+                                        }
+                                    ],
+                                    "show_header_toggle": false
+                                }
+                            ]
+                        },
+                        {
                             "entity": "climate.living_room",
                             "step_size": 0.1,
                             "type": "custom:simple-thermostat"
@@ -41,13 +118,31 @@
                         },
                         {
                             "entities": [
-                                "sensor.living_room_temperature"
+                                {
+                                    "entity": "sensor.living_room_temperature"
+                                }
                             ],
                             "show": {
                                 "fill": false,
                                 "labels": true
                             },
-                            "type": "custom:mini-graph-card"
+                            "type": "custom:mini-graph-card",
+                            "hours_to_show": 168,
+                            "points_per_hour": 0.25,
+                            "color_thresholds": [
+                                {
+                                    "value": 20,
+                                    "color": "#f39c12"
+                                },
+                                {
+                                    "value": 21,
+                                    "color": "#d35400"
+                                },
+                                {
+                                    "value": 22,
+                                    "color": "#c0392b"
+                                }
+                            ]
                         },
                         {
                             "entities": [

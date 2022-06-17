@@ -10,4 +10,4 @@ energy_monthly_cost:
   max: 100
   initial: 9.66
   unit_of_measurement: "GBP"
-  icon: mdi:currency-eur-off
+  icon: mdi:currency-gbp

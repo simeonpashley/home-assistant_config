@@ -10,4 +10,4 @@ energy_daily_cost:
   max: 100
   initial: 0.30
   unit_of_measurement: "GBP"
-  icon: mdi:currency-eur-off
+  icon: mdi:currency-gbp

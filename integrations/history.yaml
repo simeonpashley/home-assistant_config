@@ -6,14 +6,40 @@
 #####
 
 history:
-# use_include_order: True
-#  include:
-#    entities:
-#      - binary_sensor.garagedoor
-#      - device_tracker.meta_rashmi
-#      - person.rashmi
-#      - device_tracker.meta_alok
-#      - person.alok
+  # use_include_order: True
+  #  include:
+  #    entities:
+  #      - binary_sensor.garagedoor
+  #      - device_tracker.meta_rashmi
+  #      - person.rashmi
+  #      - device_tracker.meta_alok
+  #      - person.alok
   exclude:
     domains:
+      - alert
       - automation
+      - counter
+      - group
+      - media_player
+      - script
+      - update
+      - zone
+      - weather
+    entity_globs:
+      - binary_sensor.updated_*
+      - binary_sensor.workday_*
+      - binary_sensor.*_focus
+      - sensor.count_*
+      - sensor.simeonpashley_home_assistant_config*
+    entities:
+      - binary_sensor.front_door_ding
+      - binary_sensor.front_door_ding_2
+      - binary_sensor.front_door_motion
+      - binary_sensor.front_door_motion_2
+      - binary_sensor.sp12_focus
+      - binary_sensor.sp_m1_active
+      - binary_sensor.sp_m1_audio_input_in_use
+      - binary_sensor.sp_m1_audio_output_in_use
+      - binary_sensor.sp_m1_camera_in_use
+      - binary_sensor.sp_m1_focus
+      - sensor.icloud3_event_log

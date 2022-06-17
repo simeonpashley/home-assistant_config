@@ -26,7 +26,7 @@
                                 {
                                     "type": "custom:mini-graph-card",
                                     "entities": [
-                                        "sensor.solar_production"
+                                        "sensor.solar_production_kwh"
                                     ]
                                 }
                             ]
@@ -48,7 +48,7 @@
                                 {
                                     "type": "custom:mini-graph-card",
                                     "entities": [
-                                        "sensor.grid_imported_power_w"
+                                        "sensor.grid_imported_power_kwh"
                                     ]
                                 }
                             ]
@@ -65,7 +65,7 @@
                                 {
                                     "type": "custom:mini-graph-card",
                                     "entities": [
-                                        "sensor.lp20_solar_exported_power"
+                                        "sensor.solar_exported_power_kwh"
                                     ]
                                 }
                             ]
@@ -96,6 +96,12 @@
                             "type": "entities",
                             "entities": [
                                 {
+                                    "entity": "sensor.solar_exported_power_hourly_compensation"
+                                },
+                                {
+                                    "entity": "sensor.330e_xdrive_charging_level_hv"
+                                },
+                                {
                                     "entity": "sensor.smappee_reactive_power"
                                 },
                                 {
@@ -105,13 +111,13 @@
                                     "entity": "sensor.smappee_always_on"
                                 },
                                 {
-                                    "entity": "sensor.lp20_solar_exported_power"
+                                    "entity": "binary_sensor.excess_solar"
                                 },
                                 {
-                                    "entity": "sensor.solar_exported_power_w"
+                                    "entity": "sensor.electricity_excess_solar_waterheater"
                                 },
                                 {
-                                    "entity": "sensor.solar_exported_power_kwh"
+                                    "entity": "sensor.electricity_excess_solar"
                                 }
                             ]
                         }

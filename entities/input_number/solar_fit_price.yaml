@@ -1,0 +1,8 @@
+solar_fit_price:
+  name: Solar F.I.T. Price
+  mode: box
+  min: 0
+  max: 100
+  initial: 0.0435
+  unit_of_measurement: "GBP/kWh"
+  icon: mdi:currency-gbp

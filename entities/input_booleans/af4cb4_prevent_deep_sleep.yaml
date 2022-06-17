@@ -1,0 +1,4 @@
+af4cb4_prevent_deep_sleep:
+  name: af4cb4 Prevent Deep Sleep
+  icon: mdi:sleep-off
+  initial: false
