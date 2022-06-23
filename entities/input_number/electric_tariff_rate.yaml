@@ -1,0 +1,8 @@
+electric_tariff_rate:
+  name: Electric Tariff Rate
+  mode: box
+  min: 0
+  max: 100
+  initial: 0.1845
+  unit_of_measurement: "GBP/kWh"
+  icon: mdi:flash

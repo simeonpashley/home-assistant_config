@@ -1,0 +1,17 @@
+id: openuv_update_index
+alias: "Update OpenUV every 30 minutes during day"
+trigger:
+  - platform: time_pattern
+    hours: /1
+  - platform: sun
+    event: sunrise
+condition:
+  - condition: and
+    conditions:
+      - condition: sun
+        after: sunrise
+      - condition: sun
+        before: sunset
+action:
+  - service: openuv.update_uv_index_data
+  - service: openuv.update_data

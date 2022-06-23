@@ -1,0 +1,8 @@
+gas_tariff_rate:
+  name: Gas Tariff Rate
+  mode: box
+  min: 0
+  max: 100
+  initial: 0.0241
+  unit_of_measurement: "GBP/kWh"
+  icon: mdi:fire

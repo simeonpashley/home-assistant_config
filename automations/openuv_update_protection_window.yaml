@@ -1,0 +1,7 @@
+id: openuv_update_protection_window
+alias: "Update OpenUV protection window once a day"
+trigger:
+  platform: time
+  at: "02:12:00"
+action:
+  service: openuv.update_protection_data

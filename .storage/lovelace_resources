@@ -78,6 +78,11 @@
                 "url": "/local/custom_cards/icloud3-event-log-card.js",
                 "type": "module",
                 "id": "2b0d30462ae5405e9e330082e57465d4"
+            },
+            {
+                "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325342",
+                "type": "module",
+                "id": "758325f64d2a41b788a9e131b6d88670"
             }
         ]
     }

@@ -1,0 +1,24 @@
+- sensor:
+    - name: tariff_solar_export
+      unit_of_measurement: "GBP/kWh"
+      state: "{{ states('input_number.solar_export_tariff') | float(0) }}"
+
+- sensor:
+    - name: tariff_electric_standing
+      unit_of_measurement: GBP/kWh
+      state: "{{ states('input_number.electric_tariff_standing') | float(0) }}"
+
+- sensor:
+    - name: tariff_electric_rate
+      unit_of_measurement: GBP/kWh
+      state: "{{states('input_number.electric_tariff_rate') | float(0)}}"
+
+- sensor:
+    - name: tariff_gas_standing
+      unit_of_measurement: GBP/kWh
+      state: "{{states('input_number.gas_tariff_standing') | float(0)}}"
+
+- sensor:
+    - name: tariff_gas_rate
+      unit_of_measurement: GBP/kWh
+      state: "{{states('input_number.gas_tariff_rate') | float(0)}}"

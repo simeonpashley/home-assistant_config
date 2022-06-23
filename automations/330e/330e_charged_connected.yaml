@@ -2,8 +2,7 @@ id: 330e_charged_connected
 alias: "330e Charged and Connected"
 trigger:
   platform: time_pattern
-  # Matches every hour at X minutes past whole
-  minutes: 5
+  minutes: "/15"
 condition:
   condition: and
   conditions:
@@ -14,6 +13,7 @@ condition:
       entity_id: input_boolean.text_notifications
       state: "on"
 action:
+  - delay: 7200 # seconds until next trigger, to mitigate too many messages
   - service: script.notify_engine
     data:
       who: "simeon"

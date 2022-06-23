@@ -1,0 +1,11 @@
+alias: Increment Electric by Standing
+description: ""
+trigger:
+  - platform: time
+    at: "00:01"
+condition: []
+action:
+  - service: input_number.increment
+    target:
+      entity_id: input_number.electric_daily_kwh
+mode: single

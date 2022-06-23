@@ -4,7 +4,7 @@
 #####
 
 platform: command_line
-command: /bin/bash -c "(echo > /dev/tcp/192.168.88.30/1883) > /dev/null 2>&1 && echo open || echo closed"
+command: /bin/bash -c "(echo > /dev/tcp/192.168.88.41/1883) > /dev/null 2>&1 && echo open || echo closed"
 name: MQTT status
 payload_off: "closed"
 payload_on: "open"

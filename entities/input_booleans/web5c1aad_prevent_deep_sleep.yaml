@@ -1,0 +1,4 @@
+web5c1aad_prevent_deep_sleep:
+  name: web5c1aad Prevent Deep Sleep
+  icon: mdi:sleep-off
+  initial: false

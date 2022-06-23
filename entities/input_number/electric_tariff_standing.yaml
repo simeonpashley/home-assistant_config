@@ -1,0 +1,8 @@
+electric_tariff_standing:
+  name: Electric Tariff Standing
+  mode: box
+  min: 0
+  max: 100
+  initial: 0.2262
+  unit_of_measurement: "GBP/kWh"
+  icon: mdi:cash

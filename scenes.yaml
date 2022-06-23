@@ -1,26 +1,26 @@
-- id: '1654986378589'
+- id: "1654986378589"
   name: New Scene
   entities:
     switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
       icon: mdi:toggle-switch
       friendly_name: Front Small Lamp
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
       icon: mdi:toggle-switch
       friendly_name: Front Big Lamp
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_z_outside_lights:
       icon: mdi:toggle-switch
       friendly_name: Z Outside Lights
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_x_inside_lights:
       icon: mdi:toggle-switch
       friendly_name: X - Inside Lights
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_y_landing_off_only:
       icon: mdi:toggle-switch
       friendly_name: Landing Off
-      state: 'off'
+      state: "off"
   metadata:
     switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
       entity_only: false
@@ -33,21 +33,21 @@
     switch.smappee_1005002095_local_comfort_plug_y_landing_off_only:
       entity_only: false
   icon: mdi:home-off
-- id: '1654986709900'
+- id: "1654986709900"
   name: Lights off
   entities:
     switch.smappee_1005002095_local_comfort_plug_y_landing_off_only:
       icon: mdi:toggle-switch
       friendly_name: Landing Off
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
       icon: mdi:toggle-switch
       friendly_name: Front Big Lamp
-      state: 'off'
+      state: "off"
     switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
       icon: mdi:toggle-switch
       friendly_name: Front Small Lamp
-      state: 'off'
+      state: "off"
   icon: mdi:lightbulb-group-off-outline
   metadata:
     switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
@@ -56,24 +56,45 @@
       entity_only: true
     switch.smappee_1005002095_local_comfort_plug_y_landing_off_only:
       entity_only: true
-- id: '1654986864619'
+- id: "1654986864619"
   name: Bb
   entities:
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
       icon: mdi:toggle-switch
       friendly_name: Front Big Lamp
-      state: 'off'
+      state: "off"
   icon: mdi:lightbulb-group-off-outline
   metadata:
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
       entity_only: true
-- id: '1655071906324'
+- id: "1655071906324"
   name: New Scene
   entities:
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
       icon: mdi:toggle-switch
       friendly_name: Front Big Lamp
-      state: 'off'
+      state: "off"
   metadata:
     switch.smappee_1005002095_local_comfort_plug_front_big_e:
+      entity_only: true
+- id: "1655759352727"
+  name: Front Off
+  entities:
+    switch.smappee_1005002095_local_comfort_plug_front_big_e:
+      icon: mdi:toggle-switch
+      friendly_name: Front Big Lamp
+      state: "off"
+    switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
+      icon: mdi:toggle-switch
+      friendly_name: Front Small Lamp
+      state: "off"
+    switch.tradfi_001:
+      friendly_name: Tradfi001
+      state: "on"
+  metadata:
+    switch.smappee_1005002095_local_comfort_plug_front_small_lamp:
+      entity_only: true
+    switch.smappee_1005002095_local_comfort_plug_front_big_e:
+      entity_only: true
+    switch.tradfi_001:
       entity_only: true

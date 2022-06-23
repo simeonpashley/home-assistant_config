@@ -6,102 +6,12 @@
         "items": [
             {
                 "show_in_sidebar": true,
-                "title": "Solar",
-                "require_admin": false,
-                "mode": "storage",
-                "url_path": "lovelace-solar",
-                "id": "lovelace_solar",
-                "icon": "mdi:solar-power"
-            },
-            {
-                "show_in_sidebar": true,
-                "title": "System Monitor",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "system-monitor",
-                "id": "system_monitor",
-                "icon": "mdi:bug"
-            },
-            {
-                "show_in_sidebar": true,
-                "title": "legacy",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-legacy",
-                "id": "lovelace_legacy",
-                "icon": "mdi:archive-outline"
-            },
-            {
-                "show_in_sidebar": true,
-                "title": "Outside",
-                "require_admin": false,
-                "mode": "storage",
-                "url_path": "lovelace-outside",
-                "id": "lovelace_outside",
-                "icon": "mdi:weather-sunset"
-            },
-            {
-                "show_in_sidebar": true,
-                "title": "Climate",
-                "require_admin": false,
-                "mode": "storage",
-                "url_path": "lovelace-climate",
-                "id": "lovelace_climate",
-                "icon": "mdi:home-thermometer-outline"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:flash",
-                "title": "Electricity",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-electricity",
-                "id": "lovelace_electricity"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:battery-charging-40",
-                "title": "Battery",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-battery",
-                "id": "lovelace_battery"
-            },
-            {
-                "show_in_sidebar": true,
                 "icon": "mdi:tune-vertical",
-                "title": "19-Configuration",
-                "require_admin": false,
+                "title": "Admin",
+                "require_admin": true,
                 "mode": "storage",
                 "url_path": "19-configuration",
                 "id": "19_configuration"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:beta",
-                "title": "zTest",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-ztest",
-                "id": "lovelace_ztest"
-            },
-            {
-                "show_in_sidebar": true,
-                "title": "People",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-people",
-                "id": "lovelace_people",
-                "icon": "mdi:account-group-outline"
-            },
-            {
-                "show_in_sidebar": true,
-                "icon": "mdi:floor-plan",
-                "title": "Floorplan",
-                "require_admin": true,
-                "mode": "storage",
-                "url_path": "lovelace-floorplan",
-                "id": "lovelace_floorplan"
             }
         ]
     }

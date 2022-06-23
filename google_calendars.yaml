@@ -1,0 +1,52 @@
+- cal_id: c_b1ki2fkncdv1d797n1devjvb4g@group.calendar.google.com
+  entities:
+    - device_id: bin_garden
+      ignore_availability: true
+      name: Garden Bin
+      track: true
+      search: "bin_garden"
+    - device_id: bin_household
+      ignore_availability: true
+      name: Household Waste
+      track: true
+      search: "bin_household"
+    - device_id: bin_paper
+      ignore_availability: true
+      name: Paper Bin
+      track: true
+      search: "bin_paper"
+    - device_id: bin_mixed_recycle
+      ignore_availability: true
+      name: Mixed Recycle
+      track: true
+      search: "bin_mixed_recycle"
+
+- cal_id: p#weather@group.v.calendar.google.com
+  entities:
+    - device_id: weather
+      ignore_availability: true
+      name: Weather
+
+- cal_id: en-gb.uk#holiday@group.v.calendar.google.com
+  entities:
+    - device_id: holidays_in_the_united_kingdom
+      ignore_availability: true
+      name: Holidays in the United Kingdom
+
+- cal_id: ringalpha.com_dhsndpgeag6veq2r4esl8el36c@group.calendar.google.com
+  entities:
+    - device_id: import
+      ignore_availability: true
+      name: Import
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+    - device_id: birthdays
+      ignore_availability: true
+      name: Birthdays
+
+- cal_id: simeon@pashley.org
+  entities:
+    - device_id: simeon_pashley_org
+      ignore_availability: true
+      name: simeon@pashley.org

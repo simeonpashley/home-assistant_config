@@ -1,0 +1,6 @@
+electric_daily_kwh:
+    name: Electric Daily kWh
+    min: 0
+    max: 1000000
+    step: 1
+    unit_of_measurement: kWh

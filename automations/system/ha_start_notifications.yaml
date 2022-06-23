@@ -10,23 +10,23 @@ trigger:
   platform: homeassistant
 
 action:
-- service: script.notify_engine
-  data:
-    who: 'simeon'
-    title: '*HA started*'
-    value1: 'Home Assistant started at {{ states("sensor.time") }}'
-    group: ha
-    tag_id: 'information'
-    importance_id: default
-    color: 'green'
-    sticky: 'false'
-    timeout: 300
-- timeout: 00:03:00
-  wait_template: ''
-- service: media_player.volume_set
-  target:
-    entity_id: media_player.display_me
-  data:
-    volume_level: 0.3
-- delay: 00:00:01
+  - service: script.notify_engine
+    data:
+      who: "simeon"
+      title: "*HA started*"
+      value1: 'Home Assistant started at {{ states("sensor.time") }}'
+      group: ha
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "false"
+      timeout: 300
+  - timeout: 00:03:00
+    wait_template: ""
+# - service: media_player.volume_set
+#   target:
+#     entity_id: media_player.display_me
+#   data:
+#     volume_level: 0.3
+# - delay: 00:00:01
 #SP - service: script.googlescripthastart

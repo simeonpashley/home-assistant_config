@@ -15,7 +15,11 @@ action:
     data:
       who: "simeon"
       title: "*⚡ Energy Usage*"
-      value1: "Today's energy use was {{ states('sensor.daily_energy_total') }} kWh."
+      value1: "Today's energy use was:
+        Grid imported: {{ states('sensor.grid_imported_power_daily') }} kWh  (API £ {{ states('sensor.electric_cost_today') }})
+        Solar exported: {{ states('sensor.solar_exported_power_daily') }} kWh (£{{ states('sensor.solar_exported_power_daily_compensation') }})
+        Solar production: {{ states('sensor.solar_production_daily') }} kWh
+        Gas: API £{{ states('sensor.gas_cost_today') }}"
       target_id: !secret telegram_bot_chat_id
       group: home
       tag_id: "information"
@@ -23,6 +27,3 @@ action:
       color: "green"
       sticky: "false"
       timeout: 300
-  - service: notify.energy_log
-    data:
-      message: "{{ states('sensor.date') }},{{ states('sensor.sun_energy_day') }},{{ states('sensor.sun_energy_night') }},{{ states('sensor.daily_energy_total') }},{{ state_attr('sensor.power_stats','min_value') }},{{ state_attr('sensor.power_stats','max_value') }},{{ states('sensor.power_stats') }},{{ states('sensor.daily_total_energy_cost') }}"

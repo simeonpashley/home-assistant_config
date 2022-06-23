@@ -1,0 +1,42 @@
+alias: "330e Charge with Solar"
+id: d93eef00-aa6b-46f9-a28b-4951c0516532
+
+trigger:
+  - platform: time_pattern
+    minutes: "/15"
+
+condition:
+  condition: and
+  conditions:
+    - condition: numeric_state
+      entity_id: sensor.lp20_inverter_power
+      above: 1000
+    - condition: numeric_state
+      entity_id: sensor.electric_load
+      below: 500
+    - condition: numeric_state
+      entity_id: sensor.330e_xdrive_charging_level_hv
+      below: 95
+    - condition: state
+      entity_id: device_tracker.330e_xdrive
+      state: "home"
+    - condition: state
+      entity_id: binary_sensor.330e_xdrive_connection_status
+      state: "off"
+    - condition: state
+      entity_id: input_boolean.text_notifications
+      state: "on"
+action:
+  - delay: 3600 # seconds until next trigger, to mitigate too many messages
+  - service: script.notify_engine
+    data:
+      who: "simeon"
+      title: "* Charge 330e with solar *"
+      value1: 'Solar production is maintaining {{ states("sensor.lp20_inverter_power")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
+      target_id: !secret telegram_bot_chat_id
+      group: duties
+      tag_id: "information"
+      importance_id: default
+      color: "green"
+      sticky: "true"
+  #    timeout: ''

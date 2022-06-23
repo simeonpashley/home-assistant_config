@@ -1,0 +1,23 @@
+google_calendar:
+  - cal_id: c_b1ki2fkncdv1d797n1devjvb4g@group.calendar.google.com
+    entities:
+      - device_id: bin_garden
+        ignore_availability: true
+        name: Garden Bin
+        track: true
+        search: "bin_gardin"
+      - device_id: bin_household
+        ignore_availability: true
+        name: Household Waste
+        track: true
+        search: "bin_household"
+      - device_id: bin_paper
+        ignore_availability: true
+        name: Paper Bin
+        track: true
+        search: "bin_paper"
+      - device_id: bin_mixed_recycle
+        ignore_availability: true
+        name: Mixed Recycle
+        track: true
+        search: "bin_mixed_recycle"

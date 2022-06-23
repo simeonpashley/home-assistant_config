@@ -1,0 +1,4 @@
+tradfi003_auto:
+  name: Tradfi003 Auto Schedule
+  icon: mdi:home-clock
+  initial: true

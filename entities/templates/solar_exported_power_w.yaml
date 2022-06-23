@@ -4,6 +4,7 @@
       state_class: measurement
       device_class: power
       unit_of_measurement: "W"
+      icon: mdi:flash-outline
       state: >
         {% if (states('sensor.grid_power') | int(0)) < 0 %}
           {{ -(states('sensor.grid_power') | int(0)) }}
