@@ -183,9 +183,6 @@
                                 },
                                 {
                                     "entity": "sensor.swap_use"
-                                },
-                                {
-                                    "entity": "sensor.processor_temperature"
                                 }
                             ]
                         },
@@ -295,37 +292,6 @@
                                 }
                             ],
                             "title": "Pi-Hole"
-                        }
-                    ]
-                },
-                {
-                    "title": "Health",
-                    "path": "Health",
-                    "icon": "mdi:walk",
-                    "panel": false,
-                    "cards": [
-                        {
-                            "type": "custom:mini-graph-card",
-                            "hours_to_show": 240,
-                            "name": "Steps - 10d",
-                            "aggregate_func": "max",
-                            "group_by": "date",
-                            "show": {
-                                "state": false,
-                                "graph": "bar"
-                            },
-                            "entities": [
-                                {
-                                    "entity": "sensor.sp12_steps",
-                                    "name": "Simeon",
-                                    "show_state": false
-                                },
-                                {
-                                    "entity": "sensor.claires_mobile_steps",
-                                    "name": "Claire",
-                                    "show_state": false
-                                }
-                            ]
                         }
                     ]
                 },
@@ -753,17 +719,31 @@
                     "badges": [],
                     "cards": [
                         {
-                            "type": "custom:mini-graph-card",
-                            "hours_to_show": 6,
-                            "points_per_hour": 12,
-                            "entities": [
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
-                                    "name": "Lux",
-                                    "entity": "sensor.esphome_web_5c1aad_illuminance"
+                                    "type": "custom:mini-graph-card",
+                                    "hours_to_show": 6,
+                                    "points_per_hour": 12,
+                                    "entities": [
+                                        {
+                                            "name": "Lux",
+                                            "entity": "sensor.esphome_web_5c1aad_illuminance"
+                                        },
+                                        {
+                                            "name": "Lux5",
+                                            "entity": "sensor.lp5_5c1aad_luminance"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "name": "Lux5",
-                                    "entity": "sensor.lp5_5c1aad_luminance"
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "input_number.front_low_light_threshold",
+                                            "name": "Trigger below"
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -919,7 +899,7 @@
                                     "secondary_info": "none"
                                 },
                                 {
-                                    "entity": "sensor.esphome_web_af4cb4_temperature_2",
+                                    "entity": "sensor.esphome_web_af4cb4_temperature",
                                     "secondary_info": "last-updated"
                                 }
                             ],

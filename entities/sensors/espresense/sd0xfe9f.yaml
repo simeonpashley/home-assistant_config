@@ -1,6 +1,0 @@
-platform: mqtt_room
-name: "ble sd:0xfe9f"
-device_id: "sd:0xfe9f"
-state_topic: "espresense/devices/sd:0xfe9f"
-timeout: 5
-away_timeout: 120

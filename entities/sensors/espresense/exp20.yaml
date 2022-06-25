@@ -1,6 +1,0 @@
-platform: mqtt_room
-name: "ble covid tracker"
-device_id: "exp:20"
-state_topic: "espresense/devices/exp:20"
-timeout: 5
-away_timeout: 120

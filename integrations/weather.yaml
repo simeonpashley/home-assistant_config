@@ -5,3 +5,37 @@
 #####
 
 weather: !include_dir_list ../entities/weather
+
+# Tomorrowio Pollen Count Forecast
+template:
+  - sensor:
+      - name: Pollen - Tree
+        unique_id: sensor.pollen_tree
+        state: "{{ states('sensor.pollen_tree_index_day_0') }}"
+        icon: 'mdi:tree'
+        attributes:
+          Today: "{{ states('sensor.pollen_tree_index_day_0') }}"
+          Tomorrow: "{{ states('sensor.pollen_tree_index_day_1') }}"
+          Today + 2: "{{ states('sensor.pollen_tree_index_day_2') }}"
+          Today + 3: "{{ states('sensor.pollen_tree_index_day_3') }}"
+          Today + 4: "{{ states('sensor.pollen_tree_index_day_4') }}"
+      - name: Pollen - Grass
+        unique_id: sensor.pollen_grass
+        state: "{{ state_attr('sensor.pollen_tree_index_day_0', 'grassIndex') }}"
+        icon: 'mdi:grass'
+        attributes:
+          Today: "{{ state_attr('sensor.pollen_tree_index_day_0', 'grassIndex') }}"
+          Tomorrow: "{{ state_attr('sensor.pollen_tree_index_day_1', 'grassIndex') }}"
+          Today + 2: "{{ state_attr('sensor.pollen_tree_index_day_2', 'grassIndex') }}"
+          Today + 3: "{{ state_attr('sensor.pollen_tree_index_day_3', 'grassIndex') }}"
+          Today + 4: "{{ state_attr('sensor.pollen_tree_index_day_4', 'grassIndex') }}"
+      - name: Pollen - Weed
+        unique_id: sensor.pollen_weed
+        state: "{{ state_attr('sensor.pollen_tree_index_day_0', 'weedIndex') }}"
+        icon: 'mdi:spa'
+        attributes:
+          Today: "{{ state_attr('sensor.pollen_tree_index_day_0', 'weedIndex') }}"
+          Tomorrow: "{{ state_attr('sensor.pollen_tree_index_day_1', 'weedIndex') }}"
+          Today + 2: "{{ state_attr('sensor.pollen_tree_index_day_2', 'weedIndex') }}"
+          Today + 3: "{{ state_attr('sensor.pollen_tree_index_day_3', 'weedIndex') }}"
+          Today + 4: "{{ state_attr('sensor.pollen_tree_index_day_4', 'weedIndex') }}"

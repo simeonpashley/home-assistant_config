@@ -1,6 +1,0 @@
-platform: mqtt_room
-name: "ble sp12"
-device_id: "apple:1007:11-8"
-state_topic: "espresense/devices/apple:1007:11-8"
-timeout: 5
-away_timeout: 120

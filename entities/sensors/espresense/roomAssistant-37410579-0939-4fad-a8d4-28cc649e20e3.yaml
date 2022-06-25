@@ -1,6 +1,0 @@
-platform: mqtt_room
-name: "ble sp12-ra"
-device_id: "espresense/devices/roomAssistant:37410579-0939-4fad-a8d4-28cc649e20e3"
-state_topic: "espresense/devices/roomAssistant:37410579-0939-4fad-a8d4-28cc649e20e3"
-timeout: 5
-away_timeout: 120

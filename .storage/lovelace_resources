@@ -83,6 +83,16 @@
                 "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325342",
                 "type": "module",
                 "id": "758325f64d2a41b788a9e131b6d88670"
+            },
+            {
+                "url": "/hacsfiles/decluttering-card/decluttering-card.js?hacstag=188686483063",
+                "type": "module",
+                "id": "51a825bbec37424098e42c67c43d5c20"
+            },
+            {
+                "url": "/hacsfiles/custom-ui/custom-ui.js?hacstag=267558148202204191",
+                "type": "module",
+                "id": "955a8cabed9c46389034090a4f7b410d"
             }
         ]
     }

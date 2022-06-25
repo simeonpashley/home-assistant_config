@@ -1,6 +1,0 @@
-platform: mqtt_room
-name: "ble msft:cdp:0902"
-device_id: "msft:cdp:0902"
-state_topic: "espresense/devices/msft:cdp:0902"
-timeout: 5
-away_timeout: 120
