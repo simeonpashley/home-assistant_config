@@ -1,0 +1,39 @@
+input_number:
+  front_low_light_threshold:
+    name: Front Low Light Threshold
+    mode: box
+    min: 0
+    max: 1000
+    initial: 100
+    unit_of_measurement: lx
+    icon: mdi:light-flood-down
+
+template:
+  - binary_sensor:
+      - name: "Front Low Light"
+        unique_id: front_low_light
+        # 9999 - default implies NOT low light if the state is "unknown"
+        state: "{{ (states('sensor.lp5_5c1aad_luminance')|float(9999)) < (states('input_number.front_low_light_threshold') | float(100)) }}"
+# automation:
+#   - id: d93eef00-aba6-f469-28ab-4951651c0532
+#     alias: "front low light"
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.front_low_light
+#       to: "on"
+#       for:
+#         minutes: 5
+#     action:
+#     - delay: 3600 # seconds until next trigger, to mitigate too many messages
+#     - service: script.notify_engine
+#       data:
+#         who: "simeon"
+#         title: "* Charge 330e with solar *"
+#         value1: 'Solar production is maintaining {{ states("sensor.lp20_inverter_power")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
+#         target_id: !secret telegram_bot_chat_id
+#         group: duties
+#         tag_id: "information"
+#         importance_id: default
+#         color: "green"
+#         sticky: "true"
+#     #    timeout: ''

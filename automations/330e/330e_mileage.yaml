@@ -1,0 +1,11 @@
+id: 330e_mileage
+alias: "330e Mileage"
+trigger:
+  platform: time
+  at: "23:59:30"
+  # platform: state
+  # entity_id: sensor.330e_mileage
+action:
+  - service: notify.mileage_log
+    data_template:
+      message: "{{ as_timestamp(now()) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}, {{ states('sensor.330e_xdrive_mileage_miles') }}"

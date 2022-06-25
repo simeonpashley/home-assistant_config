@@ -1,0 +1,42 @@
+binary_sensor.bin_mixed_recycle:
+  icon: "mdi:recycle"
+binary_sensor.bin_paper:
+  icon: "mdi:paperclip"
+binary_sensor.bin_household:
+  icon: "mdi:biohazard"
+binary_sensor.bin_garden:
+  icon: "mdi:trash-can"
+
+#########################################################
+#                                                                                                              #
+#             Customize UI                                                                                #
+#                                                                                                              #
+#########################################################
+# https://github.com/Mariusthvdb/custom-ui
+
+sensor.pollen_tree:
+  templates:
+    icon_color: if ( state ===  '0' ) return 'rgb(178, 244, 187)';
+      if ( state ===  '1' ) return 'rgb(115, 223, 130)';
+      if ( state === '2' ) return 'rgb(72, 192, 89)';
+      if ( state ===  '3' ) return 'rgb(55, 175, 72)';
+      if ( state ===  '4' ) return 'rgb(44, 188, 65)';
+      if ( state ===  '5' ) return 'rgb(27, 157, 44)';
+
+sensor.pollen_weed:
+  templates:
+    icon_color: if ( state ===  '0' ) return 'rgb(178, 244, 187)';
+      if ( state ===  '1' ) return 'rgb(115, 223, 130)';
+      if ( state === '2' ) return 'rgb(72, 192, 89)';
+      if ( state ===  '3' ) return 'rgb(55, 175, 72)';
+      if ( state ===  '4' ) return 'rgb(44, 188, 65)';
+      if ( state ===  '5' ) return 'rgb(27, 157, 44)';
+
+sensor.pollen_grass:
+  templates:
+    icon_color: if ( state ===  '0' ) return 'rgb(178, 244, 187)';
+      if ( state ===  '1' ) return 'rgb(115, 223, 130)';
+      if ( state === '2' ) return 'rgb(72, 192, 89)';
+      if ( state ===  '3' ) return 'rgb(55, 175, 72)';
+      if ( state ===  '4' ) return 'rgb(44, 188, 65)';
+      if ( state ===  '5' ) return 'rgb(27, 157, 44)';
