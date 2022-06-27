@@ -118,10 +118,10 @@
                             "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.drive_info"
+                                    "entity": "sensor.drive_last_activity"
                                 },
                                 {
-                                    "entity": "switch.drive_live_stream"
+                                    "entity": "binary_sensor.drive_motion"
                                 }
                             ]
                         },
@@ -130,25 +130,156 @@
                             "show_name": true,
                             "camera_view": "auto",
                             "type": "picture-entity",
-                            "entity": "camera.drive_snapshot",
-                            "camera_image": "camera.drive_snapshot"
+                            "entity": "camera.drive",
+                            "camera_image": "camera.drive"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "select.front_door_event_select",
+                                    "name": "Event Select"
+                                },
+                                {
+                                    "entity": "switch.front_door_event_stream",
+                                    "name": "Event Stream"
+                                },
+                                {
+                                    "entity": "switch.front_door_live_stream",
+                                    "name": "Live Stream"
+                                },
+                                {
+                                    "entity": "number.front_door_snapshot_interval",
+                                    "name": "Snapshot Interval"
+                                },
+                                {
+                                    "entity": "select.front_door_snapshot_mode",
+                                    "name": "Snapshot Mode"
+                                }
+                            ],
+                            "title": "Front Door"
                         }
                     ]
                 },
                 {
                     "theme": "Backend-selected",
-                    "title": "12-Battery",
-                    "path": "battery",
-                    "icon": "mdi:battery-charging-medium",
+                    "title": "CCTV",
+                    "path": "cctv",
+                    "icon": "mdi:cctv",
+                    "type": "custom:horizontal-layout",
                     "badges": [],
                     "cards": [
                         {
-                            "type": "custom:battery-state-card",
-                            "title": "Device battery levels",
-                            "entities": [
+                            "type": "alarm-panel",
+                            "entity": "alarm_control_panel.home_mode",
+                            "states": [],
+                            "name": "Ring Alerts"
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
                                 {
-                                    "entity": "sensor.front_door_battery_2",
-                                    "name": "Ring Front Door"
+                                    "type": "picture-entity",
+                                    "entity": "camera.front_door_snapshot",
+                                    "show_state": false,
+                                    "show_name": false,
+                                    "state_filter": {
+                                        "idle": "brightness(110%) saturate(1.2)"
+                                    }
+                                },
+                                {
+                                    "type": "custom:battery-state-card",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.front_door_battery_2",
+                                            "name": "Ring Front Door"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.front_door_motion_2",
+                                            "name": "Motion",
+                                            "secondary_info": "last-updated"
+                                        },
+                                        {
+                                            "entity": "binary_sensor.front_door_ding_2",
+                                            "name": "Ding",
+                                            "secondary_info": "last-updated"
+                                        },
+                                        {
+                                            "entity": "sensor.front_door_last_ding",
+                                            "secondary_info": "last-updated"
+                                        },
+                                        {
+                                            "entity": "sensor.front_door_last_motion",
+                                            "secondary_info": "last-updated"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.drive_snapshot",
+                                    "show_state": false,
+                                    "show_name": false,
+                                    "state_filter": {
+                                        "idle": "brightness(110%) saturate(1.2)"
+                                    }
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.drive_last_motion",
+                                            "name": "Last Motion",
+                                            "secondary_info": "last-updated"
+                                        },
+                                        {
+                                            "entity": "sensor.drive_info",
+                                            "secondary_info": "last-updated"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "history-graph",
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.drive_motion_2",
+                                            "name": "Motion"
+                                        }
+                                    ],
+                                    "hours_to_show": 12
+                                }
+                            ]
+                        },
+                        {
+                            "type": "vertical-stack",
+                            "cards": [
+                                {
+                                    "type": "glance",
+                                    "title": "Home Status",
+                                    "state_color": false,
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.n_people_home",
+                                            "name": "Count"
+                                        },
+                                        {
+                                            "entity": "input_select.home_mode",
+                                            "name": "Status"
+                                        },
+                                        {
+                                            "entity": "input_boolean.guest_mode",
+                                            "name": "Guest"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -942,6 +1073,261 @@
                                     "entities": [
                                         "remote.50dx700_series"
                                     ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "theme": "Backend-selected",
+                    "title": "Sprinkler",
+                    "path": "sprinkler",
+                    "type": "custom:vertical-layout",
+                    "badges": [],
+                    "cards": [
+                        {
+                            "type": "custom:mushroom-title-card",
+                            "title": "",
+                            "subtitle": "Helpers"
+                        },
+                        {
+                            "square": false,
+                            "columns": 2,
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('input_number.sprinkler_maximum_temperature_measured') }} \u00b0C",
+                                    "secondary": "Max temperature",
+                                    "icon": "mdi:thermometer",
+                                    "entity": "input_number.sprinkler_maximum_temperature_measured",
+                                    "icon_color": "{% if states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 15.1 -%}\n  light-blue\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 21.1 -%}\n  amber\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 26.1 -%}\n  orange\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 31.1 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('input_number.sprinkler_total_rain_fallen') }} mm",
+                                    "secondary": "Total Rain Fallen",
+                                    "icon": "mdi:weather-pouring",
+                                    "entity": "input_number.sprinkler_total_rain_fallen",
+                                    "icon_color": "{% if states('input_number.sprinkler_total_rain_fallen') | float(0) <= 10 -%}\n  green\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 15 -%}\n  amber\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 20 -%}\n  orange\n{%- else -%}\n  red\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ (states('input_datetime.sprinkler_last_watering_day') | as_datetime).strftime('%d-%m-%Y') }}",
+                                    "secondary": "Last Watering Day",
+                                    "icon": "mdi:calendar",
+                                    "entity": "input_datetime.sprinkler_last_watering_day",
+                                    "icon_color": "amber",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('input_number.sprinkler_watering_duration') }}",
+                                    "secondary": "Watering Duration",
+                                    "icon": "mdi:timer",
+                                    "entity": "input_number.sprinkler_watering_duration",
+                                    "icon_color": "{% if states('input_number.sprinkler_watering_duration') | int == 45 -%}\n  green\n{%- elif states('input_number.sprinkler_watering_duration') | int == 60 -%}\n  amber\n{%- elif states('input_number.sprinkler_watering_duration') | int == 75 -%}\n  orange\n{%- elif states('input_number.sprinkler_watering_duration') | int == 90 -%}\n  red\n{%- else -%}\n  grey\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "custom:mushroom-title-card",
+                            "title": "",
+                            "subtitle": "Sensors"
+                        },
+                        {
+                            "square": false,
+                            "columns": 2,
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('sensor.sprinkler_current_temperature_is_higher') | capitalize }}\n",
+                                    "secondary": "Current Temp is Higher?",
+                                    "icon": "mdi:check",
+                                    "entity": "sensor.sprinkler_current_temperature_is_higher",
+                                    "icon_color": "{% if states('sensor.sprinkler_current_temperature_is_higher') == true -%}\n  green\n{%- else -%}\n  red\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('sensor.openweathermap_rain') }} mm\n",
+                                    "secondary": "Openweathermap Rain",
+                                    "icon": "{% if states('sensor.openweathermap_condition') == 'partlycloudy' -%}\n  mdi:weather-partly-cloudy\n{% elif states('sensor.openweathermap_condition') == 'cloudy' -%}\n  mdi:weather-cloudy\n{% elif states('sensor.openweathermap_condition') == 'rainy' -%}\n  mdi:weather-pouring\n{% elif states('sensor.openweathermap_condition') == 'clear-night' -%}\n  mdi:weather-night\n{% elif states('sensor.openweathermap_condition') == 'sunny' -%}\n  mdi:weather-sunny\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
+                                    "entity": "sensor.openweathermap_rain",
+                                    "icon_color": "{% if states('sensor.openweathermap_rain') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('sensor.sprinkler_total_expected_precipitation') }} mm\n",
+                                    "secondary": "Expected Precipitation",
+                                    "icon": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  mdi:weather-cloudy\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
+                                    "entity": "sensor.sprinkler_total_expected_precipitation",
+                                    "icon_color": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-template-card",
+                                    "primary": "{{ states('sensor.openweathermap_temperature') }} \u00b0C\n",
+                                    "secondary": "Openweathermap Temp",
+                                    "icon": "mdi:thermometer",
+                                    "entity": "sensor.openweathermap_temperature",
+                                    "icon_color": "{% if states('sensor.openweathermap_temperature') | float(0) <= 15 -%}\n  light-blue\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 21 -%}\n  amber\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 26 -%}\n  orange\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 31 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
+                                    "tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.sprinkler_days_since_last_watering_day",
+                                    "min": 0,
+                                    "max": 3,
+                                    "severity": {
+                                        "green": 1,
+                                        "yellow": 1,
+                                        "red": 2
+                                    },
+                                    "needle": true,
+                                    "name": "Days since last watering"
+                                },
+                                {
+                                    "type": "gauge",
+                                    "entity": "sensor.sprinkler_total_rain_fallen_plus_expected",
+                                    "min": 0,
+                                    "max": 25,
+                                    "severity": {
+                                        "green": 10,
+                                        "yellow": 15,
+                                        "red": 20
+                                    },
+                                    "needle": true,
+                                    "name": "Rain Fallen + Expected"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "custom:mushroom-title-card",
+                            "title": "",
+                            "subtitle": "Automations"
+                        },
+                        {
+                            "square": false,
+                            "columns": 1,
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "automation.sprinkler_add_current_rain_to_total_rain_fallen",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_color": "light-green"
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "automation.sprinkler_water_the_garden",
+                                    "icon_color": "light-green",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "automation.sprinkler_check_maximum_temperature_when_temperature_changes",
+                                    "icon_color": "light-green",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "automation.sprinkler_check_if_sprinkler_is_still_running_after_a_reboot_of_home_assistant",
+                                    "icon_color": "light-green",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "custom:mushroom-title-card",
+                            "title": "",
+                            "subtitle": "Scripts"
+                        },
+                        {
+                            "square": false,
+                            "columns": 1,
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "script.sprinkler_water_the_garden",
+                                    "icon_color": "light-green",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    }
+                                },
+                                {
+                                    "type": "custom:mushroom-entity-card",
+                                    "entity": "script.sprinkler_reset_helper_values",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "double_tap_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_color": "light-green"
                                 }
                             ]
                         }

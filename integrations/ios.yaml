@@ -1,0 +1,17 @@
+ios:
+  push:
+    categories:
+      - name: Medicine
+        identifier: "tablet"
+        actions:
+          - identifier: "TABLET_TAKEN"
+            title: "Tablet Taken"
+            activationMode: "background"
+            authenticationRequired: no
+            destructive: yes
+
+          - identifier: "NOT_HOME"
+            title: "I am not Home"
+            activationMode: "background"
+            authenticationRequired: no
+            destructive: no

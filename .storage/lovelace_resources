@@ -93,6 +93,16 @@
                 "url": "/hacsfiles/custom-ui/custom-ui.js?hacstag=267558148202204191",
                 "type": "module",
                 "id": "955a8cabed9c46389034090a4f7b410d"
+            },
+            {
+                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375200",
+                "type": "module",
+                "id": "37f29e0b4392454c9d513399462a95c9"
+            },
+            {
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242",
+                "type": "module",
+                "id": "4f77142841d244b28f80a31c15a8ebbe"
             }
         ]
     }

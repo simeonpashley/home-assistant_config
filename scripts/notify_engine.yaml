@@ -39,14 +39,16 @@
 
 notify_engine:
   sequence:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_boolean.text_notifications
-          state: "on"
+    # - condition: or
+    #   conditions:
+    #     - condition: state
+    #       entity_id: input_boolean.text_notifications
+    #       state: "on"
     - service: >
         {% if who == 'simeon' %}
           notify.simeon_devices
+        {% elif who == 'ios_simeon' %}
+             notify.ios_simeon 
         {% else %}
           notify.pashley_bot
         {% endif %}
@@ -67,13 +69,6 @@ notify_engine:
             "apns-collapse-id": "{{ tag_id | default }}"
           group: "{{ group | default }}"
           tag: "{{ tag_id | default }}"
-          importance: "{{ importance_id | default }}"
-          color: "{{ color | default }}"
-          sticky: "{{ sticky | default }}"
-          channel: "{{ channel_id | default }}"
-          #          vibrationPattern: "100 1000 100 1000 100"
-          #          ledColor: "{{ ledColor | default }}"
-          timeout: "{{ timeout_sec | default }}"
           entity_id: "{{ camera_entity | default }}"
           push:
             category: "{{ ios_category | default }}"

@@ -1,0 +1,117 @@
+## - Reminders to take my medicine
+input_boolean:
+  medicine:
+    name: Medicine Reminder
+    initial: off
+    icon: mdi:pill
+
+automation:
+  - alias: Tablet Already taken
+    id: d0142b8f-283a-4a4d-8d0e-736039c2ff3a
+    trigger:
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: TABLET_TAKEN
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.medicine
+  - alias: Remind Me Later
+    id: 941812a2-000b-4fbe-adef-084de60acac7
+    trigger:
+      platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: NOT_HOME
+    action:
+      - service: script.notify_engine
+        data:
+          title: "Medicine Reminder"
+          value1: "Ok. I will remind you when you get home."
+          who: "ios_simeon"
+          tag_id: "Medicine"
+      - wait_template: >-
+          {{ states.person.simeon.state == 'home' }}
+      - service: notify.ios_simeon
+        data:
+          message: "Medicine Reminder. Now that your home, please take your medicine!"
+          data:
+            actions:
+              - action: TABLET_TAKEN
+                title: "Tablet Taken"
+              - action: "NOT_HOME"
+                title: "I am not Home"
+  - alias: Medicine Reminder
+    id: 7cd124d6-e028-4add-a28d-6f1078ed1862
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        minutes: "/45"
+      - platform: time
+        at: "08:00:00"
+      - platform: state
+        entity_id: person.simeon
+        to: "home"
+
+    condition:
+      - condition: time
+        after: "08:00:00"
+      - condition: state
+        entity_id: person.simeon
+        state: "home"
+      - condition: state
+        entity_id: input_boolean.medicine
+        state: "off"
+    action:
+      - service: notify.ios_simeon
+        data:
+          message: "Meds"
+          data:
+            actions:
+              - action: TABLET_TAKEN
+                title: "Tablet Taken"
+              - action: "NOT_HOME"
+                title: "I am not Home"
+
+  ###################################
+  ##  LOG Medicine
+  ###################################
+  - alias: "Log Medicine Activity"
+    mode: single
+    id: 5dca1211-be2c-4f81-ac6b-9ec784496d3e
+
+    trigger:
+      - platform: event
+        event_type: medicine_dash
+      - platform: state
+        entity_id: input_boolean.medicine
+        to: "on"
+        from: "off"
+
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.medicine
+      - service: logbook.log
+        data:
+          name: "Medicine Push"
+          message: "Took Medicine today."
+      - service: mqtt.publish
+        data:
+          payload: '{{ states("sensor.date") }}'
+          topic: "dash/medicine/medicine_time"
+          retain: true
+      - service: script.notify_engine
+        data:
+          title: "Medicine Reminder Completed"
+          value1: "Simeon Took Medicine today."
+          who: "ios_simeon"
+          tag_id: "Medicine"
+      - delay:
+          minutes: 1
+
+mqtt:
+  sensor:
+    - name: Medicine Time
+      unique_id: medicine_time
+      state_topic: "dash/medicine/medicine_time"
+      icon: "mdi:pill"

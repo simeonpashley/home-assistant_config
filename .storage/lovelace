@@ -13,6 +13,12 @@
                     "path": "default_view",
                     "cards": [
                         {
+                            "type": "alarm-panel",
+                            "entity": "alarm_control_panel.home_mode",
+                            "states": [],
+                            "name": "Ring Alerts"
+                        },
+                        {
                             "type": "vertical-stack",
                             "cards": [
                                 {
@@ -114,6 +120,14 @@
                                     "headings": true
                                 }
                             }
+                        },
+                        {
+                            "type": "glance",
+                            "entities": [
+                                {
+                                    "entity": "input_select.home_mode"
+                                }
+                            ]
                         }
                     ]
                 },

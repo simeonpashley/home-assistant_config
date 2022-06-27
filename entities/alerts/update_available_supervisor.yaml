@@ -15,5 +15,4 @@ supervisor_update_available:
     - simeon_devices
   data:
     tag: 'supervisor-update-available'
-    url: 'http://hassio.local/hassio/dashboard'
     ttl: 21600

@@ -15,5 +15,4 @@ hacs_update_available:
     - simeon_devices
   data:
     tag: 'hacs-update-available'
-    url: 'http://hassio.local/hacs/installed'
     ttl: 21600

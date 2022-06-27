@@ -1,0 +1,41 @@
+sprinkler_water_the_garden:
+  alias: "Sprinkler: Water the Garden"
+  sequence:
+    - service: script.notify_engine
+      data:
+        who: "simeon"
+        title: >-
+          Start watering the garden for {{
+          states("input_number.sprinkler_watering_duration") | int }} minutes.
+        target_id: !secret telegram_bot_chat_id
+        group: duties
+        tag_id: "information"
+        importance_id: default
+        color: "green"
+        sticky: "true"
+    # - type: turn_on
+    #   device_id: 8137a99e9f2fc80d6d0b0192ef801c0a
+    #   entity_id: switch.sw_plug_2
+    #   domain: switch
+    - delay:
+        minutes: |
+          {{ states("input_number.sprinkler_watering_duration") | int }}
+    # - type: turn_off
+    #   device_id: 8137a99e9f2fc80d6d0b0192ef801c0a
+    #   entity_id: switch.sw_plug_2
+    #   domain: switch
+    - service: script.sprinkler_reset_helper_values
+      data: {}
+    - service: script.notify_engine
+      data:
+        who: "simeon"
+        title: "Stopped Watering the Garden"
+        target_id: !secret telegram_bot_chat_id
+        group: duties
+        tag_id: "information"
+        importance_id: default
+        color: "green"
+        sticky: "true"
+    #    timeout: ''
+  mode: single
+  icon: mdi:sprinkler
