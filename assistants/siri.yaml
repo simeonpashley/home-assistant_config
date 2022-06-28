@@ -1,0 +1,36 @@
+switch.tradfi001:
+  name: Small Lamp
+  type: switch
+switch.tradfi002:
+  name: Big Lamp
+  type: switch
+switch.tradfi003:
+  name: Landing Light
+  type: switch
+input_boolean.tradfi001_auto:
+  name: Small Light Automation
+  type: switch
+input_boolean.tradfi002_auto:
+  name: Big Light Automation
+  type: switch
+input_boolean.tradfi003_auto:
+  name: Landing Light Automation
+  type: switch
+media_player.50dx700_series:
+  name: TV
+  feature_list:
+    - feature: on_off
+    - feature: toggle_mute
+camera.front_door:
+  name: Ring Front Door
+camera.drive:
+  name: Drive Camera
+climate.living_room:
+  name: Nest Heating
+alarm_control_panel.home_mode:
+  name: Ring Alarm Mode
+media_player.simeon_s_echo_dot:
+  name: Office Echo
+  feature_list:
+    - feature: play_pause
+    - feature: toggle_mute

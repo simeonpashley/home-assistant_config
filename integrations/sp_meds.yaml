@@ -2,7 +2,7 @@
 input_boolean:
   medicine:
     name: Medicine Reminder
-    initial: off
+    initial: true
     icon: mdi:pill
 
 automation:
@@ -31,7 +31,7 @@ automation:
           who: "ios_simeon"
           tag_id: "Medicine"
       - wait_template: >-
-          {{ states.person.simeon.state == 'home' }}
+          {{ states('person.simeon') == 'home' }}
       - service: notify.ios_simeon
         data:
           message: "Medicine Reminder. Now that your home, please take your medicine!"
@@ -85,9 +85,8 @@ automation:
         event_type: medicine_dash
       - platform: state
         entity_id: input_boolean.medicine
-        to: "on"
         from: "off"
-
+        to: "on"
     action:
       - service: input_boolean.turn_on
         entity_id: input_boolean.medicine
@@ -95,11 +94,6 @@ automation:
         data:
           name: "Medicine Push"
           message: "Took Medicine today."
-      - service: mqtt.publish
-        data:
-          payload: '{{ states("sensor.date") }}'
-          topic: "dash/medicine/medicine_time"
-          retain: true
       - service: script.notify_engine
         data:
           title: "Medicine Reminder Completed"
@@ -108,10 +102,20 @@ automation:
           tag_id: "Medicine"
       - delay:
           minutes: 1
-
-mqtt:
-  sensor:
-    - name: Medicine Time
-      unique_id: medicine_time
-      state_topic: "dash/medicine/medicine_time"
-      icon: "mdi:pill"
+  - alias: "Medicine Reset on=>off"
+    mode: single
+    id: f937b7b6-bdd3-446f-998e-82f8874a82ea
+    trigger:
+      - platform: state
+        entity_id: input_boolean.medicine
+        from: "on"
+        to: "off"
+    action:
+      - service: script.notify_engine
+        data:
+          title: "Medicine Reminder Completed"
+          value1: "Medicine reset"
+          who: "ios_simeon"
+          tag_id: "Medicine"
+      - delay:
+          minutes: 1

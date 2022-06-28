@@ -31,6 +31,10 @@ input_boolean:
     icon: mdi:account-convert
     initial: off
 
+  simeon_in_office:
+    name: Simeon in office
+    icon: mdi:account-hard-hat-outline
+
 group:
   family_presense:
     name: Family Presense
@@ -44,6 +48,13 @@ group:
 binary_sensor:
   - platform: template
     sensors:
+      simeon_away:
+        value_template: >-
+          "{{ ((states('sensor.ble_sp_iphone')|lower not in ['office'])
+                or (states('device_tracker.sp12_2')|lower not in ['home'])
+                or (states('device_tracker.sp12_app')|lower not in ['home'])
+            )
+            and  (states('device_tracker.330e_xdrive')|lower not in ['home'])}}"
       simeon_presense:
         friendly_name: "Simeon"
         device_class: presence
@@ -151,7 +162,6 @@ automation:
           importance_id: default
           color: "green"
           sticky: "true"
-      #    timeout: ''
       - service: input_boolean.turn_on
         entity_id: input_boolean.sentry_mode
 
@@ -163,7 +173,7 @@ automation:
     action:
       choose:
         - conditions: >
-            {{ states.input_boolean.vacation_mode.state == 'on' }}
+            {{ states('input_boolean.vacation_mode') == 'on' }}
           sequence:
             - service: input_select.select_option
               entity_id: input_select.home_mode
@@ -173,16 +183,16 @@ automation:
               entity_id: input_boolean.sentry_mode
 
         - conditions: >
-            {{ states.input_boolean.vacation_mode.state == 'off' and
-               states.sensor.n_people_home.state | int(0)  < 1 }}
+            {{ states('input_boolean.vacation_mode') == 'off' and
+               states('sensor.n_people_home') | int(0)  < 1 }}
           sequence:
             - service: input_select.select_option
               entity_id: input_select.home_mode
               data:
                 option: "Away"
         - conditions: >
-            {{ states.input_boolean.vacation_mode.state == 'off' and
-               states.sensor.n_people_home.state | int(0)  >= 1 }}
+            {{ states('input_boolean.vacation_mode') == 'off' and
+               states('sensor.n_people_home') | int(0)  >= 1 }}
           sequence:
             - service: input_select.select_option
               entity_id: input_select.home_mode
@@ -200,12 +210,12 @@ automation:
   - alias: Presense Simeon On
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.ble_sp_iphone').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.ble_sp_iphone')|lower in ['office'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
       - condition: template
-        value_template: "{{ states('sensor.ble_sp_iphone').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.ble_sp_iphone')|lower in ['office'] }}"
     action:
       - service: input_boolean.turn_on
         data:
@@ -214,11 +224,12 @@ automation:
     mode: restart
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.ble_sp_iphone').lower() in ['not_home','unknown','unavailable'] }}"
+        value_template: "{{ (states('sensor.ble_sp_iphone')|lower) in ['not_home', 'unknown', 'unavailable'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
-      - condition: "{{ states('sensor.ble_sp_iphone').lower() in ['not_home','unknown','unavailable'] }}"
+      - condition: template
+        value_template: "{{ (states('sensor.ble_sp_iphone')|lower) in ['not_home', 'unknown', 'unavailable'] }}"
     action:
       - service: input_boolean.turn_off
         data:
@@ -228,12 +239,12 @@ automation:
   - alias: Presense Claire On
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.ble_claire_iphone').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['office'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
       - condition: template
-        value_template: "{{ states('sensor.ble_claire_iphone').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['office'] }}"
     action:
       - service: input_boolean.turn_on
         data:
@@ -242,12 +253,12 @@ automation:
     mode: restart
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.ble_claire_iphone').lower() in ['not_home','unknown','unavailable'] }}"
+        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['not_home', 'unknown', 'unavailable'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
       - condition: template
-        value_template: "{{ states('sensor.ble_claire_iphone').lower() in ['not_home','unknown','unavailable'] }}"
+        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['not_home', 'unknown', 'unavailable'] }}"
     action:
       - service: input_boolean.turn_off
         data:
@@ -257,7 +268,7 @@ automation:
   - alias: Presense Eleanor On
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.eleanor_tms_espresense').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.eleanor_tms_espresense')|lower in ['office'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
@@ -294,7 +305,7 @@ automation:
   - alias: Presense Isabelle On
     trigger:
       - platform: template
-        value_template: "{{ states('sensor.isabelle_tms_espresense').lower() in ['office'] }}"
+        value_template: "{{ states('sensor.isabelle_tms_espresense')|lower in ['office'] }}"
       - platform: time_pattern
         minutes: /5
     condition:
@@ -341,9 +352,13 @@ script:
       #     room: "lr"
       # - condition: template
       #   value_template: "{{ states('switch.sb_humidifier') != 'off' }}"
-      - service: media_player.turn_off
-        data:
-          entity_id: media_player.50dx700_series
+      # - service: media_player.turn_off
+      #   data:
+      #     entity_id: media_player.50dx700_series
+      - service: script.notify_me
+        data_template:
+          message: "SHOULD script.appliances_off"
+
   standby:
     sequence:
       - condition: state

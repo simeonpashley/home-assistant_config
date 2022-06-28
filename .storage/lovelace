@@ -23,7 +23,7 @@
                             "cards": [
                                 {
                                     "type": "glance",
-                                    "title": "Pollen Index",
+                                    "title": "Pollen Today",
                                     "state_color": false,
                                     "entities": [
                                         {
@@ -37,6 +37,25 @@
                                         {
                                             "entity": "sensor.pollen_weed",
                                             "name": "Weed"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "glance",
+                                    "title": "Pollen Forecast",
+                                    "state_color": false,
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.pollen_tree_index_day_1",
+                                            "name": "Tomorrow"
+                                        },
+                                        {
+                                            "entity": "sensor.pollen_tree_index_day_2",
+                                            "name": "+2 days"
+                                        },
+                                        {
+                                            "entity": "sensor.pollen_tree_index_day_3",
+                                            "name": "+3 days"
                                         }
                                     ]
                                 }
@@ -57,6 +76,15 @@
                             "type": "vertical-stack",
                             "title": "Switches",
                             "cards": [
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "input_number.front_low_light_threshold",
+                                            "name": "Auto on below brightness"
+                                        }
+                                    ]
+                                },
                                 {
                                     "type": "entities",
                                     "show_header_toggle": true,
@@ -502,6 +530,9 @@
                                 {
                                     "entity": "sensor.max_uv_index",
                                     "secondary_info": "last-updated"
+                                },
+                                {
+                                    "entity": "binary_sensor.good_weather_to_fly_drones"
                                 }
                             ]
                         },

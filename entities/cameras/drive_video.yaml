@@ -1,4 +1,0 @@
-platform: generic
-name: Drive Video
-still_image_url: http://192.168.88.31:8123{{ states.camera.drive_snapshot.attributes.entity_picture }}
-stream_source: rtsp://03cabcc9-ring-mqtt:8554/083a8803b7de_live

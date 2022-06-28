@@ -1,0 +1,26 @@
+#
+# Good Weather To Fly Drone?
+# Criteria:
+#   - Wind Speed must be less than 12 mph (5.36448 m/s)
+#   - No Rain, or Snow
+#   - No Thunderstorms, lightning
+#   - Visiblity must be more than 2 miles (3218.688 m)
+#   - Temperature must be above 32 degrees Fahrenheit - (avoid risk of batteries being dead in extreme cold temperature)
+#   - Cloud coverage must be above than 30% (I prefer good amount of sunlight or clear sky) - may have to tweak during winters :)
+#
+
+binary_sensor:
+  - platform: template
+    sensors:
+      good_weather_to_fly_drones:
+        friendly_name: Good Weather To Fly Drone?
+        value_template: >-
+          {% if states('sensor.openweathermap_wind_speed') | round(0) | int > 5 or 
+                states('sensor.openweathermap_forecast_precipitation') | round(0) | int >= 1 or
+                states('sensor.openweathermap_visibility') | round(0) | int < 3218 or 
+                states('sensor.openweathermap_forecast_temperature') | round(0) | int < 5 or 
+                states('sensor.openweathermap_forecast_cloud_coverage') | round(0) | int > 30 %}
+            false
+          {% else %}
+            true
+          {% endif %}

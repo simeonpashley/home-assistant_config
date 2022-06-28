@@ -1,0 +1,80 @@
+homekit:
+  - name: HASS Bridge
+    mode: bridge
+    id: a93feebe-e2a7-4040-b8ce-81d8c4fdd6bb
+    # Stop the HomeKit Server from starting automatically after the Home Assistant
+    # Core Setup is done.
+    entity_config: !include ../assistants/siri.yaml
+    filter:
+      include_domains:
+        - alarm_control_panel
+        # - light
+        # - switch
+        # - camera
+        # - climate
+      include_entities:
+        - switch.tradfi001
+        - switch.tradfi002
+        - switch.tradfi003
+        - climate.living_room
+        - alarm_control_panel.home_mode
+        - input_boolean.tradfi001_auto
+        - input_boolean.tradfi002_auto
+        - input_boolean.tradfi003_auto
+  - name: HASS TV
+    port: 21064
+    mode: accessory
+    id: 483730be-1ef6-4336-8db2-a2aba9b67017
+    entity_config: !include ../assistants/siri.yaml
+    filter:
+      include_entities:
+        - media_player.50dx700_series
+  - name: Office Echo
+    port: 21065
+    mode: accessory
+    id: cd50d9e1-963b-44e3-ba92-d3d96b82e69a
+    entity_config: !include ../assistants/siri.yaml
+    filter:
+      include_entities:
+        - media_player.simeon_s_echo_dot
+  - name: Drive Camera
+    port: 21066
+    mode: accessory
+    id: 9bd4bfc4-316d-43c1-ac1c-36f441dc6b61
+    entity_config: !include ../assistants/siri.yaml
+    filter:
+      include_entities:
+        - camera.drive
+  - name: Front Door Camera
+    port: 21067
+    mode: accessory
+    id: 07e967b1-ef6e-42e2-a3b7-5b636c7ecdd1
+    entity_config: !include ../assistants/siri.yaml
+    filter:
+      include_entities:
+        - camera.front_door
+automation:
+  - alias: Homekit Start
+    initial_state: true
+    id: 46bba67e-a6ea-4207-94d3-cab136246bfb
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - wait_template: >-
+          {% if not media_player.simeon_s_echo_dot %}
+            false
+          {% else %}
+            true
+          {% endif %}
+        timeout: 00:05 # Waits 5 minutes
+        continue_on_timeout: true
+      - service: homekit.reload
+  - alias: "Homekit - Routine Reload"
+    id: 3e36130e-3a0a-4293-a983-ad921806a5dd
+    trigger:
+      - platform: time_pattern
+        # This will become seemingly random, as 37 is prime.
+        minutes: "/37"
+    action:
+      - service: homekit.reload

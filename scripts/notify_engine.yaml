@@ -49,6 +49,8 @@ notify_engine:
           notify.simeon_devices
         {% elif who == 'ios_simeon' %}
              notify.ios_simeon 
+        {% elif who == 'echodot' %}
+             notify.alexa_media
         {% else %}
           notify.pashley_bot
         {% endif %}

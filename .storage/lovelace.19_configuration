@@ -478,6 +478,12 @@
                                 },
                                 {
                                     "entity": "input_datetime.morning_report"
+                                },
+                                {
+                                    "entity": "input_number.calendar_remind_before_days"
+                                },
+                                {
+                                    "entity": "input_boolean.hourly_report"
                                 }
                             ],
                             "title": "Report times"
@@ -772,7 +778,7 @@
                                     "column_width": "20%",
                                     "entities": [
                                         {
-                                            "entity": "device_tracker.claires_mobile_app",
+                                            "entity": "device_tracker.claires_mobile",
                                             "name": "Claire"
                                         },
                                         {

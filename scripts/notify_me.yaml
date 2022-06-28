@@ -1,0 +1,10 @@
+notify_me:
+  sequence:
+    - condition: template
+      value_template: '{{ message | trim != "" }}'
+    - service: script.notify_engine
+      data:
+        who: "simeon"
+        title: "{{ message }}"
+        value1: "{{ message }}"
+        target_id: !secret telegram_bot_chat_id

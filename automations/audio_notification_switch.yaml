@@ -10,10 +10,18 @@ initial_state: true
 
 trigger:
   - platform: template
-    value_template: "{{ states('sensor.time') == (state_attr('input_datetime.audio_notification_on', 'timestamp') | int | timestamp_custom('%H:%M', False)) }}"
+    value_template: >-
+      "{{ (states('sensor.time') == (state_attr('input_datetime.audio_notification_on', 'timestamp') | int | timestamp_custom('%H:%M', False)))
+          and (states('sensor.ble_sp_iphone') == 'office'
+              or states('sensor.ble_sp_watch') == 'office')
+      }}"
     id: turn_on
   - platform: template
-    value_template: "{{ states('sensor.time') == (state_attr('input_datetime.audio_notification_off', 'timestamp') | int | timestamp_custom('%H:%M', False)) }}"
+    value_template: >-
+      "{{ (states('sensor.time') == (state_attr('input_datetime.audio_notification_off', 'timestamp') | int | timestamp_custom('%H:%M', False)))
+        or (states('sensor.ble_sp_iphone') != 'office'
+            and states('sensor.ble_sp_watch') != 'office')
+       }}"
     id: turn_off
 
 action:

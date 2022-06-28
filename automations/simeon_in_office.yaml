@@ -1,0 +1,32 @@
+#####
+#####
+
+id: 205b31f7-3992-4d85-99a4-9c988ace7e36
+alias: Simeon in office
+
+initial_state: false
+
+trigger:
+  - platform: template
+    value_template: >-
+      "{{ states('sensor.ble_sp_iphone') == 'office' or states('sensor.ble_sp_watch') == 'office' }}"
+    id: turn_on
+  - platform: template
+    value_template: >-
+      "{{ states('sensor.ble_sp_iphone') != 'office' and states('sensor.ble_sp_watch') != 'office' }}"
+    id: turn_off
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: turn_on
+        sequence:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.simeon_in_office
+      - conditions:
+          - condition: trigger
+            id: turn_off
+        sequence:
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.simeon_in_office

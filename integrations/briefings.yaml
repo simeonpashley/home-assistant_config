@@ -1,0 +1,32 @@
+input_number:
+  calendar_remind_before_days:
+    name: Calendar Remind Before Days
+    initial: 2
+    min: 1
+    max: 15
+    step: 1
+    mode: box
+
+input_boolean:
+  hourly_report:
+    name: Hourly Report
+    icon: mdi:file-chart
+
+automation:
+  - alias: Hourly Report During Day Time
+    id: 4b2a10a6-af02-4daa-a0d7-91ec85e752d4
+    initial_state: true
+    trigger:
+      platform: time_pattern
+      hours: "/01"
+      minutes: 05
+      seconds: 00
+    condition:
+      - condition: state
+        entity_id: input_boolean.hourly_report
+        state: on
+      - condition: state
+        entity_id: input_boolean.audio_notifications
+        state: on
+    action:
+      - service: script.home_status

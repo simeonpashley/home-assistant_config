@@ -27,7 +27,6 @@ condition:
       entity_id: input_boolean.text_notifications
       state: "on"
 action:
-  - delay: 3600 # seconds until next trigger, to mitigate too many messages
   - service: script.notify_engine
     data:
       who: "simeon"
@@ -40,3 +39,4 @@ action:
       color: "green"
       sticky: "true"
   #    timeout: ''
+  - delay: 3600 # seconds until next trigger, to mitigate too many messages

@@ -1,0 +1,11 @@
+notify_echo:
+
+  sequence:
+    - condition: template
+      value_template: '{{ message | trim != "" }}'
+    - service: notify.alexa_media
+      data:
+        message: "{{ message }}"
+        target: media_player.simeon_s_echo_dot
+        data:
+          type: tts

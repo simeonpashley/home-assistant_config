@@ -14,4 +14,4 @@ condition:
         before: sunset
 action:
   - service: openuv.update_uv_index_data
-  - service: openuv.update_data
+  # - service: openuv.update_data

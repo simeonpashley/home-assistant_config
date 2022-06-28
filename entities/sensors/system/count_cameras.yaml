@@ -7,5 +7,5 @@ platform: template
 sensors:
   count_camera:
     friendly_name: 'Number of online Cameras'
-    value_template: >
+    value_template: >-
       {{ states.camera | list | count }}
