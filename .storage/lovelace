@@ -78,6 +78,46 @@
                             "cards": [
                                 {
                                     "type": "entities",
+                                    "show_header_toggle": false,
+                                    "title": "Front room",
+                                    "entities": [
+                                        {
+                                            "entity": "switch.tradfi001",
+                                            "name": "Front Small",
+                                            "icon": "mdi:lightbulb-on-outline"
+                                        },
+                                        {
+                                            "entity": "switch.tradfi002",
+                                            "name": "Front Big",
+                                            "icon": "mdi:lightbulb-on-outline"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
+                                    "title": "Landing",
+                                    "show_header_toggle": false,
+                                    "entities": [
+                                        {
+                                            "entity": "switch.tradfi003",
+                                            "name": "Landing",
+                                            "icon": "mdi:lightbulb-on-outline"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "custom:mini-graph-card",
+                                    "hours_to_show": 6,
+                                    "points_per_hour": 12,
+                                    "entities": [
+                                        {
+                                            "name": "Front Brightness",
+                                            "entity": "sensor.lp5_5c1aad_luminance"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "entities",
                                     "entities": [
                                         {
                                             "entity": "input_number.front_low_light_threshold",
@@ -87,46 +127,7 @@
                                 },
                                 {
                                     "type": "entities",
-                                    "show_header_toggle": true,
-                                    "title": "Front room",
-                                    "entities": [
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_front_big_e",
-                                            "name": "Front Big - smappee",
-                                            "icon": "mdi:lightbulb"
-                                        },
-                                        {
-                                            "entity": "switch.tradfi001",
-                                            "name": "Front Small - HA",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        },
-                                        {
-                                            "entity": "switch.tradfi002",
-                                            "name": "Front Big - HA",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "title": "Landing",
-                                    "show_header_toggle": true,
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi003",
-                                            "name": "Landing - HA",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        },
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_y_landing_off_only",
-                                            "name": "Landing - smappee",
-                                            "icon": "mdi:lightbulb"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "show_header_toggle": true,
+                                    "show_header_toggle": false,
                                     "title": "Plugs - Smappee",
                                     "entities": [
                                         {
@@ -134,6 +135,12 @@
                                         },
                                         {
                                             "entity": "switch.smappee_1005002095_local_comfort_plug_z_outside_lights"
+                                        },
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_front_big_e"
+                                        },
+                                        {
+                                            "entity": "switch.smappee_1005002095_local_comfort_plug_y_landing_off_only"
                                         }
                                     ]
                                 }

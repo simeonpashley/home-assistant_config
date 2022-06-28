@@ -117,14 +117,13 @@ automation:
   # Home
   - alias: Home Mode - Arriving
     trigger:
-      - platform: state
+      - platform: numeric_state
         entity_id: sensor.n_people_home
+        above: 0
+        for: 60
     condition:
       - condition: template
         value_template: "{{ not is_state('input_boolean.vacation_mode', 'on') }}"
-      - condition: template
-        value_template: >
-          {{ trigger.to_state.state|int(0) > trigger.from_state.state|int(0) }}
     action:
       - service: input_select.select_option
         entity_id: input_select.home_mode

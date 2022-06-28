@@ -9,13 +9,10 @@ switch.tradfi003:
   type: switch
 input_boolean.tradfi001_auto:
   name: Small Light Automation
-  type: switch
 input_boolean.tradfi002_auto:
   name: Big Light Automation
-  type: switch
 input_boolean.tradfi003_auto:
   name: Landing Light Automation
-  type: switch
 media_player.50dx700_series:
   name: TV
   feature_list:

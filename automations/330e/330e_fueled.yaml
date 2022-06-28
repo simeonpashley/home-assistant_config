@@ -2,10 +2,10 @@ id: 330e_fueled
 alias: "330e Fueled"
 trigger:
   platform: state
-  entity_id: binary_sensor.330e_xdrive_fueled
+  entity_id: binary_sensor.330e_xdrive_fuel_increased
 condition:
   - condition: state
-    entity_id: binary_sensor.330e_xdrive_fueled_increase
+    entity_id: binary_sensor.330e_xdrive_fuel_increased
     state: "on"
 action:
   - service: script.notify_engine

@@ -1,0 +1,282 @@
+---
+>
+  {# a macro that removes all newline characters, empty spaces, and returns formatted text and replaces underscores with spaces  #}
+  {%- macro cleanup(data) -%}
+    {%- for item in data.split("\n")  if item | trim != "" -%}
+    {{ item | trim | replace("_", " ") }} {% endfor -%}
+  {%- endmacro -%}
+  {%- macro pause() -%}
+    {{ ". " }}
+  {%- endmacro -%}
+
+  {%- macro greeting_line() -%}
+    {%- set hour = now().strftime('%H')|int -%}
+    {%- if hour > 0 and hour < 10  %}
+      Good morning.
+    {%- elif hour >= 10 and hour < 17 %}
+      Good afternoon.
+    {%- else %}
+      Good evening.
+    {%- endif %}
+    {{ pause() }}
+    It is {{ now().strftime("%I:%M %p") }}.
+    {{ pause() }}
+  {%- endmacro -%}
+
+  {%- macro goodbye_line() -%}
+    {{ [
+      "Adios! ",
+      "Bye Guys! ",
+      "See ya! " ,
+      "See you later. ",
+      "Until next time!",
+      "How lucky I am to have something that makes saying Goodbye so hard. ",
+      "Good friends never say goodbye, they simply say, see you soon! ",
+      "See you later alligator! ",
+      "Stay out of trouble. ",
+      "I am out of here. Oh, I'm stuck here, are-nt I?",
+      "Okay...bye, fry guy! ",
+      "If I don’t see you around, I'll see you square. ",
+      "Stay classy. ",
+      "Fare thee well. ",
+      "Catch you on the rebound. ",
+      "Gotta go, buffalo. ",
+      "Peace out! ",
+      "Gotta hit the road. ",
+      "Live long and prosper!",
+      "Well, I guess your off! I've got things to do too. ",
+      "Bye bye, butterfly. ",
+      "Out to the door, dinosaur. ",
+      "Catch you on the flip side. ",
+      "See you soon, racoon. ",
+      "You're still here? It's over. Go home. Go! ",
+      "Don't get run over! ",
+      "Have a good one. ",
+      "It was nice to see you again. ",
+      "Later, haters. ",
+      "Give a hug, ladybug. ",
+      "Compute you later! ",
+      "See you on the other side. ",
+      "Have fun storming the castle! ",
+      "Ah-dieu, cockatoo! ",
+      "Blow a kiss, goldfish. ",
+      "It's been a pleasure and a privilege to meet you. ",
+      "Be good and don't get caught. ",
+      "Thank you for your cooperation. Farewell. ",
+      "I look forward to our next meeting. ",
+      "Are you gonna make like a bakery truck? and haul buh-uns. ",
+      "Chop chop, lollipop! ",
+      "Gotta roll! ",
+      "Hello. Oh and in case I don't see you, good afternoon good evening and good night! ",
+      "Don't forget to come back! ",
+      "Once more unto the breach, dear friends! ",
+      "See yuh, wouldn't wanna be yuh. ",
+      "Peace out, girl scout! ",
+      "Adios, hippos. ",
+      "Time to scoot, little newt. ",
+      "Smell ya later! ",
+      "Happy trails! ",
+      "Cheerio! ",
+      "Bye for now. ",
+      "Tootle-loo, kangaroo. ",
+      "Love, peace, and chicken grease. ",
+      "I'm off like a dirty shirt. ",
+      "See you when I see you. ",
+      "Catch ya later, future dudes! ",
+      "Cya. (Clearly, this is just short for ‘see you,’ which makes no sense because you utter ‘cya’ and not write it. Oh, whatever!) ",
+      "As you wish, jellyfish! ",
+      "Later, skater! ",
+      "May the force be with you... always. ",
+      "Shine on, you crazy diamonds. ",
+      "Don't let the door hit ya where the good lord split ya. ",
+      "Better shake, rattlesnake! ",
+      "Later, potato! ",
+      "Don't forget to be awesome. ",
+      "Later nerds! ",
+      "Stay cool, my dude. ",
+      "Don't get cut by a blade of grass! ",
+      "Be sweet, parakeet. ",
+      "Be careful! Don't get mauled by a squirrel! ",
+      "Don't trip on a raindrop! ",
+      "See you soon, baboon! ",
+      "Bye! I tolerate you! ",
+      "Gotta go, the power of the shower compels me. ",
+      "Are you late for your bus, snuffle-up-ahgus? ",
+      "Move out, brussels sprout! ",
+      "Make sure the doormat says goodbye! ",
+      "I’ll show you to the door! ",
+      "Ciao ciao, brown cow! ",
+      "Forget you guys, I'm going home! ",
+      "See you, space cowboy. "
+      "Take it easy, greasy. You've got a long way to slide. ",
+      "Toodaloo, caribou! ",
+      "Adios, amigos. ",
+      "Why don't you make like a tree, and leave! "
+      "Why don't you make like a tree, and get outta here! ",
+      "That's all folks. ",
+      "Take care, polar bear! ",
+      "Peace out, rainbow trout! ",
+      "Your outta here like spit through a trumpet. ",
+      "Au revoir! ",
+      "See you in the future. ",
+      "Be gone! ",
+      "So long, sucker! ",
+      "Hasta lasagna, don't get any on ya. ",
+      "Sayonara, muchachos! ",
+      "Next time, bring more cookies. ",
+      "Party easy, drive safe, and return with a smile on your face. ",
+      "After two, kangaroo! ",
+      "After three, chimpanzee! ",
+      "After four, dinosaur. ",
+      "Goodbye forever. ",
+      "Never look back! ",
+      "See you on the internet! ",
+      "Forever and forever farewell. If we do meet again, we'll smile indeed. If not, 'tis true parting was well made. ",
+      "See you at the restaurant at the edge of the universe! "
+    ]|random }}
+    {{ pause() }}
+  {%- endmacro -%}
+  {# UK Holidays notifications #}  
+  {%- macro UKHolidays() -%}
+    {% set days2NextEvent = 0 %}
+      {% if state_attr('calendar.holidays_in_the_united_kingdom', 'start_time') != None and state_attr('calendar.holidays_in_the_united_kingdom', 'message') != None %}
+      {% if now().year == strptime(states.calendar.holidays_in_the_united_kingdom.attributes.start_time, '%Y-%m-%d %H:%M:%S').year %}
+        {% set days2NextEvent = strptime(states.calendar.holidays_in_the_united_kingdom.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%j') | int - (now().strftime('%j') | int) %}
+      {% else %}
+        {% set days2NextEvent = strptime((now().year ~ "-12-31 12:02:05"), '%Y-%m-%d %H:%M:%S').strftime('%j') | int - (now().strftime('%j') | int) + (strptime(states.calendar.holidays_in_the_united_kingdom.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%j') | int) -%} 
+      {% endif -%}  
+      {% if days2NextEvent <= (states('input_number.calendar_remind_before_days') | int(7))  %}
+        {% if days2NextEvent == 0 | int %}
+          Today is {{ states.calendar.holidays_in_the_united_kingdom.attributes.message | replace(".", "")}}.
+        {%- elif days2NextEvent == 1 %}
+          Tomorrow is {{ states.calendar.holidays_in_the_united_kingdom.attributes.message | replace(".", "")}}.
+        {%- elif days2NextEvent == 2 -%}
+          {{ states.calendar.holidays_in_the_united_kingdom.attributes.message | replace(".", "")}} is day after tomorrow.
+        {%- else -%}
+          {{ states.calendar.holidays_in_the_united_kingdom.attributes.message | replace(".", "")}} is in {{ days2NextEvent }} days.
+        {%- endif -%}
+      {%- endif %}
+      {%- endif %}
+  {%- endmacro -%}
+
+  {# weather summary #}
+  {%- macro inside_weather() -%}
+    {%- if states('sensor.living_room_temperature') | lower != "unknown" -%}
+      "Inside temperature is {{ states('sensor.living_room_temperature') | round(0) }} degrees."
+    {%- endif -%}
+    {%- if states('sensor.esphome_web_af4cb4_temperature') | lower != "unknown" -%}
+      "Office temperature is {{ states('sensor.esphome_web_af4cb4_temperature') | round(0) }} degrees."
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {# Only notify pollen levels in spring #}
+  {%- macro pollen_levels() -%}
+    {% if (states('sensor.pollen_tree_index_day_1') | float > 0) and (states('sensor.season') | lower in ["spring", "summer"]) %}
+      "Tree pollen is {{ states('sensor.pollen_tree_index_day_0') }} and grass pollen is {{ state_attr('sensor.pollen_tree_index_day_0', 'grassIndex') -}}. "
+      {%- if (states('sensor.pollen_tree_index_day_1') | float > 7.0) -%}
+        "Tomorrow's pollen levels are going to be Medium to High. "
+      {%- endif -%}
+    {% endif %}
+  {%- endmacro -%}
+
+  {%- macro outside_weather() -%}
+    {%- set conditions = {
+      "clear-night": "clear night skies",
+      "partlycoudly": "mostly cloudy skies",
+      "sunny": "clear skies and sun"
+    } -%}
+    {%- if conditions[states('weather.29stratford_2')] is string -%}
+      {%- set condition = conditions[states('weather.29stratford_2')] -%}
+    {%- else -%}
+      {%- set condition = states('weather.29stratford_2') -%}
+    {%- endif -%}
+    {{ ['Currently', 'Right now']|random }} outside, it is {{ state_attr('weather.29stratford_2','temperature')|int }} degrees, with {{ condition }}.
+    {{ states("sensor.forecast") }}
+    {{ pause() }}
+  {%- endmacro -%}
+
+  {# Only notify when high levels of UV #}
+  {%- macro uv_levels() -%}
+    {%- set uv = states('sensor.current_uv_index') | int(0) -%}
+    {%- if  uv >= 6 and uv <= 7 -%}
+      Current UV index is high. Please be careful outdoors.
+    {%- elif  uv >= 8 and uv <= 10 -%}
+      Current UV index is very high. It is not advised to go out.
+    {%- elif  uv >= 11 -%}
+      Current UV index is extremely high. It is highly advised to stay indoors.
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {# Calendar notifications #}
+  {%- macro calendar_reminder() -%}
+    {% set days2NextEvent = 0 %}
+      {% if state_attr('calendar.simeon_pashley_org', 'start_time') != None and state_attr('calendar.simeon_pashley_org', 'message') != None %}
+      {% if now().year == strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').year %}
+        {% set days2NextEvent = strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%j') | int - (now().strftime('%j') | int) %}
+      {% else %}
+        {% set days2NextEvent = strptime((now().year ~ "-12-31 12:02:05"), '%Y-%m-%d %H:%M:%S').strftime('%j') | int - (now().strftime('%j') | int) + (strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%j') | int) -%} 
+      {% endif -%}  
+      {% if days2NextEvent <= states('input_number.calendar_remind_before_days') | int(7)  %}
+        Your next event. {{ states.calendar.simeon_pashley_org.attributes.message }} . starts 
+        {% if days2NextEvent == 0 | int %}
+          today at {{ strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%I:%M %p') }}.
+        {% elif days2NextEvent == 1 %}
+          tomorrow at {{ strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%I:%M %p') }}.
+        {% elif days2NextEvent == 2 %}
+          day after tomorrow {{ strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%A') }} 
+          at {{ strptime(states.calendar.simeon_pashley_org.attributes.start_time, '%Y-%m-%d %H:%M:%S').strftime('%I:%M %p') }}.
+        {% else %}
+          in {{ days2NextEvent }} days.
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {%- endmacro -%}
+
+  {%- macro car_status() -%}
+    {% if (states("sensor.330e_xdrive_charging_level_hv") != "unknown") and (states("binary_sensor.330e_xdrive_connection_status") != "on") %}
+    {%- if (states('sensor.330e_xdrive_charging_level_hv') | int) | round(0) < 85 and 
+          (states('sensor.330e_xdrive_charging_level_hv') | int) | round(0) > 0 -%}
+      Attention!. Your car battery is at {{ states('sensor.330e_xdrive_charging_level_hv') }} percent, and you can only drive about {{ (states('sensor.330e_xdrive_remaining_range_electric_miles') | int) | round(0) }} miles. Please charge your car if you want to go anywhere.
+    {%- endif -%}
+    {% endif %}
+  {%- endmacro -%}
+
+  {# Drone Flying Weather #}
+  {%- macro drone_weather() -%}
+  {% if states('binary_sensor.good_weather_to_fly_drones')| lower == "on" and 
+        states('device_tracker.simeon') == "home" and 
+        states('sun.sun') == "above_horizon" %}
+    It is now a great weather to fly drone outside.
+  {% endif %}
+  {%- endmacro -%}
+  {# Birthday notifications #}
+  {%- macro birthday_countdown(name, days2go) -%}
+    {%if days2go != 'unknown' %}
+      {%- if days2go |int == 0 -%}
+        Today is {{name}}'s Birthday!. Happy Birthday to you, my dear {{name}}!!!.
+      {%- elif days2go |int == 1 -%}
+        Tomorrow is {{name}}'s Birthday! HURRAY!!!
+      {%- elif days2go |int > 1 and days2go |int <= 10 -%}
+        {{name}}'s Birthday is in {{days2go}} days! HURRAY!!!
+      {%- endif -%}
+    {%- endif -%}
+  {%- endmacro -%}
+  {# a macro to call all macros :)  #}
+  {%- macro mother_of_all_macros() -%}
+    {{ greeting_line() }}
+    {{ UKHolidays() }}
+    {{ inside_weather() }}
+    {{ outside_weather() }}
+    {{ pollen_levels() }}
+    {{ uv_levels() }}
+    {{ calendar_reminder() }}
+    {{ car_status() }}
+    {{ drone_weather() }}
+    {{ birthday_countdown("Claire", states('input_label.claire_birthday_days2go')) }}
+    {{ birthday_countdown("Eleanor", states('input_label.eleanor_birthday_days2go')) }}
+    {{ birthday_countdown("Isabelle", states('input_label.isabelle_birthday_days2go')) }}
+    {{ " " ~ goodbye_line() }}
+  {%- endmacro -%}
+
+  {# Call the macro  #}
+  {{- cleanup(mother_of_all_macros()) -}}

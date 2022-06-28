@@ -1,4 +1,6 @@
 platform: trend
 sensors:
-  330e_xdrive_fueled:
+  330e_xdrive_fuel_increased:
     entity_id: sensor.330e_xdrive_remaining_fuel
+    min_gradient: 0.0001
+    device_class: update
