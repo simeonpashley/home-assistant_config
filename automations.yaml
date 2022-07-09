@@ -1,0 +1,14 @@
+- id: '1657275415473'
+  alias: Appliance has finished
+  description: ''
+  use_blueprint:
+    path: notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.gosundplug05_power
+      starting_threshold: 5
+      starting_hysteresis: 5
+      finishing_threshold: 5
+      finishing_hysteresis: 5
+      actions:
+      - service: script.notify_me
+        data: {}

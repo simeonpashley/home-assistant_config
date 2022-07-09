@@ -5,6 +5,8 @@
 
 logger:
   default: warn
-  # logs:
+  logs:
+    aioesphomeapi.reconnect_logic: error
+    custom_components.mikrotik_router.mikrotikapi: error
   #    homeassistant.components.cast: debug
   #    homeassistant.components.cast.media_player: debug

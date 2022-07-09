@@ -10,14 +10,6 @@ trigger:
   platform: homeassistant
 
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "*HA shutdown*"
-      value1: 'Home Assistant shutting down at {{ states("sensor.time") }}'
-      group: ha
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "false"
-      timeout: 150
+      message: '*HA shutdown* Home Assistant shutting down at {{ states("sensor.time") }}'

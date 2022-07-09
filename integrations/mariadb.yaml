@@ -1,0 +1,23 @@
+sensor:
+- platform: sql
+  db_url: !secret mariadb_url
+  scan_interval: 3600
+  queries:
+    - name: MariaDB size
+      query: 'SELECT table_schema AS "database", ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+      column: "value"
+      unit_of_measurement: MB
+
+binary_sensor:
+  - platform: command_line
+    name: www.poundshop.com
+    device_class: connectivity
+    command: response=$(curl -LIk -m 3 https://www.poundshop.com -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "ON" || echo "OFF"
+    scan_interval: 300
+    value_template: '{{ value }}'
+  - platform: command_line
+    name: www.poundland.co.uk
+    device_class: connectivity
+    command: response=$(curl -LIk -m 3 https://www.poundland.co.uk -o /dev/null -w "%{http_code}\n" -s); test "$response" -eq 200 && echo "ON" || echo "OFF"
+    scan_interval: 300
+    value_template: '{{ value }}'

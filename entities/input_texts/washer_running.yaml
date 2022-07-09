@@ -1,0 +1,4 @@
+### Washing machine
+washer_running:
+  name: Washer
+  icon: "mdi:washing-machine"

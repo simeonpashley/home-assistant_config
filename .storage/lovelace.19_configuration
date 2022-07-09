@@ -1,1345 +1,1950 @@
 {
-    "version": 1,
-    "minor_version": 1,
-    "key": "lovelace.19_configuration",
-    "data": {
-        "config": {
-            "title": "Admin",
-            "icon": "mdi:tune-vertical",
-            "views": [
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.19_configuration",
+  "data": {
+    "config": {
+      "title": "Admin",
+      "icon": "mdi:tune-vertical",
+      "views": [
+        {
+          "theme": "Backend-selected",
+          "title": "Status",
+          "path": "test",
+          "icon": "mdi:feature-search-outline",
+          "badges": [
+            {
+              "entity": "switch.pi_hole"
+            },
+            {
+              "entity": "input_boolean.meeting_time"
+            },
+            {
+              "entity": "input_boolean.quiet_time"
+            }
+          ],
+          "cards": [
+            {
+              "type": "custom:auto-entities",
+              "show_empty": false,
+              "sort": {
+                "method": "domain"
+              },
+              "card": {
+                "type": "entities",
+                "title": "On",
+                "show_header_toggle": false
+              },
+              "filter": {
+                "include": [
+                  {
+                    "state": "on"
+                  },
+                  {
+                    "state": "cleaning"
+                  },
+                  {
+                    "state": "paused"
+                  },
+                  {
+                    "state": "armed_away"
+                  },
+                  {
+                    "state": "armed_home"
+                  },
+                  {
+                    "state": "today"
+                  },
+                  {
+                    "state": "tomorrow"
+                  }
+                ],
+                "exclude": [
+                  {
+                    "entity_id": "group.*"
+                  },
+                  {
+                    "entity_id": "automation.*"
+                  },
+                  {
+                    "entity_id": "sensor.climate_*"
+                  },
+                  {
+                    "entity_id": "switch.garage_cover_outlet*"
+                  },
+                  {
+                    "entity_id": "switch.unifi_*"
+                  },
+                  {
+                    "entity_id": "switch.hdr_mode_*"
+                  },
+                  {
+                    "entity_id": "switch.high_fps_*"
+                  },
+                  {
+                    "entity_id": "switch.ir_active_*"
+                  },
+                  {
+                    "entity_id": "switch.record_always_*"
+                  },
+                  {
+                    "entity_id": "switch.status_light_on_*"
+                  },
+                  {
+                    "entity_id": "switch.powerstrip"
+                  },
+                  {
+                    "entity_id": "switch.outlet1_*"
+                  },
+                  {
+                    "entity_id": "switch.modem"
+                  },
+                  {
+                    "entity_id": "switch.humidifer"
+                  },
+                  {
+                    "entity_id": "switch.powerstrip_*"
+                  },
+                  {
+                    "entity_id": "switch.chromecasts"
+                  },
+                  {
+                    "entity_id": "switch.*_*_detect"
+                  },
+                  {
+                    "entity_id": "switch.*_detect"
+                  },
+                  {
+                    "entity_id": "switch.*.*_clips"
+                  },
+                  {
+                    "entity_id": "switch.*.*_snapshots"
+                  },
+                  {
+                    "entity_id": "switch.*_timer_smart_watering_program*"
+                  },
+                  {
+                    "entity_id": "switch.*_timer_rain_delay"
+                  },
+                  {
+                    "entity_id": "switch.*_timer_daily_program"
+                  },
+                  {
+                    "entity_id": "input_boolean.front_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.back_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.garage_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.vacuum_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.*_alerts"
+                  },
+                  {
+                    "entity_id": "input_boolean.door_keypad_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.automations"
+                  },
+                  {
+                    "entity_id": "light.garage_*"
+                  },
+                  {
+                    "entity_id": "light.dimmable_*"
+                  },
+                  {
+                    "entity_id": "remote.*"
+                  },
+                  {
+                    "entity_id": "light.blinds"
+                  },
+                  {
+                    "entity_id": "light.garage"
+                  },
+                  {
+                    "entity_id": "light.shellyrgbw2*"
+                  },
+                  {
+                    "entity_id": "light.kitchen_*_led"
+                  },
+                  {
+                    "entity_id": "light.*_*_audio_settings"
+                  },
+                  {
+                    "entity_id": "calendar.garbage_collection"
+                  },
+                  {
+                    "entity_id": "switch.backyard_timer_grass_seeding_program"
+                  },
+                  {
+                    "entity_id": "switch.nzbget_download"
+                  },
+                  {
+                    "entity_id": "switch.deluge_switch"
+                  },
+                  {
+                    "entity_id": "switch.*_power_off"
+                  },
+                  {
+                    "entity_id": "switch.ipad"
+                  },
+                  {
+                    "entity_id": "switch.office"
+                  },
+                  {
+                    "entity_id": "switch.unifi_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.workday_sensor"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_occupancy"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_nest_protect_online"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_door"
+                  },
+                  {
+                    "entity_id": "binary_sensor.office_device"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_motion"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_firmware_update"
+                  },
+                  {
+                    "entity_id": "binary_sensor.door_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_completed"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_*_motion"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_motion"
+                  },
+                  {
+                    "entity_id": "binary_sensor.motion_*_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.motion_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.backups_stale"
+                  },
+                  {
+                    "entity_id": "switch.*_recordings"
+                  },
+                  {
+                    "state": "paused"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "custom:auto-entities",
+              "sort": {
+                "method": "domain"
+              },
+              "show_empty": false,
+              "card": {
+                "show_header_toggle": false,
+                "title": "Playing",
+                "type": "entities"
+              },
+              "filter": {
+                "exclude": [
+                  {
+                    "entity_id": "group.*"
+                  },
+                  {
+                    "entity_id": "media_player.theater"
+                  }
+                ],
+                "include": [
+                  {
+                    "state": "playing"
+                  },
+                  {
+                    "state": "paused"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "custom:auto-entities",
+              "sort": {
+                "method": "domain"
+              },
+              "show_empty": false,
+              "card": {
+                "show_header_toggle": false,
+                "title": "Off",
+                "type": "entities"
+              },
+              "filter": {
+                "exclude": [
+                  {
+                    "entity_id": "script.*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*"
+                  },
+                  {
+                    "entity_id": "group.*"
+                  },
+                  {
+                    "entity_id": "light.*"
+                  },
+                  {
+                    "entity_id": "media_player.*"
+                  },
+                  {
+                    "entity_id": "switch.*"
+                  },
+                  {
+                    "entity_id": "sensor.*"
+                  },
+                  {
+                    "entity_id": "input_select.door_*"
+                  },
+                  {
+                    "entity_id": "input_boolean.*"
+                  },
+                  {
+                    "entity_id": "remote.*"
+                  },
+                  {
+                    "entity_id": "calendar.*"
+                  },
+                  {
+                    "entity_id": "input_select.camera_motion_alerts"
+                  }
+                ],
+                "include": [
+                  {
+                    "entity": "switch.front_door_detect"
+                  },
+                  {
+                    "state": "Disabled"
+                  },
+                  {
+                    "state": "Manual"
+                  },
+                  {
+                    "state": "off"
+                  },
+                  {
+                    "state": "error"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "custom:auto-entities",
+              "sort": {
+                "method": "domain"
+              },
+              "show_empty": false,
+              "card": {
+                "show_header_toggle": false,
+                "title": "Open",
+                "type": "entities"
+              },
+              "filter": {
+                "exclude": [
+                  {
+                    "entity_id": "sensor.*window*"
+                  },
+                  {
+                    "entity_id": "automation.*"
+                  },
+                  {
+                    "entity_id": "group.*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_room_occupancy"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_occupancy"
+                  },
+                  {
+                    "entity_id": "binary_sensor.motion_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_nest_protect_online"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_*_motion"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_motion"
+                  },
+                  {
+                    "entity_id": "binary_sensor.washer_wash_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.dryer_dry_*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_home_security_tampering_product_cover_removed"
+                  },
+                  {
+                    "entity_id": "binary_sensor.workday_sensor"
+                  },
+                  {
+                    "entity_id": "binary_sensor.updater"
+                  },
+                  {
+                    "entity_id": "binary_sensor.theateroutlet2_power_management_over_load_detected"
+                  },
+                  {
+                    "entity_id": "binary_sensor.multi_sensor_low_battery_level"
+                  },
+                  {
+                    "entity_id": "binary_sensor.office_device"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_*_bin_full"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*_firmware_update"
+                  },
+                  {
+                    "entity_id": "binary_sensor.backups_stale"
+                  },
+                  {
+                    "state": "off"
+                  },
+                  {
+                    "state": "unavailable"
+                  },
+                  {
+                    "domain": "cover"
+                  }
+                ],
+                "include": [
+                  {
+                    "state": "open"
+                  },
+                  {
+                    "state": "unlocked"
+                  },
+                  {
+                    "domain": "binary_sensor"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "custom:auto-entities",
+              "sort": {
+                "method": "domain"
+              },
+              "show_empty": false,
+              "card": {
+                "show_header_toggle": false,
+                "title": "Occupied",
+                "type": "entities"
+              },
+              "filter": {
+                "exclude": [
+                  {
+                    "entity_id": "group.*"
+                  },
+                  {
+                    "entity_id": "binary_sensor.*"
+                  },
+                  {
+                    "entity_id": "*bathroom*"
+                  }
+                ],
+                "include": [
+                  {
+                    "state": "Occupied"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "330e",
+          "icon": "mdi:car-sports",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
                 {
-                    "theme": "Backend-selected",
-                    "title": "330e",
-                    "icon": "mdi:car-sports",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "button.330e_xdrive_refresh_from_cloud",
-                                    "name": "Refresh"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_remaining_range_total_miles",
-                                    "secondary_info": "last-updated",
-                                    "name": "Total Range"
-                                },
-                                {
-                                    "entity": "device_tracker.330e_xdrive",
-                                    "secondary_info": "last-updated",
-                                    "name": "Location"
-                                }
-                            ],
-                            "title": "330e Summary"
-                        },
-                        {
-                            "type": "entities",
-                            "title": "330e Electric",
-                            "entities": [
-                                {
-                                    "entity": "sensor.330e_xdrive_remaining_range_electric_miles",
-                                    "name": "Range - Electric"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_charging_level_hv",
-                                    "secondary_info": "last-updated",
-                                    "name": "Charge %"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_connection_status",
-                                    "name": "Connected"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_charging_end_time",
-                                    "name": "Charge End"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_charging_status",
-                                    "name": "Charge State"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_charging_status",
-                                    "name": "Charge State"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "title": "330e Fuel",
-                            "entities": [
-                                {
-                                    "entity": "sensor.330e_xdrive_remaining_range_fuel_miles",
-                                    "name": "Range - Fuel"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_remaining_fuel",
-                                    "secondary_info": "last-updated",
-                                    "name": "Remaining"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_fuel_percent",
-                                    "name": "Fuel %"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "title": "330e Service",
-                            "entities": [
-                                {
-                                    "entity": "sensor.330e_xdrive_mileage_miles",
-                                    "name": "Mileage"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_check_control_messages",
-                                    "name": "Control Messages"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_condition_based_services",
-                                    "secondary_info": "last-updated",
-                                    "name": "Condition Services"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_door_lock_state",
-                                    "name": "Locked"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_lids",
-                                    "name": "Lids"
-                                },
-                                {
-                                    "entity": "binary_sensor.330e_xdrive_windows",
-                                    "name": "Windows"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.drive_last_activity"
-                                },
-                                {
-                                    "entity": "binary_sensor.drive_motion"
-                                }
-                            ]
-                        },
-                        {
-                            "show_state": true,
-                            "show_name": true,
-                            "camera_view": "auto",
-                            "type": "picture-entity",
-                            "entity": "camera.drive",
-                            "camera_image": "camera.drive"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "select.front_door_event_select",
-                                    "name": "Event Select"
-                                },
-                                {
-                                    "entity": "switch.front_door_event_stream",
-                                    "name": "Event Stream"
-                                },
-                                {
-                                    "entity": "switch.front_door_live_stream",
-                                    "name": "Live Stream"
-                                },
-                                {
-                                    "entity": "number.front_door_snapshot_interval",
-                                    "name": "Snapshot Interval"
-                                },
-                                {
-                                    "entity": "select.front_door_snapshot_mode",
-                                    "name": "Snapshot Mode"
-                                }
-                            ],
-                            "title": "Front Door"
-                        }
-                    ]
+                  "entity": "button.330e_xdrive_refresh_from_cloud",
+                  "name": "Refresh"
                 },
                 {
-                    "theme": "Backend-selected",
-                    "title": "CCTV",
-                    "path": "cctv",
-                    "icon": "mdi:cctv",
-                    "type": "custom:horizontal-layout",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "alarm-panel",
-                            "entity": "alarm_control_panel.home_mode",
-                            "states": [],
-                            "name": "Ring Alerts"
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.front_door_snapshot",
-                                    "show_state": false,
-                                    "show_name": false,
-                                    "state_filter": {
-                                        "idle": "brightness(110%) saturate(1.2)"
-                                    }
-                                },
-                                {
-                                    "type": "custom:battery-state-card",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.front_door_battery_2",
-                                            "name": "Ring Front Door"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.front_door_motion_2",
-                                            "name": "Motion",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "binary_sensor.front_door_ding_2",
-                                            "name": "Ding",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "sensor.front_door_last_ding",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "sensor.front_door_last_motion",
-                                            "secondary_info": "last-updated"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "picture-entity",
-                                    "entity": "camera.drive_snapshot",
-                                    "show_state": false,
-                                    "show_name": false,
-                                    "state_filter": {
-                                        "idle": "brightness(110%) saturate(1.2)"
-                                    }
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.drive_last_motion",
-                                            "name": "Last Motion",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "sensor.drive_info",
-                                            "secondary_info": "last-updated"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.drive_motion_2",
-                                            "name": "Motion"
-                                        }
-                                    ],
-                                    "hours_to_show": 12
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Home Status",
-                                    "state_color": false,
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.n_people_home",
-                                            "name": "Count"
-                                        },
-                                        {
-                                            "entity": "input_select.home_mode",
-                                            "name": "Status"
-                                        },
-                                        {
-                                            "entity": "input_boolean.guest_mode",
-                                            "name": "Guest"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
+                  "entity": "sensor.330e_xdrive_remaining_range_total_miles",
+                  "secondary_info": "last-updated",
+                  "name": "Total Range"
                 },
                 {
-                    "title": "System Monitor",
-                    "icon": "mdi:bug",
-                    "path": "system",
-                    "cards": [
-                        {
-                            "hours_to_show": 12,
-                            "graph": "line",
-                            "type": "sensor",
-                            "entity": "sensor.memory_use",
-                            "detail": 2
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.memory_use"
-                                },
-                                {
-                                    "entity": "sensor.memory_free"
-                                },
-                                {
-                                    "entity": "sensor.load_1m"
-                                },
-                                {
-                                    "entity": "sensor.swap_free"
-                                },
-                                {
-                                    "entity": "sensor.swap_use"
-                                }
-                            ]
-                        },
-                        {
-                            "hours_to_show": 12,
-                            "graph": "line",
-                            "type": "sensor",
-                            "entity": "sensor.load_1m",
-                            "detail": 2
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_select.logger_level"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Logger",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "input_text.version_latest_notified"
-                                }
-                            ],
-                            "title": "HA Update",
-                            "type": "entities"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.updater"
-                                },
-                                {
-                                    "entity": "binary_sensor.updater_addons"
-                                },
-                                {
-                                    "entity": "binary_sensor.updater_hacs"
-                                },
-                                {
-                                    "entity": "binary_sensor.updater_supervisor"
-                                },
-                                {
-                                    "entity": "sensor.supervisor_updates"
-                                },
-                                {
-                                    "entity": "sensor.hacs"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "Pi-Hole",
-                    "icon": "mdi:block-helper",
-                    "path": "pihole",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                "switch.pi_hole"
-                            ],
-                            "title": "Pi-Hole"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.pi_hole_ads_blocked_today",
-                                    "name": "Ads Blocked Today"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_ads_percentage_blocked_today",
-                                    "name": "Ads Percentage Blocked Today"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_dns_queries_cached",
-                                    "name": "DNS Queries Cached"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_dns_queries_forwarded",
-                                    "name": "DNS Queries Forwarded"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_dns_queries_today",
-                                    "name": "DNS Queries Today"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_dns_unique_clients",
-                                    "name": "DNS Unique Clients"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_dns_unique_domains",
-                                    "name": "DNS Unique Domains"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_domains_blocked",
-                                    "name": "Domains Blocked"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_seen_clients",
-                                    "name": "Seen Clients"
-                                }
-                            ],
-                            "title": "Pi-Hole"
-                        }
-                    ]
-                },
-                {
-                    "icon": "mdi:tune-vertical",
-                    "title": "Configuration",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "input_number.electric_tariff_rate"
-                                },
-                                {
-                                    "entity": "input_number.electric_tariff_standing"
-                                },
-                                {
-                                    "entity": "input_number.gas_tariff_rate"
-                                },
-                                {
-                                    "entity": "input_number.gas_tariff_standing"
-                                },
-                                {
-                                    "entity": "input_number.solar_export_tariff"
-                                }
-                            ],
-                            "title": "Electricity price"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "input_datetime.text_notification_on"
-                                },
-                                {
-                                    "entity": "input_datetime.text_notification_off"
-                                },
-                                {
-                                    "entity": "input_datetime.audio_notification_on"
-                                },
-                                {
-                                    "entity": "input_datetime.audio_notification_off"
-                                }
-                            ],
-                            "title": "Silent hours"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "input_datetime.evening_report"
-                                },
-                                {
-                                    "entity": "input_datetime.morning_report"
-                                },
-                                {
-                                    "entity": "input_number.calendar_remind_before_days"
-                                },
-                                {
-                                    "entity": "input_boolean.hourly_report"
-                                }
-                            ],
-                            "title": "Report times"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.audio_notifications"
-                                },
-                                {
-                                    "entity": "input_boolean.text_notifications"
-                                }
-                            ],
-                            "title": "Notifications",
-                            "show_header_toggle": false
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "People",
-                    "icon": "mdi:account-group-outline",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "person.simeon",
-                                    "name": "Simeon",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.claire",
-                                    "name": "Claire",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.eleanor",
-                                    "name": "Eleanor",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "person.isabelle",
-                                    "name": "Isabelle",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "title": "The Family",
-                            "show_name": true,
-                            "show_icon": true,
-                            "show_state": true
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Location Info - Simeon",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "device_tracker.sp12_app",
-                                            "name": "Simeon"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_interval",
-                                            "name": "Interval",
-                                            "icon": "mdi:clock-start"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_travel_time",
-                                            "name": "TravTime",
-                                            "icon": "mdi:clock-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_zone_distance",
-                                            "name": "Home",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_next_update",
-                                            "name": "NextUpdt",
-                                            "icon": "mdi:update"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.sp12_calc_distance",
-                                            "name": "CalcDist",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_dir_of_travel",
-                                            "name": "Direction",
-                                            "icon": "mdi:compass-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_last_located",
-                                            "name": "Located",
-                                            "icon": "mdi:map-clock"
-                                        },
-                                        {
-                                            "entity": "sensor.sp12_last_update",
-                                            "name": "LastUpdt",
-                                            "icon": "mdi:history"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.sp12_info",
-                                                    "name": "Info",
-                                                    "icon": "mdi:information-outline"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Location Info - Isabelle",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_zone_fname",
-                                            "name": "Isabelle"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_interval",
-                                            "name": "Interval",
-                                            "icon": "mdi:clock-start"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_travel_time",
-                                            "name": "TravTime",
-                                            "icon": "mdi:clock-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_zone_distance",
-                                            "name": "Home",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_next_update",
-                                            "name": "NextUpdt",
-                                            "icon": "mdi:update"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_calc_distance",
-                                            "name": "CalcDist",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_dir_of_travel",
-                                            "name": "Direction",
-                                            "icon": "mdi:compass-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_last_located",
-                                            "name": "Located",
-                                            "icon": "mdi:map-clock"
-                                        },
-                                        {
-                                            "entity": "sensor.isabelle_s_iphone_last_update",
-                                            "name": "LastUpdt",
-                                            "icon": "mdi:history"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.isabelle_s_iphone_info",
-                                                    "name": "Info",
-                                                    "icon": "mdi:information-outline"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Location Info - Eleanor",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.iphone_5_zone_fname",
-                                            "name": "Eleanor"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_interval",
-                                            "name": "Interval",
-                                            "icon": "mdi:clock-start"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_travel_time",
-                                            "name": "TravTime",
-                                            "icon": "mdi:clock-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_zone_distance",
-                                            "name": "Home",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_next_update",
-                                            "name": "NextUpdt",
-                                            "icon": "mdi:update"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.iphone_5_calc_distance",
-                                            "name": "CalcDist",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_dir_of_travel",
-                                            "name": "Direction",
-                                            "icon": "mdi:compass-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_last_located",
-                                            "name": "Located",
-                                            "icon": "mdi:map-clock"
-                                        },
-                                        {
-                                            "entity": "sensor.iphone_5_last_update",
-                                            "name": "LastUpdt",
-                                            "icon": "mdi:history"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.iphone_5_info",
-                                                    "name": "Info",
-                                                    "icon": "mdi:information-outline"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Location Info - Claire",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "device_tracker.claires_mobile",
-                                            "name": "Claire"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_interval",
-                                            "name": "Interval",
-                                            "icon": "mdi:clock-start"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_travel_time",
-                                            "name": "TravTime",
-                                            "icon": "mdi:clock-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_zone_distance",
-                                            "name": "Home",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_next_update",
-                                            "name": "NextUpdt",
-                                            "icon": "mdi:update"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "column_width": "20%",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.claires_mobile_calc_distance",
-                                            "name": "CalcDist",
-                                            "icon": "mdi:map-marker-distance"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_dir_of_travel",
-                                            "name": "Direction",
-                                            "icon": "mdi:compass-outline"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_last_located",
-                                            "name": "Located",
-                                            "icon": "mdi:map-clock"
-                                        },
-                                        {
-                                            "entity": "sensor.claires_mobile_last_update",
-                                            "name": "LastUpdt",
-                                            "icon": "mdi:history"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "entities",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.claires_mobile_info",
-                                                    "name": "Info",
-                                                    "icon": "mdi:information-outline"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "switch",
-                    "path": "switch",
-                    "icon": "mdi:connection",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "hours_to_show": 6,
-                                    "points_per_hour": 12,
-                                    "entities": [
-                                        {
-                                            "name": "Lux",
-                                            "entity": "sensor.esphome_web_5c1aad_illuminance"
-                                        },
-                                        {
-                                            "name": "Lux5",
-                                            "entity": "sensor.lp5_5c1aad_luminance"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "input_number.front_low_light_threshold",
-                                            "name": "Trigger below"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "title": "IKEA Tradfi001 - Smart Socket",
-                                    "show_header_toggle": false,
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi001",
-                                            "name": "On/Off",
-                                            "icon": "mdi:power",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "input_boolean.tradfi001_auto",
-                                            "name": "Auto Schedule"
-                                        },
-                                        {
-                                            "entity": "select.tradfi001_power_on_behavior",
-                                            "name": "Default On Mains Resuming",
-                                            "icon": "mdi:transmission-tower-export"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 4hr",
-                                    "entities": [
-                                        "switch.tradfi001"
-                                    ],
-                                    "hours_to_show": 4,
-                                    "refresh_interval": 5
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 24hr",
-                                    "entities": [
-                                        "switch.tradfi001"
-                                    ],
-                                    "hours_to_show": 24,
-                                    "refresh_interval": 5
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "title": "IKEA Tradfi002 - Smart Socket",
-                                    "show_header_toggle": false,
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi002",
-                                            "name": "On/Off",
-                                            "icon": "mdi:power",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "input_boolean.tradfi002_auto",
-                                            "name": "Auto Schedule"
-                                        },
-                                        {
-                                            "entity": "select.tradfi002_power_on_behavior",
-                                            "name": "Default On Mains Resuming",
-                                            "icon": "mdi:transmission-tower-export"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 4hr",
-                                    "entities": [
-                                        "switch.tradfi002"
-                                    ],
-                                    "hours_to_show": 4,
-                                    "refresh_interval": 5
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 24hr",
-                                    "entities": [
-                                        "switch.tradfi002"
-                                    ],
-                                    "hours_to_show": 24,
-                                    "refresh_interval": 5
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "title": "IKEA Tradfi003 - Smart Socket",
-                                    "show_header_toggle": false,
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi003",
-                                            "name": "On/Off",
-                                            "icon": "mdi:power",
-                                            "secondary_info": "last-updated"
-                                        },
-                                        {
-                                            "entity": "input_boolean.tradfi003_auto",
-                                            "name": "Auto Schedule"
-                                        },
-                                        {
-                                            "entity": "select.tradfi003_power_on_behavior",
-                                            "name": "Default On Mains Resuming",
-                                            "icon": "mdi:transmission-tower-export"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 4hr",
-                                    "entities": [
-                                        "switch.tradfi003"
-                                    ],
-                                    "hours_to_show": 4,
-                                    "refresh_interval": 5
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage 24hr",
-                                    "entities": [
-                                        "switch.tradfi003"
-                                    ],
-                                    "hours_to_show": 24,
-                                    "refresh_interval": 5
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "ESP Home",
-                    "path": "esp-home",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "entities",
-                            "title": "Office ESP32",
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.af4cb4_prevent_deep_sleep",
-                                    "secondary_info": "none"
-                                },
-                                {
-                                    "entity": "sensor.esphome_web_af4cb4_temperature",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "show_header_toggle": false
-                        },
-                        {
-                            "type": "entities",
-                            "title": "Front ESP32",
-                            "entities": [
-                                {
-                                    "entity": "input_boolean.web5c1aad_prevent_deep_sleep",
-                                    "secondary_info": "none"
-                                },
-                                {
-                                    "entity": "sensor.esphome_web_5c1aad_illuminance",
-                                    "secondary_info": "last-updated"
-                                }
-                            ],
-                            "show_header_toggle": false
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "icon": "mdi:television-classic",
-                    "title": "Front TV",
-                    "path": "front-tv",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "media-control",
-                                    "entity": "media_player.50dx700_series"
-                                },
-                                {
-                                    "type": "history-graph",
-                                    "title": "Usage",
-                                    "entities": [
-                                        "remote.50dx700_series"
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "Sprinkler",
-                    "path": "sprinkler",
-                    "type": "custom:vertical-layout",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "custom:mushroom-title-card",
-                            "title": "",
-                            "subtitle": "Helpers"
-                        },
-                        {
-                            "square": false,
-                            "columns": 2,
-                            "type": "grid",
-                            "cards": [
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('input_number.sprinkler_maximum_temperature_measured') }} \u00b0C",
-                                    "secondary": "Max temperature",
-                                    "icon": "mdi:thermometer",
-                                    "entity": "input_number.sprinkler_maximum_temperature_measured",
-                                    "icon_color": "{% if states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 15.1 -%}\n  light-blue\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 21.1 -%}\n  amber\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 26.1 -%}\n  orange\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 31.1 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('input_number.sprinkler_total_rain_fallen') }} mm",
-                                    "secondary": "Total Rain Fallen",
-                                    "icon": "mdi:weather-pouring",
-                                    "entity": "input_number.sprinkler_total_rain_fallen",
-                                    "icon_color": "{% if states('input_number.sprinkler_total_rain_fallen') | float(0) <= 10 -%}\n  green\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 15 -%}\n  amber\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 20 -%}\n  orange\n{%- else -%}\n  red\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ (states('input_datetime.sprinkler_last_watering_day') | as_datetime).strftime('%d-%m-%Y') }}",
-                                    "secondary": "Last Watering Day",
-                                    "icon": "mdi:calendar",
-                                    "entity": "input_datetime.sprinkler_last_watering_day",
-                                    "icon_color": "amber",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('input_number.sprinkler_watering_duration') }}",
-                                    "secondary": "Watering Duration",
-                                    "icon": "mdi:timer",
-                                    "entity": "input_number.sprinkler_watering_duration",
-                                    "icon_color": "{% if states('input_number.sprinkler_watering_duration') | int == 45 -%}\n  green\n{%- elif states('input_number.sprinkler_watering_duration') | int == 60 -%}\n  amber\n{%- elif states('input_number.sprinkler_watering_duration') | int == 75 -%}\n  orange\n{%- elif states('input_number.sprinkler_watering_duration') | int == 90 -%}\n  red\n{%- else -%}\n  grey\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:mushroom-title-card",
-                            "title": "",
-                            "subtitle": "Sensors"
-                        },
-                        {
-                            "square": false,
-                            "columns": 2,
-                            "type": "grid",
-                            "cards": [
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('sensor.sprinkler_current_temperature_is_higher') | capitalize }}\n",
-                                    "secondary": "Current Temp is Higher?",
-                                    "icon": "mdi:check",
-                                    "entity": "sensor.sprinkler_current_temperature_is_higher",
-                                    "icon_color": "{% if states('sensor.sprinkler_current_temperature_is_higher') == true -%}\n  green\n{%- else -%}\n  red\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('sensor.openweathermap_rain') }} mm\n",
-                                    "secondary": "Openweathermap Rain",
-                                    "icon": "{% if states('sensor.openweathermap_condition') == 'partlycloudy' -%}\n  mdi:weather-partly-cloudy\n{% elif states('sensor.openweathermap_condition') == 'cloudy' -%}\n  mdi:weather-cloudy\n{% elif states('sensor.openweathermap_condition') == 'rainy' -%}\n  mdi:weather-pouring\n{% elif states('sensor.openweathermap_condition') == 'clear-night' -%}\n  mdi:weather-night\n{% elif states('sensor.openweathermap_condition') == 'sunny' -%}\n  mdi:weather-sunny\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
-                                    "entity": "sensor.openweathermap_rain",
-                                    "icon_color": "{% if states('sensor.openweathermap_rain') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('sensor.sprinkler_total_expected_precipitation') }} mm\n",
-                                    "secondary": "Expected Precipitation",
-                                    "icon": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  mdi:weather-cloudy\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
-                                    "entity": "sensor.sprinkler_total_expected_precipitation",
-                                    "icon_color": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-template-card",
-                                    "primary": "{{ states('sensor.openweathermap_temperature') }} \u00b0C\n",
-                                    "secondary": "Openweathermap Temp",
-                                    "icon": "mdi:thermometer",
-                                    "entity": "sensor.openweathermap_temperature",
-                                    "icon_color": "{% if states('sensor.openweathermap_temperature') | float(0) <= 15 -%}\n  light-blue\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 21 -%}\n  amber\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 26 -%}\n  orange\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 31 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
-                                    "tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.sprinkler_days_since_last_watering_day",
-                                    "min": 0,
-                                    "max": 3,
-                                    "severity": {
-                                        "green": 1,
-                                        "yellow": 1,
-                                        "red": 2
-                                    },
-                                    "needle": true,
-                                    "name": "Days since last watering"
-                                },
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.sprinkler_total_rain_fallen_plus_expected",
-                                    "min": 0,
-                                    "max": 25,
-                                    "severity": {
-                                        "green": 10,
-                                        "yellow": 15,
-                                        "red": 20
-                                    },
-                                    "needle": true,
-                                    "name": "Rain Fallen + Expected"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:mushroom-title-card",
-                            "title": "",
-                            "subtitle": "Automations"
-                        },
-                        {
-                            "square": false,
-                            "columns": 1,
-                            "type": "grid",
-                            "cards": [
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "automation.sprinkler_add_current_rain_to_total_rain_fallen",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    },
-                                    "icon_color": "light-green"
-                                },
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "automation.sprinkler_water_the_garden",
-                                    "icon_color": "light-green",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "automation.sprinkler_check_maximum_temperature_when_temperature_changes",
-                                    "icon_color": "light-green",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "automation.sprinkler_check_if_sprinkler_is_still_running_after_a_reboot_of_home_assistant",
-                                    "icon_color": "light-green",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:mushroom-title-card",
-                            "title": "",
-                            "subtitle": "Scripts"
-                        },
-                        {
-                            "square": false,
-                            "columns": 1,
-                            "type": "grid",
-                            "cards": [
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "script.sprinkler_water_the_garden",
-                                    "icon_color": "light-green",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    }
-                                },
-                                {
-                                    "type": "custom:mushroom-entity-card",
-                                    "entity": "script.sprinkler_reset_helper_values",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "double_tap_action": {
-                                        "action": "more-info"
-                                    },
-                                    "icon_color": "light-green"
-                                }
-                            ]
-                        }
-                    ]
+                  "entity": "device_tracker.330e_xdrive",
+                  "secondary_info": "last-updated",
+                  "name": "Location"
                 }
-            ]
+              ],
+              "title": "330e Summary"
+            },
+            {
+              "type": "entities",
+              "title": "330e Electric",
+              "entities": [
+                {
+                  "entity": "sensor.330e_xdrive_remaining_range_electric_miles",
+                  "name": "Range - Electric"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_charging_level_hv",
+                  "secondary_info": "last-updated",
+                  "name": "Charge %"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_connection_status",
+                  "name": "Connected"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_charging_end_time",
+                  "name": "Charge End"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_charging_status",
+                  "name": "Charge State"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_charging_status",
+                  "name": "Charge State"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "title": "330e Fuel",
+              "entities": [
+                {
+                  "entity": "sensor.330e_xdrive_remaining_range_fuel_miles",
+                  "name": "Range - Fuel"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_remaining_fuel",
+                  "secondary_info": "last-updated",
+                  "name": "Remaining"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_fuel_percent",
+                  "name": "Fuel %"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "title": "330e Service",
+              "entities": [
+                {
+                  "entity": "sensor.330e_xdrive_mileage_miles",
+                  "name": "Mileage"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_check_control_messages",
+                  "name": "Control Messages"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_condition_based_services",
+                  "secondary_info": "last-updated",
+                  "name": "Condition Services"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_door_lock_state",
+                  "name": "Locked"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_lids",
+                  "name": "Lids"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_windows",
+                  "name": "Windows"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.drive_last_activity"
+                },
+                {
+                  "entity": "binary_sensor.drive_motion"
+                }
+              ]
+            },
+            {
+              "show_state": true,
+              "show_name": true,
+              "camera_view": "auto",
+              "type": "picture-entity",
+              "entity": "camera.drive",
+              "camera_image": "camera.drive"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "select.front_door_event_select",
+                  "name": "Event Select"
+                },
+                {
+                  "entity": "switch.front_door_event_stream",
+                  "name": "Event Stream"
+                },
+                {
+                  "entity": "switch.front_door_live_stream",
+                  "name": "Live Stream"
+                },
+                {
+                  "entity": "number.front_door_snapshot_interval",
+                  "name": "Snapshot Interval"
+                },
+                {
+                  "entity": "select.front_door_snapshot_mode",
+                  "name": "Snapshot Mode"
+                }
+              ],
+              "title": "Front Door"
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Deluge",
+          "path": "deluge",
+          "icon": "mdi:download",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "switch.deluge",
+                "sensor.deluge_down_speed",
+                "sensor.deluge_status",
+                "sensor.deluge_up_speed"
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.nzbget_download"
+                },
+                {
+                  "entity": "sensor.nzbget_speed"
+                },
+                {
+                  "entity": "sensor.nzbget_download_paused"
+                },
+                {
+                  "entity": "sensor.nzbget_queue_size"
+                },
+                {
+                  "entity": "sensor.nzbget_size"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "CCTV",
+          "path": "cctv",
+          "icon": "mdi:cctv",
+          "type": "custom:horizontal-layout",
+          "badges": [],
+          "cards": [
+            {
+              "type": "alarm-panel",
+              "entity": "alarm_control_panel.home_mode",
+              "states": [],
+              "name": "Ring Alerts"
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.front_door_snapshot",
+                  "show_state": false,
+                  "show_name": false,
+                  "state_filter": {
+                    "idle": "brightness(110%) saturate(1.2)"
+                  }
+                },
+                {
+                  "type": "custom:battery-state-card",
+                  "entities": [
+                    {
+                      "entity": "sensor.front_door_battery_2",
+                      "name": "Ring Front Door"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.front_door_motion_2",
+                      "name": "Motion",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "binary_sensor.front_door_ding_2",
+                      "name": "Ding",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "sensor.front_door_last_ding",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "sensor.front_door_last_motion",
+                      "secondary_info": "last-updated"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "picture-entity",
+                  "entity": "camera.drive_snapshot",
+                  "show_state": false,
+                  "show_name": false,
+                  "state_filter": {
+                    "idle": "brightness(110%) saturate(1.2)"
+                  }
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.drive_last_motion",
+                      "name": "Last Motion",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "sensor.drive_info",
+                      "secondary_info": "last-updated"
+                    }
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.drive_motion_2",
+                      "name": "Motion"
+                    }
+                  ],
+                  "hours_to_show": 12
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Home Status",
+                  "state_color": false,
+                  "entities": [
+                    {
+                      "entity": "sensor.n_people_home",
+                      "name": "Count"
+                    },
+                    {
+                      "entity": "input_select.home_mode",
+                      "name": "Status"
+                    },
+                    {
+                      "entity": "input_boolean.guest_mode",
+                      "name": "Guest"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "binary_sensor.0x00158d00080691ca_contact",
+                "binary_sensor.0x00158d0008482be9_contact"
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "ESP Home",
+          "path": "esp-home",
+          "icon": "mdi:car-esp",
+          "type": "custom:vertical-layout",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "title": "Office ESP32",
+              "entities": [
+                {
+                  "entity": "input_boolean.af4cb4_prevent_deep_sleep",
+                  "secondary_info": "none"
+                },
+                {
+                  "entity": "sensor.esphome_web_af4cb4_temperature",
+                  "secondary_info": "last-updated"
+                }
+              ],
+              "show_header_toggle": false
+            },
+            {
+              "type": "entities",
+              "title": "Front ESP32",
+              "entities": [
+                {
+                  "entity": "input_boolean.web5c1aad_prevent_deep_sleep",
+                  "secondary_info": "none"
+                },
+                {
+                  "entity": "sensor.esphome_web_5c1aad_illuminance",
+                  "secondary_info": "last-updated"
+                }
+              ],
+              "show_header_toggle": false
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug05"
+                },
+                {
+                  "entity": "sensor.gosundplug05_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug05_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug05_power",
+                  "name": "Power"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug06"
+                },
+                {
+                  "entity": "sensor.gosundplug06_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug06_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug06_power",
+                  "name": "Power"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug07"
+                },
+                {
+                  "entity": "sensor.gosundplug07_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug07_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug07_power",
+                  "name": "Power"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug08"
+                },
+                {
+                  "entity": "sensor.gosundplug08_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug08_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug08_power",
+                  "name": "Power"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug09"
+                },
+                {
+                  "entity": "sensor.gosundplug09_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug09_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug09_power",
+                  "name": "Power"
+                }
+              ],
+              "title": "gosundplug09"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.gosundplug10"
+                },
+                {
+                  "entity": "sensor.gosundplug10_activity_state",
+                  "name": "Activity State"
+                },
+                {
+                  "entity": "sensor.gosundplug10_daily_energy",
+                  "name": "Daily Energy"
+                },
+                {
+                  "entity": "sensor.gosundplug10_power",
+                  "name": "Power"
+                }
+              ],
+              "title": "gosundplug10"
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "switch",
+          "path": "switch",
+          "icon": "mdi:connection",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mini-graph-card",
+                  "hours_to_show": 6,
+                  "points_per_hour": 12,
+                  "entities": [
+                    {
+                      "name": "Lux",
+                      "entity": "sensor.esphome_web_5c1aad_illuminance"
+                    },
+                    {
+                      "name": "Lux5",
+                      "entity": "sensor.lp5_5c1aad_luminance"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_number.front_low_light_threshold",
+                      "name": "Trigger below"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "title": "IKEA Tradfi001 - Smart Socket",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "switch.tradfi001",
+                      "name": "On/Off",
+                      "icon": "mdi:power",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "input_boolean.tradfi001_auto",
+                      "name": "Auto Schedule"
+                    },
+                    {
+                      "entity": "select.tradfi001_power_on_behavior",
+                      "name": "Default On Mains Resuming",
+                      "icon": "mdi:transmission-tower-export"
+                    }
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 4hr",
+                  "entities": [
+                    "switch.tradfi001"
+                  ],
+                  "hours_to_show": 4,
+                  "refresh_interval": 5
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 24hr",
+                  "entities": [
+                    "switch.tradfi001"
+                  ],
+                  "hours_to_show": 24,
+                  "refresh_interval": 5
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "title": "IKEA Tradfi002 - Smart Socket",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "switch.tradfi002",
+                      "name": "On/Off",
+                      "icon": "mdi:power",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "input_boolean.tradfi002_auto",
+                      "name": "Auto Schedule"
+                    },
+                    {
+                      "entity": "select.tradfi002_power_on_behavior",
+                      "name": "Default On Mains Resuming",
+                      "icon": "mdi:transmission-tower-export"
+                    }
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 4hr",
+                  "entities": [
+                    "switch.tradfi002"
+                  ],
+                  "hours_to_show": 4,
+                  "refresh_interval": 5
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 24hr",
+                  "entities": [
+                    "switch.tradfi002"
+                  ],
+                  "hours_to_show": 24,
+                  "refresh_interval": 5
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "title": "IKEA Tradfi003 - Smart Socket",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "switch.tradfi003",
+                      "name": "On/Off",
+                      "icon": "mdi:power",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "input_boolean.tradfi003_auto",
+                      "name": "Auto Schedule"
+                    },
+                    {
+                      "entity": "select.tradfi003_power_on_behavior",
+                      "name": "Default On Mains Resuming",
+                      "icon": "mdi:transmission-tower-export"
+                    }
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 4hr",
+                  "entities": [
+                    "switch.tradfi003"
+                  ],
+                  "hours_to_show": 4,
+                  "refresh_interval": 5
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage 24hr",
+                  "entities": [
+                    "switch.tradfi003"
+                  ],
+                  "hours_to_show": 24,
+                  "refresh_interval": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "System Monitor",
+          "icon": "mdi:bug",
+          "path": "system",
+          "cards": [
+            {
+              "hours_to_show": 12,
+              "graph": "line",
+              "type": "sensor",
+              "entity": "sensor.memory_use",
+              "detail": 2
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.memory_use"
+                },
+                {
+                  "entity": "sensor.memory_free"
+                },
+                {
+                  "entity": "sensor.load_1m"
+                },
+                {
+                  "entity": "sensor.swap_free"
+                },
+                {
+                  "entity": "sensor.swap_use"
+                }
+              ]
+            },
+            {
+              "hours_to_show": 12,
+              "graph": "line",
+              "type": "sensor",
+              "entity": "sensor.load_1m",
+              "detail": 2
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "sensor.mariadb_size",
+                "binary_sensor.www_poundshop_com",
+                "binary_sensor.www_poundland_co_uk"
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Pi-Hole",
+          "icon": "mdi:block-helper",
+          "path": "pihole",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "switch.pi_hole"
+              ],
+              "title": "Pi-Hole"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.pi_hole_ads_blocked_today",
+                  "name": "Ads Blocked Today"
+                },
+                {
+                  "entity": "sensor.pi_hole_ads_percentage_blocked_today",
+                  "name": "Ads Percentage Blocked Today"
+                },
+                {
+                  "entity": "sensor.pi_hole_dns_queries_cached",
+                  "name": "DNS Queries Cached"
+                },
+                {
+                  "entity": "sensor.pi_hole_dns_queries_forwarded",
+                  "name": "DNS Queries Forwarded"
+                },
+                {
+                  "entity": "sensor.pi_hole_dns_queries_today",
+                  "name": "DNS Queries Today"
+                },
+                {
+                  "entity": "sensor.pi_hole_dns_unique_clients",
+                  "name": "DNS Unique Clients"
+                },
+                {
+                  "entity": "sensor.pi_hole_dns_unique_domains",
+                  "name": "DNS Unique Domains"
+                },
+                {
+                  "entity": "sensor.pi_hole_domains_blocked",
+                  "name": "Domains Blocked"
+                },
+                {
+                  "entity": "sensor.pi_hole_seen_clients",
+                  "name": "Seen Clients"
+                }
+              ],
+              "title": "Pi-Hole"
+            }
+          ]
+        },
+        {
+          "icon": "mdi:tune-vertical",
+          "title": "Configuration",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_number.electric_tariff_rate"
+                },
+                {
+                  "entity": "input_number.electric_tariff_standing"
+                },
+                {
+                  "entity": "input_number.gas_tariff_rate"
+                },
+                {
+                  "entity": "input_number.gas_tariff_standing"
+                },
+                {
+                  "entity": "input_number.solar_export_tariff"
+                }
+              ],
+              "title": "Electricity price"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_datetime.text_notification_on"
+                },
+                {
+                  "entity": "input_datetime.text_notification_off"
+                },
+                {
+                  "entity": "input_datetime.audio_notification_on"
+                },
+                {
+                  "entity": "input_datetime.audio_notification_off"
+                }
+              ],
+              "title": "Silent hours"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_datetime.evening_report"
+                },
+                {
+                  "entity": "input_datetime.morning_report"
+                },
+                {
+                  "entity": "input_number.calendar_remind_before_days"
+                },
+                {
+                  "entity": "input_boolean.hourly_report"
+                }
+              ],
+              "title": "Report times"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_boolean.audio_notifications"
+                },
+                {
+                  "entity": "input_boolean.text_notifications"
+                }
+              ],
+              "title": "Notifications",
+              "show_header_toggle": false
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "People",
+          "icon": "mdi:account-group-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "glance",
+              "entities": [
+                {
+                  "entity": "person.simeon",
+                  "name": "Simeon",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "person.claire",
+                  "name": "Claire",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "person.eleanor",
+                  "name": "Eleanor",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "person.isabelle",
+                  "name": "Isabelle",
+                  "secondary_info": "last-updated"
+                }
+              ],
+              "title": "The Family",
+              "show_name": true,
+              "show_icon": true,
+              "show_state": true
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Location Info - Simeon",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "device_tracker.sp12_app",
+                      "name": "Simeon"
+                    },
+                    {
+                      "entity": "sensor.sp12_interval",
+                      "name": "Interval",
+                      "icon": "mdi:clock-start"
+                    },
+                    {
+                      "entity": "sensor.sp12_travel_time",
+                      "name": "TravTime",
+                      "icon": "mdi:clock-outline"
+                    },
+                    {
+                      "entity": "sensor.sp12_zone_distance",
+                      "name": "Home",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.sp12_next_update",
+                      "name": "NextUpdt",
+                      "icon": "mdi:update"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.sp12_calc_distance",
+                      "name": "CalcDist",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.sp12_dir_of_travel",
+                      "name": "Direction",
+                      "icon": "mdi:compass-outline"
+                    },
+                    {
+                      "entity": "sensor.sp12_last_located",
+                      "name": "Located",
+                      "icon": "mdi:map-clock"
+                    },
+                    {
+                      "entity": "sensor.sp12_last_update",
+                      "name": "LastUpdt",
+                      "icon": "mdi:history"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "sensor.sp12_info",
+                          "name": "Info",
+                          "icon": "mdi:information-outline"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Location Info - Isabelle",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.isabelle_s_iphone_zone_fname",
+                      "name": "Isabelle"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_interval",
+                      "name": "Interval",
+                      "icon": "mdi:clock-start"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_travel_time",
+                      "name": "TravTime",
+                      "icon": "mdi:clock-outline"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_zone_distance",
+                      "name": "Home",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_next_update",
+                      "name": "NextUpdt",
+                      "icon": "mdi:update"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.isabelle_s_iphone_calc_distance",
+                      "name": "CalcDist",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_dir_of_travel",
+                      "name": "Direction",
+                      "icon": "mdi:compass-outline"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_last_located",
+                      "name": "Located",
+                      "icon": "mdi:map-clock"
+                    },
+                    {
+                      "entity": "sensor.isabelle_s_iphone_last_update",
+                      "name": "LastUpdt",
+                      "icon": "mdi:history"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "sensor.isabelle_s_iphone_info",
+                          "name": "Info",
+                          "icon": "mdi:information-outline"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Location Info - Eleanor",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.iphone_5_zone_fname",
+                      "name": "Eleanor"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_interval",
+                      "name": "Interval",
+                      "icon": "mdi:clock-start"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_travel_time",
+                      "name": "TravTime",
+                      "icon": "mdi:clock-outline"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_zone_distance",
+                      "name": "Home",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_next_update",
+                      "name": "NextUpdt",
+                      "icon": "mdi:update"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.iphone_5_calc_distance",
+                      "name": "CalcDist",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_dir_of_travel",
+                      "name": "Direction",
+                      "icon": "mdi:compass-outline"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_last_located",
+                      "name": "Located",
+                      "icon": "mdi:map-clock"
+                    },
+                    {
+                      "entity": "sensor.iphone_5_last_update",
+                      "name": "LastUpdt",
+                      "icon": "mdi:history"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "sensor.iphone_5_info",
+                          "name": "Info",
+                          "icon": "mdi:information-outline"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Location Info - Claire",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "device_tracker.claires_mobile",
+                      "name": "Claire"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_interval",
+                      "name": "Interval",
+                      "icon": "mdi:clock-start"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_travel_time",
+                      "name": "TravTime",
+                      "icon": "mdi:clock-outline"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_zone_distance",
+                      "name": "Home",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_next_update",
+                      "name": "NextUpdt",
+                      "icon": "mdi:update"
+                    }
+                  ]
+                },
+                {
+                  "type": "glance",
+                  "column_width": "20%",
+                  "entities": [
+                    {
+                      "entity": "sensor.claires_mobile_calc_distance",
+                      "name": "CalcDist",
+                      "icon": "mdi:map-marker-distance"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_dir_of_travel",
+                      "name": "Direction",
+                      "icon": "mdi:compass-outline"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_last_located",
+                      "name": "Located",
+                      "icon": "mdi:map-clock"
+                    },
+                    {
+                      "entity": "sensor.claires_mobile_last_update",
+                      "name": "LastUpdt",
+                      "icon": "mdi:history"
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "sensor.claires_mobile_info",
+                          "name": "Info",
+                          "icon": "mdi:information-outline"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "icon": "mdi:television-classic",
+          "title": "Front TV",
+          "path": "front-tv",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "media-control",
+                  "entity": "media_player.50dx700_series"
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Usage",
+                  "entities": [
+                    "remote.50dx700_series"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Sprinkler",
+          "path": "sprinkler",
+          "type": "custom:vertical-layout",
+          "icon": "mdi:shower-head",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:mushroom-title-card",
+              "title": "",
+              "subtitle": "Helpers"
+            },
+            {
+              "square": false,
+              "columns": 2,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('input_number.sprinkler_maximum_temperature_measured') }} °C",
+                  "secondary": "Max temperature",
+                  "icon": "mdi:thermometer",
+                  "entity": "input_number.sprinkler_maximum_temperature_measured",
+                  "icon_color": "{% if states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 15.1 -%}\n  light-blue\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 21.1 -%}\n  amber\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 26.1 -%}\n  orange\n{%- elif states('input_number.sprinkler_maximum_temperature_measured') | float(0) <= 31.1 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('input_number.sprinkler_total_rain_fallen') }} mm",
+                  "secondary": "Total Rain Fallen",
+                  "icon": "mdi:weather-pouring",
+                  "entity": "input_number.sprinkler_total_rain_fallen",
+                  "icon_color": "{% if states('input_number.sprinkler_total_rain_fallen') | float(0) <= 10 -%}\n  green\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 15 -%}\n  amber\n{%- elif states('input_number.sprinkler_total_rain_fallen') | float(0) <= 20 -%}\n  orange\n{%- else -%}\n  red\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ (states('input_datetime.sprinkler_last_watering_day') | as_datetime).strftime('%d-%m-%Y') }}",
+                  "secondary": "Last Watering Day",
+                  "icon": "mdi:calendar",
+                  "entity": "input_datetime.sprinkler_last_watering_day",
+                  "icon_color": "amber",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('input_number.sprinkler_watering_duration') }}",
+                  "secondary": "Watering Duration",
+                  "icon": "mdi:timer",
+                  "entity": "input_number.sprinkler_watering_duration",
+                  "icon_color": "{% if states('input_number.sprinkler_watering_duration') | int == 45 -%}\n  green\n{%- elif states('input_number.sprinkler_watering_duration') | int == 60 -%}\n  amber\n{%- elif states('input_number.sprinkler_watering_duration') | int == 75 -%}\n  orange\n{%- elif states('input_number.sprinkler_watering_duration') | int == 90 -%}\n  red\n{%- else -%}\n  grey\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "custom:mushroom-title-card",
+              "title": "",
+              "subtitle": "Sensors"
+            },
+            {
+              "square": false,
+              "columns": 2,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('sensor.sprinkler_current_temperature_is_higher') | capitalize }}\n",
+                  "secondary": "Current Temp is Higher?",
+                  "icon": "mdi:check",
+                  "entity": "sensor.sprinkler_current_temperature_is_higher",
+                  "icon_color": "{% if states('sensor.sprinkler_current_temperature_is_higher') == true -%}\n  green\n{%- else -%}\n  red\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('sensor.openweathermap_rain') }} mm\n",
+                  "secondary": "Openweathermap Rain",
+                  "icon": "{% if states('sensor.openweathermap_condition') == 'partlycloudy' -%}\n  mdi:weather-partly-cloudy\n{% elif states('sensor.openweathermap_condition') == 'cloudy' -%}\n  mdi:weather-cloudy\n{% elif states('sensor.openweathermap_condition') == 'rainy' -%}\n  mdi:weather-pouring\n{% elif states('sensor.openweathermap_condition') == 'clear-night' -%}\n  mdi:weather-night\n{% elif states('sensor.openweathermap_condition') == 'sunny' -%}\n  mdi:weather-sunny\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
+                  "entity": "sensor.openweathermap_rain",
+                  "icon_color": "{% if states('sensor.openweathermap_rain') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('sensor.sprinkler_total_expected_precipitation') }} mm\n",
+                  "secondary": "Expected Precipitation",
+                  "icon": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  mdi:weather-cloudy\n{%- else -%}\n  mdi:weather-pouring\n{%- endif %}",
+                  "entity": "sensor.sprinkler_total_expected_precipitation",
+                  "icon_color": "{% if states('sensor.sprinkler_total_expected_precipitation') | float(0) == 0 -%}\n  grey\n{%- else -%}\n  amber\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-template-card",
+                  "primary": "{{ states('sensor.openweathermap_temperature') }} °C\n",
+                  "secondary": "Openweathermap Temp",
+                  "icon": "mdi:thermometer",
+                  "entity": "sensor.openweathermap_temperature",
+                  "icon_color": "{% if states('sensor.openweathermap_temperature') | float(0) <= 15 -%}\n  light-blue\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 21 -%}\n  amber\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 26 -%}\n  orange\n{% elif states('sensor.openweathermap_temperature') | float(0) <= 31 -%}\n  deep-orange\n{%- else -%}\n  red\n{%- endif %}",
+                  "tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "gauge",
+                  "entity": "sensor.sprinkler_days_since_last_watering_day",
+                  "min": 0,
+                  "max": 3,
+                  "severity": {
+                    "green": 1,
+                    "yellow": 1,
+                    "red": 2
+                  },
+                  "needle": true,
+                  "name": "Days since last watering"
+                },
+                {
+                  "type": "gauge",
+                  "entity": "sensor.sprinkler_total_rain_fallen_plus_expected",
+                  "min": 0,
+                  "max": 25,
+                  "severity": {
+                    "green": 10,
+                    "yellow": 15,
+                    "red": 20
+                  },
+                  "needle": true,
+                  "name": "Rain Fallen + Expected"
+                }
+              ]
+            },
+            {
+              "type": "custom:mushroom-title-card",
+              "title": "",
+              "subtitle": "Automations"
+            },
+            {
+              "square": false,
+              "columns": 1,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "automation.sprinkler_add_current_rain_to_total_rain_fallen",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  },
+                  "icon_color": "light-green"
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "automation.sprinkler_water_the_garden",
+                  "icon_color": "light-green",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "automation.sprinkler_check_maximum_temperature_when_temperature_changes",
+                  "icon_color": "light-green",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "automation.sprinkler_check_if_sprinkler_is_still_running_after_a_reboot_of_home_assistant",
+                  "icon_color": "light-green",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "custom:mushroom-title-card",
+              "title": "",
+              "subtitle": "Scripts"
+            },
+            {
+              "square": false,
+              "columns": 1,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "script.sprinkler_water_the_garden",
+                  "icon_color": "light-green",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  }
+                },
+                {
+                  "type": "custom:mushroom-entity-card",
+                  "entity": "script.sprinkler_reset_helper_values",
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "hold_action": {
+                    "action": "more-info"
+                  },
+                  "double_tap_action": {
+                    "action": "more-info"
+                  },
+                  "icon_color": "light-green"
+                }
+              ]
+            }
+          ]
         }
+      ]
     }
+  }
 }

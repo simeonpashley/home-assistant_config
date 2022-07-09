@@ -23,14 +23,6 @@
 # clickAction:    Used toprovide URL that can be called after clisking notification (url in iOS, clickAction in Android)
 # tag_id:         Used to tag notifications, useful for mobile app notifications
 # group:          Used to group notificatrions, useful for mobile app notifications
-# sticky:         Android specific - true will make notification stick even when you press on it, default is false
-# color:          Android specific - change notification color. can use hex code or color name  (#ff0000 or 'orange')
-# channel_id:     Android specific - create or use channel for notification. Default is 'general'
-# importance_id:  Android specific - in combination with channel used to define importance: high, low, max, min and default
-# vibrationPattern: Android specific - NOT YET USED
-# ledColor:       Android specific - you can use hex code or color name (#ff0000 or 'orange')
-# timeout_sec:    Android specific - allows you to atumaticly expire notification after nnn secons - numeric value, in ex. 900
-# camera_entity:  Disply image
 # ios_category:   iOS specific -
 # iso_sound:      iOS specific - DISABLED
 # ios_badge:      iOS specific - DISABLED
@@ -49,10 +41,8 @@ notify_engine:
           notify.simeon_devices
         {% elif who == 'ios_simeon' %}
              notify.ios_simeon 
-        {% elif who == 'echodot' %}
-             notify.alexa_media
         {% else %}
-          notify.pashley_bot
+          notify.simeon_devices
         {% endif %}
       data:
         title: "{{ title | default }}"
@@ -71,8 +61,7 @@ notify_engine:
             "apns-collapse-id": "{{ tag_id | default }}"
           group: "{{ group | default }}"
           tag: "{{ tag_id | default }}"
-          entity_id: "{{ camera_entity | default }}"
-          push:
-            category: "{{ ios_category | default }}"
+          # push:
+          #   category: "{{ ios_category | default }}"
 #            sound: "{{ ios_sound | default }}"
 #            badge: "{{ ios_badge | default }}"

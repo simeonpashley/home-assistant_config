@@ -1,0 +1,225 @@
+input_boolean:
+  automations:
+    name: Automations
+    initial: true
+  quiet_time:
+    name: Quiet Time
+    icon: mdi:volume-off
+    initial: false
+  meeting_time:
+    name: Meeting Time
+    icon: mdi:calendar-cursor
+    initial: false
+
+input_number:
+  echo_default_quiet_volume:
+    name: Echo Default Resume Volume
+    initial: 0.1
+    min: 0
+    max: 1
+  echo_default_resume_volume:
+    name: Echo Default Resume Volume
+    initial: 0.3
+    min: 0
+    max: 1
+
+automation:
+  - id: adf34988-9b0d-4f68-9c05-ac8ab6508d3b
+    alias: Doorbell - Front Ring
+    description: ""
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door_ding
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: "on"
+      - condition: time
+        after: 08:00:00
+        before: "22:00:00"
+    # - condition: state
+    #   entity_id: group.family_devices
+    #   state: home
+    action:
+      # - service: media_player.play_media
+      #   data:
+      #     media_content_id: https://home.eatsleepbreach.ca/local/doorbell_front.mp3
+      #     media_content_type: music
+      #   target:
+      #     device_id:
+      #     - c038376b0bd411ebb661915fc419dff9
+      #     - c03750400bd411ebbd21d302c0018c1a
+      # - service: camera.play_stream
+      #   data:
+      #     media_player: media_player.master_bedroom_display
+      #   target:
+      # #     device_id: 5f628eea7411345bf14420a07eaa74b3
+      - delay:
+          hours: 0
+          minutes: 2
+          seconds: 0
+          milliseconds: 0
+    # - service: media_player.turn_off
+    #   data: {}
+    #   entity_id: media_player.master_bedroom_display
+    mode: single
+  - id: 439e13f0-fcb3-4a90-a263-125dd0c4ec5f
+    alias: Meeting Time - Set Preferences
+    description: ""
+    trigger:
+      - platform: state
+        entity_id: input_boolean.meeting_time
+    condition:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: "on"
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.meeting_time
+                state: "on"
+            sequence:
+              - service: automation.turn_off
+                target:
+                  entity_id: automation.doorbell_front_ring
+              - service: media_player.volume_set
+                target:
+                  entity_id:
+                    - media_player.simeon_s_echo_dot
+                data:
+                  volume_level: 0
+              # - service: unifiprotect.set_doorbell_lcd_message
+              #   data:
+              #     entity_id: camera.doorbell
+              #     message: Do Not Disturb
+              # - service: unifiprotect.set_doorbell_chime_duration
+              #   data:
+              #     entity_id: camera.doorbell
+              #     chime_duration: 0
+              # - service: number.set_value
+              #   target:
+              #     entity_id:
+              #       - number.calgary_base_station_volume
+              #       - number.entryway_keypad_volume
+              #   data:
+              #     value: "2"
+              - service: switch.turn_off
+                target:
+                  entity_id:
+                    # - switch.nzbget_download
+                    - switch.deluge
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.meeting_time
+                state: "off"
+            sequence:
+              - service: automation.turn_on
+                target:
+                  entity_id: automation.doorbell_front_ring
+              - service: media_player.volume_set
+                target:
+                  entity_id:
+                    - media_player.simeon_s_echo_dot
+                data:
+                  volume_level: input_number.
+              # - service: unifiprotect.set_doorbell_lcd_message
+              #   data:
+              #     entity_id: camera.doorbell
+              #     message: Welcome
+              # - service: unifiprotect.set_doorbell_chime_duration
+              #   data:
+              #     entity_id: camera.doorbell
+              #     chime_duration: 300
+              # - service: number.set_value
+              #   target:
+              #     entity_id:
+              #       - number.entryway_keypad_volume
+              #       - number.calgary_base_station_volume
+              #   data:
+              #     value: "50"
+              - service: switch.turn_on
+                target:
+                  entity_id:
+                    # - switch.nzbget_download
+                    - switch.deluge
+        default: []
+    mode: single
+  - id: 9e48f6e9-4a32-46e6-a094-d60dad16ec72
+    alias: Quiet Time - Set Preferences
+    description: ""
+    trigger:
+      - platform: state
+        entity_id: input_boolean.quiet_time
+    condition:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: "on"
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.quiet_time
+                state: "on"
+            sequence:
+              - service: automation.turn_off
+                target:
+                  entity_id: automation.doorbell_front_ring
+              - service: media_player.volume_set
+                target:
+                  entity_id:
+                    - media_player.simeon_s_echo_dot
+                data:
+                  volume_level: input_number.echo_default_quiet_volume
+            # - service: unifiprotect.set_doorbell_lcd_message
+            #   data:
+            #     entity_id: camera.doorbell
+            #     message: Do Not Disturb
+            # - service: unifiprotect.set_doorbell_chime_duration
+            #   data:
+            #     entity_id: camera.doorbell
+            #     chime_duration: 0
+            # - service: number.set_value
+            #   target:
+            #     entity_id:
+            #     - number.back_door_keypad_volume
+            #     - number.bedroom_keypad_volume
+            #     - number.calgary_base_station_volume
+            #     - number.entryway_keypad_volume
+            #   data:
+            #     value: '2'
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.quiet_time
+                state: "off"
+            sequence:
+              - service: automation.turn_on
+                target:
+                  entity_id: automation.doorbell_front_ring
+              - service: media_player.volume_set
+                target:
+                  entity_id:
+                    - media_player.simeon_s_echo_dot
+                data:
+                  volume_level: input_number.echo_default_volume
+            # - service: unifiprotect.set_doorbell_lcd_message
+            #   data:
+            #     entity_id: camera.doorbell
+            #     message: Welcome
+            # - service: unifiprotect.set_doorbell_chime_duration
+            #   data:
+            #     entity_id: camera.doorbell
+            #     chime_duration: 300
+            # - service: number.set_value
+            #   target:
+            #     entity_id:
+            #     - number.back_door_keypad_volume
+            #     - number.bedroom_keypad_volume
+            #     - number.calgary_base_station_volume
+            #     - number.entryway_keypad_volume
+            #   data:
+            #     value: '50'
+        default: []
+    mode: single

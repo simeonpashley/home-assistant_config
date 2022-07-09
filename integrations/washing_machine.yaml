@@ -1,0 +1,113 @@
+input_select:
+  washing_machine_state:
+    name: Washing Machine State
+    initial: "Idle"
+    options:
+      - Idle
+      - Done
+      - "Off"
+      - Washing
+
+automation:
+  - alias: Washing Machine Notifier
+    description: >-
+      Select input option washing machine 
+      based on current power use
+    mode: single
+    id: 7153ac40-1fc2-430a-a61c-1cfadf267c33
+    trigger:
+      - platform: state
+        entity_id: sensor.gosundplug05_power
+    condition: []
+    action:
+      - choose:
+          # Machine turned off
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity_id: input_select.washing_machine_state
+                        state: "Idle"
+                      - condition: state
+                        entity_id: input_select.washing_machine_state
+                        state: "Done"
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    below: 1
+            sequence:
+              - service: input_select.select_option
+                data:
+                  option: "Off"
+                entity_id: input_select.washing_machine_state
+
+          # Machine Turned on
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_select.washing_machine_state
+                    state: "Off"
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    above: 1
+            sequence:
+              - service: input_select.select_option
+                data:
+                  option: "Idle"
+                entity_id: input_select.washing_machine_state
+
+          # Machine Washing - above 5w for 5min
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    above: 5
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity_id: input_select.washing_machine_state
+                        state: "Off"
+                      - condition: state
+                        entity_id: input_select.washing_machine_state
+                        state: "Idle"
+                      - condition: state
+                        entity_id: input_select.washing_machine_state
+                        state: "Done"
+            sequence:
+              - wait_for_trigger:
+                  - platform: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    above: 5
+                    for:
+                      minutes: 5
+              - service: input_select.select_option
+                data:
+                  option: "Washing"
+                entity_id: input_select.washing_machine_state
+
+          # Machine Done - below 5w for 5min
+          - conditions:
+              - condition: numeric_state
+                entity_id: sensor.gosundplug05_power
+                below: 5
+            sequence:
+              - wait_for_trigger:
+                  - platform: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    below: 5
+                    for:
+                      minutes: 5
+                continue_on_timeout: true
+                timeout: "1:01"
+              - service: input_select.select_option
+                data:
+                  option: "Done"
+                  entity_id: input_select.washing_machine_state
+              - service: script.notify_me
+                data:
+                  message: "Good News! The washing machine is done"
+
+        default: []

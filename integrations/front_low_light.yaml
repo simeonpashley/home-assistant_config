@@ -4,7 +4,7 @@ input_number:
     mode: box
     min: 0
     max: 1000
-    initial: 70
+    initial: 60
     unit_of_measurement: lx
     icon: mdi:light-flood-down
 

@@ -1,575 +1,582 @@
 {
-    "version": 1,
-    "minor_version": 1,
-    "key": "lovelace",
-    "data": {
-        "config": {
-            "icon": "mdi:home",
-            "views": [
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "icon": "mdi:home",
+      "views": [
+        {
+          "title": "Home",
+          "icon": "mdi:home",
+          "panel": false,
+          "path": "default_view",
+          "cards": [
+            {
+              "type": "alarm-panel",
+              "entity": "alarm_control_panel.home_mode",
+              "states": [
+                "arm_home",
+                "arm_away"
+              ],
+              "name": "Ring Alerts"
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
                 {
-                    "title": "Home",
-                    "icon": "mdi:home",
-                    "panel": false,
-                    "path": "default_view",
-                    "cards": [
-                        {
-                            "type": "alarm-panel",
-                            "entity": "alarm_control_panel.home_mode",
-                            "states": [],
-                            "name": "Ring Alerts"
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Pollen Today",
-                                    "state_color": false,
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.pollen_tree",
-                                            "name": "Tree"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_grass",
-                                            "name": "Grass"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_weed",
-                                            "name": "Weed"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "glance",
-                                    "title": "Pollen Forecast",
-                                    "state_color": false,
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.pollen_tree_index_day_1",
-                                            "name": "Tomorrow"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_tree_index_day_2",
-                                            "name": "+2 days"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_tree_index_day_3",
-                                            "name": "+3 days"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "initial_view": "listWeek",
-                            "type": "calendar",
-                            "entities": [
-                                "calendar.bin_garden",
-                                "calendar.bin_mixed_recycle",
-                                "calendar.bin_paper",
-                                "calendar.bin_household"
-                            ],
-                            "title": "Bin Days"
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "title": "Switches",
-                            "cards": [
-                                {
-                                    "type": "entities",
-                                    "show_header_toggle": false,
-                                    "title": "Front room",
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi001",
-                                            "name": "Front Small",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        },
-                                        {
-                                            "entity": "switch.tradfi002",
-                                            "name": "Front Big",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "title": "Landing",
-                                    "show_header_toggle": false,
-                                    "entities": [
-                                        {
-                                            "entity": "switch.tradfi003",
-                                            "name": "Landing",
-                                            "icon": "mdi:lightbulb-on-outline"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "hours_to_show": 6,
-                                    "points_per_hour": 12,
-                                    "entities": [
-                                        {
-                                            "name": "Front Brightness",
-                                            "entity": "sensor.lp5_5c1aad_luminance"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "input_number.front_low_light_threshold",
-                                            "name": "Auto on below brightness"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "show_header_toggle": false,
-                                    "title": "Plugs - Smappee",
-                                    "entities": [
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_x_inside_lights"
-                                        },
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_z_outside_lights"
-                                        },
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_front_big_e"
-                                        },
-                                        {
-                                            "entity": "switch.smappee_1005002095_local_comfort_plug_y_landing_off_only"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "custom:simple-thermostat",
-                            "step_size": 0.5,
-                            "entity": "climate.living_room",
-                            "layout": {
-                                "mode": {
-                                    "headings": true
-                                }
-                            }
-                        },
-                        {
-                            "type": "glance",
-                            "entities": [
-                                {
-                                    "entity": "input_select.home_mode"
-                                }
-                            ]
-                        }
-                    ]
+                  "type": "glance",
+                  "title": "Pollen Today",
+                  "state_color": false,
+                  "entities": [
+                    {
+                      "entity": "sensor.pollen_tree",
+                      "name": "Tree"
+                    },
+                    {
+                      "entity": "sensor.pollen_grass",
+                      "name": "Grass"
+                    },
+                    {
+                      "entity": "sensor.pollen_weed",
+                      "name": "Weed"
+                    }
+                  ]
                 },
                 {
-                    "theme": "Backend-selected",
-                    "title": "Climate",
-                    "path": "climate",
-                    "icon": "mdi:home-thermometer-outline",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "title": "Office",
-                            "cards": [
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "gauge",
-                                            "entity": "sensor.esphome_web_af4cb4_temperature",
-                                            "name": "Temp",
-                                            "max": 40,
-                                            "min": 10,
-                                            "needle": false,
-                                            "severity": {
-                                                "green": 0,
-                                                "yellow": 18,
-                                                "red": 30
-                                            }
-                                        },
-                                        {
-                                            "type": "gauge",
-                                            "entity": "sensor.esphome_web_af4cb4_humidity",
-                                            "name": "Humidity",
-                                            "max": 100,
-                                            "min": 0,
-                                            "needle": false,
-                                            "severity": {
-                                                "green": 0,
-                                                "yellow": 30,
-                                                "red": 60
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "name": "12hr",
-                                    "smoothing": false,
-                                    "hours_to_show": 12,
-                                    "points_per_hour": 12,
-                                    "show": {
-                                        "fill": false,
-                                        "labels": true
-                                    },
-                                    "entities": [
-                                        {
-                                            "name": "Temp",
-                                            "entity": "sensor.esphome_web_af4cb4_temperature"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "name": "7d",
-                                    "smoothing": false,
-                                    "hours_to_show": 168,
-                                    "show": {
-                                        "fill": false,
-                                        "labels": true,
-                                        "labels_secondary": true
-                                    },
-                                    "entities": [
-                                        {
-                                            "name": "Temp",
-                                            "entity": "sensor.esphome_web_af4cb4_temperature"
-                                        },
-                                        {
-                                            "name": "Humidity",
-                                            "entity": "sensor.esphome_web_af4cb4_humidity",
-                                            "y_axis": "secondary",
-                                            "show_legend": true
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "title": "Living Room",
-                            "cards": [
-                                {
-                                    "type": "horizontal-stack",
-                                    "cards": [
-                                        {
-                                            "type": "gauge",
-                                            "entity": "sensor.living_room_temperature",
-                                            "name": "Temp",
-                                            "max": 40,
-                                            "min": 10,
-                                            "needle": false,
-                                            "severity": {
-                                                "green": 0,
-                                                "yellow": 18,
-                                                "red": 30
-                                            }
-                                        },
-                                        {
-                                            "type": "gauge",
-                                            "entity": "sensor.living_room_humidity",
-                                            "name": "Humidity",
-                                            "max": 100,
-                                            "min": 0,
-                                            "needle": false,
-                                            "severity": {
-                                                "green": 0,
-                                                "yellow": 30,
-                                                "red": 60
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "name": "12hr",
-                                    "smoothing": false,
-                                    "hours_to_show": 12,
-                                    "points_per_hour": 12,
-                                    "show": {
-                                        "fill": false,
-                                        "labels": true,
-                                        "labels_secondary": true
-                                    },
-                                    "entities": [
-                                        {
-                                            "name": "Temp",
-                                            "entity": "sensor.living_room_temperature"
-                                        },
-                                        {
-                                            "name": "Humidity",
-                                            "entity": "sensor.living_room_humidity",
-                                            "y_axis": "secondary",
-                                            "show_legend": true
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "name": "7d",
-                                    "smoothing": false,
-                                    "hours_to_show": 168,
-                                    "show": {
-                                        "fill": false,
-                                        "labels": true,
-                                        "labels_secondary": true
-                                    },
-                                    "entities": [
-                                        {
-                                            "name": "Temp",
-                                            "entity": "sensor.living_room_temperature"
-                                        },
-                                        {
-                                            "name": "Humidity",
-                                            "entity": "sensor.living_room_humidity",
-                                            "y_axis": "secondary",
-                                            "show_legend": true
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "entities",
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.living_room_temperature",
-                                            "secondary_info": "last-updated"
-                                        }
-                                    ],
-                                    "show_header_toggle": false
-                                }
-                            ]
-                        },
-                        {
-                            "entity": "climate.living_room",
-                            "step_size": 0.1,
-                            "type": "custom:simple-thermostat"
-                        },
-                        {
-                            "entities": [
-                                "sensor.min_temp_rooms",
-                                "sensor.max_temp_rooms"
-                            ],
-                            "name": "Minimum/Maximum",
-                            "show": {
-                                "fill": false,
-                                "labels": true
-                            },
-                            "type": "custom:mini-graph-card",
-                            "points_per_hour": 12
-                        }
-                    ]
-                },
-                {
-                    "theme": "Backend-selected",
-                    "title": "Solar",
-                    "path": "solar",
-                    "icon": "mdi:solar-power",
-                    "badges": [],
-                    "cards": [
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.solar_production",
-                                    "max": 3000,
-                                    "severity": {
-                                        "green": 3,
-                                        "yellow": 2,
-                                        "red": 1
-                                    }
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "entities": [
-                                        "sensor.solar_production_kwh"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.grid_imported_power_w",
-                                    "severity": {
-                                        "green": 1,
-                                        "yellow": 2,
-                                        "red": 3
-                                    },
-                                    "name": "Grid Import",
-                                    "max": 10000
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "entities": [
-                                        "sensor.grid_imported_power_kwh"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.solar_exported_power_w",
-                                    "max": 3000,
-                                    "name": "Solar - Export"
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "entities": [
-                                        "sensor.solar_exported_power_kwh"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "gauge",
-                                    "entity": "sensor.electric_load",
-                                    "severity": {
-                                        "green": 1,
-                                        "yellow": 500,
-                                        "red": 1000
-                                    },
-                                    "name": "House Load",
-                                    "max": 10000
-                                },
-                                {
-                                    "type": "custom:mini-graph-card",
-                                    "entities": [
-                                        "sensor.electric_load"
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.solar_exported_power_daily_compensation"
-                                },
-                                {
-                                    "entity": "sensor.330e_xdrive_charging_level_hv"
-                                },
-                                {
-                                    "entity": "sensor.smappee_reactive_power"
-                                },
-                                {
-                                    "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
-                                },
-                                {
-                                    "entity": "sensor.smappee_always_on"
-                                },
-                                {
-                                    "entity": "binary_sensor.excess_solar"
-                                },
-                                {
-                                    "entity": "sensor.electricity_excess_solar_waterheater"
-                                },
-                                {
-                                    "entity": "sensor.electricity_excess_solar"
-                                },
-                                {
-                                    "entity": "sensor.lp20_solar_exported_power"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "entities",
-                            "title": "Energy Cost Today",
-                            "entities": [
-                                {
-                                    "entity": "sensor.gas_imported_energy_cost",
-                                    "name": "<= Gas"
-                                },
-                                {
-                                    "entity": "sensor.grid_imported_power_daily_cost",
-                                    "name": "<= Grid"
-                                },
-                                {
-                                    "entity": "sensor.solar_exported_power_daily_compensation",
-                                    "name": "=> Solar FIT"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": "Outdoor",
-                    "icon": "mdi:weather-sunset",
-                    "cards": [
-                        {
-                            "type": "iframe",
-                            "url": "https://embed.windy.com/embed2.html?lat=53.418184&lon=-1.260242&detailLat=53.418184&detailLon=-1.260242&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=12&pressure=&type=map&location=coordinates&detail=1&metricWind=mph&metricTemp=default&radarRange=-1",
-                            "aspect_ratio": "100%"
-                        },
-                        {
-                            "type": "custom:weather-card",
-                            "entity": "weather.29stratford",
-                            "number_of_forecasts": "5",
-                            "name": "AW"
-                        },
-                        {
-                            "type": "entities",
-                            "entities": [
-                                {
-                                    "entity": "sensor.current_uv_level",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "sensor.skin_type_2_safe_exposure_time"
-                                },
-                                {
-                                    "entity": "sensor.current_uv_index",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "sensor.max_uv_index",
-                                    "secondary_info": "last-updated"
-                                },
-                                {
-                                    "entity": "binary_sensor.good_weather_to_fly_drones"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "vertical-stack",
-                            "cards": [
-                                {
-                                    "type": "glance",
-                                    "title": "Pollen",
-                                    "state_color": false,
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.pollen_tree",
-                                            "name": "Tree"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_grass",
-                                            "name": "Grass"
-                                        },
-                                        {
-                                            "entity": "sensor.pollen_weed",
-                                            "name": "Weed"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
+                  "type": "glance",
+                  "title": "Pollen Forecast",
+                  "state_color": false,
+                  "entities": [
+                    {
+                      "entity": "sensor.pollen_tree_index_day_1",
+                      "name": "Tomorrow"
+                    },
+                    {
+                      "entity": "sensor.pollen_tree_index_day_2",
+                      "name": "+2 days"
+                    },
+                    {
+                      "entity": "sensor.pollen_tree_index_day_3",
+                      "name": "+3 days"
+                    }
+                  ]
                 }
-            ]
+              ]
+            },
+            {
+              "initial_view": "listWeek",
+              "type": "calendar",
+              "entities": [
+                "calendar.bin_garden",
+                "calendar.bin_mixed_recycle",
+                "calendar.bin_paper",
+                "calendar.bin_household"
+              ],
+              "title": "Bin Days"
+            },
+            {
+              "type": "vertical-stack",
+              "title": "Switches",
+              "cards": [
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "title": "Front room",
+                  "entities": [
+                    {
+                      "entity": "switch.tradfi001",
+                      "name": "Front Small",
+                      "icon": "mdi:lightbulb-on-outline"
+                    },
+                    {
+                      "entity": "switch.tradfi002",
+                      "name": "Front Big",
+                      "icon": "mdi:lightbulb-on-outline"
+                    },
+                    {
+                      "entity": "switch.tradfi003",
+                      "name": "Landing",
+                      "icon": "mdi:lightbulb-on-outline"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "hours_to_show": 6,
+                  "points_per_hour": 12,
+                  "entities": [
+                    {
+                      "name": "Front Brightness",
+                      "entity": "sensor.lp5_5c1aad_luminance"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_number.front_low_light_threshold",
+                      "name": "Auto on below brightness"
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_text.washer_running",
+                      "name": "Status"
+                    },
+                    {
+                      "entity": "sensor.gosundplug05_power",
+                      "name": "Power"
+                    },
+                    {
+                      "entity": "input_select.washing_machine_state"
+                    }
+                  ],
+                  "title": "Washer"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_select.dishwasher_state"
+                    },
+                    {
+                      "entity": "sensor.gosundplug06_power",
+                      "name": "Power"
+                    }
+                  ],
+                  "title": "Dishwasher"
+                }
+              ]
+            },
+            {
+              "type": "custom:simple-thermostat",
+              "step_size": 0.5,
+              "entity": "climate.living_room",
+              "layout": {
+                "mode": {
+                  "headings": true
+                }
+              }
+            },
+            {
+              "type": "glance",
+              "entities": [
+                {
+                  "entity": "input_select.home_mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Climate",
+          "path": "climate",
+          "icon": "mdi:home-thermometer-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "title": "Office",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esphome_web_af4cb4_temperature",
+                      "name": "Temp",
+                      "max": 40,
+                      "min": 10,
+                      "needle": false,
+                      "severity": {
+                        "green": 0,
+                        "yellow": 18,
+                        "red": 30
+                      }
+                    },
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.esphome_web_af4cb4_humidity",
+                      "name": "Humidity",
+                      "max": 100,
+                      "min": 0,
+                      "needle": false,
+                      "severity": {
+                        "green": 0,
+                        "yellow": 30,
+                        "red": 60
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "12hr",
+                  "smoothing": false,
+                  "hours_to_show": 12,
+                  "points_per_hour": 12,
+                  "show": {
+                    "fill": false,
+                    "labels": true
+                  },
+                  "entities": [
+                    {
+                      "name": "Temp",
+                      "entity": "sensor.esphome_web_af4cb4_temperature"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "7d",
+                  "smoothing": false,
+                  "hours_to_show": 168,
+                  "show": {
+                    "fill": false,
+                    "labels": true,
+                    "labels_secondary": true
+                  },
+                  "entities": [
+                    {
+                      "name": "Temp",
+                      "entity": "sensor.esphome_web_af4cb4_temperature"
+                    },
+                    {
+                      "name": "Humidity",
+                      "entity": "sensor.esphome_web_af4cb4_humidity",
+                      "y_axis": "secondary",
+                      "show_legend": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "title": "Living Room",
+              "cards": [
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.living_room_temperature",
+                      "name": "Temp",
+                      "max": 40,
+                      "min": 10,
+                      "needle": false,
+                      "severity": {
+                        "green": 0,
+                        "yellow": 18,
+                        "red": 30
+                      }
+                    },
+                    {
+                      "type": "gauge",
+                      "entity": "sensor.living_room_humidity",
+                      "name": "Humidity",
+                      "max": 100,
+                      "min": 0,
+                      "needle": false,
+                      "severity": {
+                        "green": 0,
+                        "yellow": 30,
+                        "red": 60
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "12hr",
+                  "smoothing": false,
+                  "hours_to_show": 12,
+                  "points_per_hour": 12,
+                  "show": {
+                    "fill": false,
+                    "labels": true,
+                    "labels_secondary": true
+                  },
+                  "entities": [
+                    {
+                      "name": "Temp",
+                      "entity": "sensor.living_room_temperature"
+                    },
+                    {
+                      "name": "Humidity",
+                      "entity": "sensor.living_room_humidity",
+                      "y_axis": "secondary",
+                      "show_legend": true
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "7d",
+                  "smoothing": false,
+                  "hours_to_show": 168,
+                  "show": {
+                    "fill": false,
+                    "labels": true,
+                    "labels_secondary": true
+                  },
+                  "entities": [
+                    {
+                      "name": "Temp",
+                      "entity": "sensor.living_room_temperature"
+                    },
+                    {
+                      "name": "Humidity",
+                      "entity": "sensor.living_room_humidity",
+                      "y_axis": "secondary",
+                      "show_legend": true
+                    }
+                  ]
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.living_room_temperature",
+                      "secondary_info": "last-updated"
+                    }
+                  ],
+                  "show_header_toggle": false
+                }
+              ]
+            },
+            {
+              "entity": "climate.living_room",
+              "step_size": 0.1,
+              "type": "custom:simple-thermostat"
+            },
+            {
+              "entities": [
+                "sensor.min_temp_rooms",
+                "sensor.max_temp_rooms"
+              ],
+              "name": "Minimum/Maximum",
+              "show": {
+                "fill": false,
+                "labels": true
+              },
+              "type": "custom:mini-graph-card",
+              "points_per_hour": 12
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Solar",
+          "path": "solar",
+          "icon": "mdi:solar-power",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "entity": "sensor.solar_production",
+                  "max": 3000,
+                  "severity": {
+                    "green": 3,
+                    "yellow": 2,
+                    "red": 1
+                  }
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "entities": [
+                    "sensor.solar_production_kwh"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "entity": "sensor.grid_imported_power_w",
+                  "severity": {
+                    "green": 1,
+                    "yellow": 2,
+                    "red": 3
+                  },
+                  "name": "Grid Import",
+                  "max": 10000
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "entities": [
+                    "sensor.grid_imported_power_kwh"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "entity": "sensor.solar_exported_power_w",
+                  "max": 3000,
+                  "name": "Solar - Export"
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "entities": [
+                    "sensor.solar_exported_power_kwh"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "entity": "sensor.electric_load",
+                  "severity": {
+                    "green": 1,
+                    "yellow": 500,
+                    "red": 1000
+                  },
+                  "name": "House Load",
+                  "max": 10000
+                },
+                {
+                  "type": "custom:mini-graph-card",
+                  "entities": [
+                    "sensor.electric_load"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.solar_exported_power_daily_compensation"
+                },
+                {
+                  "entity": "sensor.330e_xdrive_charging_level_hv"
+                },
+                {
+                  "entity": "sensor.smappee_reactive_power"
+                },
+                {
+                  "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
+                },
+                {
+                  "entity": "sensor.smappee_always_on"
+                },
+                {
+                  "entity": "binary_sensor.excess_solar"
+                },
+                {
+                  "entity": "sensor.electricity_excess_solar_waterheater"
+                },
+                {
+                  "entity": "sensor.electricity_excess_solar"
+                },
+                {
+                  "entity": "sensor.lp20_solar_exported_power"
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "title": "Energy Cost Today",
+              "entities": [
+                {
+                  "entity": "sensor.gas_imported_energy_cost",
+                  "name": "<= Gas"
+                },
+                {
+                  "entity": "sensor.grid_imported_power_daily_cost",
+                  "name": "<= Grid"
+                },
+                {
+                  "entity": "sensor.solar_exported_power_daily_compensation",
+                  "name": "=> Solar FIT"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Outdoor",
+          "icon": "mdi:weather-sunset",
+          "cards": [
+            {
+              "type": "iframe",
+              "url": "https://embed.windy.com/embed2.html?lat=53.418184&lon=-1.260242&detailLat=53.418184&detailLon=-1.260242&width=650&height=450&zoom=11&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=12&pressure=&type=map&location=coordinates&detail=1&metricWind=mph&metricTemp=default&radarRange=-1",
+              "aspect_ratio": "100%"
+            },
+            {
+              "type": "custom:weather-card",
+              "entity": "weather.29stratford",
+              "number_of_forecasts": "5",
+              "name": "AW"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.current_uv_level",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.skin_type_2_safe_exposure_time"
+                },
+                {
+                  "entity": "sensor.current_uv_index",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.max_uv_index",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "binary_sensor.good_weather_to_fly_drones"
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "glance",
+                  "title": "Pollen",
+                  "state_color": false,
+                  "entities": [
+                    {
+                      "entity": "sensor.pollen_tree",
+                      "name": "Tree"
+                    },
+                    {
+                      "entity": "sensor.pollen_grass",
+                      "name": "Grass"
+                    },
+                    {
+                      "entity": "sensor.pollen_weed",
+                      "name": "Weed"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
+      ]
     }
+  }
 }

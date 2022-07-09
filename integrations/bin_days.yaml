@@ -163,17 +163,9 @@ automation:
         to: "on"
         for: "02:00:00"
     action:
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          who: "simeon"
-          title: "♻ *Bin day*"
-          value1: "Take out BROWN bin (garden) out."
-          target_id: !secret telegram_bot_chat_id
-          group: duties
-          tag_id: "information"
-          importance_id: default
-          color: "green"
-          sticky: "false"
+          message: "♻ *Bin day* Take out BROWN bin (garden) out."
   - alias: Bin day - Household
     trigger:
       - platform: state
@@ -184,17 +176,9 @@ automation:
         to: "on"
         for: "02:00:00"
     action:
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          who: "simeon"
-          title: "♻ *Bin day*"
-          value1: "Take out Household bin (PINK) out."
-          target_id: !secret telegram_bot_chat_id
-          group: duties
-          tag_id: "information"
-          importance_id: default
-          color: "green"
-          sticky: "false"
+          message: "♻ *Bin day* Take out Household bin (PINK) out"
   - alias: Bin day - Paper
     trigger:
       - platform: state
@@ -205,17 +189,9 @@ automation:
         to: "on"
         for: "02:00:00"
     action:
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          who: "simeon"
-          title: "♻ *Bin day*"
-          value1: "Take out Paper bin (garage) out."
-          target_id: !secret telegram_bot_chat_id
-          group: duties
-          tag_id: "information"
-          importance_id: default
-          color: "green"
-          sticky: "false"
+          message: "♻ *Bin day* Take out Paper bin (garage) out."
   - alias: Bin day - Mixed Recycle
     trigger:
       - platform: state
@@ -226,14 +202,6 @@ automation:
         to: "on"
         for: "02:00:00"
     action:
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          who: "simeon"
-          title: "♻ *Bin day*"
-          value1: "Take out Mixed Recycle bin (garage) out."
-          target_id: !secret telegram_bot_chat_id
-          group: duties
-          tag_id: "information"
-          importance_id: default
-          color: "green"
-          sticky: "false"
+          message: "♻ *Bin day* Take out Mixed Recycle bin (garage) out."

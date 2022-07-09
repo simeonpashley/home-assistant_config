@@ -62,7 +62,7 @@ automation:
       event: start
     action:
       - wait_template: >-
-          {% if not media_player.simeon_s_echo_dot %}
+          {% if states('media_player.simeon_s_echo_dot') != "unknown"  %}
             false
           {% else %}
             true

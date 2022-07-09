@@ -6,43 +6,8 @@ input_boolean:
     icon: mdi:pill
 
 automation:
-  - alias: Tablet Already taken
-    id: d0142b8f-283a-4a4d-8d0e-736039c2ff3a
-    trigger:
-      - platform: event
-        event_type: mobile_app_notification_action
-        event_data:
-          action: TABLET_TAKEN
-    action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.medicine
-  - alias: Remind Me Later
-    id: 941812a2-000b-4fbe-adef-084de60acac7
-    trigger:
-      platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: NOT_HOME
-    action:
-      - service: script.notify_engine
-        data:
-          title: "Medicine Reminder"
-          value1: "Ok. I will remind you when you get home."
-          who: "ios_simeon"
-          tag_id: "Medicine"
-      - wait_template: >-
-          {{ states('person.simeon') == 'home' }}
-      - service: notify.ios_simeon
-        data:
-          message: "Medicine Reminder. Now that your home, please take your medicine!"
-          data:
-            actions:
-              - action: TABLET_TAKEN
-                title: "Tablet Taken"
-              - action: "NOT_HOME"
-                title: "I am not Home"
   - alias: Medicine Reminder
-    id: 7cd124d6-e028-4add-a28d-6f1078ed1862
+    id: ac17f0fd-8454-4653-a5f0-b54d3f012a70
     initial_state: true
     trigger:
       - platform: time_pattern
@@ -63,15 +28,58 @@ automation:
         entity_id: input_boolean.medicine
         state: "off"
     action:
-      - service: notify.ios_simeon
+      - alias: "vars"
+        variables:
+          meds_taken: "{{ 'TAKEN_' ~ context.id }} "
+          meds_defer: "{{ 'NOT_HOME_' ~ context.id }}"
+      - alias: "Ask"
+        service: notify.mobile_app_sp12
         data:
-          message: "Meds"
+          message: "Meds?"
           data:
             actions:
-              - action: TABLET_TAKEN
+              - action: "{{ meds_taken }}"
                 title: "Tablet Taken"
-              - action: "NOT_HOME"
+                icon: "sfsymbols:bell"
+              - action: "{{ meds_defer }}"
                 title: "I am not Home"
+                icon: "sfsymbols:bell.slash"
+      - alias: "Wait for a response"
+        wait_for_trigger:
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              # waiting for the specific action avoids accidentally continuing
+              # for another script/automation's notification action
+              action: "{{ meds_taken }}"
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ meds_defer }}"
+      - alias: "Perform the action"
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == meds_taken }}"
+            sequence:
+              - service: input_boolean.turn_on
+                entity_id: input_boolean.medicine
+          - conditions: "{{ wait.trigger.event.data.action == meds_defer }}"
+            sequence:
+              - service: notify.mobile_app_sp12
+                data:
+                  message: "Medicine Reminder: Ok. I will remind you when you get home."
+              - wait_template: >-
+                  {{ states('person.simeon') == 'home' }}
+              - service: notify.mobile_app_sp12
+                data:
+                  message: "Medicine Reminder. Now that your home, please take your medicine!"
+                  data:
+                    actions:
+                      - action: "{{ meds_taken }}"
+                        title: "Tablet Taken"
+                        icon: "sfsymbols:bell"
+                      - action: "{{ meds_defer }}"
+                        title: "I am not Home"
+                        icon: "sfsymbols:bell.slash"
 
   ###################################
   ##  LOG Medicine
@@ -81,8 +89,6 @@ automation:
     id: 5dca1211-be2c-4f81-ac6b-9ec784496d3e
 
     trigger:
-      - platform: event
-        event_type: medicine_dash
       - platform: state
         entity_id: input_boolean.medicine
         from: "off"
@@ -94,12 +100,9 @@ automation:
         data:
           name: "Medicine Push"
           message: "Took Medicine today."
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          title: "Medicine Reminder Completed"
-          value1: "Simeon Took Medicine today."
-          who: "ios_simeon"
-          tag_id: "Medicine"
+          message: "Took Medicine today"
       - delay:
           minutes: 1
   - alias: "Medicine Reset on=>off"
@@ -111,11 +114,8 @@ automation:
         from: "on"
         to: "off"
     action:
-      - service: script.notify_engine
+      - service: script.notify_me
         data:
-          title: "Medicine Reminder Completed"
-          value1: "Medicine reset"
-          who: "ios_simeon"
-          tag_id: "Medicine"
+          message: "Medicine Reminder Completed"
       - delay:
           minutes: 1

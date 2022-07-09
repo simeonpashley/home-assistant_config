@@ -17,7 +17,7 @@ sprinkler_reset_helper_values:
         value: "{{ states('sensor.openweathermap_temperature') }}"
       target:
         entity_id: input_number.sprinkler_maximum_temperature_measured
-    - service: notify.me
+    - service: script.notify_me
       data:
         message: Now resetting the Sprinkler values
   mode: single

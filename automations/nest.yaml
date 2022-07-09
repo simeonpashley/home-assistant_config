@@ -14,5 +14,5 @@ condition:
       state: "on"
 action:
   - service: script.notify_me
-    data_template:
+    data:
       message: "Nest Thermostat changed from '{{ trigger.from_state.state }}' to '{{ trigger.to_state.state }}'."

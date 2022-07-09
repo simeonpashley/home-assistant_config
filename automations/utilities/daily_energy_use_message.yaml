@@ -15,10 +15,10 @@ action:
       who: "simeon"
       title: "☀️⚡️🔥 Energy Usage "
       value1: "Today's energy use was:
-        ⚡️ Grid imported: {{ states('sensor.grid_imported_power_daily') }} kWh  (API £ {{ states('sensor.electric_cost_today') }})
-        ☀️ Solar exported: {{ states('sensor.solar_exported_power_daily') }} kWh (£{{ states('sensor.solar_exported_power_daily_compensation') }})
-        ☀️ Solar production: {{ states('sensor.solar_production_daily') }} kWh
-        🔥 Gas: API £{{ states('sensor.gas_cost_today') }}"
+        ⚡️ Grid imported: {{ states('sensor.grid_imported_power_daily')|round(1, 'ceil') }}kWh  (API £{{ states('sensor.electric_cost_today')|round(1, 'ceil') }})
+        ☀️ Solar exported: {{ states('sensor.solar_exported_power_daily')|round(1, 'ceil') }}kWh (£{{ states('sensor.solar_exported_power_daily_compensation')|round(1, 'ceil') }})
+        ☀️ Solar production: {{ states('sensor.solar_production_daily')|round(1, 'ceil') }}kWh
+        🔥 Gas: API £{{ states('sensor.gas_cost_today')|round(1, 'ceil') }}"
       target_id: !secret telegram_bot_chat_id
       group: home
       tag_id: "information"
