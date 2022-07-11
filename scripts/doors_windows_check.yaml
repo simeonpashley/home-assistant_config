@@ -1,0 +1,9 @@
+doors_windows_check:
+  alias: Check / Doors and Windows
+  sequence:
+    - condition: state
+      entity_id: binary_sensor.doors_windows_sensors
+      state: "on"
+    - service: script.notify_me
+      data:
+        message: "{{ state_attr('binary_sensor.doors_windows_sensors', 'message') }}"

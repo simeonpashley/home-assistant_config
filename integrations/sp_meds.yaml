@@ -2,7 +2,7 @@
 input_boolean:
   medicine:
     name: Medicine Reminder
-    initial: true
+    initial: false
     icon: mdi:pill
 
 automation:
@@ -116,6 +116,6 @@ automation:
     action:
       - service: script.notify_me
         data:
-          message: "Medicine Reminder Completed"
+          message: "Medicine Reset on=>off"
       - delay:
           minutes: 1

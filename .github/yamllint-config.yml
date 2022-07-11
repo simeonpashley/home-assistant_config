@@ -1,6 +1,6 @@
 ---
 #####
-# Used to configure yamlling so it skips some checks
+# Used to configure yamllint so it skips some checks
 # But also some files too
 #####
 extends: default

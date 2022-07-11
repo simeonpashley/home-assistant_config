@@ -90,9 +90,16 @@ automation:
 
           # Machine Done - below 5w for 5min
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.gosundplug06_power
-                below: 5
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug06_power
+                    below: 5
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity_id: input_select.dishwasher_state
+                        state: "Washing"
             sequence:
               - wait_for_trigger:
                   - platform: numeric_state

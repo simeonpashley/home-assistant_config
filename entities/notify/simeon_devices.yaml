@@ -1,5 +1,5 @@
 platform: group
 name: simeon_devices
 services:
-  - service: notify.mobile_app_sp12
+  - service: mobile_app_sp12
   - service: !secret telegram_bot_name

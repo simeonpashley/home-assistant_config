@@ -13,7 +13,6 @@ automation:
     description: >-
       Select input option washing machine 
       based on current power use
-    mode: single
     id: 7153ac40-1fc2-430a-a61c-1cfadf267c33
     trigger:
       - platform: state
@@ -90,9 +89,16 @@ automation:
 
           # Machine Done - below 5w for 5min
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.gosundplug05_power
-                below: 5
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug05_power
+                    below: 5
+                  - condition: or
+                    conditions:
+                      - condition: state
+                        entity_id: input_select.dishwasher_state
+                        state: "Washing"
             sequence:
               - wait_for_trigger:
                   - platform: numeric_state

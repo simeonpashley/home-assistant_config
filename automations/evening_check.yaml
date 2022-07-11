@@ -1,0 +1,8 @@
+alias: "Evening Check"
+id: 8fe94015-2af0-4e1e-a52e-ddaee50ef0e2
+mode: single
+trigger:
+  platform: time
+  at: "21:00:00"
+action:
+  - service: script.doors_windows_check

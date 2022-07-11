@@ -1,109 +1,109 @@
 {
-    "version": 1,
-    "minor_version": 1,
-    "key": "lovelace_resources",
-    "data": {
-        "items": [
-            {
-                "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620110",
-                "type": "module",
-                "id": "2f4420da51474b26b6287067362607ba"
-            },
-            {
-                "url": "/hacsfiles/weather-card/weather-card.js?hacstag=192732636150",
-                "type": "module",
-                "id": "766f8a70fabf47d7b5f6b1cc4a0c2d7f"
-            },
-            {
-                "url": "/hacsfiles/simple-thermostat/simple-thermostat.js?hacstag=158654878243",
-                "type": "module",
-                "id": "517ddc34064d4d869dc4bacd68f169aa"
-            },
-            {
-                "url": "/hacsfiles/battery-state-card/battery-state-card.js?hacstag=256292682211",
-                "type": "module",
-                "id": "7aee67009636448bb5e3a27db6481fbf"
-            },
-            {
-                "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js?hacstag=178921037441",
-                "type": "module",
-                "id": "350d499f52e747bc869834d3b58bbeff"
-            },
-            {
-                "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js?hacstag=1677445841110",
-                "type": "module",
-                "id": "61bb9660b2844ab589da0f925e549ca9"
-            },
-            {
-                "url": "/hacsfiles/uptime-card/uptime-card.js?hacstag=3505098670111",
-                "type": "module",
-                "id": "9748b54bae264d9fb32d33dde8c77cfb"
-            },
-            {
-                "url": "/hacsfiles/power-distribution-card/power-distribution-card.js?hacstag=283578257253",
-                "type": "module",
-                "id": "521aed3528844fc293d157d6070a86e3"
-            },
-            {
-                "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=3612056631141",
-                "type": "module",
-                "id": "5e0ecb06d1ae4bee8e6bf800ec54f412"
-            },
-            {
-                "url": "/hacsfiles/light-entity-card/light-entity-card.js?hacstag=168744428500",
-                "type": "module",
-                "id": "11d4e0505645466d9df17a93e65970b3"
-            },
-            {
-                "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js?hacstag=1448997001721",
-                "type": "module",
-                "id": "722b8c71b4a447a1acd66f5f25730fc3"
-            },
-            {
-                "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381164",
-                "type": "module",
-                "id": "89ed7fa9bc084de29497b6de131617ac"
-            },
-            {
-                "url": "/hacsfiles/lovelace-notify-card/notify-card.js?hacstag=3589626564459742",
-                "type": "module",
-                "id": "49cf12e6888e4281863642b9fa69166b"
-            },
-            {
-                "url": "/hacsfiles/github-flexi-card/github-flexi-card.js?hacstag=302895020200",
-                "type": "module",
-                "id": "75bad51ab97146a48a998fea3a29aafd"
-            },
-            {
-                "url": "/local/custom_cards/icloud3-event-log-card.js",
-                "type": "module",
-                "id": "2b0d30462ae5405e9e330082e57465d4"
-            },
-            {
-                "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325342",
-                "type": "module",
-                "id": "758325f64d2a41b788a9e131b6d88670"
-            },
-            {
-                "url": "/hacsfiles/decluttering-card/decluttering-card.js?hacstag=188686483063",
-                "type": "module",
-                "id": "51a825bbec37424098e42c67c43d5c20"
-            },
-            {
-                "url": "/hacsfiles/custom-ui/custom-ui.js?hacstag=267558148202204191",
-                "type": "module",
-                "id": "955a8cabed9c46389034090a4f7b410d"
-            },
-            {
-                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375200",
-                "type": "module",
-                "id": "37f29e0b4392454c9d513399462a95c9"
-            },
-            {
-                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242",
-                "type": "module",
-                "id": "4f77142841d244b28f80a31c15a8ebbe"
-            }
-        ]
-    }
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620110",
+        "type": "module",
+        "id": "2f4420da51474b26b6287067362607ba"
+      },
+      {
+        "url": "/hacsfiles/weather-card/weather-card.js?hacstag=192732636150",
+        "type": "module",
+        "id": "766f8a70fabf47d7b5f6b1cc4a0c2d7f"
+      },
+      {
+        "url": "/hacsfiles/simple-thermostat/simple-thermostat.js?hacstag=158654878243",
+        "type": "module",
+        "id": "517ddc34064d4d869dc4bacd68f169aa"
+      },
+      {
+        "url": "/hacsfiles/battery-state-card/battery-state-card.js?hacstag=256292682211",
+        "type": "module",
+        "id": "7aee67009636448bb5e3a27db6481fbf"
+      },
+      {
+        "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js?hacstag=178921037441",
+        "type": "module",
+        "id": "350d499f52e747bc869834d3b58bbeff"
+      },
+      {
+        "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js?hacstag=1677445841110",
+        "type": "module",
+        "id": "61bb9660b2844ab589da0f925e549ca9"
+      },
+      {
+        "url": "/hacsfiles/uptime-card/uptime-card.js?hacstag=3505098670111",
+        "type": "module",
+        "id": "9748b54bae264d9fb32d33dde8c77cfb"
+      },
+      {
+        "url": "/hacsfiles/power-distribution-card/power-distribution-card.js?hacstag=283578257253",
+        "type": "module",
+        "id": "521aed3528844fc293d157d6070a86e3"
+      },
+      {
+        "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663200",
+        "type": "module",
+        "id": "5e0ecb06d1ae4bee8e6bf800ec54f412"
+      },
+      {
+        "url": "/hacsfiles/light-entity-card/light-entity-card.js?hacstag=168744428500",
+        "type": "module",
+        "id": "11d4e0505645466d9df17a93e65970b3"
+      },
+      {
+        "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js?hacstag=1448997001721",
+        "type": "module",
+        "id": "722b8c71b4a447a1acd66f5f25730fc3"
+      },
+      {
+        "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=1485208381164",
+        "type": "module",
+        "id": "89ed7fa9bc084de29497b6de131617ac"
+      },
+      {
+        "url": "/hacsfiles/lovelace-notify-card/notify-card.js?hacstag=3589626564459742",
+        "type": "module",
+        "id": "49cf12e6888e4281863642b9fa69166b"
+      },
+      {
+        "url": "/hacsfiles/github-flexi-card/github-flexi-card.js?hacstag=302895020200",
+        "type": "module",
+        "id": "75bad51ab97146a48a998fea3a29aafd"
+      },
+      {
+        "url": "/local/custom_cards/icloud3-event-log-card.js",
+        "type": "module",
+        "id": "2b0d30462ae5405e9e330082e57465d4"
+      },
+      {
+        "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325342",
+        "type": "module",
+        "id": "758325f64d2a41b788a9e131b6d88670"
+      },
+      {
+        "url": "/hacsfiles/decluttering-card/decluttering-card.js?hacstag=188686483063",
+        "type": "module",
+        "id": "51a825bbec37424098e42c67c43d5c20"
+      },
+      {
+        "url": "/hacsfiles/custom-ui/custom-ui.js?hacstag=267558148202204191",
+        "type": "module",
+        "id": "955a8cabed9c46389034090a4f7b410d"
+      },
+      {
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375200",
+        "type": "module",
+        "id": "37f29e0b4392454c9d513399462a95c9"
+      },
+      {
+        "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242",
+        "type": "module",
+        "id": "4f77142841d244b28f80a31c15a8ebbe"
+      }
+    ]
+  }
 }

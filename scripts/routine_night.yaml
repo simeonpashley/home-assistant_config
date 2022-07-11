@@ -1,0 +1,19 @@
+routine_night:
+  alias: Routine / Good Night
+  sequence:
+    # check doors and windows
+    - service: script.turn_on
+      entity_id: script.doors_windows_check
+      # turn off media
+    - service: media_player.turn_off
+      entity_id:
+        - media_player.50dx700_series
+        - media_player.simeon_s_echo_dot
+
+    # turn off lights
+    - service: switch.turn_off
+      entity_id:
+        - switch.tradfi_001
+        - switch.tradfi_002
+        - switch.tradfi_003
+  mode: single
