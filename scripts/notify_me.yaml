@@ -7,5 +7,4 @@ notify_me:
       data:
         who: "simeon"
         title: "{{ message }}"
-        value1: "{{ message }}"
         target_id: !secret telegram_bot_chat_id

@@ -1,0 +1,41 @@
+automation:
+  - id: "battery_charge_up"
+    initial_state: on
+    alias: "Battery Charge Up"
+    trigger:
+      - platform: numeric_state
+        entity_id:
+          - sensor.office_blind_battery
+        below: 30
+        for: "03:00:00"
+    action:
+      service: script.notify_me
+      data:
+        message: "The {{ trigger.to_state.name }} is at {{ trigger.to_state.state }}% battery, it needs charging"
+  - id: "battery_charge_alt"
+    initial_state: on
+    alias: "Battery Charge Alt"
+    trigger:
+      - platform: numeric_state
+        entity_id:
+          - sensor.front_door_battery
+        below: 30
+        for: "03:00:00"
+    action:
+      service: script.notify_me
+      data:
+        message: "The {{ trigger.to_state.name }} is at {{ trigger.to_state.state }}% battery, start charging the spare"
+  - id: "battery_2032"
+    initial_state: on
+    alias: "Battery CR2032"
+    trigger:
+      - platform: numeric_state
+        entity_id:
+          - sensor.0x00158d00080691ca_battery
+          - sensor.office_window_battery
+        below: 20
+        for: "03:00:00"
+    action:
+      service: script.notify_me
+      data:
+        message: "The {{ trigger.to_state.name }} is at {{ trigger.to_state.state }}% battery, it needs a CR2032"

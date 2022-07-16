@@ -8,6 +8,16 @@ input_number:
     unit_of_measurement: lx
     icon: mdi:light-flood-down
 
+sensor:
+  - platform: filter
+    name: LP5 5c1aad Luminance
+    unique_id: lp5_5c1aad_luminance
+    entity_id: sensor.esphome_web_5c1aad_illuminance
+    filters:
+      - filter: lowpass
+        time_constant: 5
+        precision: 0
+
 template:
   - binary_sensor:
       - name: "Front Low Light"
@@ -29,7 +39,7 @@ template:
 #       data:
 #         who: "simeon"
 #         title: "* Charge 330e with solar *"
-#         value1: 'Solar production is maintaining {{ states("sensor.lp20_inverter_power")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
+#         value1: 'Solar production is maintaining {{ states("sensor.lp20_solar_production_poll")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
 #         target_id: !secret telegram_bot_chat_id
 #         group: duties
 #         tag_id: "information"

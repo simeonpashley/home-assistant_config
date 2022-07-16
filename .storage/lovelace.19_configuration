@@ -9,9 +9,9 @@
       "views": [
         {
           "theme": "Backend-selected",
-          "title": "Status",
-          "path": "test",
-          "icon": "mdi:feature-search-outline",
+          "title": "Admin Home",
+          "path": "admin-home",
+          "icon": "mdi:cone",
           "badges": [
             {
               "entity": "switch.pi_hole"
@@ -23,6 +23,41 @@
               "entity": "input_boolean.quiet_time"
             }
           ],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-cover-card",
+                  "entity": "cover.office_blind",
+                  "name": "Office Blinds",
+                  "show_position_control": true,
+                  "show_buttons_control": false
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    "automation.office_blind_manager"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "switch.shelly_airing_switch_0",
+                "sensor.shelly_airing_switch_0_energy",
+                "sensor.shelly_airing_switch_0_power"
+              ]
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Status",
+          "path": "test",
+          "icon": "mdi:feature-search-outline",
+          "badges": [],
           "cards": [
             {
               "type": "custom:auto-entities",

@@ -12,25 +12,6 @@ input_boolean:
     name: Guest Mode
     icon: mdi:account-multiple
 
-  # PRESENSE DETECTION
-  simeon_presense:
-    name: Simeon
-    icon: mdi:account
-  claire_presense:
-    name: Claire
-    icon: mdi:account
-  eleanor_presense:
-    name: Eleanor
-    icon: mdi:account
-  isabelle_presense:
-    name: Isabelle
-    icon: mdi:account
-
-  toggle_guest_presense:
-    name: "Toggle Guest Presense"
-    icon: mdi:account-convert
-    initial: off
-
   simeon_in_office:
     name: Simeon in office
     icon: mdi:account-hard-hat-outline
@@ -69,7 +50,11 @@ binary_sensor:
         friendly_name: "Claire"
         device_class: presence
         value_template: >-
-          {{ is_state('input_boolean.claire_presense', 'on') }}
+          {% if (states('person.claire')|lower in ['home', 'undefined', 'unknown']) %}
+            true
+          {% else %}
+            false
+          {% endif %}
         icon_template: >-
           {% if is_state('binary_sensor.claire_presense','on') %} mdi:home-account
           {% else %} mdi:home-outline
@@ -78,7 +63,11 @@ binary_sensor:
         friendly_name: "Eleanor"
         device_class: presence
         value_template: >-
-          {{ is_state('input_boolean.eleanor_presense', 'on') }}
+          {% if (states('person.eleanor')|lower in ['home', 'undefined', 'unknown']) %}
+            true
+          {% else %}
+            false
+          {% endif %}
         icon_template: >-
           {% if is_state('binary_sensor.eleanor_presense','on') %} mdi:home-account
           {% else %} mdi:home-outline
@@ -87,7 +76,11 @@ binary_sensor:
         friendly_name: "Isabelle"
         device_class: presence
         value_template: >-
-          {{ is_state('input_boolean.isabelle_presense', 'on') }}
+          {% if (states('person.isabelle')|lower in ['home', 'undefined', 'unknown']) %}
+            true
+          {% else %}
+            false
+          {% endif %}
         icon_template: >-
           {% if is_state('binary_sensor.isabelle_presense','on') %} mdi:home-account
           {% else %} mdi:home-outline

@@ -1,8 +1,0 @@
-platform: filter
-name: LP20 Solar Production
-unique_id: lp20_inverter_power
-entity_id: sensor.solar_production
-filters:
-  - filter: lowpass
-    time_constant: 20
-    precision: 0

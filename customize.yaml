@@ -27,8 +27,13 @@ sensor.gosundplug05_power:
   friendly_name: Washer Power
   icon: mdi:washing-machine
 
-switch.gosundplug07:
-  friendly_name: Plug 7
+cover.office_blind:
+  assumed_state: false
+  icon: mdi:blinds
+
+binary_sensor.office_window_contact:
+  device_class: window
+  icon: mdi:window-open
 
 #########################################################
 #                                                       #

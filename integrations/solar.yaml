@@ -1,0 +1,84 @@
+# Capture the solar production at regular intervals so it can
+# be pass through a low-pass filter, which processes a number of events (not time)
+input_number:
+  solar_production_poll_1m:
+    name: Solar Production Poll 1m
+    icon: mdi:solar-power-variant-outline
+    initial: 0
+    min: 0
+    max: 999999
+    unit_of_measurement: "W"
+
+automation:
+  - id: solar_production_poll_1m
+    alias: Solar Production poll 1m
+    description: Capture solar production at fixed intervals for feeding into filters, rounded to constrain updates
+    trigger:
+      - platform: time_pattern
+        minutes: "/1"
+    action:
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.solar_production_poll_1m
+          value: >
+            {{ (((states('sensor.solar_production') | int(0)) / 10) | round ) * 10 }}
+    mode: single
+
+template:
+  - sensor:
+      - name: "Solar Production"
+        unique_id: solar_production
+        state_class: measurement
+        # WAS "energy" but doesn't match "W"| device_class: energy
+        device_class: power
+        unit_of_measurement: "W"
+        icon: mdi:solar-power-variant-outline
+        state: "{{(states('sensor.smappee_solar_c') | int)}}"
+  - sensor:
+      - name: "Solar Exported Power W"
+        unique_id: solar_exported_power_w
+        state_class: measurement
+        device_class: power
+        unit_of_measurement: "W"
+        icon: mdi:flash-outline
+        state: >
+          {% if (states('sensor.grid_power') | int(0)) < 0 %}
+            {{ -(states('sensor.grid_power') | int(0)) }}
+          {% else %}
+            0
+          {% endif %}
+
+sensor:
+  - platform: integration
+    source: sensor.solar_exported_power_w
+    method: left
+    unit_prefix: k
+    name: solar_exported_power_kwh
+  - platform: integration
+    source: sensor.solar_production
+    method: left
+    unit_prefix: k
+    name: solar_production_kwh
+  - platform: filter
+    name: LP20 Solar Production Poll
+    unique_id: lp20_solar_production_poll_1m
+    entity_id: input_number.solar_production_poll_1m
+    filters:
+      - filter: lowpass
+        time_constant: 20
+        precision: 0
+  - platform: filter
+    name: LP20 Solar Production
+    unique_id: lp20_inverter_power
+    entity_id: sensor.solar_production
+    filters:
+      - filter: lowpass
+        time_constant: 20
+        precision: 0
+  - platform: filter
+    name: LP20 Solar Exported Power
+    entity_id: sensor.solar_exported_power_w
+    filters:
+      - filter: lowpass
+        time_constant: 20
+        precision: 0

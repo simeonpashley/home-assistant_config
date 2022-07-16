@@ -1,0 +1,250 @@
+input_number:
+  office_blind_solar_above:
+    name: Office Blind Solar Above
+    icon: mdi:weather-sunny
+    min: 0
+    max: 3000
+    initial: 600
+
+input_boolean:
+  office_blind_automation:
+    initial: true
+  hot_day:
+    initial: false
+
+sensor:
+  - platform: template
+    sensors:
+      office_blind_position:
+        friendly_name: "Office Blind Position"
+        value_template: "{{ state_attr('cover.office_blind', 'current_position') | int}}"
+        unit_of_measurement: "%"
+        icon_template: mdi:blinds
+      # sunrise:
+      #   value_template: "{{ ((as_timestamp(state_attr('sun.sun', 'next_rising'))) | timestamp_local) [11:16] }}"
+      #   friendly_name: "sunrise"
+      # sunset:
+      #   value_template: "{{ ((as_timestamp(state_attr('sun.sun', 'next_setting'))) | timestamp_local) [11:16] }}"
+      #   friendly_name: "sunset"
+      solar_azimuth:
+        friendly_name: "Sun azimuth"
+        unit_of_measurement: "degrees"
+        value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
+
+automation:
+  - id: 94ac7281-77dc-497c-8f8f-8d9a2c64662a
+    alias: turn off hot_day when sun goes downs
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: sun.sun
+        from: "above_horizon"
+        to: "below_horizon"
+    condition:
+      - condition: state
+        entity_id: input_boolean.hot_day
+        state: "on"
+      - condition: state
+        entity_id: sun.sun
+        state: "below_horizon"
+    action:
+      - service: input_boolean.turn_off
+        entity_id:
+          - input_boolean.hot_day
+  - id: office_blind_manager
+    alias: office blind manager
+    trigger:
+      - platform: state
+        entity_id: sun.sun
+      - platform: state
+        entity_id: person.simeon
+        to: "away"
+        for:
+          minutes: 10
+    condition:
+      - condition: state
+        entity_id: input_boolean.office_blind_automation
+        state: "on"
+    action:
+      - choose:
+          # close - sun is below horizon AND blind is up
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    above: 80
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "below_horizon"
+            sequence:
+              - service: script.close_office_blind_10
+          # close - i am away AND blind is up
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    above: 80
+                  - condition: state
+                    entity_id: person.simeon
+                    state: "away"
+            sequence:
+              - service: script.close_office_blind_10
+          # close - sun is strong and facing office window
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.hot_day
+                    state: "off"
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    above: 10
+                  - condition: numeric_state
+                    entity_id: sensor.solar_azimuth
+                    above: 0
+                    below: 170
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "above_horizon"
+                  - condition: template
+                    value_template: >-
+                      {{ (is_state('sensor.openweathermap_condition', 'sunny') or is_state('sensor.openweathermap_condition', 'partlycloudy')) }}
+                  - condition: numeric_state
+                    entity_id: sensor.lp20_solar_production_poll
+                    above: 600
+            sequence:
+              - data:
+                  entity_id: input_boolean.hot_day
+                service: input_boolean.turn_on
+              - service: script.close_office_blind_10
+          # open - after hot_day
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.hot_day
+                    state: "on"
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "above_horizon"
+                  - condition: or
+                    conditions:
+                      - condition: template
+                        value_template: >-
+                          {{ not (is_state('sensor.openweathermap_condition', 'sunny') or is_state('sensor.openweathermap_condition', 'partlycloudy')) }}
+                      - condition: numeric_state
+                        entity_id: sensor.solar_azimuth
+                        above: 170
+                      - condition: numeric_state
+                        entity_id: sensor.lp20_solar_production_poll
+                        below: 500
+            sequence:
+              - data:
+                  entity_id: input_boolean.hot_day
+                service: input_boolean.turn_off
+              - service: script.open_office_blind_10
+          # work day - open early
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.hot_day
+                    state: "off"
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    below: 15
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "above_horizon"
+                  - condition: time
+                    after: "07:30"
+                  - condition: time
+                    weekday:
+                      - mon
+                      - tue
+                      - wed
+                      - thu
+                      - fri
+            sequence:
+              - service: script.open_office_blind_10
+          #  open
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.hot_day
+                    state: "off"
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    below: 15
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "above_horizon"
+                  - condition: time
+                    after: "10:00"
+            sequence:
+              - service: script.open_office_blind_10
+
+  # - id: 8edbe5db-b2ab-4b7e-862a-eeae8a498a4e
+  #   alias: "Office blinds close"
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: "00:05:00"
+  #     # - platform: numeric_state
+  #     #   entity_id: sensor.dining_room_stairs_motion_sensor_illuminance
+  #     #   above: 400
+  #     #   for:
+  #     #     minutes: 2
+  #     - platform: state
+  #       entity_id: person.simeon
+  #       to: "away"
+  #       for:
+  #         seconds: 120
+  #     - platform: state
+  #       entity_id: input_select.home_mode
+  #       to: "Away"
+  #       for:
+  #         seconds: 120
+  #     - platform: state
+  #       entity_id: input_select.home_mode
+  #       to: "Vacation"
+  #       for:
+  #         seconds: 120
+  #   action:
+  #     - service: script.close_office_blind_10
+
+script:
+  set_office_blind:
+    mode: queued
+    sequence:
+      - data:
+          entity_id: cover.office_blind
+          position: "{{ position }}"
+        service: cover.set_cover_position
+      - service: script.notify_me
+        data:
+          message: "Office blind set to {{ position }}"
+  close_office_blind_10:
+    alias: "lower office blind to 10% to avoid sun"
+    sequence:
+      - condition: numeric_state
+        entity_id: sensor.office_blind_position
+        above: 10
+      - data:
+          position: "10"
+        service: script.set_office_blind
+  open_office_blind_10:
+    alias: "open office blind to 100%"
+    sequence:
+      - condition: numeric_state
+        entity_id: sensor.office_blind_position
+        below: 100
+      - data:
+          position: "100"
+        service: script.set_office_blind
+      - data:
+          entity_id: input_boolean.hot_day
+        service: input_boolean.turn_off

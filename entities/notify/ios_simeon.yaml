@@ -1,4 +1,0 @@
-platform: group
-name: ios_simeon
-services:
-  - service: mobile_app_sp12

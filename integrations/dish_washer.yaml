@@ -42,23 +42,7 @@ automation:
                   option: "Off"
                 entity_id: input_select.dishwasher_state
 
-          # Machine Turned on
-          - conditions:
-              - condition: and
-                conditions:
-                  - condition: state
-                    entity_id: input_select.dishwasher_state
-                    state: "Off"
-                  - condition: numeric_state
-                    entity_id: sensor.gosundplug06_power
-                    above: 1
-            sequence:
-              - service: input_select.select_option
-                data:
-                  option: "Idle"
-                entity_id: input_select.dishwasher_state
-
-          # Machine Washing - above 5w for 5min
+          # Machine Washing - above 5w
           - conditions:
               - condition: and
                 conditions:
@@ -77,38 +61,22 @@ automation:
                         entity_id: input_select.dishwasher_state
                         state: "Done"
             sequence:
-              - wait_for_trigger:
-                  - platform: numeric_state
-                    entity_id: sensor.gosundplug06_power
-                    above: 5
-                    for:
-                      minutes: 5
               - service: input_select.select_option
                 data:
                   option: "Washing"
                 entity_id: input_select.dishwasher_state
 
-          # Machine Done - below 5w for 5min
+          # Machine Done - below 5w
           - conditions:
               - condition: and
                 conditions:
                   - condition: numeric_state
                     entity_id: sensor.gosundplug06_power
                     below: 5
-                  - condition: or
-                    conditions:
-                      - condition: state
-                        entity_id: input_select.dishwasher_state
-                        state: "Washing"
+                  - condition: state
+                    entity_id: input_select.dishwasher_state
+                    state: "Washing"
             sequence:
-              - wait_for_trigger:
-                  - platform: numeric_state
-                    entity_id: sensor.gosundplug06_power
-                    below: 5
-                    for:
-                      minutes: 5
-                continue_on_timeout: true
-                timeout: "1:01"
               - service: input_select.select_option
                 data:
                   option: "Done"
@@ -116,5 +84,21 @@ automation:
               - service: script.notify_me
                 data:
                   message: "Good News! The dishwasher is done"
+
+          # Machine Turned on
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity_id: input_select.dishwasher_state
+                    state: "Off"
+                  - condition: numeric_state
+                    entity_id: sensor.gosundplug06_power
+                    above: 1
+            sequence:
+              - service: input_select.select_option
+                data:
+                  option: "Idle"
+                entity_id: input_select.dishwasher_state
 
         default: []

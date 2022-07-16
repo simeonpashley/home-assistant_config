@@ -39,8 +39,6 @@ notify_engine:
     - service: >
         {% if who == 'simeon' %}
           notify.simeon_devices
-        {% elif who == 'ios_simeon' %}
-             notify.ios_simeon 
         {% else %}
           notify.simeon_devices
         {% endif %}
@@ -57,8 +55,6 @@ notify_engine:
             hide-thumbnail: false
           url: "{{ clickAction | default }}"
           clickAction: "{{ clickAction | default }}"
-          apns_headers:
-            "apns-collapse-id": "{{ tag_id | default }}"
           group: "{{ group | default }}"
           tag: "{{ tag_id | default }}"
           # push:

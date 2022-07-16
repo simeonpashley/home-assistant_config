@@ -16,7 +16,7 @@ sensors:
             {%- if binary_sensor.state|string == "on" -%}    
               {{ binary_sensor.attributes.friendly_name
                 |replace("Sensor", "")
-                + "is open. "
+                + " is open. "
               }}
             {%- endif %}
           {%- endif %}
@@ -24,7 +24,7 @@ sensors:
             {%- if binary_sensor.state|string == "on" -%}    
               {{ binary_sensor.attributes.friendly_name
                 |replace("Sensor", "")
-                + "is open. "
+                + " is open. "
               }}
             {%- endif %}
           {%- endif %}
