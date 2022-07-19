@@ -7,15 +7,6 @@ trigger:
   for:
     minutes: 30
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "*Car unlocked*"
-      value1: "You have left the 330e unlocked"
-      target_id: !secret telegram_bot_chat_id
-      group: duties
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "true"
-  #    timeout: ''
+      message: "*Car unlocked* You have left the 330e unlocked"

@@ -9,15 +9,6 @@ trigger:
   for:
     minutes: 45
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "*Car window open*"
-      value1: "You have left the windows open on the 330e"
-      target_id: !secret telegram_bot_chat_id
-      group: duties
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "true"
-  #    timeout: ''
+      message: "*Car window open* You have left the windows open on the 330e"

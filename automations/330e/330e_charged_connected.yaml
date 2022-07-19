@@ -13,16 +13,7 @@ condition:
       entity_id: input_boolean.text_notifications
       state: "on"
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "*330e charged and connected*"
-      value1: "330e is charged, it can be disconnected"
-      target_id: !secret telegram_bot_chat_id
-      group: duties
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "true"
-  #    timeout: ''
+      message: "330e is charged, it can be disconnected"
   - delay: 7200 # seconds until next trigger, to mitigate too many messages

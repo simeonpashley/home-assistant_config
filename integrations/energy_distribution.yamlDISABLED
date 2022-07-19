@@ -1,0 +1,493 @@
+### # iocage # v2021.2
+######################################
+###                                ###
+###     +++   PACKAGE   +++        ###
+###     Energy_Distribution.yaml   ###
+###                                ###
+######################################
+
+### energy consumption allocation based on battery debt concept ###
+### gives energy consumers the freedom to use battery as a buffer, up to a specific and dynamic "debt" threshold
+### Consumers can freely use available stored and live generated energy, depending on set priorities
+
+### Energy Consumption per consumer:
+# EV charge : via fibaro smart ipmlant (switch.ev_charging_authorization) -> consumption set to max 2.3kWh (10A x 230V)
+# hot water: via Sonoff 4ch ID01 -> consumption max. 2kWh, manually set via "bridge" on hot water boiler electronics
+# depending on exterior temperature, etc.
+
+#################################
+###          -+SECTION+-      ###
+###           Automation      ###
+#################################
+automation:
+  #  General automations  #
+  #########################
+
+  - alias: "(energy control) auto set prio consumer"
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        minutes: "/1"
+    condition:
+      - condition: state
+        entity_id: input_boolean.consumer_auto_prio
+        state: "on"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.prio1_consumer
+          option: >
+            {% if is_state('binary_sensor.auth_hot_water','on') %}
+              hot water
+            {% else %}
+              ev charge
+            {% endif %}
+      - delay: "00:00:01"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.prio2_consumer
+          option: >
+            {% if is_state('input_select.prio1_consumer', 'hot water') %}
+              ev charge
+            {% else %}
+              hot water
+            {% endif %}
+    # calculation of "energy debt" value, based on weather forecast
+  - alias: "(energy control) dynamic change of energy debt ratio"
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: sensor.openweathermap_condition
+      - platform: state
+        entity_id: sensor.period_of_day
+        to: "day"
+    action:
+      - service: input_number.set_value
+        data_template:
+          value: >
+            {% if is_state('sensor.openweathermap_condition', 'partlycloudy') %}
+              70
+            {% elif is_state('sensor.openweathermap_condition', 'sunny') %}
+              90
+            {% else %}
+              50
+            {% endif %}
+          entity_id: input_number.dynamic_battery_debt
+
+  ###       START & CHANGE       ###
+  ##################################
+
+  - alias: "(energy control) dynamically authorize energy consumers"
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.auth_hot_water
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.auth_ev_charge
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.water_hot
+        to: "on"
+      - platform: template
+        value_template: "{{ states.sensor.grid_imported_power_w.state | int < -500 }}"
+        for:
+          minutes: 2
+      - platform: template
+        value_template: "{{ states.sensor.grid_imported_power_w.state | int < -400 }}"
+        for:
+          minutes: 5
+      - platform: template
+        value_template: "{{ states.sensor.grid_imported_power_w.state | int < -300 }}"
+        for:
+          minutes: 8
+      - platform: template
+        value_template: "{{ states.sensor.grid_imported_power_w.state | int < -200 }}"
+        for:
+          minutes: 11
+    condition:
+      - condition: state
+        entity_id: input_boolean.energy_flow_auto_control
+        state: "on"
+      - condition: template
+        value_template: "{{ states.sensor.grid_imported_power_w.state | int < 100 }}"
+      - condition: template
+        value_template: "{{ not is_state('sensor.dynamic_priority_consumer', 'no consumer authorized') }}"
+    action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ not is_state('sensor.dynamic_priority_consumer', 'hot water') }}"
+              - condition: state
+                entity_id: sensor.dynamic_priority_consumer
+                state: "ev charge"
+            sequence:
+              - service: switch.turn_on
+                entity_id: switch.ev_charging_authorization
+          - conditions:
+              - condition: state
+                entity_id: sensor.dynamic_priority_consumer
+                state: "hot water"
+            sequence:
+              - service: switch.turn_on
+                entity_id: switch.switch.hot_water_boiler_3kwh_switch_0
+      - condition: state
+        entity_id: input_boolean.energy_audio_notifications
+        state: "on"
+      - service: persistent_notification.create
+        data_template:
+          message: >
+            "{{ trigger.entity_id }} changed from {{trigger.from_state.state }} to {{trigger.to_state.state }}"
+          title: "new authorization of energy consumers"
+
+  #
+  ###         STOP Orders     ###
+  ###############################
+
+  - alias: "(energy control) turn off consumers when power missing"
+    initial_state: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.grid_imported_power_w
+        above: 300
+        for:
+          minutes: 1
+    condition:
+      - condition: state
+        entity_id: input_boolean.energy_flow_auto_control
+        state: "on"
+      - condition: template
+        value_template: "{{ not is_state('sensor.dynamic_shutdown_consumer', '_no_consumer_activated_') }}"
+    action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ is_state('sensor.dynamic_shutdown_consumer', 'hot water') }}"
+            sequence:
+              - service: switch.turn_off
+                entity_id: switch.switch.hot_water_boiler_3kwh_switch_0
+          - conditions:
+              - condition: template
+                value_template: "{{ is_state('sensor.dynamic_shutdown_consumer', 'ev charge') }}"
+            sequence:
+              - service: switch.turn_off
+                entity_id: switch.ev_charging_authorization
+
+##########################
+###      Sensors       ###
+##########################
+
+sensor:
+  # dynamic priority consumer
+  - platform: template
+    sensors:
+      dynamic_priority_consumer:
+        friendly_name: "waiting for activation:"
+        value_template: >
+          {% if is_state('input_select.prio1_consumer', 'hot water')  %}
+            {% if is_state('binary_sensor.auth_hot_water', 'on') %}
+              hot water
+            {% elif is_state('input_select.prio2_consumer', 'ev charge') and is_state('binary_sensor.auth_ev_charge', 'on') %}
+              ev charge
+            {%else%}
+              no consumer authorized
+            {% endif %}
+          {% elif is_state('input_select.prio1_consumer', 'ev charge')  %}
+            {% if is_state('binary_sensor.auth_ev_charge', 'on') %}
+              ev charge
+            {% elif is_state('input_select.prio2_consumer', 'hot water') and is_state('binary_sensor.auth_hot_water', 'on') %}
+              hot water
+            {%else%}
+              no consumer authorized
+            {% endif %}
+          {% endif %}
+
+      # dynamic shutdown consumer
+      dynamic_shutdown_consumer:
+        friendly_name: "ready for shutdown:"
+        value_template: >
+          {% if is_state('switch.switch.hot_water_boiler_3kwh_switch_0', 'on') or is_state('switch.ev_charging_authorization', 'on') %}
+            {% if is_state('input_select.prio2_consumer', 'hot water') and is_state('switch.switch.hot_water_boiler_3kwh_switch_0', 'on') %}
+                hot water
+            {% elif is_state('input_select.prio2_consumer', 'ev charge') and is_state('switch.ev_charging_authorization', 'on') and 
+              not is_state('input_boolean.ev_charge_override','on') and not is_state('timer.ev_battery_top_up','active') %}
+                ev charge
+            {% elif is_state('input_select.prio1_consumer', 'hot water') and is_state('switch.switch.hot_water_boiler_3kwh_switch_0', 'on') %}
+                hot water
+            {% elif is_state('input_select.prio1_consumer', 'ev charge') and is_state('switch.ev_charging_authorization', 'on') and
+            not is_state('input_boolean.ev_charge_override','on') and not is_state('timer.ev_battery_top_up','active') %}
+                ev charge
+            {% else %} 
+              _manual_consumer_active_
+            {% endif %}
+          {% else %}
+            _no_consumer_activated_
+          {% endif %}
+  # rest calls - values from Fronius inverters
+  - platform: rest
+    resource: http://192.168.1.31/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System
+    name: real time AC production est
+    value_template: "{{value_json.Body.Data.PAC.Values['1'] | int }}"
+    unit_of_measurement: "W"
+    scan_interval: 15
+
+  - platform: rest
+    resource: http://192.168.1.32/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: gross AC production PV ouest
+    value_template: "{{value_json.Body.Data.Site['P_PV']  | int  }}"
+    unit_of_measurement: "W"
+    scan_interval: 15
+
+  - platform: rest
+    resource: http://192.168.1.32/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: net household grid injection
+    value_template: "{{value_json.Body.Data.Site['P_Load']  | int  }}"
+    unit_of_measurement: "W"
+    scan_interval: 15
+
+  - platform: rest
+    resource: http://192.168.1.32/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: power from public grid
+    value_template: "{{value_json.Body.Data.Site['P_Grid']  | int  }}"
+    unit_of_measurement: "W"
+    scan_interval: 15
+
+  - platform: rest
+    resource: http://192.168.1.32/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System
+    name: net AC production PV ouest
+    value_template: "{{value_json.Body.Data.PAC.Values['1'] | int }}"
+    unit_of_measurement: "W"
+    scan_interval: 15
+
+  - platform: rest
+    resource: http://192.168.1.32/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+    name: Battery SOC
+    unit_of_measurement: "%"
+    value_template: "{{value_json.Body.Data.Inverters['1']['SOC'] | int }}"
+    scan_interval: 60
+
+  # other calculated values
+  - platform: template
+    sensors:
+      cumulated_gross_real_time_production:
+        friendly_name: "cumulated gross PV real time production"
+        value_template: "{{ states.sensor.real_time_ac_production_est.state | int + states.sensor.gross_ac_production_pv_ouest.state | int }}"
+        unit_of_measurement: "W"
+
+  - platform: statistics
+    entity_id: sensor.cumulated_gross_real_time_production
+    name: cumulated production 5min
+    max_age:
+      minutes: 5
+    precision: 0
+
+  - platform: statistics
+    entity_id: sensor.cumulated_gross_real_time_production
+    name: cumulated production 30min
+    max_age:
+      minutes: 30
+    precision: 0
+
+  # total household power consumption WITHOUT battery charge -> gives consumers priority over battery charge
+  - platform: template
+    sensors:
+      household_power_consumption:
+        friendly_name: "real time household consumption excl. battery charge"
+        unit_of_measurement: "W"
+        value_template: >
+          {% if states.sensor.net_household_grid_injection.state  | int <= 0 %}
+            {{ states.sensor.net_household_grid_injection.state  | int | abs +  states.sensor.real_time_ac_production_est.state | int }}
+          {% elif states.sensor.net_household_grid_injection.state  | int > 0 %}
+            {{ states.sensor.real_time_ac_production_est.state | int - states.sensor.net_household_grid_injection.state  | int  }}
+          {%else%}
+            N/A
+          {%endif%}
+  - platform: statistics
+    entity_id: sensor.household_power_consumption
+    name: total household consumption 5min
+    max_age:
+      minutes: 5
+    precision: 0
+
+    # total household power consumption INCLUDING battery charge -> gives battery charge priority over anything else
+
+  - platform: template
+    sensors:
+      household_power_consumption:
+        friendly_name: "real time household consumption incl. battery charge"
+        unit_of_measurement: "W"
+        value_template: >
+          {{ states.sensor.household_power_consumption.state | int }}
+  - platform: statistics
+    entity_id: sensor.household_power_consumption
+    name: total household consumption 5min
+    max_age:
+      minutes: 5
+    precision: 0
+
+    # total household excess power EXCLUDING battery charge
+
+  - platform: template
+    sensors:
+      total_excess_household_power_excl_batt_charge:
+        friendly_name: "excess household power 5min mean excl batt"
+        unit_of_measurement: "W"
+        value_template: "{{ (states.sensor.cumulated_production_5min.state | int - states.sensor.total_household_consumption_5min.state | int) }}"
+
+    # total household excess power INCLUDING battery charge
+
+  - platform: template
+    sensors:
+      total_real_time_excess_household_power:
+        friendly_name: "excess household power"
+        unit_of_measurement: "W"
+        value_template: "{{ (states.sensor.cumulated_gross_real_time_production.state | int - states.sensor.household_power_consumption.state | int) }}"
+
+  - platform: template
+    sensors:
+      total_excess_household_power:
+        friendly_name: "excess household power (5min mean calc)"
+        unit_of_measurement: "W"
+        value_template: "{{ (states.sensor.cumulated_production_5min.state | int - states.sensor.total_household_consumption_5min.state | int) }}"
+
+  - platform: template
+    sensors:
+      remaining_daylight:
+        friendly_name: "Remaining Daylight in hours"
+        unit_of_measurement: "h"
+        value_template: "{{ '%.2f' |format ((as_timestamp(states.sun.sun.attributes.next_setting) - as_timestamp(now())) / 3600) }}"
+
+  - platform: template
+    sensors:
+      remaining_pv_light:
+        value_template: >
+          {% if is_state('sensor.season', 'summer') %}
+            {{'%.2f' |format (states.sensor.remaining_daylight.state | float -1.5) }}
+          {% else %}
+            {{'%.2f' |format (states.sensor.remaining_daylight.state | float -0.9) }}
+          {% endif %}
+  - platform: template
+    sensors:
+      remaining_pv_light_clock:
+        friendly_name: "remaining time for PV energy production"
+        unit_of_measurement: "h"
+        value_template: >
+          {% if is_state('sensor.season', 'summer') %}
+            {% set hours = states.sensor.remaining_daylight.state | float -1.5 %}
+            {% set minutes = ((hours % 1) * 60) | int %}
+            {% set hours = (hours - (hours % 1)) | int %}
+              {{ '%02i:%02i'%(hours, minutes) }}
+          {% elif is_state('sensor.season', 'winter') %}
+            {% set hours = states.sensor.remaining_daylight.state | float -1 %}
+            {% set minutes = ((hours % 1) * 60) | int %}
+            {% set hours = (hours - (hours % 1)) | int %}
+              {{ '%02i:%02i'%(hours, minutes) }}
+          {% else %}
+            {% set hours = states.sensor.remaining_daylight.state | float -1.3 %}
+            {% set minutes = ((hours % 1) * 60) | int %}
+            {% set hours = (hours - (hours % 1)) | int %}
+              {{ '%02i:%02i'%(hours, minutes) }}
+          {% endif %}
+
+###  Binary Sensors    ###
+##########################
+# authorization template sensor for energy consumers
+# "there's something I could do" = In need of energy and device is turned off
+binary_sensor:
+  - platform: template
+    sensors:
+      auth_hot_water:
+        friendly_name: "hot water production authorized"
+        value_template: >
+          {{   is_state('binary_sensor.water_hot', 'off') and
+              (
+                (
+                is_state('binary_sensor.pv_winter_period', 'off') and 
+                  ( is_state('switch.switch.hot_water_boiler_3kwh_switch_0', 'off')
+                  )
+                ) 
+                 or 
+                (
+                 is_state('binary_sensor.pv_winter_period', 'on') and 
+                 states('sensor.cumulated_production_5min') | int > 2500 and
+                 is_state('switch.switch.hot_water_boiler_3kwh_switch_0', 'off')
+                )
+              )
+          }}
+      auth_ev_charge:
+        friendly_name: "EV Charge authorized"
+        value_template: >
+          {{ states('sensor.330e_xdrive_charging_level_hv') | int < 95 and
+             is_state('switch.ev_charging_authorization', 'off') and
+              (
+                (
+                 states('sensor.cumulated_production_5min') | int > 2000 
+                ) 
+              )
+          }}
+
+      # switches
+      switch_hot_water:
+        value_template: "{{ is_state('switch.switch.hot_water_boiler_3kwh_switch_0','on') }}"
+        friendly_name: "Hot Water - Switch"
+      switch_ev_charge:
+        value_template: "{{ is_state('switch.ev_charging_authorization','on') }}"
+        friendly_name: "EV Charge Switch"
+      # hot water indicators
+      water_hot:
+        value_template: "{{ states('luxtronik.temperature_warm_water_actual') | float > 48 }}"
+        friendly_name: "water is hot at 48+ degrees"
+        device_class: heat
+      # pv winter period as of October 26th 2020 until February 16th 2021
+      pv_winter_period:
+        friendly_name: "Limited PV production"
+        value_template: >
+          {{ is_state('sensor.period_of_day','day') and
+             states('sensor.daylength') | int < 11
+          }}
+
+###############################
+###   Various Inputs        ###
+###############################
+
+input_boolean:
+  energy_flow_auto_control:
+    name: automatic SOC control
+    initial: on
+  consumer_auto_prio:
+    name: automatic priority adjustment
+    initial: on
+
+  energy_audio_notifications:
+    name: Notifications for energy events
+    initial: off
+    icon: mdi:bell-ring
+
+input_number:
+  dynamic_battery_debt:
+    name: dynamically calculated offset value for battery debt
+    initial: 10
+    min: 10
+    max: 100
+    step: 10
+
+    ###############################
+    ###   INPUT                 ###
+    ###############################
+
+input_select:
+  prio1_consumer:
+    name: Priority 1 consumer
+    options:
+      - ev charge
+      - hot water
+    initial: ev charge
+    icon: mdi:arrow-right-circle
+
+  prio2_consumer:
+    name: Priority 2 consumer
+    options:
+      - ev charge
+      - hot water
+    initial: hot water
+    icon: mdi:arrow-down-circle

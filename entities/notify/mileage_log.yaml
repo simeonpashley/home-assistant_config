@@ -5,5 +5,5 @@
 
 platform: file
 name: mileage_log
-filename: /root/config/www/csv_logs/mileage_log.csv
+filename: www/csv_logs/mileage_log.csv
 timestamp: false

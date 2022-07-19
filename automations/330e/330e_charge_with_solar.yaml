@@ -27,16 +27,9 @@ condition:
       entity_id: input_boolean.text_notifications
       state: "on"
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "* Charge 330e with solar *"
-      value1: 'Solar production is maintaining {{ states("sensor.lp20_solar_production_poll")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
-      target_id: !secret telegram_bot_chat_id
-      group: duties
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "true"
-  #    timeout: ''
+      message: |-
+        * Charge 330e with solar *
+        Solar production is maintaining {{ states("sensor.lp20_solar_production_poll")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
   - delay: 3600 # seconds until next trigger, to mitigate too many messages

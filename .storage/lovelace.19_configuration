@@ -45,9 +45,49 @@
             {
               "type": "entities",
               "entities": [
-                "switch.shelly_airing_switch_0",
-                "sensor.shelly_airing_switch_0_energy",
-                "sensor.shelly_airing_switch_0_power"
+                {
+                  "entity": "input_boolean.energy_flow_auto_control"
+                },
+                {
+                  "entity": "input_number.divert_on_above_solar_w"
+                },
+                {
+                  "entity": "sensor.cumulated_production_5min"
+                },
+                {
+                  "entity": "input_number.divert_off_above_grid_import"
+                },
+                {
+                  "entity": "sensor.grid_imported_power_w"
+                },
+                {
+                  "entity": "switch.hot_water_boiler_3kwh_switch_0",
+                  "name": "Immersion"
+                },
+                {
+                  "entity": "sensor.hot_water_boiler_3kwh_switch_0_power",
+                  "secondary_info": "last-updated",
+                  "name": "Immersion Power"
+                },
+                {
+                  "entity": "sensor.hot_water_boiler_3kwh_switch_0_energy",
+                  "name": "Immersion Energy Total"
+                },
+                {
+                  "entity": "binary_sensor.immersion_off_1min"
+                },
+                {
+                  "entity": "binary_sensor.auth_ev_charge"
+                },
+                {
+                  "entity": "binary_sensor.import_above_divert_off"
+                },
+                {
+                  "entity": "binary_sensor.auth_hot_water"
+                },
+                {
+                  "entity": "binary_sensor.330e_xdrive_charging_status"
+                }
               ]
             }
           ]
@@ -828,8 +868,12 @@
             {
               "type": "entities",
               "entities": [
-                "binary_sensor.0x00158d00080691ca_contact",
-                "binary_sensor.0x00158d0008482be9_contact"
+                {
+                  "entity": "binary_sensor.0x00158d00080691ca_contact"
+                },
+                {
+                  "entity": "binary_sensor.office_window_contact"
+                }
               ]
             }
           ]

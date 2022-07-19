@@ -73,12 +73,12 @@ automation:
                 conditions:
                   - condition: numeric_state
                     entity_id: sensor.office_blind_position
-                    above: 80
+                    above: 0
                   - condition: state
                     entity_id: sun.sun
                     state: "below_horizon"
             sequence:
-              - service: script.close_office_blind_10
+              - service: script.close_office_blind
           # close - i am away AND blind is up
           - conditions:
               - condition: and
@@ -144,7 +144,7 @@ automation:
               - data:
                   entity_id: input_boolean.hot_day
                 service: input_boolean.turn_off
-              - service: script.open_office_blind_10
+              - service: script.open_office_blind_100
           # work day - open early
           - conditions:
               - condition: and
@@ -168,7 +168,7 @@ automation:
                       - thu
                       - fri
             sequence:
-              - service: script.open_office_blind_10
+              - service: script.open_office_blind_100
           #  open
           - conditions:
               - condition: and
@@ -185,19 +185,21 @@ automation:
                   - condition: time
                     after: "10:00"
             sequence:
-              - service: script.open_office_blind_10
-
+              - service: script.open_office_blind_100
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity_id: sensor.office_blind_position
+                    above: 0
+                  - condition: state
+                    entity_id: sun.sun
+                    state: "below_horizon"
+            sequence:
+              - service: script.open_office_blind
   # - id: 8edbe5db-b2ab-4b7e-862a-eeae8a498a4e
   #   alias: "Office blinds close"
   #   trigger:
-  #     - platform: sun
-  #       event: sunset
-  #       offset: "00:05:00"
-  #     # - platform: numeric_state
-  #     #   entity_id: sensor.dining_room_stairs_motion_sensor_illuminance
-  #     #   above: 400
-  #     #   for:
-  #     #     minutes: 2
   #     - platform: state
   #       entity_id: person.simeon
   #       to: "away"
@@ -214,7 +216,7 @@ automation:
   #       for:
   #         seconds: 120
   #   action:
-  #     - service: script.close_office_blind_10
+  #     - service: script.close_office_blind
 
 script:
   set_office_blind:
@@ -227,6 +229,15 @@ script:
       - service: script.notify_me
         data:
           message: "Office blind set to {{ position }}"
+  close_office_blind:
+    alias: "lower office blind"
+    sequence:
+      - condition: numeric_state
+        entity_id: sensor.office_blind_position
+        above: 0
+      - data:
+          position: "0"
+        service: script.set_office_blind
   close_office_blind_10:
     alias: "lower office blind to 10% to avoid sun"
     sequence:
@@ -236,7 +247,7 @@ script:
       - data:
           position: "10"
         service: script.set_office_blind
-  open_office_blind_10:
+  open_office_blind_100:
     alias: "open office blind to 100%"
     sequence:
       - condition: numeric_state

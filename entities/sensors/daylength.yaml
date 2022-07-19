@@ -1,0 +1,34 @@
+platform: template
+sensors:
+  daylength:
+    friendly_name: "Day Length"
+    unit_of_measurement: "Hours"
+    value_template: >-
+      {% set nw = as_timestamp(now()) %}
+      {% set mn = as_timestamp(state_attr('sun.sun','next_midnight')) - (2*60) %}
+      {% if nw |timestamp_custom('%H:%M') == mn |timestamp_custom('%H:%M') %}
+      {{ (as_timestamp(state_attr('sun.sun','next_setting')) - as_timestamp(state_attr('sun.sun','next_rising'))) |timestamp_custom('%H:%M,false') }}
+      {% endif %}
+    icon_template: mdi:weather-sunny
+  period_of_day:
+    friendly_name: "period of the day"
+    value_template: >-
+      {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+        dusk
+      {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+        dawn
+      {% elif (states.sun.sun.attributes.elevation) < -4 %}
+        night
+      {% else %}
+        day
+      {% endif %}
+    icon_template: >-
+      {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+        mdi:weather-sunset-down
+      {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+        mdi:weather-sunset-up
+      {% elif (states.sun.sun.attributes.elevation) < -4 %}
+        mdi:weather-night
+      {% else %}
+        mdi:weather-sunny
+      {% endif %}

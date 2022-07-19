@@ -6,5 +6,5 @@ notify_me:
     - service: script.notify_engine
       data:
         who: "simeon"
-        title: "{{ message }}"
+        message: "{{ message }}"
         target_id: !secret telegram_bot_chat_id

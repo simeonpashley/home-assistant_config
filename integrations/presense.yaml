@@ -13,8 +13,16 @@ input_boolean:
     icon: mdi:account-multiple
 
   simeon_in_office:
+    initial: false
     name: Simeon in office
     icon: mdi:account-hard-hat-outline
+
+  claire_presense:
+    initial: false
+  eleanor_presense:
+    initial: false
+  isabelle_presense:
+    initial: false
 
 group:
   family_presense:
@@ -146,7 +154,9 @@ automation:
       - service: script.appliances_off # turn off any devices that were left on
       - service: script.notify_me
         data:
-          message: "*Home Status* There are {{ states('sensor.n_people_home') }} people at home now."
+          message: |-
+            *Home Status*
+            There are {{ states('sensor.n_people_home') }} people at home now.
       - service: input_boolean.turn_on
         entity_id: input_boolean.sentry_mode
 
@@ -293,6 +303,25 @@ automation:
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.isabelle_presense
+
+  - id: 205b31f7-3992-4d85-99a4-9c988ace7e36
+    alias: Simeon in office
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: sensor.gosundplug10_power # Office Monitor
+    action:
+      - choose:
+          - conditions:
+              - condition: numeric_state
+                entity_id: sensor.gosundplug10_power
+                above: 6
+            sequence:
+              - service: input_boolean.turn_on
+                entity_id: input_boolean.simeon_in_office
+        default:
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.simeon_in_office
 
 script:
   #########################################################

@@ -10,19 +10,12 @@ trigger:
   at: "23:59:50"
 
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "☀️⚡️🔥 Energy Usage "
-      value1: "Today's energy use was:
+      message: |-
+        ☀️⚡️🔥 Energy Usage
+        Today's energy use was:
         ⚡️ Grid imported: {{ states('sensor.grid_imported_power_daily')|round(1, 'ceil') }}kWh  (API £{{ states('sensor.electric_cost_today')|round(2, 'ceil') }})
         ☀️ Solar exported: {{ states('sensor.solar_exported_power_daily')|round(1, 'ceil') }}kWh (£{{ states('sensor.solar_exported_power_daily_compensation')|round(2, 'ceil') }})
         ☀️ Solar production: {{ states('sensor.solar_production_daily')|round(1, 'ceil') }}kWh
         🔥 Gas: API £{{ states('sensor.gas_cost_today')|round(2, 'ceil') }}"
-      target_id: !secret telegram_bot_chat_id
-      group: home
-      tag_id: "information"
-      importance_id: default
-      color: "green"
-      sticky: "false"
-      timeout: 300

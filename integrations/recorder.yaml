@@ -21,6 +21,7 @@ recorder:
       - update
       - zone
       - sun
+      - time_date
       - weather
       - updater
     entity_globs:
@@ -35,7 +36,24 @@ recorder:
       - sensor.today*
       - sensor.time*
       - sensor.moon*
+      - sensor.skin_type*
+      - sensor.max_uv*
+      - sensor.current_ozone_level
+      - sensor.openweathermap_wind*
+      - sensor.openweathermap_uv*
+      - sensor.openweathermap_dew*
+      - sensor.openweathermap_cloud*
+      - sensor.openweathermap_pressure*
+      - sensor.openweathermap_humidity*
+      - sensor.openweathermap_visibility
+      - sensor.deluge*
       - sensor.simeonpashley_home_assistant_config*
+      - sensor.processor_use
+      - sensor.load_1m
+      - sensor.swap_*
+      - sensor.memory_*
+      - sensor.29stratford_*
+      - sensor.thanos_*
     entities:
       - sun.sun # Don't record sun data
       - sensor.last_boot # Comes from 'systemmonitor' sensor platform
@@ -56,5 +74,29 @@ recorder:
       - sensor.smappee_channel_powers
       - sensor.solar_azimuth
       - sensor.solar_elevation
+      - sensor.period_of_day
+      - sensor.daylength
+      - sensor.openweathermap_visibility
     event_types:
       - call_service # Don't record service calls
+
+#####
+# Logbbok - list of included/excluded entities
+# TODO: Clean this list a lot more
+# https://www.home-assistant.io/integrations/logbook/
+#####
+
+logbook:
+  exclude:
+    domains:
+      - automation
+      - binary_sensor
+      - group
+      - media_player
+      - sensor
+      - sun
+      - weather
+      - zone
+      - counter
+    entities:
+      - input_number.solar_production_poll_1m

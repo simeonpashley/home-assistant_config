@@ -14,15 +14,8 @@ condition:
   value_template: '{% if states("sensor.low_batteries") %}true{% else %}false{% endif %}'
 
 action:
-  - service: script.notify_engine
+  - service: script.notify_me
     data:
-      who: "simeon"
-      title: "*Information*"
-      value1: 'There are low batteries: {{ states("sensor.low_batteries") }}'
-      target_id: !secret telegram_bot_chat_id
-      group: system
-      tag_id: "information"
-      importance_id: default
-      color: "yellow"
-      sticky: "false"
-#    timeout: ''
+      message: |-
+        *Information*
+        There are low batteries: {{ states("sensor.low_batteries") }}

@@ -1,6 +1,6 @@
 automation:
   - id: "battery_charge_up"
-    initial_state: on
+    initial_state: true
     alias: "Battery Charge Up"
     trigger:
       - platform: numeric_state
@@ -13,7 +13,7 @@ automation:
       data:
         message: "The {{ trigger.to_state.name }} is at {{ trigger.to_state.state }}% battery, it needs charging"
   - id: "battery_charge_alt"
-    initial_state: on
+    initial_state: true
     alias: "Battery Charge Alt"
     trigger:
       - platform: numeric_state
@@ -26,7 +26,7 @@ automation:
       data:
         message: "The {{ trigger.to_state.name }} is at {{ trigger.to_state.state }}% battery, start charging the spare"
   - id: "battery_2032"
-    initial_state: on
+    initial_state: true
     alias: "Battery CR2032"
     trigger:
       - platform: numeric_state

@@ -11,10 +11,7 @@
 # List of variables you can used when calling this script:
 #
 # who:            List of available platforms and variable that is used to select where to push notification
-# title:          Title of the message - not all notification platforms support this
-# value1:         value variables are used as messge body. Up to 3 lines can be used
-# value2:
-# value3:
+# message:          Title of the message - not all notification platforms support this
 # target_id:      Some platforms require you to specify target ID of the channel for message in ex. Discord, Telegram etc
 #
 # Additiona variables that can be used to further customize Companion App notifications
@@ -36,6 +33,10 @@ notify_engine:
     #     - condition: state
     #       entity_id: input_boolean.text_notifications
     #       state: "on"
+    - service: logbook.log
+      data:
+        name: "Notify:"
+        message: "@{{ who }} {{ message }}"
     - service: >
         {% if who == 'simeon' %}
           notify.simeon_devices
@@ -43,12 +44,10 @@ notify_engine:
           notify.simeon_devices
         {% endif %}
       data:
-        title: "{{ title | default }}"
-        message: "{{ value1 | default }} {{ value2 | default }} {{ value3 | default }}"
+        message: "{{ message | default }}"
         target: "{{ target_id | default }}"
         data:
-          subtitle: "{{ subtitle | default }}"
-          subject: "{{ subtitle | default }}"
+          message: "{{ message | default }}"
           attachment:
             url: "{{ clickAction | default }}"
             content-type: "{{ content_type | default }}"

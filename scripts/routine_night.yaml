@@ -1,6 +1,10 @@
 routine_night:
   alias: Routine / Good Night
   sequence:
+    - service: logbook.log
+      data_template:
+        name: "Script:"
+        message: Routine Night
     # check doors and windows
     - service: script.turn_on
       entity_id: script.doors_windows_check

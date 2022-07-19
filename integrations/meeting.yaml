@@ -24,6 +24,25 @@ input_number:
     max: 1
 
 automation:
+  - id: d39feea2-f379-4b7e-b2de-5b54ec20a6ef
+    alias: Doorbell Front Ring Log
+    description: ""
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door_ding
+        from: "off"
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.front_door_ding_2
+        from: "off"
+        to: "on"
+    condition: []
+    action:
+      - service: logbook.log
+        data:
+          name: "Doorbell:"
+          message: media DingDong played
+    mode: single
   - id: adf34988-9b0d-4f68-9c05-ac8ab6508d3b
     alias: Doorbell - Front Ring
     description: ""
@@ -32,38 +51,15 @@ automation:
         entity_id: binary_sensor.front_door_ding
         from: "off"
         to: "on"
+      - platform: state
+        entity_id: binary_sensor.front_door_ding_2
+        from: "off"
+        to: "on"
     condition:
       - condition: state
         entity_id: input_boolean.automations
         state: "on"
-      - condition: time
-        after: 08:00:00
-        before: "22:00:00"
-    # - condition: state
-    #   entity_id: group.family_devices
-    #   state: home
-    action:
-      # - service: media_player.play_media
-      #   data:
-      #     media_content_id: https://home.eatsleepbreach.ca/local/doorbell_front.mp3
-      #     media_content_type: music
-      #   target:
-      #     device_id:
-      #     - c038376b0bd411ebb661915fc419dff9
-      #     - c03750400bd411ebbd21d302c0018c1a
-      # - service: camera.play_stream
-      #   data:
-      #     media_player: media_player.master_bedroom_display
-      #   target:
-      # #     device_id: 5f628eea7411345bf14420a07eaa74b3
-      - delay:
-          hours: 0
-          minutes: 2
-          seconds: 0
-          milliseconds: 0
-    # - service: media_player.turn_off
-    #   data: {}
-    #   entity_id: media_player.master_bedroom_display
+    action: [] # Used to notify
     mode: single
   - id: 439e13f0-fcb3-4a90-a263-125dd0c4ec5f
     alias: Meeting Time - Set Preferences
@@ -82,9 +78,9 @@ automation:
                 entity_id: input_boolean.meeting_time
                 state: "on"
             sequence:
-              - service: automation.turn_off
-                target:
-                  entity_id: automation.doorbell_front_ring
+              # - service: automation.turn_off
+              #   target:
+              #     entity_id: automation.doorbell_front_ring
               - service: media_player.volume_set
                 target:
                   entity_id:
@@ -116,9 +112,9 @@ automation:
                 entity_id: input_boolean.meeting_time
                 state: "off"
             sequence:
-              - service: automation.turn_on
-                target:
-                  entity_id: automation.doorbell_front_ring
+              # - service: automation.turn_on
+              #   target:
+              #     entity_id: automation.doorbell_front_ring
               - service: media_player.volume_set
                 target:
                   entity_id:
@@ -164,9 +160,9 @@ automation:
                 entity_id: input_boolean.quiet_time
                 state: "on"
             sequence:
-              - service: automation.turn_off
-                target:
-                  entity_id: automation.doorbell_front_ring
+              # - service: automation.turn_off
+              #   target:
+              #     entity_id: automation.doorbell_front_ring
               - service: media_player.volume_set
                 target:
                   entity_id:
@@ -195,9 +191,9 @@ automation:
                 entity_id: input_boolean.quiet_time
                 state: "off"
             sequence:
-              - service: automation.turn_on
-                target:
-                  entity_id: automation.doorbell_front_ring
+              # - service: automation.turn_on
+              #   target:
+              #     entity_id: automation.doorbell_front_ring
               - service: media_player.volume_set
                 target:
                   entity_id:
