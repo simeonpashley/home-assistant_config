@@ -15,11 +15,11 @@ binary_sensor:
       good_weather_to_fly_drones:
         friendly_name: Good Weather To Fly Drone?
         value_template: >-
-          {% if states('sensor.openweathermap_wind_speed') | round(0) | int > 5 or 
-                states('sensor.openweathermap_forecast_precipitation') | round(0) | int >= 1 or
-                states('sensor.openweathermap_visibility') | round(0) | int < 3218 or 
-                states('sensor.openweathermap_forecast_temperature') | round(0) | int < 5 or 
-                states('sensor.openweathermap_forecast_cloud_coverage') | round(0) | int > 30 %}
+          {% if states("sensor.openweathermap_wind_speed") | round(0) | int > 5 or 
+                states("sensor.openweathermap_forecast_precipitation") | round(0) | int >= 1 or
+                states("sensor.openweathermap_visibility") | round(0) | int < 3218 or 
+                states("sensor.openweathermap_forecast_temperature") | round(0) | int < 5 or 
+                states("sensor.openweathermap_forecast_cloud_coverage") | round(0) | int > 30 %}
             false
           {% else %}
             true

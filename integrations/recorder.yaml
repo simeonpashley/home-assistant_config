@@ -100,3 +100,8 @@ logbook:
       - counter
     entities:
       - input_number.solar_production_poll_1m
+      - button.330e_xdrive_refresh_from_cloud
+    entity_globs:
+      - number.*_interval
+      - select.*_event_select
+      - stream.*_stream

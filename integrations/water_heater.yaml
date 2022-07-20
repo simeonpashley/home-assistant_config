@@ -15,20 +15,26 @@ input_boolean:
 
 input_number:
   divert_on_above_solar_w:
-    initial: 1200
+    name: Divert ON - Above Solar
     min: 100
-    max: 3000
+    max: 3200
+    mode: box
+    unit_of_measurement: "W"
+    icon: mdi:flash
   divert_off_above_grid_import:
-    initial: 1200
+    name: Divert OFF - Above Grid Import
     min: 100
-    max: 3000
+    max: 3200
+    mode: box
+    unit_of_measurement: "W"
+    icon: mdi:flash
 
 binary_sensor:
   - platform: template
     sensors:
       immersion_off_1min:
         value_template: >
-          {{ is_state('switch.hot_water_template_switch', 'off')}}
+          {{ is_state('switch.hot_water_boiler_3kwh_switch_0', 'off')}}
         delay_on:
           minutes: 1
       auth_ev_charge:
@@ -38,14 +44,13 @@ binary_sensor:
           {{ is_state('binary_sensor.330e_xdrive_charging_status', 'on') }}
       import_above_divert_off:
         value_template: "{{ (states('sensor.grid_imported_power_w') | float(9999999)) > (states('input_number.divert_off_above_grid_import') | float(1200)) }}"
+      wh_production_above_divert_on:
+        value_template: "{{ ((states('sensor.lp20_solar_production_poll') | int(0)) > (states('input_number.divert_on_above_solar_w')|int(1200))) }}"
       auth_hot_water:
         friendly_name: "hot water production authorized"
         value_template: >
-          {{   is_state('binary_sensor.water_hot', 'off') and
-              (
-                ((states('sensor.lp20_solar_production_poll') | int(0)) > (states('input_number.divert_on_above_solar_w')|int(1200)))
-                and is_state('switch.hot_water_template_switch', 'off')
-              )
+          {{ is_state('binary_sensor.water_hot', 'off')
+            and is_state('binary_sensor.wh_production_above_divert_on', 'on')
           }}
       water_hot:
         friendly_name: "water is hot above temp. threshold"
@@ -69,12 +74,8 @@ sensor:
       dynamic_shutdown_consumer:
         friendly_name: "ready for shutdown:"
         value_template: >
-          {% if is_state('switch.hot_water_template_switch', 'on') %}
-            {% if is_state('switch.hot_water_template_switch', 'on') %}
-                hot water
-            {% else %} 
-              _manual_consumer_active_
-            {% endif %}
+          {% if is_state('switch.hot_water_boiler_3kwh_switch_0', 'on') %}
+              hot water
           {% else %}
             _no_consumer_activated_
           {% endif %}
@@ -120,7 +121,7 @@ automation:
                 state: "on"
             sequence:
               - service: switch.turn_on
-                entity_id: switch.hot_water_template_switch
+                entity_id: switch.hot_water_boiler_3kwh_switch_0
 
   ###############################
   ###         STOP Orders     ###
@@ -130,26 +131,27 @@ automation:
     initial_state: true
     trigger:
       - platform: state
+        entity_id: switch.hot_water_boiler_3kwh_switch_0
+      - platform: state
         entity_id: binary_sensor.import_above_divert_off
         for:
           minutes: 1
-      - platform: state
-        entity_id: sensor.lp20_solar_production_poll
+      # - platform: state
+      #   entity_id: sensor.lp20_solar_production_poll
     condition:
-      - condition: template
-        value_template: >-
-          {{ (states('sensor.lp20_solar_production_poll') | int(0)) < (states('input_number.divert_on_above_solar_w')|int(1200)) }}
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: input_boolean.energy_flow_auto_control
-            state: "on"
-          - condition: state
-            entity_id: switch.hot_water_template_switch
-            state: "on"
+      # - condition: template
+      #   value_template: >-
+      #     {{ (states("sensor.lp20_solar_production_poll") | int(0)) < (states("input_number.divert_on_above_solar_w")|int(1200)) }}
+      - condition: state
+        entity_id: input_boolean.energy_flow_auto_control
+        state: "on"
+      - condition: state
+        entity_id: switch.hot_water_boiler_3kwh_switch_0
+        state: "on"
+
     action:
       - service: switch.turn_off
-        entity_id: switch.hot_water_template_switch
+        entity_id: switch.hot_water_boiler_3kwh_switch_0
   ###############################
   # NOTIFICATIONS
   ###############################
@@ -159,13 +161,13 @@ automation:
     initial_state: true
     trigger:
       - platform: state
-        entity_id: binary_sensor.hot_water_boiler_3kwh_switch_0
+        entity_id: switch.hot_water_boiler_3kwh_switch_0
     condition: []
     action:
       - choose:
           - conditions:
               - condition: template
-                value_template: "{{ is_state('binary_sensor.hot_water_boiler_3kwh_switch_0', 'on') }}"
+                value_template: "{{ is_state('switch.hot_water_boiler_3kwh_switch_0', 'on') }}"
             sequence:
               - service: logbook.log
                 data:
@@ -176,7 +178,7 @@ automation:
                   message: "Immersion ON"
           - conditions:
               - condition: template
-                value_template: "{{ is_state('binary_sensor.hot_water_boiler_3kwh_switch_0', 'off') }}"
+                value_template: "{{ is_state('switch.hot_water_boiler_3kwh_switch_0', 'off') }}"
             sequence:
               - service: logbook.log
                 data:
@@ -193,20 +195,6 @@ automation:
 switch: # Shelley 1PM switch manages immersion heating coil for hot water
   - platform: template
     switches:
-      hot_water_template_switch:
-        friendly_name: "hot water immersion switch"
-        value_template: "{{ is_state('binary_sensor.hot_water_boiler_3kwh_switch_0', 'on') }}"
-        turn_on:
-          - service: switch.turn_on
-            data:
-              entity_id: switch.hot_water_boiler_3kwh_switch_0
-          - service: switch.turn_off
-            data:
-              entity_id: binary_sensor.immersion_off_1min
-        turn_off:
-          - service: switch.turn_off
-            data:
-              entity_id: switch.hot_water_boiler_3kwh_switch_0
       ev_charging_authorization:
         friendly_name: "ev charge emulation switch"
         value_template: "{{ is_state('input_boolean.ev_charge_emulate_switch_state', 'on') }}"

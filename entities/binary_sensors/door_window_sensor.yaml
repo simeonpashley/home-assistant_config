@@ -5,8 +5,8 @@ sensors:
     value_template: >-
       {{ 
         states.binary_sensor
-          |selectattr('attributes.device_class', 'in', ['door','window'])
-          |selectattr('state', '==', 'on')
+          |selectattr("attributes.device_class", "in", ["door","window"])
+          |selectattr("state", "==", "on")
           |list|count > 0
       }}
     attribute_templates:

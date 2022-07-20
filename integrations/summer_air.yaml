@@ -1,0 +1,68 @@
+#####
+# Track inside and outside temperature and
+# inform when to open or close windows
+#####
+sensor:
+  - platform: template
+    sensors:
+      temperature_diff_in_out:
+        icon_template: mdi:temperature-celsius
+        value_template: >
+          {{ states("sensor.esphome_web_af4cb4_temperature")|int(0) - states("sensor.openweathermap_temperature")|int(0) }}
+
+automation:
+  - alias: "Temperature difference inside vs outside"
+    id: f4f3a329-c5c6-4c09-9ee7-7701b36596ca
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.temperature_diff_in_out
+        above: 3
+        for:
+          minutes: 15
+        id: lower_out
+      - platform: numeric_state
+        entity_id: sensor.temperature_diff_in_out
+        below: -3
+        for:
+          minutes: 15
+        id: higher_out
+
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: >-
+            {{ (states("sensor.n_people_home") | int(0)) > 0 }}
+        # - condition: state
+        #   entity_id: sensor.season
+        #   state: "summer"
+        - condition: state
+          entity_id: input_boolean.text_notifications
+          state: "on"
+
+    action:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: lower_out
+              - condition: numeric_state
+                entity_id: sensor.esphome_web_af4cb4_temperature
+                above: 21
+            sequence:
+              - service: script.notify_me
+                data:
+                  message: |-
+                    *Temperature*
+                    Open windows - inside temperature is {{ states("sensor.esphome_web_af4cb4_temperature") }}°C, {{states("sensor.temperature_diff_in_out")|int(0)}}° hotter than outside.
+          - conditions:
+              - condition: trigger
+                id: higher_out
+              - condition: numeric_state
+                entity_id: sensor.esphome_web_af4cb4_temperature
+                below: 18
+            sequence:
+              - service: script.notify_me
+                data:
+                  message: |-
+                    *Temperature*
+                    Close windows - inside temperature is {{ states("sensor.esphome_web_af4cb4_temperature") }}°C, {{-(states("sensor.temperature_diff_in_out")|int(0))}}° cooler than outside.

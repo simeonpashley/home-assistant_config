@@ -1,6 +1,0 @@
-platform: template
-sensors:
-  simeon_is_broadcasting:
-    value_template: >-
-      {{ is_state(' binary_sensor.sp_m1_pl_audio_input_in_use', 'on')
-         or is_state('binary_sensor.sp_m1_pl_camera_in_use', 'on') }}

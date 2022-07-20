@@ -12,7 +12,38 @@ input_boolean:
   hot_day:
     initial: false
 
+binary_sensor:
+  - platform: template
+    sensors:
+      shield_back_from_solar:
+        value_template: >
+          {{ states('sensor.solar_azimuth')|int(0) < 170 
+          and is_state('sun.sun', 'above_horizon')  
+          and states('sensor.lp20_solar_production_poll')|int(0) > 600
+          and states('sensor.day_max_temp')|int(0) > 20
+          and states('sensor.openweathermap_cloud_coverage')|int(0) < 50
+          }}
+
 sensor:
+  # Day min and max temp
+  - platform: template
+    sensors:
+      day_max_temp:
+        friendly_name: "24h max temperature"
+        unit_of_measurement: "°C"
+        value_template: >
+          {% set start = (now().timestamp() * 1000) | int %}
+          {% set end = start + 86400000 %}
+          {{ state_attr('weather.openweathermap', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+
+      day_min_temp:
+        friendly_name: "24h min temperature"
+        unit_of_measurement: "°C"
+        value_template: >
+          {% set start = (now().timestamp() * 1000) | int %}
+          {% set end = start + 86400000 %}
+          {{ state_attr('weather.openweathermap', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+
   - platform: template
     sensors:
       office_blind_position:
@@ -101,19 +132,9 @@ automation:
                   - condition: numeric_state
                     entity_id: sensor.office_blind_position
                     above: 10
-                  - condition: numeric_state
-                    entity_id: sensor.solar_azimuth
-                    above: 0
-                    below: 170
                   - condition: state
-                    entity_id: sun.sun
-                    state: "above_horizon"
-                  - condition: template
-                    value_template: >-
-                      {{ (is_state('sensor.openweathermap_condition', 'sunny') or is_state('sensor.openweathermap_condition', 'partlycloudy')) }}
-                  - condition: numeric_state
-                    entity_id: sensor.lp20_solar_production_poll
-                    above: 600
+                    entity_id: binary_sensor.shield_back_from_solar
+                    state: "on"
             sequence:
               - data:
                   entity_id: input_boolean.hot_day
@@ -127,19 +148,8 @@ automation:
                     entity_id: input_boolean.hot_day
                     state: "on"
                   - condition: state
-                    entity_id: sun.sun
-                    state: "above_horizon"
-                  - condition: or
-                    conditions:
-                      - condition: template
-                        value_template: >-
-                          {{ not (is_state('sensor.openweathermap_condition', 'sunny') or is_state('sensor.openweathermap_condition', 'partlycloudy')) }}
-                      - condition: numeric_state
-                        entity_id: sensor.solar_azimuth
-                        above: 170
-                      - condition: numeric_state
-                        entity_id: sensor.lp20_solar_production_poll
-                        below: 500
+                    entity_id: binary_sensor.shield_back_from_solar
+                    state: "off"
             sequence:
               - data:
                   entity_id: input_boolean.hot_day
@@ -151,6 +161,9 @@ automation:
                 conditions:
                   - condition: state
                     entity_id: input_boolean.hot_day
+                    state: "off"
+                  - condition: state
+                    entity_id: binary_sensor.shield_back_from_solar
                     state: "off"
                   - condition: numeric_state
                     entity_id: sensor.office_blind_position
@@ -176,6 +189,9 @@ automation:
                   - condition: state
                     entity_id: input_boolean.hot_day
                     state: "off"
+                  - condition: state
+                    entity_id: binary_sensor.shield_back_from_solar
+                    state: "off"
                   - condition: numeric_state
                     entity_id: sensor.office_blind_position
                     below: 15
@@ -197,6 +213,9 @@ automation:
                     state: "below_horizon"
             sequence:
               - service: script.open_office_blind
+              - data:
+                  entity_id: input_boolean.hot_day
+                service: input_boolean.turn_off
   # - id: 8edbe5db-b2ab-4b7e-862a-eeae8a498a4e
   #   alias: "Office blinds close"
   #   trigger:

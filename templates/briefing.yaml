@@ -185,12 +185,12 @@
       "partlycoudly": "mostly cloudy skies",
       "sunny": "clear skies and sun"
     } -%}
-    {%- if conditions[states('weather.29stratford_2')] is string -%}
-      {%- set condition = conditions[states('weather.29stratford_2')] -%}
+    {%- if conditions[states('weather.openweathermap')] is string -%}
+      {%- set condition = conditions[states('inp')] -%}
     {%- else -%}
-      {%- set condition = states('weather.29stratford_2') -%}
+      {%- set condition = states('weather.openweathermap') -%}
     {%- endif -%}
-    {{ ['Currently', 'Right now']|random }} outside, it is {{ state_attr('weather.29stratford_2','temperature')|int }} degrees, with {{ condition }}.
+    {{ ['Currently', 'Right now']|random }} outside, it is {{ state_attr('weather.openweathermap','temperature')|int }} degrees, with {{ condition }}.
     {{ states("sensor.forecast") }}
     {{ pause() }}
   {%- endmacro -%}

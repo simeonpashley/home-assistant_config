@@ -11,11 +11,11 @@ initial_state: true
 trigger:
   - platform: template
     value_template: >-
-      {{ (states('sensor.time') == (state_attr('input_datetime.audio_notification_on', 'timestamp') | int | timestamp_custom('%H:%M', False))) }}
+      {{ (states("sensor.time") == (state_attr("input_datetime.audio_notification_on", "timestamp") | int | timestamp_custom("%H:%M", False))) }}
     id: turn_on
   - platform: template
     value_template: >-
-      {{ (states('sensor.time') == (state_attr('input_datetime.audio_notification_off', 'timestamp') | int | timestamp_custom('%H:%M', False))) }}
+      {{ (states("sensor.time") == (state_attr("input_datetime.audio_notification_off", "timestamp") | int | timestamp_custom("%H:%M", False))) }}
     id: turn_off
 
 action:

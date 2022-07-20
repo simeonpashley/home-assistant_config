@@ -181,9 +181,60 @@
           "badges": [],
           "cards": [
             {
+              "type": "custom:mini-graph-card",
+              "name": "12hr",
+              "smoothing": false,
+              "hours_to_show": 12,
+              "points_per_hour": 12,
+              "show": {
+                "fill": false,
+                "labels": true
+              },
+              "entities": [
+                {
+                  "name": "Office",
+                  "entity": "sensor.esphome_web_af4cb4_temperature",
+                  "color": "#0000ff"
+                },
+                {
+                  "name": "Front",
+                  "entity": "sensor.living_room_temperature",
+                  "color": "#ff00ff"
+                },
+                {
+                  "name": "Outdoor",
+                  "entity": "sensor.openweathermap_temperature",
+                  "color": "#00ff00"
+                }
+              ]
+            },
+            {
               "type": "vertical-stack",
               "title": "Office",
               "cards": [
+                {
+                  "type": "custom:mini-graph-card",
+                  "name": "12hr",
+                  "smoothing": false,
+                  "hours_to_show": 12,
+                  "points_per_hour": 12,
+                  "show": {
+                    "fill": false,
+                    "labels": true
+                  },
+                  "entities": [
+                    {
+                      "name": "Temp",
+                      "entity": "sensor.esphome_web_af4cb4_temperature",
+                      "color": "rgb(255, 166, 0)"
+                    },
+                    {
+                      "name": "Humidity",
+                      "entity": "sensor.esphome_web_af4cb4_humidity",
+                      "color": "rgb(3, 169, 244)"
+                    }
+                  ]
+                },
                 {
                   "type": "horizontal-stack",
                   "cards": [
@@ -212,23 +263,6 @@
                         "yellow": 30,
                         "red": 60
                       }
-                    }
-                  ]
-                },
-                {
-                  "type": "custom:mini-graph-card",
-                  "name": "12hr",
-                  "smoothing": false,
-                  "hours_to_show": 12,
-                  "points_per_hour": 12,
-                  "show": {
-                    "fill": false,
-                    "labels": true
-                  },
-                  "entities": [
-                    {
-                      "name": "Temp",
-                      "entity": "sensor.esphome_web_af4cb4_temperature"
                     }
                   ]
                 },

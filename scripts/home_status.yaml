@@ -1,8 +1,8 @@
 home_status:
   mode: parallel
   variables:
-    briefing: !include ../templates/briefing.yaml
+    briefing: !include ../templates/home_status.yaml
   sequence:
     - service: script.notify_echo
       data:
-        message: '{{ briefing }}'
+        message: "{{ briefing }}"
