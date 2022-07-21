@@ -45,11 +45,6 @@
         "id": "521aed3528844fc293d157d6070a86e3"
       },
       {
-        "url": "/hacsfiles/MeteoalarmCard/meteoalarm-card.js?hacstag=361205663200",
-        "type": "module",
-        "id": "5e0ecb06d1ae4bee8e6bf800ec54f412"
-      },
-      {
         "url": "/hacsfiles/light-entity-card/light-entity-card.js?hacstag=168744428500",
         "type": "module",
         "id": "11d4e0505645466d9df17a93e65970b3"
@@ -103,6 +98,16 @@
         "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242",
         "type": "module",
         "id": "4f77142841d244b28f80a31c15a8ebbe"
+      },
+      {
+        "url": "/hacsfiles/lovelace-battery-entity-row/battery-entity-row.js?hacstag=303857065131",
+        "type": "module",
+        "id": "24433b0934914d1d846a5f8cb8140ffe"
+      },
+      {
+        "url": "/hacsfiles/lovelace-battery-entity-row/battery-entity-row.js",
+        "type": "module",
+        "id": "8f3fc8876321479d8a85c7c21f41477d"
       }
     ]
   }
