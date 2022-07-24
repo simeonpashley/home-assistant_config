@@ -24,6 +24,54 @@ input_number:
     max: 1
 
 automation:
+  - id: 989c506c-8983-4d23-9bac-afbc04d8048b
+    alias: Office switch ON - meeting ON
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: light.esphome_web_af4cb4_light
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.meeting_time
+        state: "off"
+    action:
+      - service: logbook.log
+        data:
+          name: "Office:"
+          message: switch turn meeting mode ON
+      - service: input_boolean.turn_on
+        target:
+          entity_id:
+            - input_boolean.meeting_time
+  - id: a815a7b0-4d57-4ec1-bd67-b0d8841dcd96
+    alias: Office switch OFF - meeting OFF
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: light.esphome_web_af4cb4_light
+        from: "on"
+        to: "off"
+    condition:
+      - condition: state
+        entity_id: input_boolean.automations
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.meeting_time
+        state: "on"
+    action:
+      - service: logbook.log
+        data:
+          name: "Office:"
+          message: switch turn meeting mode OFF
+      - service: input_boolean.turn_off
+        target:
+          entity_id:
+            - input_boolean.meeting_time
   - id: d39feea2-f379-4b7e-b2de-5b54ec20a6ef
     alias: Doorbell Front Ring Log
     description: ""

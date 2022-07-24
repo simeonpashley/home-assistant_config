@@ -15,7 +15,7 @@
         "id": "766f8a70fabf47d7b5f6b1cc4a0c2d7f"
       },
       {
-        "url": "/hacsfiles/simple-thermostat/simple-thermostat.js?hacstag=158654878243",
+        "url": "/hacsfiles/simple-thermostat/simple-thermostat.js?hacstag=158654878250",
         "type": "module",
         "id": "517ddc34064d4d869dc4bacd68f169aa"
       },
@@ -90,7 +90,7 @@
         "id": "955a8cabed9c46389034090a4f7b410d"
       },
       {
-        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375211",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375213",
         "type": "module",
         "id": "37f29e0b4392454c9d513399462a95c9"
       },
@@ -108,6 +108,11 @@
         "url": "/hacsfiles/lovelace-battery-entity-row/battery-entity-row.js",
         "type": "module",
         "id": "8f3fc8876321479d8a85c7c21f41477d"
+      },
+      {
+        "url": "/hacsfiles/lovelace-animated-background/animated-background.js?hacstag=202743061063",
+        "type": "module",
+        "id": "2beff4f68b474d7db57260c009912009"
       }
     ]
   }

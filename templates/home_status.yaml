@@ -11,9 +11,9 @@
 
   {%- macro greeting_line() -%}
     {%- set hour = now().strftime('%H')|int -%}
-    {%- if hour > 0 and hour < 10  %}
+    {%- if hour > 0 and hour < 12  %}
       Good morning.
-    {%- elif hour >= 10 and hour < 17 %}
+    {%- elif hour >= 12 and hour < 18 %}
       Good afternoon.
     {%- else %}
       Good evening.
@@ -179,26 +179,38 @@
   {%- macro outside_weather() -%}
     {%- set conditions = {
       "clear-night": "clear night skies",
-      "partlycoudly": "mostly cloudy skies",
-      "sunny": "clear skies and sun"
+      "cloudy": "cloudy skies",
+      "exceptional": "exceptional",
+      "few clouds": "few clouds",
+      "fog": "fog",
+      "hail": "hail",
+      "light rain": "light rain",
+      "lightning-rainy": "lightning and rainy",
+      "lightning": "lightning",
+      "partlycloudy": "partly cloudy skies",
+      "pouring": "pouring",
+      "rainy": "rain",
+      "snowy-rainy": "sleet",
+      "snowy": "snowy",
+      "sunny": "clear skies and sun",
+      "windy-variant": "windy variant",
+      "windy": "windy",
     } -%}
-    {%- if conditions[states('weather.openweathermap')] is string -%}
-      {%- set condition = conditions[states('inp')] -%}
-    {%- else -%}
-      {%- set condition = states('weather.openweathermap') -%}
+    {%- set condition = states('weather.openweathermap') -%}
+    {%- if conditions[condition] is string -%}
+      {%- set condition = conditions[condition] -%}
     {%- endif -%}
     {{ ['Currently', 'Right now']|random }} outside, it is {{ state_attr('weather.openweathermap','temperature')|int }} degrees, with {{ condition }}.
-    {{ states("sensor.forecast") }}
     {{ pause() }}
   {%- endmacro -%}
 
   {# Only notify when high levels of UV #}
   {%- macro uv_levels() -%}
-    {%- set uv = states('sensor.current_uv_index') | int(0) -%}
+    {%- set uv = states('sensor.current_uv_index') | float(0) -%}
     {%- if  uv >= 6 and uv <= 7 -%}
       Current UV index is high. Please be careful outdoors.
     {%- elif  uv >= 8 and uv <= 10 -%}
-      Current UV index is very high. It is    <emphasis level='strong'>not advised</emphasis> to go out.
+      Current UV index is very high. It is <emphasis level='strong'>not advised</emphasis> to go out.
     {%- elif  uv >= 11 -%}
       Current UV index is extremely high. It is <emphasis level='strong'>highly advised to stay indoors</emphasis>.
     {%- endif -%}
@@ -238,6 +250,25 @@
     {% endif %}
   {%- endmacro -%}
 
+
+  {%- macro door_window_check() -%}
+    {%- set entities = [
+      'binary_sensor.0x00158d00080691ca_contact',
+      'binary_sensor.office_window_contact'
+    ] -%}
+    {%- set open_states = ['open','on','unlocked'] -%}
+    {%- set open_entities = states|selectattr('entity_id','in',entities)|selectattr('state','in',open_states)|map(attribute='entity_id')|list -%}
+
+    {%- if open_entities|length > 0 -%}
+      {%- for entity in open_entities -%}
+        {{ 'T' if entity == open_entities|first else 't' }}he {{ state_attr(entity,'friendly_name') }} is {{ 'unlocked' if 'lock' in entity else 'open' }}{{ '.' if entity == open_entities|last else ', ' }}{{ 'and ' if open_entities|length > 1 and entity != open_entities|last }}
+      {%- endfor -%}
+      {{ " " }}
+    {%- endif -%}
+  {%- endmacro -%}
+
+
+
   {# Drone Flying Weather #}
   {%- macro drone_weather() -%}
   {% if states('binary_sensor.good_weather_to_fly_drones')| lower == "on" and 
@@ -267,6 +298,7 @@
     {{ uv_levels() }}
     {{ calendar_reminder() }}
     {{ car_status() }}
+    {{ door_window_check() }}
     {{ drone_weather() }}
     {{ birthday_countdown("Claire", states('input_label.claire_birthday_days2go')) }}
     {{ birthday_countdown("Eleanor", states('input_label.eleanor_birthday_days2go')) }}

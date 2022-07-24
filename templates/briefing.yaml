@@ -11,9 +11,9 @@
 
   {%- macro greeting_line() -%}
     {%- set hour = now().strftime('%H')|int -%}
-    {%- if hour > 0 and hour < 10  %}
+    {%- if hour > 0 and hour < 12  %}
       Good morning.
-    {%- elif hour >= 10 and hour < 17 %}
+    {%- elif hour >= 12 and hour < 18 %}
       Good afternoon.
     {%- else %}
       Good evening.
@@ -182,7 +182,9 @@
   {%- macro outside_weather() -%}
     {%- set conditions = {
       "clear-night": "clear night skies",
-      "partlycoudly": "mostly cloudy skies",
+      "cloudy": "cloudy skies",
+      "partlycloudy": "partly cloudy skies",
+      "rainy": "rain",
       "sunny": "clear skies and sun"
     } -%}
     {%- if conditions[states('weather.openweathermap')] is string -%}
