@@ -8,3 +8,11 @@ notify_me:
         who: "simeon"
         message: "{{ message }}"
         target_id: !secret telegram_bot_chat_id
+    - if:
+        - alias: "tts"
+          condition: template
+          value_template: "{{ tts == true }}"
+      then:
+        - service: script.notify_echo
+          data:
+            message: "{{ message }}"

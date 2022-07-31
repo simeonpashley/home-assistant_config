@@ -9,4 +9,5 @@ trigger:
 action:
   - service: script.notify_me
     data:
+      tts: true
       message: "*Car unlocked* You have left the 330e unlocked"

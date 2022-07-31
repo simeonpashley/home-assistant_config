@@ -22,6 +22,9 @@ automation:
     condition:
       condition: and
       conditions:
+        - condition: time
+          after: "08:00:00"
+          before: "18:00:00"
         - condition: template
           value_template: >-
             {{ (states("sensor.n_people_home") | int(0)) > 0 }}
@@ -33,10 +36,13 @@ automation:
           state: "on"
         - condition: numeric_state
           entity_id: sensor.esphome_web_af4cb4_temperature
-          above: 21
+          above: 22
         - condition: numeric_state
           entity_id: sensor.temperature_diff_in_out
           above: 3
+        - condition: state
+          entity_id: binary_sensor.office_window_contact
+          state: "off" # 'on' = open, 'off' = closed
     action:
       - service: script.notify_me
         data:
@@ -54,6 +60,9 @@ automation:
     condition:
       condition: and
       conditions:
+        - condition: time
+          after: "08:00:00"
+          before: "18:00:00"
         - condition: template
           value_template: >-
             {{ (states("sensor.n_people_home") | int(0)) > 0 }}
@@ -63,9 +72,12 @@ automation:
         - condition: state
           entity_id: input_boolean.text_notifications
           state: "on"
+        - condition: state
+          entity_id: binary_sensor.office_window_contact
+          state: "on" # 'on' = open, 'off' = closed
         - condition: numeric_state
           entity_id: sensor.esphome_web_af4cb4_temperature
-          below: 18
+          below: 22
         - condition: numeric_state
           entity_id: sensor.temperature_diff_in_out
           below: -3

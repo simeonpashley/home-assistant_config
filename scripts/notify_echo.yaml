@@ -3,6 +3,12 @@ notify_echo:
   sequence:
     - condition: template
       value_template: '{{ message | trim != "" }}'
+    - condition: state
+      entity_id: input_boolean.audio_notifications
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.simeon_in_office
+      state: "on"
     - service: media_player.volume_set
       data:
         entity_id: media_player.simeon_s_echo_dot

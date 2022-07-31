@@ -1,0 +1,31 @@
+alias: "NOTIFY garage door contact change"
+id: fad70bd1-54cc-4252-b5ee-1ada39408de9
+initial_state: true
+trigger:
+  - platform: state
+    entity_id: binary_sensor.0x00158d00080691ca_contact
+    to: "on"
+    for:
+      minutes: 1
+  - platform: state
+    entity_id: binary_sensor.0x00158d00080691ca_contact
+    to: "off"
+    for:
+      minutes: 1
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ is_state('binary_sensor.0x00158d00080691ca_contact', 'on') }}"
+        sequence:
+          - service: script.notify_me
+            data:
+              message: "Garage door is open"
+      - conditions:
+          - condition: template
+            value_template: "{{ is_state('binary_sensor.0x00158d00080691ca_contact', 'off') }}"
+        sequence:
+          - service: script.notify_me
+            data:
+              message: "Garage door is closed"

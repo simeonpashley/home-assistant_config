@@ -71,7 +71,9 @@ recorder:
       - binary_sensor.sp_m1_camera_in_use
       - binary_sensor.sp_m1_focus
       - sensor.icloud3_event_log
+      - sensor.smappee_aggregated
       - sensor.smappee_channel_powers
+      - sensor.smappee_realtime
       - sensor.solar_azimuth
       - sensor.solar_elevation
       - sensor.period_of_day

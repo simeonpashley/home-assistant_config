@@ -21,32 +21,32 @@
       track: true
       search: "bin_mixed_recycle"
 
-- cal_id: p#weather@group.v.calendar.google.com
-  entities:
-    - device_id: weather
-      ignore_availability: true
-      name: Weather
-
 - cal_id: en-gb.uk#holiday@group.v.calendar.google.com
   entities:
     - device_id: holidays_in_the_united_kingdom
       ignore_availability: true
       name: Holidays in the United Kingdom
 
+- cal_id: p#weather@group.v.calendar.google.com
+  entities:
+  - device_id: weather
+    ignore_availability: true
+    name: Weather
+
 - cal_id: ringalpha.com_dhsndpgeag6veq2r4esl8el36c@group.calendar.google.com
   entities:
-    - device_id: import
-      ignore_availability: true
-      name: Import
+  - device_id: import
+    ignore_availability: true
+    name: Import
 
 - cal_id: addressbook#contacts@group.v.calendar.google.com
   entities:
-    - device_id: birthdays
-      ignore_availability: true
-      name: Birthdays
+  - device_id: birthdays
+    ignore_availability: true
+    name: Birthdays
 
 - cal_id: simeon@pashley.org
   entities:
-    - device_id: simeon_pashley_org
-      ignore_availability: true
-      name: simeon@pashley.org
+  - device_id: simeon_pashley_org
+    ignore_availability: true
+    name: simeon@pashley.org

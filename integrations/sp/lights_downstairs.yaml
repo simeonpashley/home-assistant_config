@@ -1,0 +1,132 @@
+script:
+  managed_light_off:
+    alias: Managed Light OFF
+    sequence:
+      - condition: template
+        value_template: '{{ entity | trim != "" }}'
+      - condition: template
+        value_template: |
+          {{ is_state("input_boolean."+ entity + "_auto", "on") }}
+      - condition: template
+        value_template: |
+          {{ is_state("switch."+ entity, "on") }}
+      - service: logbook.log
+        data_template:
+          name: "Script:"
+          message: "Managed Lights OFF - {{ entity }}"
+      - service: switch.turn_off
+        data_template:
+          entity_id: "switch.{{ entity }}"
+    mode: single
+  managed_light_on:
+    alias: Managed Light ON
+    sequence:
+      - condition: template
+        value_template: '{{ entity | trim != "" }}'
+      - condition: template
+        value_template: |
+          {{ is_state("input_boolean."+ entity + "_auto", "on") }}
+      - condition: template
+        value_template: |
+          {{ is_state("switch."+ entity, "off") }}
+      - service: logbook.log
+        data_template:
+          name: "Script:"
+          message: "Managed Lights ON - {{ entity }}"
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.{{ entity }}"
+    mode: single
+  all_managed_lights_off:
+    alias: Managed Light - ALL OFF
+    sequence:
+      - service: script.managed_light_off
+        data:
+          entity: tradfi001
+      - service: script.managed_light_off
+        data:
+          entity: tradfi002
+      - service: script.managed_light_off
+        data:
+          entity: tradfi003
+  all_managed_lights_on:
+    alias: Managed Light - ALL ON
+    sequence:
+      - service: script.managed_light_on
+        data:
+          entity: tradfi001
+      - service: script.managed_light_on
+        data:
+          entity: tradfi002
+      - service: script.managed_light_on
+        data:
+          entity: tradfi003
+
+automation:
+  - alias: "lighting manager"
+    id: bac4c973-64f1-4c53-8b53-a2afc2422ab2
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: sun.sun
+    condition:
+      - condition: template # rate limit
+        value_template: "{{ ( as_timestamp(now()) - as_timestamp(state_attr('automation.lighting_manager', 'last_triggered')) |int(0) ) > 300 }}"
+    action:
+      - choose:
+          - conditions:
+              - condition: time
+                before: "10:00:00"
+            sequence:
+              - service: script.all_managed_lights_off
+          - conditions:
+              - condition: state
+                entity_id: sun.sun
+                state: "above_horizon"
+            # daytime sequence
+            sequence:
+              - choose: # actions only after 12pm
+                  - conditions:
+                      - condition: time
+                        after: "12:00:00"
+                      - condition: state
+                        entity_id: binary_sensor.front_low_light
+                        state: "on"
+                        for:
+                          minutes: 5
+                      - condition: state
+                        entity_id: switch.tradfi001
+                        state: "off"
+                        for:
+                          minutes: 5
+                    sequence:
+                      - service: script.all_managed_lights_on
+                  - conditions:
+                      - condition: time
+                        after: "12:00:00"
+                      - condition: state
+                        entity_id: binary_sensor.front_low_light
+                        state: "off"
+                        for:
+                          minutes: 5
+                      - condition: state
+                        entity_id: switch.tradfi001
+                        state: "on"
+                        for:
+                          minutes: 5
+                    sequence:
+                      - service: script.all_managed_lights_off
+        default: # nighttime: sunset->10pm = ON, TV off for 10mins = OFF
+          - choose:
+              - conditions:
+                  - condition: time
+                    before: "22:00:00"
+                sequence:
+                  - service: script.all_managed_lights_on
+            default:
+              - condition: state # TV off for 10 mins
+                entity_id: remote.50dx700_series
+                state: "off"
+                for:
+                  minutes: 10
+              - service: script.all_managed_lights_off

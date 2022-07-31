@@ -311,7 +311,10 @@ automation:
       - platform: state
         entity_id: sensor.gosundplug10_power # Office Monitor
       - platform: state
-        entity_id: light.esphome_web_af4cb4_light
+        entity_id: switch.esphome_web_af4cb4_switch
+    condition:
+      - condition: template # rate limit
+        value_template: "{{ ( as_timestamp(now()) - as_timestamp(state_attr('automation.simeon_in_office', 'last_triggered')) |int(0) ) > 180 }}"
     action:
       - choose:
           - conditions:
@@ -321,7 +324,7 @@ automation:
                   entity_id: sensor.gosundplug10_power
                   above: 6
                 - condition: state
-                  entity_id: light.esphome_web_af4cb4_light
+                  entity_id: switch.esphome_web_af4cb4_switch
                   state: "on"
             sequence:
               - service: input_boolean.turn_on

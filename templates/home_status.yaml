@@ -267,8 +267,6 @@
     {%- endif -%}
   {%- endmacro -%}
 
-
-
   {# Drone Flying Weather #}
   {%- macro drone_weather() -%}
   {% if states('binary_sensor.good_weather_to_fly_drones')| lower == "on" and 

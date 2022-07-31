@@ -29,7 +29,7 @@ automation:
     mode: single
     trigger:
       - platform: state
-        entity_id: light.esphome_web_af4cb4_light
+        entity_id: switch.esphome_web_af4cb4_switch
         from: "off"
         to: "on"
     condition:
@@ -48,12 +48,15 @@ automation:
         target:
           entity_id:
             - input_boolean.meeting_time
+      - service: script.notify_echo
+        data:
+          message: Meeting mode on
   - id: a815a7b0-4d57-4ec1-bd67-b0d8841dcd96
     alias: Office switch OFF - meeting OFF
     mode: single
     trigger:
       - platform: state
-        entity_id: light.esphome_web_af4cb4_light
+        entity_id: switch.esphome_web_af4cb4_switch
         from: "on"
         to: "off"
     condition:
@@ -72,6 +75,9 @@ automation:
         target:
           entity_id:
             - input_boolean.meeting_time
+      - service: script.notify_echo
+        data:
+          message: Meeting mode off
   - id: d39feea2-f379-4b7e-b2de-5b54ec20a6ef
     alias: Doorbell Front Ring Log
     description: ""

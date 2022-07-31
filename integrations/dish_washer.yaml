@@ -83,8 +83,8 @@ automation:
                   entity_id: input_select.dishwasher_state
               - service: script.notify_me
                 data:
+                  tts: true
                   message: "Good News! The dishwasher is done"
-
           # Machine Turned on
           - conditions:
               - condition: and

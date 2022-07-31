@@ -4,51 +4,6 @@
   "key": "lovelace.19_configuration",
   "data": {
     "config": {
-      "animated_background": {
-        "default_url": "https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4",
-        "entity": "weather.openweathermap",
-        "state_url": {
-          "sunny": [
-            "https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4",
-            "https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4",
-            "https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4",
-            "https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4",
-            "https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4"
-          ],
-          "partlycloudy": [
-            "https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4",
-            "https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4",
-            "https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4",
-            "https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4",
-            "https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4",
-            "https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4"
-          ],
-          "cloudy": [
-            "https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4",
-            "https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4",
-            "https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4",
-            "https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4",
-            "https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4",
-            "https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4"
-          ],
-          "mostlycloudy": [
-            "https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4",
-            "https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4",
-            "https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4"
-          ],
-          "clear-night": [
-            "https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4",
-            "https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4",
-            "https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4",
-            "https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4"
-          ],
-          "fog": [
-            "https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4",
-            "https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4"
-          ],
-          "rainy": "https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4"
-        }
-      },
       "title": "Admin",
       "icon": "mdi:tune-vertical",
       "views": [
@@ -88,50 +43,92 @@
               ]
             },
             {
-              "type": "entities",
-              "entities": [
+              "type": "vertical-stack",
+              "title": "Immersion Heater",
+              "cards": [
                 {
-                  "entity": "input_boolean.energy_flow_auto_control"
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "input_boolean.energy_flow_auto_control"
+                    },
+                    {
+                      "entity": "switch.hot_water_boiler_3kwh_switch_0",
+                      "name": "Immersion",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "sensor.hot_water_boiler_3kwh_switch_0_power",
+                      "secondary_info": "last-updated",
+                      "name": "Immersion Power"
+                    }
+                  ]
                 },
                 {
-                  "entity": "input_number.divert_on_above_solar_w"
+                  "type": "history-graph",
+                  "entities": [
+                    {
+                      "entity": "switch.hot_water_boiler_3kwh_switch_0",
+                      "name": "Switch"
+                    }
+                  ],
+                  "hours_to_show": 24
                 },
                 {
-                  "entity": "sensor.cumulated_production_5min"
+                  "type": "history-graph",
+                  "entities": [
+                    {
+                      "entity": "sensor.hot_water_boiler_3kwh_switch_0_power",
+                      "name": "Power"
+                    }
+                  ],
+                  "hours_to_show": 24
                 },
                 {
-                  "entity": "input_number.divert_off_above_grid_import"
-                },
-                {
-                  "entity": "sensor.grid_imported_power_w"
-                },
-                {
-                  "entity": "switch.hot_water_boiler_3kwh_switch_0",
-                  "name": "Immersion"
-                },
-                {
-                  "entity": "sensor.hot_water_boiler_3kwh_switch_0_power",
-                  "secondary_info": "last-updated",
-                  "name": "Immersion Power"
-                },
-                {
-                  "entity": "sensor.hot_water_boiler_3kwh_switch_0_energy",
-                  "name": "Immersion Energy Total"
-                },
-                {
-                  "entity": "binary_sensor.immersion_off_1min"
-                },
-                {
-                  "entity": "binary_sensor.auth_ev_charge"
-                },
-                {
-                  "entity": "binary_sensor.import_above_divert_off"
-                },
-                {
-                  "entity": "binary_sensor.auth_hot_water"
-                },
-                {
-                  "entity": "binary_sensor.330e_xdrive_charging_status"
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.immersion_switch_buffered",
+                      "name": "Delayed Status",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.auth_hot_water",
+                      "name": "Water can be on",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.import_above_divert_off",
+                      "name": "Off - import high",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.auth_ev_charge",
+                      "name": "EV Charging",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "binary_sensor.330e_xdrive_charging_status",
+                      "name": "330e Charging",
+                      "secondary_info": "last-changed"
+                    },
+                    {
+                      "entity": "input_number.divert_on_above_solar_w"
+                    },
+                    {
+                      "entity": "sensor.cumulated_production_5min"
+                    },
+                    {
+                      "entity": "input_number.divert_off_above_grid_import"
+                    },
+                    {
+                      "entity": "sensor.grid_imported_power_w"
+                    },
+                    {
+                      "entity": "sensor.hot_water_boiler_3kwh_switch_0_energy",
+                      "name": "Immersion Energy Total"
+                    }
+                  ]
                 }
               ]
             }

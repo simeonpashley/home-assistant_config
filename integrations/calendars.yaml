@@ -1,0 +1,9 @@
+calendar:
+  - platform: caldav
+    url: !secret icloud_calendar
+    username: !secret icloud_username
+    password: !secret icloud_app_password
+    calendars:
+      - Family
+      - Home
+      - Work

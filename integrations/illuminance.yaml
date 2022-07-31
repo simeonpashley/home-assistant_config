@@ -4,7 +4,6 @@ input_number:
     mode: box
     min: 0
     max: 1000
-    initial: 60
     unit_of_measurement: lx
     icon: mdi:light-flood-down
   office_low_light_threshold:
@@ -12,7 +11,6 @@ input_number:
     mode: box
     min: 0
     max: 1000
-    initial: 60
     unit_of_measurement: lx
     icon: mdi:light-flood-down
 
@@ -39,9 +37,9 @@ template:
       - name: "Front Low Light"
         unique_id: front_low_light
         # 9999 - default implies NOT low light if the state is "unknown"
-        state: "{{ (states('sensor.lp5_5c1aad_luminance')|float(9999)) < (states('input_number.front_low_light_threshold') | float(100)) }}"
+        state: "{{ (states('sensor.lp5_5c1aad_luminance')|float(9999)) < (states('input_number.front_low_light_threshold') | float(40)) }}"
   - binary_sensor:
       - name: "Office Low Light"
         unique_id: office_low_light
         # 9999 - default implies NOT low light if the state is "unknown"
-        state: "{{ (states('sensor.lp5_m5office_luminance')|float(9999)) < (states('input_number.office_low_light_threshold') | float(100)) }}"
+        state: "{{ (states('sensor.lp5_m5office_luminance')|float(9999)) < (states('input_number.office_low_light_threshold') | float(40)) }}"

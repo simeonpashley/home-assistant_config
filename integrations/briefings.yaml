@@ -25,11 +25,5 @@ automation:
       - condition: state
         entity_id: input_boolean.hourly_report
         state: "on"
-      - condition: state
-        entity_id: input_boolean.audio_notifications
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.simeon_in_office
-        state: "on"
     action:
       - service: script.home_status

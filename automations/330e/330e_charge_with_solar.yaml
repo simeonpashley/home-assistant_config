@@ -29,6 +29,7 @@ condition:
 action:
   - service: script.notify_me
     data:
+      tts: true
       message: |-
         * Charge 330e with solar *
         Solar production is maintaining {{ states("sensor.lp20_solar_production_poll")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'

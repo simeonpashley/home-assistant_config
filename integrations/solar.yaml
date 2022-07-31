@@ -33,7 +33,7 @@ template:
         device_class: power
         unit_of_measurement: "W"
         icon: mdi:solar-power-variant-outline
-        state: "{{(states('sensor.smappee_solar_c') | float)}}"
+        state: "{{(states('sensor.smappee_solar_c') | float(default=0))}}"
   - sensor:
       - name: "Solar Exported Power W"
         unique_id: solar_exported_power_w
@@ -52,7 +52,7 @@ sensor:
     sensors:
       electricity_excess_solar: # Produce a sensor for "Excess Solar" being generated
         friendly_name: "Electricity Excess Solar Power"
-        value_template: "{{ (states('sensor.solar_production') | float(0)) - (states('sensor.electric_load') | float(0)) }}"
+        value_template: "{{ (states('sensor.solar_production') | float(default=0)) - (states('sensor.electric_load') | float(default=0)) }}"
         unit_of_measurement: "W"
 
   - platform: statistics

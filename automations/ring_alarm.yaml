@@ -1,0 +1,11 @@
+alias: "NOTIFY ring mode changed status"
+id: 3459a3be-d6d9-4880-9e0f-af8cf5a5a546
+initial_state: true
+trigger:
+  - platform: state
+    entity_id: alarm_control_panel.home_mode
+condition: []
+action:
+  - service: script.notify_me
+    data:
+      message: "Ring mode to {{ state_attr('alarm_control_panel.home_mode', 'friendly_name') }}"

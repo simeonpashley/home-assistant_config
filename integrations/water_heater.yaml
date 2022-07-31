@@ -32,11 +32,13 @@ input_number:
 binary_sensor:
   - platform: template
     sensors:
-      immersion_off_1min:
+      immersion_switch_buffered:
         value_template: >
-          {{ is_state('switch.hot_water_boiler_3kwh_switch_0', 'off')}}
+          {{ is_state('switch.hot_water_boiler_3kwh_switch_0', 'on')}}
         delay_on:
-          minutes: 1
+          minutes: 3
+        delay_off:
+          minutes: 3
       auth_ev_charge:
         # charged is dumb and cannot be controlled, dictated by EV
         friendly_name: "EV Charge authorized"
@@ -88,6 +90,9 @@ automation:
     initial_state: true
     trigger:
       - platform: state
+        entity_id: binary_sensor.immersion_switch_buffered
+        to: "off"
+      - platform: state
         entity_id: binary_sensor.auth_hot_water
         to: "on"
       - platform: state
@@ -97,8 +102,9 @@ automation:
       - condition: state
         entity_id: input_boolean.energy_flow_auto_control
         state: "on"
-      - condition: template
-        value_template: "{{ states('sensor.grid_imported_power_w') | int(99999999) < (states('input_number.divert_off_above_grid_import') | int(1200)) }}"
+      - condition: state
+        entity_id: binary_sensor.import_above_divert_off
+        state: "off"
       - condition: template
         value_template: "{{ not is_state('sensor.dynamic_priority_consumer', 'no consumer authorized') }}"
     action:
@@ -114,10 +120,13 @@ automation:
                 entity_id: switch.ev_charging_authorization
           - conditions:
               - condition: state
+                entity_id: binary_sensor.immersion_switch_buffered # must be off for 1min before proceeding
+                state: "off"
+              - condition: state
                 entity_id: sensor.dynamic_priority_consumer
                 state: "hot water"
               - condition: state
-                entity_id: binary_sensor.immersion_off_1min # must be off for 1min before proceeding
+                entity_id: binary_sensor.auth_hot_water
                 state: "on"
             sequence:
               - service: switch.turn_on
@@ -131,24 +140,24 @@ automation:
     initial_state: true
     trigger:
       - platform: state
-        entity_id: switch.hot_water_boiler_3kwh_switch_0
+        entity_id: binary_sensor.immersion_switch_buffered
       - platform: state
         entity_id: binary_sensor.import_above_divert_off
         for:
           minutes: 1
-      # - platform: state
-      #   entity_id: sensor.lp20_solar_production_poll
     condition:
-      # - condition: template
-      #   value_template: >-
-      #     {{ (states("sensor.lp20_solar_production_poll") | int(0)) < (states("input_number.divert_on_above_solar_w")|int(1200)) }}
+      - condition: state
+        entity_id: binary_sensor.immersion_switch_buffered # must be off for 1min before proceeding
+        state: "on"
+      - condition: state
+        entity_id: binary_sensor.import_above_divert_off
+        state: "on"
       - condition: state
         entity_id: input_boolean.energy_flow_auto_control
         state: "on"
       - condition: state
         entity_id: switch.hot_water_boiler_3kwh_switch_0
         state: "on"
-
     action:
       - service: switch.turn_off
         entity_id: switch.hot_water_boiler_3kwh_switch_0

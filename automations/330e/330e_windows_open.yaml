@@ -11,4 +11,5 @@ trigger:
 action:
   - service: script.notify_me
     data:
+      tts: true
       message: "*Car window open* You have left the windows open on the 330e"

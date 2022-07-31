@@ -1,0 +1,29 @@
+automation:
+  - alias: Smappee realtime rate limited
+    id: d34b9728-8781-402c-b496-da228200282b
+    trigger:
+      platform: state
+      entity_id: sensor.smappee_realtime
+    condition:
+      - condition: template # rate limit
+        value_template: "{{ ( as_timestamp(now()) - as_timestamp(state_attr('automation.smappee_realtime_rate_limited', 'last_triggered')) |int(0) ) > 60 }}"
+    action:
+      service: mqtt.publish
+      data:
+        retain: true
+        topic: smappee/realtime
+        payload_template: "{{ states('sensor.smappee_realtime') }}"
+  - alias: Smappee aggregated rate limited
+    id: d34b9728-8781-402c-b496-da228200282b
+    trigger:
+      platform: state
+      entity_id: sensor.smappee_realtime
+    condition:
+      - condition: template # rate limit
+        value_template: "{{ ( as_timestamp(now()) - as_timestamp(state_attr('automation.smappee_aggregated_rate_limited', 'last_triggered')) |int(0) ) > 60 }}"
+    action:
+      service: mqtt.publish
+      data:
+        retain: true
+        topic: smappee/aggregated
+        payload_template: "{{ states('sensor.smappee_aggregated') }}"
