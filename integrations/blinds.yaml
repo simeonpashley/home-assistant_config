@@ -20,7 +20,7 @@ binary_sensor:
           {{ states('sensor.solar_azimuth')|int(0) < 170 
           and is_state('sun.sun', 'above_horizon')  
           and states('sensor.lp20_solar_production')|int(0) > 600
-          and states('sensor.day_max_temp')|int(0) > 20
+          and states('sensor.day_max_temp')|int(0) > 22
           and states('sensor.openweathermap_cloud_coverage')|int(0) < 50
           }}
 
@@ -32,23 +32,39 @@ sensor:
         friendly_name: "24h max temperature"
         unit_of_measurement: "°C"
         value_template: >
-          {% set start = (now().timestamp() * 1000) | int %}
-          {% set end = start + 86400000 %}
-          {{ state_attr('weather.openweathermap', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | max }}
+          {% set ns = namespace(max_temp=0) %}
+          {% set start = (now().timestamp()) | int %}
+          {% set end = start + 86400 %}
+          {% for forecast in state_attr('weather.openweathermap', 'forecast') %}
+          {% set dt = forecast.datetime | as_timestamp %}
+          {% set temp = forecast.temperature | float(default=0) %}
+          {% if (dt >= start and dt <= end) and temp > ns.max_temp %}
+          {% set ns.max_temp = temp %}
+          {% endif %}
+          {% endfor %}
+          {{ ns.max_temp }}
 
       day_min_temp:
         friendly_name: "24h min temperature"
         unit_of_measurement: "°C"
         value_template: >
-          {% set start = (now().timestamp() * 1000) | int %}
-          {% set end = start + 86400000 %}
-          {{ state_attr('weather.openweathermap', 'forecast') | selectattr('datetime', '>=', start) | selectattr('datetime','<=', end) | map(attribute='temperature') | list | min }}
+          {% set ns = namespace(min_temp=999999) %}
+          {% set start = (now().timestamp()) | int %}
+          {% set end = start + 86400 %}
+          {% for forecast in state_attr('weather.openweathermap', 'forecast') %}
+          {% set dt = forecast.datetime | as_timestamp %}
+          {% set temp = forecast.temperature | float(default=0) %}
+          {% if (dt >= start and dt <= end) and temp < ns.min_temp %}
+          {% set ns.min_temp = temp %}
+          {% endif %}
+          {% endfor %}
+          {{ ns.min_temp }}
 
   - platform: template
     sensors:
       office_blind_position:
         friendly_name: "Office Blind Position"
-        value_template: "{{ state_attr('cover.office_blind', 'current_position') | int}}"
+        value_template: "{{ state_attr('cover.office_blind', 'current_position') | int(default=0)}}"
         unit_of_measurement: "%"
         icon_template: mdi:blinds
       # sunrise:
