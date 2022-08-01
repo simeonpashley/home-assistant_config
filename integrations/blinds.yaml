@@ -19,7 +19,7 @@ binary_sensor:
         value_template: >
           {{ states('sensor.solar_azimuth')|int(0) < 170 
           and is_state('sun.sun', 'above_horizon')  
-          and states('sensor.lp20_solar_production_poll')|int(0) > 600
+          and states('sensor.lp20_solar_production')|int(0) > 600
           and states('sensor.day_max_temp')|int(0) > 20
           and states('sensor.openweathermap_cloud_coverage')|int(0) < 50
           }}

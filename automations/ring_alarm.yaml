@@ -4,6 +4,8 @@ initial_state: true
 trigger:
   - platform: state
     entity_id: alarm_control_panel.home_mode
+    for:
+      minutes: 2
 condition: []
 action:
   - service: script.notify_me

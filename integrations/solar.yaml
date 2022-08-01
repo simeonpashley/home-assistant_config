@@ -1,40 +1,99 @@
-# Capture the solar production at regular intervals so it can
-# be pass through a low-pass filter, which processes a number of events (not time)
-input_number:
-  solar_production_poll_1m:
-    name: Solar Production Poll 1m
-    icon: mdi:solar-power-variant-outline
-    initial: 0
-    min: 0
-    max: 999999
-    unit_of_measurement: "W"
-
 automation:
-  - id: solar_production_poll_1m
-    alias: Solar Production poll 1m
-    description: Capture solar production at fixed intervals for feeding into filters, rounded to constrain updates
+  - alias: smappee_interval_1m
+    id: 73de7a9b-8c86-435b-82fc-23f4199081df
     trigger:
       - platform: time_pattern
         minutes: "/1"
     action:
-      - service: input_number.set_value
-        data_template:
-          entity_id: input_number.solar_production_poll_1m
-          value: >
-            {{ (((states('sensor.solar_production') | int(0)) / 10) | round ) * 10 }}
-    mode: single
+      - service: mqtt.publish
+        data:
+          topic: "sp/smappee/state"
+          retain: true
+          payload_template: >
+            {
+              "electric_load": {{ states("sensor.smappee_electric_load") | int(default=0) }},
+              "solar_production": {{ states("sensor.smappee_solar_production") | int(default=0) }}
+            }
+  - alias: Push sensor config
+    id: 1ff721f4-22ab-4bd2-b6a0-9be16dee99e5
+    trigger:
+      - event: start
+        platform: homeassistant
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "homeassistant/sensor/smappee_electric_load/config"
+          retain: false
+          payload_template: >
+            {
+              "unique_id": "smappee_electric_load",
+              "name": "Smappee Electric Load",
+              "state_topic": "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime",
+              "state_class": "measurement",
+              "icon": "mdi:power-plug",
+              "unit_of_measurement": "W",
+              {% raw %}
+              "value_template": "{{ '{{value_json.channelPowers[1].power}}' }}"
+              {% endraw %}
+            }
+      - service: mqtt.publish
+        data:
+          topic: "homeassistant/sensor/smappee_solar_production/config"
+          retain: false
+          payload_template: >
+            {
+              "unique_id": "smappee_solar_production",
+              "name": "Smappee Solar Production",
+              "state_topic": "servicelocation/5769521f-d672-11e7-ac58-022d286959f5/realtime",
+              "state_class": "measurement",
+              "icon": "mdi:power-plug",
+              "unit_of_measurement": "W",
+              {% raw %}
+              "value_template": "{{ '{{max(0, value_json.channelPowers[0].power)}}' }}"
+              {% endraw %}
+            }
+      - service: mqtt.publish
+        data:
+          topic: "homeassistant/sensor/electric_load/config"
+          retain: false
+          payload_template: >
+            {
+              "unique_id": "electric_load",
+              "name": "Electric Load",
+              "state_topic": "sp/smappee/state",
+              "state_class": "measurement",
+              "icon": "mdi:power-plug",
+              "unit_of_measurement": "W",
+              {% raw %}
+              "value_template": "{{ '{{value_json.electric_load | int(default=0)}}' }}"
+              {% endraw %}
+            }
+      - service: mqtt.publish
+        data:
+          topic: "homeassistant/sensor/solar_production/config"
+          retain: false
+          payload_template: >
+            {
+              "unique_id": "solar_production",
+              "name": "Solar Production",
+              "state_topic": "sp/smappee/state",
+              "state_class": "measurement",
+              "device_class": "power",
+              "icon": "mdi:solar-power-variant-outline",
+              "unit_of_measurement": "W",
+              {% raw %}
+              "value_template": "{{ '{{max(0, value_json.solar_production )}}' }}"
+              {% endraw %}
+            }
 
 template:
   - sensor:
-      - name: "Solar Production"
-        unique_id: solar_production
+      - name: "Grid Power"
+        unique_id: grid_power
         state_class: measurement
-        # WAS "energy" but doesn't match "W"| device_class: energy
         device_class: power
         unit_of_measurement: "W"
-        icon: mdi:solar-power-variant-outline
-        state: "{{(states('sensor.smappee_solar_c') | float(default=0))}}"
-  - sensor:
+        state: "{{ (states('sensor.electric_load') | float(0)) - (states('sensor.solar_production') | float(0)) }}"
       - name: "Solar Exported Power W"
         unique_id: solar_exported_power_w
         state_class: measurement
@@ -47,14 +106,29 @@ template:
           {% else %}
             0
           {% endif %}
+      - name: Grid Import Power
+        state_class: measurement
+        icon: mdi:transmission-tower
+        unit_of_measurement: W
+        device_class: power
+        state: >
+          {{ [0, (states('sensor.electric_load') | float(0)) - (states('sensor.solar_production') | float(0)) ] | max }}
+      - name: Grid Export Power
+        state_class: measurement
+        icon: mdi:transmission-tower
+        unit_of_measurement: W
+        device_class: power
+        state: >
+          {{ [0, (states('sensor.solar_production') | float(0)) - (states('sensor.electric_load') | float(0)) ] | max }}
+
 sensor:
   - platform: template
     sensors:
       electricity_excess_solar: # Produce a sensor for "Excess Solar" being generated
         friendly_name: "Electricity Excess Solar Power"
-        value_template: "{{ (states('sensor.solar_production') | float(default=0)) - (states('sensor.electric_load') | float(default=0)) }}"
+        value_template: >
+          {{ (states('sensor.solar_production') | float(default=0)) - (states('sensor.electric_load') | float(default=0)) }}
         unit_of_measurement: "W"
-
   - platform: statistics
     entity_id: sensor.solar_production
     name: cumulated production 5min
@@ -80,16 +154,8 @@ sensor:
     unit_prefix: k
     name: solar_production_kwh
   - platform: filter
-    name: LP20 Solar Production Poll
-    unique_id: lp20_solar_production_poll_1m
-    entity_id: input_number.solar_production_poll_1m
-    filters:
-      - filter: lowpass
-        time_constant: 20
-        precision: 0
-  - platform: filter
     name: LP20 Solar Production
-    unique_id: lp20_inverter_power
+    unique_id: lp20_solar_production
     entity_id: sensor.solar_production
     filters:
       - filter: lowpass

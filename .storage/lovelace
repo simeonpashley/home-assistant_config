@@ -453,19 +453,10 @@
                   "entity": "sensor.330e_xdrive_charging_level_hv"
                 },
                 {
-                  "entity": "sensor.smappee_reactive_power"
-                },
-                {
                   "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
                 },
                 {
-                  "entity": "sensor.smappee_always_on"
-                },
-                {
                   "entity": "binary_sensor.excess_solar"
-                },
-                {
-                  "entity": "sensor.electricity_excess_solar_waterheater"
                 },
                 {
                   "entity": "sensor.electricity_excess_solar"

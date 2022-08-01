@@ -9,7 +9,7 @@ condition:
   condition: and
   conditions:
     - condition: numeric_state
-      entity_id: sensor.lp20_solar_production_poll
+      entity_id: sensor.lp20_solar_production
       above: 1000
     - condition: numeric_state
       entity_id: sensor.electric_load
@@ -32,5 +32,5 @@ action:
       tts: true
       message: |-
         * Charge 330e with solar *
-        Solar production is maintaining {{ states("sensor.lp20_solar_production_poll")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
+        Solar production is maintaining {{ states("sensor.lp20_solar_production")  }}W and 330e is at {{ states("sensor.330e_xdrive_charging_level_hv") }}% charge.'
   - delay: 3600 # seconds until next trigger, to mitigate too many messages

@@ -45,9 +45,19 @@ binary_sensor:
         value_template: >
           {{ is_state('binary_sensor.330e_xdrive_charging_status', 'on') }}
       import_above_divert_off:
-        value_template: "{{ (states('sensor.grid_imported_power_w') | float(9999999)) > (states('input_number.divert_off_above_grid_import') | float(1200)) }}"
+        value_template: >
+          {{ (states('sensor.grid_imported_power_w') | float(9999999)) > (states('input_number.divert_off_above_grid_import') | float(1200)) }}
       wh_production_above_divert_on:
-        value_template: "{{ ((states('sensor.lp20_solar_production_poll') | int(0)) > (states('input_number.divert_on_above_solar_w')|int(1200))) }}"
+        # enough solar production and above max grid import to mitigate flip-flopping
+        value_template: >
+          {% set immersion_w = 3000 %}
+          {% set solar = states('sensor.lp20_solar_production') | int(0) %}
+          {% set divert_on = states('input_number.divert_on_above_solar_w')|int(1200) %}
+          {% set divert_off = states('input_number.divert_off_above_grid_import') | float(1200) %}
+          {% set load = states('sensor.electric_load')| float(9999999) %}
+          {% set solar_unused = solar-load %}
+          {% set next_grid = -(solar_unused - immersion_w) %}
+          {{ solar > divert_on and next_grid < divert_off }}
       auth_hot_water:
         friendly_name: "hot water production authorized"
         value_template: >

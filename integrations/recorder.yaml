@@ -71,9 +71,9 @@ recorder:
       - binary_sensor.sp_m1_camera_in_use
       - binary_sensor.sp_m1_focus
       - sensor.icloud3_event_log
-      - sensor.smappee_aggregated
+      - sensor.smappee_solar_production
       - sensor.smappee_channel_powers
-      - sensor.smappee_realtime
+      - sensor.smappee_electric_load
       - sensor.solar_azimuth
       - sensor.solar_elevation
       - sensor.period_of_day
@@ -101,7 +101,6 @@ logbook:
       - zone
       - counter
     entities:
-      - input_number.solar_production_poll_1m
       - button.330e_xdrive_refresh_from_cloud
       - switch.nzbget_download
     entity_globs:
