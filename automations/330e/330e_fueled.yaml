@@ -8,6 +8,9 @@ condition:
     entity_id: binary_sensor.330e_xdrive_fuel_increased
     state: "on"
 action:
+  - service: notify.mileage_log
+    data_template:
+      message: "{{ as_timestamp(now()) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}, {{ states('sensor.330e_xdrive_mileage_miles') }}, fueled"
   - service: script.notify_me
     data:
       message: "330e has been refueled, the tank has {{ states('sensor.330e_xdrive_remaining_fuel') }} litres of petrol, with a range of {{ states('sensor.330e_xdrive_remaining_range_fuel_miles') }} miles"

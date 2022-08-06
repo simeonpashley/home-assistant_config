@@ -2,23 +2,39 @@
 # Sends notifications that HA nas started
 #####
 
-alias: Home Assistant Start - Notify
-id: d2d8775b-e666-4fb4-976d-02b4d9c5a396
+- alias: Home Assistant Start - Notify
+  id: d2d8775b-e666-4fb4-976d-02b4d9c5a396
 
-trigger:
-  event: start
-  platform: homeassistant
+  trigger:
+    event: start
+    platform: homeassistant
 
-action:
-  - service: script.notify_me
-    data:
-      message: '*HA started* Home Assistant started at {{ states("sensor.time") }}'
-  # - timeout: 00:03:00
-  #   wait_template: ""
-# - service: media_player.volume_set
-#   target:
-#     entity_id: media_player.display_me
-#   data:
-#     volume_level: 0.3
-# - delay: 00:00:01
-#SP - service: script.googlescripthastart
+  action:
+    - service: script.notify_me
+      data:
+        message: '*HA starting* Home Assistant starting at {{ states("sensor.time") }}'
+
+    - service: persistent_notification.create
+      data:
+        title: "Automation Startup"
+        message: "Waiting for startup to complete."
+        notification_id: startup_delay
+
+    # wait for entities to initialize before continuing
+    - wait_template: >
+        {{ is_state('input_boolean.startup_pending','off')
+            or (is_state('binary_sensor.wan_connected','on')
+            ) }}
+      timeout:
+        minutes: 5
+
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.startup_pending
+
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: startup_delay
+
+    - service: script.notify_me
+      data:
+        message: '*HA startup completed* Home Assistant started at {{ states("sensor.time") }}'

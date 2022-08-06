@@ -123,11 +123,11 @@ sensor.pollen_tree_index_day_3:
       if ( state ===  '4' ) return 'rgb(44, 188, 65)';
       if ( state ===  '5' ) return 'rgb(27, 157, 44)';
 
-input_select.home_mode:
+input_select.occupancy_mode:
   templates:
     icon:
       if ( state === 'Home' ) return 'mdi:home'; if ( state === 'Away' ) return
-      'mdi:home-export-outline'; if ( state === 'Returning' ) return 'mdi:home-import-outline';
+      'mdi:home-export-outline'; if ( state === 'Guest' ) return 'mdi:home-import-outline';
       return 'mdi:beach';
 sensor.n_people_home:
   templates:

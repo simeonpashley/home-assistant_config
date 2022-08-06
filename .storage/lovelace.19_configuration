@@ -131,6 +131,23 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_select.occupancy_mode"
+                },
+                {
+                  "entity": "input_boolean.occupancy_notifications"
+                },
+                {
+                  "entity": "input_boolean.occupancy_announcements"
+                },
+                {
+                  "entity": "input_boolean.occupancy_override"
+                }
+              ]
             }
           ]
         },

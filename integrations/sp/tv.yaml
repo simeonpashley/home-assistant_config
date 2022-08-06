@@ -1,0 +1,28 @@
+binary_sensor:
+  - platform: template
+    sensors:
+      pana50_on: # for either network interface LAN or WIFI
+        value_template: >
+          {{ is_state('remote.50dx700_series','on')
+            or is_state('remote.50dx700_series_wifi','on') }}
+
+panasonic_viera:
+  - host: !secret pana50_ip_lan
+    name: 50dx700_series
+  - host: !secret pana50_ip_wifi
+    name: 50dx700_series_wifi
+
+media_player:
+  - platform: panasonic_viera
+    name: 50dx700_series
+    host: !secret pana50_ip_lan
+  - platform: panasonic_viera
+    name: 50dx700_series_wifi
+    host: !secret pana50_ip_wifi
+remote:
+  - platform: panasonic_viera
+    name: 50dx700_series
+    host: !secret pana50_ip_lan
+  - platform: panasonic_viera
+    name: 50dx700_series_wifi
+    host: !secret pana50_ip_wifi

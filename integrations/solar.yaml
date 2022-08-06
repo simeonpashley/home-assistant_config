@@ -122,13 +122,6 @@ template:
           {{ [0, (states('sensor.solar_production') | float(0)) - (states('sensor.electric_load') | float(0)) ] | max }}
 
 sensor:
-  - platform: template
-    sensors:
-      electricity_excess_solar: # Produce a sensor for "Excess Solar" being generated
-        friendly_name: "Electricity Excess Solar Power"
-        value_template: >
-          {{ (states('sensor.solar_production') | float(default=0)) - (states('sensor.electric_load') | float(default=0)) }}
-        unit_of_measurement: "W"
   - platform: statistics
     entity_id: sensor.solar_production
     name: cumulated production 5min

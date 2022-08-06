@@ -1,16 +1,14 @@
 input_boolean:
-  # Main security switch. If this is on, the security is armed.
-  sentry_mode:
-    name: Sentry Mode
-    icon: mdi:security
-
-  vacation_mode:
-    name: Vacation Mode
-    icon: mdi:airplane-takeoff
-
-  guest_mode:
-    name: Guest Mode
+  occupancy_notifications:
+    name: "Occupancy Notifications"
     icon: mdi:account-multiple
+
+  occupancy_override:
+    name: "Occupancy Override"
+    initial: false
+  occupancy_announcements:
+    name: "Occupancy Announcements"
+    icon: mdi:account-voice
 
   simeon_in_office:
     initial: false
@@ -24,6 +22,17 @@ input_boolean:
   isabelle_presense:
     initial: false
 
+input_select:
+  occupancy_mode:
+    name: "Occupancy Mode"
+    icon: mdi:home-account
+    options:
+      - Home
+      - Night
+      - Away
+      - Guest
+      - Vacation
+
 group:
   family_presense:
     name: Family Presense
@@ -34,6 +43,11 @@ group:
       - binary_sensor.eleanor_presense
       - binary_sensor.isabelle_presense
 
+#########################################################
+#
+#            Presense - Family
+#
+#########################################################
 binary_sensor:
   - platform: template
     sensors:
@@ -101,7 +115,7 @@ sensor:
         friendly_name: Number of People Home
         value_template: >-
           {{ expand("group.family_presense")|selectattr("state","equalto","on")|list|length +
-                (1 if is_state("input_boolean.guest_mode","on") else 0) }}
+                (1 if is_state("input_select.occupancy_mode","Guest") else 0) }}
         icon_template: >-
           {% if is_state("sensor.n_people_home", "0") %} mdi:account-off
           {% elif is_state("sensor.n_people_home", "1") %} mdi:account
@@ -110,200 +124,6 @@ sensor:
           {% else %} mdi:account-plus {% endif %}
 
 automation:
-  #########################################################
-  #
-  #            Away|Home|Returning|Vacation status
-  #
-  #########################################################
-
-  # Home
-  - alias: Home Mode - Arriving
-    trigger:
-      - platform: numeric_state
-        entity_id: sensor.n_people_home
-        above: 0
-        for: 60
-    condition:
-      - condition: template
-        value_template: "{{ not is_state('input_boolean.vacation_mode', 'on') }}"
-    action:
-      - service: input_select.select_option
-        entity_id: input_select.home_mode
-        data:
-          option: "Home"
-      - service: script.standby
-
-  # Away
-  - alias: Home Mode - Leaving
-    trigger:
-      - platform: numeric_state
-        entity_id: sensor.n_people_home
-        below: 1
-        for: 60
-    condition:
-      - condition: template
-        value_template: "{{ not is_state('input_boolean.vacation_mode', 'on') }}"
-      - condition: state
-        entity_id: input_select.home_mode
-        state: "Home"
-    action:
-      - service: input_select.select_option
-        entity_id: input_select.home_mode
-        data:
-          option: "Away"
-      - service: script.appliances_off # turn off any devices that were left on
-      - service: script.notify_me
-        data:
-          message: |-
-            *Home Status*
-            There are {{ states('sensor.n_people_home') }} people at home now.
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.sentry_mode
-
-  # Vacation
-  - alias: Home Mode - Vacation
-    trigger:
-      - platform: state
-        entity_id: input_boolean.vacation_mode
-    action:
-      choose:
-        - conditions: >
-            {{ states('input_boolean.vacation_mode') == 'on' }}
-          sequence:
-            - service: input_select.select_option
-              entity_id: input_select.home_mode
-              data:
-                option: "Vacation"
-            - service: input_boolean.turn_on
-              entity_id: input_boolean.sentry_mode
-
-        - conditions: >
-            {{ states("input_boolean.vacation_mode") == "off" and
-               states("sensor.n_people_home") | int(0)  < 1 }}
-          sequence:
-            - service: input_select.select_option
-              entity_id: input_select.home_mode
-              data:
-                option: "Away"
-        - conditions: >
-            {{ states("input_boolean.vacation_mode") == "off" and
-               states("sensor.n_people_home") | int(0)  >= 1 }}
-          sequence:
-            - service: input_select.select_option
-              entity_id: input_select.home_mode
-              data:
-                option: "Home"
-            - service: script.standby
-
-  #########################################################
-  #
-  #            Presense - Family
-  #
-  #########################################################
-
-  # Claire combing both monitor and espresense detections
-  - alias: Presense Claire On
-    trigger:
-      - platform: template
-        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['office'] }}"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['office'] }}"
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.claire_presense
-  - alias: Presense Claire Off
-    mode: restart
-    trigger:
-      - platform: template
-        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['not_home', 'unknown', 'unavailable'] }}"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: "{{ states('sensor.ble_claire_iphone')|lower in ['not_home', 'unknown', 'unavailable'] }}"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.claire_presense
-
-  # Eleanor combing both monitor and espresense detections
-  - alias: Presense Eleanor On
-    trigger:
-      - platform: template
-        value_template: "{{ states('sensor.eleanor_tms_espresense')|lower in ['office'] }}"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: >-
-          {{ states("sensor.eleanor_tms_espresense") != "not_home"
-          and states("sensor.eleanor_tms_espresense") != "unavailable"
-          and states("sensor.eleanor_tms_espresense") != "unknown"
-          }}
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.eleanor_presense
-  - alias: Presense Eleanor Off
-    trigger:
-      - platform: state
-        entity_id: sensor.eleanor_tms_espresense
-        to: "not_home"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: >-
-          {{ is_state("sensor.eleanor_tms_espresense", "not_home")
-          or is_state("sensor.eleanor_tms_espresense", "unavailable")
-          or is_state("sensor.eleanor_tms_espresense", "unknown")
-          }}
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.eleanor_presense
-
-  # Isabelle combing both monitor and espresense detections
-  - alias: Presense Isabelle On
-    trigger:
-      - platform: template
-        value_template: "{{ states('sensor.isabelle_tms_espresense')|lower in ['office'] }}"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: >-
-          {{ states("sensor.isabelle_tms_espresense") != "not_home"
-          and states("sensor.isabelle_tms_espresense") != "unavailable"
-          and states("sensor.isabelle_tms_espresense") != "unknown"
-          }}
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.isabelle_presense
-  - alias: Presense Isabelle Off
-    trigger:
-      - platform: state
-        entity_id: sensor.isabelle_tms_espresense
-        to: "not_home"
-      - platform: time_pattern
-        minutes: /5
-    condition:
-      - condition: template
-        value_template: >-
-          {{ is_state("sensor.eleanor_tms_espresense", "not_home")
-          or is_state("sensor.eleanor_tms_espresense", "unavailable")
-          or is_state("sensor.eleanor_tms_espresense", "unknown")
-          }}
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.isabelle_presense
-
   - id: 205b31f7-3992-4d85-99a4-9c988ace7e36
     alias: Simeon in office
     initial_state: true
@@ -333,6 +153,211 @@ automation:
           - service: input_boolean.turn_off
             entity_id: input_boolean.simeon_in_office
 
+  - id: presence_occupancy_mode_reset
+    alias: "[Presence] Occupancy Mode Reset"
+    description: "Auto select occupancy mode."
+    trigger:
+      - platform: state
+        entity_id: input_boolean.startup_pending
+        to: "off"
+        from: "on"
+        for: 60 # allow states to register
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.occupancy_mode
+        data:
+          option: >
+            {% if states("sensor.n_people_home") | int(0) == 0 %}
+              {{ 'Vacation' if is_state('input_select.occupancy_mode','Vacation') else 'Away' }}
+            {% else %}
+              {{ 'Home' }}
+            {% endif %}
+  - id: presence_someone_leaves_home
+    alias: "[Presence] Someone Leaves Home"
+    description: "Run leave home script when someone leaves home."
+    mode: restart
+    max: 5
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.simeon_presense
+          - binary_sensor.claire_presense
+          - binary_sensor.eleanor_presense
+          - binary_sensor.isabelle_presense
+        from: "on"
+        to: "off"
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.occupancy_mode
+        data:
+          option: >-
+            {% if states("sensor.n_people_home") | int(0) == 0 %}
+              {% if is_state('input_select.occupancy_mode','Vacation') %} Vacation
+              {% else %} Away
+              {% endif %}
+            {% elif states('input_select.occupancy_mode') == 'Night' %} Night
+            {% else %} Home
+            {% endif %}
+  ###############################################################################
+  ## Presence - Occupancy Mode
+  ###############################################################################
+  - id: presence_occupancy_mode
+    alias: "[Presence] Occupancy Mode"
+    description: "Set occupancy mode options, validate occupancy mode change."
+    mode: restart
+    variables:
+      prev_mode: "{{ trigger.from_state.state }}"
+    trigger:
+      - platform: state
+        entity_id: input_select.occupancy_mode
+        to: ~
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_select.occupancy_mode
+                state: Home
+            sequence:
+              - if:
+                  - condition: template
+                    value_template: >
+                      {{ states("sensor.n_people_home") | int(0) == 0 }}
+                then:
+                  - service: input_boolean.turn_on
+                    target:
+                      entity_id: input_boolean.occupancy_override
+                  - service: input_select.select_option
+                    target:
+                      entity_id: input_select.occupancy_mode
+                    data:
+                      option: "{{ prev_mode }}" # should be away/vacation
+                  - service: input_boolean.turn_off
+                    target:
+                      entity_id: input_boolean.occupancy_override
+          - conditions:
+              - condition: state
+                entity_id: input_select.occupancy_mode
+                state: Night
+            sequence:
+              - if:
+                  - condition: template
+                    value_template: >
+                      {{ states("sensor.n_people_home") | int(0) == 0 }}
+                then:
+                  - service: input_boolean.turn_on
+                    target:
+                      entity_id: input_boolean.occupancy_override
+
+                  - service: input_select.select_option # back to previous mode
+                    target:
+                      entity_id: input_select.occupancy_mode
+                    data:
+                      option: "{{ prev_mode }}" # should be away/vacation
+
+                  - service: input_boolean.turn_off
+                    target:
+                      entity_id: input_boolean.occupancy_override
+                  # - service: homeassistant.turn_off
+                  #   target:
+                  #     entity_id:
+                  #       - script.morning_lights
+
+          # - conditions:
+          #     - condition: state
+          #       entity_id: input_select.occupancy_mode
+          #       state:
+          #         - Away
+          #         - Vacation
+          #   sequence:
+          #   - service: homeassistant.turn_off
+          #     target:
+          #       entity_id:
+          #         - script.someone_arrives_home
+          #         - script.bedtime
+
+          - conditions:
+              - condition: state
+                entity_id: input_select.occupancy_mode
+                state: Guest
+            sequence:
+              - if:
+                  - condition: template
+                    value_template: >
+                      {{ states("sensor.n_people_home") | int(0) > 0 }}
+                then:
+                  - service: input_boolean.turn_on
+                    target:
+                      entity_id: input_boolean.occupancy_override
+
+                  - service: input_select.select_option # back to previous mode if night/override else home mode
+                    target:
+                      entity_id: input_select.occupancy_mode
+                    data:
+                      option: "{{ 'Night' if prev_mode == 'Night' else 'Home' }}"
+
+                  - service: input_boolean.turn_off
+                    target:
+                      entity_id: input_boolean.occupancy_override
+
+  ###############################################################################
+  ## Presence - Occupancy Notification
+  ###############################################################################
+  - id: presence_occupancy_notification
+    alias: "[Presence] Occupancy Notification"
+    description: "Send notification when occupancy mode has changed."
+    mode: restart
+    variables:
+      run_delay: 15
+      occupancy_changed: >
+        {{ is_state('input_boolean.occupancy_announcements','on')
+            and now() - states.input_select.occupancy_mode.last_changed
+              < timedelta(seconds=run_delay) }}
+      n_people_home_changed: >
+        {{ is_state('input_boolean.occupancy_announcements','on')
+            and now() - states.sensor.n_people_home.last_changed
+              < timedelta(seconds=run_delay) }}
+    trigger:
+      - platform: numeric_state
+        id: n_people_home
+        entity_id: sensor.n_people_home
+        above: -1
+      - platform: state
+        id: occupancy
+        entity_id: input_select.occupancy_mode
+        to:
+          - Home
+          - Guest
+          - Night
+          - Away
+          - Vacation
+    condition:
+      - condition: template
+        value_template: >
+          {{ is_state('input_boolean.occupancy_announcements','on')
+              and now() - states.input_select.occupancy_mode.last_changed < timedelta(seconds=run_delay) }}
+      - condition: template
+        alias: "Occupancy override is off if occupancy trigger"
+        value_template: >
+          {{ is_state('input_boolean.occupancy_override','off') }}
+    action:
+      - service: script.notify_me
+        data:
+          message: |-
+            ** Presense **
+            {%- set npeople = states('sensor.n_people_home') |int(0)  -%}
+              The house is now in "{{ states('input_select.occupancy_mode') }}" mode.
+            {%- if npeople > 0 -%}
+              There are {{ npeople }} at home.
+            {%- else -%}
+              The house is empty.
+            {%- endif %}
+            {%- if is_state('binary_sensor.simeon_presense', 'on') -%} Simeon is Home {% endif %}
+            {%- if is_state('binary_sensor.claire_presense', 'on') -%} Claire is Home {% endif %}
+            {%- if is_state('binary_sensor.eleanor_presense', 'on') -%} Eleanor is Home {% endif %}
+            {%- if is_state('binary_sensor.isabelle_presense', 'on') -%} Isabelle is Home {% endif %}
+
 script:
   #########################################################
   #
@@ -353,17 +378,3 @@ script:
       - service: script.notify_me
         data_template:
           message: "SHOULD script.appliances_off"
-
-  standby:
-    sequence:
-      - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: "off"
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.sentry_mode
-    # - service: input_boolean.turn_off
-    #   entity_id: input_boolean.security_issue
-    # - service: input_boolean.turn_off
-    #   entity_id: input_boolean.lockdown_issue
-    # - service: input_boolean.turn_off
-    #   entity_id: input_boolean.security_alarm

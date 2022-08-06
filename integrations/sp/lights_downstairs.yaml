@@ -120,13 +120,20 @@ automation:
           - choose:
               - conditions:
                   - condition: time
-                    before: "22:00:00"
+                    before: "22:10:00"
                 sequence:
                   - service: script.all_managed_lights_on
             default:
-              - condition: state # TV off for 10 mins
-                entity_id: remote.50dx700_series
-                state: "off"
-                for:
-                  minutes: 10
+              - condition: or
+                conditions:
+                  - condition: state # TV off for 10 mins
+                    entity_id: binary_sensor.pana50_on
+                    state: "off"
+                    for:
+                      minutes: 10
+                  - condition: state # TV not reachable
+                    entity_id: binary_sensor.pana50_on
+                    state:
+                      - "unknown"
+                      - "undefined"
               - service: script.all_managed_lights_off

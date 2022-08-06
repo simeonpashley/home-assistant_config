@@ -8,4 +8,4 @@ trigger:
 action:
   - service: notify.mileage_log
     data_template:
-      message: "{{ as_timestamp(now()) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}, {{ states('sensor.330e_xdrive_mileage_miles') }}"
+      message: "{{ as_timestamp(now()) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}, {{ states('sensor.330e_xdrive_mileage_miles') }}, cron"

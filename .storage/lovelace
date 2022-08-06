@@ -456,12 +456,6 @@
                   "entity": "sensor.smappee_1005002095_local_total_consumption_active_power"
                 },
                 {
-                  "entity": "binary_sensor.excess_solar"
-                },
-                {
-                  "entity": "sensor.electricity_excess_solar"
-                },
-                {
                   "entity": "sensor.lp20_solar_exported_power"
                 }
               ]

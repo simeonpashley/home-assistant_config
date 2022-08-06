@@ -1,4 +1,4 @@
-id: 330e_charged_connected
+id: 4b7a78b2-b1a4-440b-8d64-1e8d6eb4afec
 alias: "330e Charged and Connected"
 trigger:
   platform: time_pattern
@@ -6,6 +6,8 @@ trigger:
 condition:
   condition: and
   conditions:
+    - condition: template # rate limit
+      value_template: "{{ ( as_timestamp(now()) - as_timestamp(state_attr('automation.330e_charged_and_connected', 'last_triggered')) |int(0) ) > 7200 }}"
     - condition: state
       entity_id: binary_sensor.330e_charged_connected
       state: "on"
@@ -16,4 +18,3 @@ action:
   - service: script.notify_me
     data:
       message: "330e is charged, it can be disconnected"
-  - delay: 7200 # seconds until next trigger, to mitigate too many messages

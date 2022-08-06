@@ -7,7 +7,6 @@ trigger:
 action:
   - service: input_boolean.turn_off
     entity_id:
-      - input_boolean.guest_mode
       - input_boolean.hot_day
   - service: switch.turn_on
     entity_id:

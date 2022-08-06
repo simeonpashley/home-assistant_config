@@ -17,11 +17,15 @@ binary_sensor:
     sensors:
       shield_back_from_solar:
         value_template: >
-          {{ states('sensor.solar_azimuth')|int(0) < 170 
-          and is_state('sun.sun', 'above_horizon')  
-          and states('sensor.lp20_solar_production')|int(0) > 600
-          and states('sensor.day_max_temp')|int(0) > 22
-          and states('sensor.openweathermap_cloud_coverage')|int(0) < 50
+          {% set prod = states('sensor.lp20_solar_production')|int(0) %}
+          {% set cloud = states('sensor.openweathermap_cloud_coverage')|int(0) %}
+          {{ states('sensor.solar_azimuth')|int(0) < 159 and is_state('sun.sun', 'above_horizon')
+            and (
+              (prod > 600 and cloud < 20)
+              or (prod > 800 and cloud < 40)
+              or (prod > 1000 and cloud < 60)
+              or (prod > 600 and states('sensor.day_max_temp')|int(0) > 24)
+            )
           }}
 
 sensor:
@@ -241,12 +245,12 @@ automation:
   #       for:
   #         seconds: 120
   #     - platform: state
-  #       entity_id: input_select.home_mode
+  #       entity_id: input_select.occupancy_mode
   #       to: "Away"
   #       for:
   #         seconds: 120
   #     - platform: state
-  #       entity_id: input_select.home_mode
+  #       entity_id: input_select.occupancy_mode
   #       to: "Vacation"
   #       for:
   #         seconds: 120
